@@ -19,8 +19,8 @@ sealed class MedKitViewer : MonoBehaviour
         FullOrEmptyChecker();
 
         /*
-         *      The if-statements with an Input.GetKey() method are placeholder logic to demonstrate the functions
-         *      that picks up and uses Med Kits to heal the player.
+         *      The if-statements with an Input.GetKey() method are placeholder logic to
+         *      demonstrate the functions that picks up and uses Med Kits to heal the player.
          *
          *      MUST BE REMOVED OR REPLACED AT A LATER TIME!!
          */
@@ -64,6 +64,14 @@ sealed class MedKitViewer : MonoBehaviour
         _playerHealth.GainHealth();
         UpdateMedKitBar();
     }
+    
+    /*
+     *      The PickUpMedKit method should be called when made contact with a Med Kit.
+     *      Remember to not let the Med Kit despawn if the Med Kit inventory is full.
+     *      It is called temporarily in Update() in MedKitViewer.cs as a placeholder.
+     *
+     *      REMOVE THIS COMMENT ONCE A PERMANENT SOLUTION IS PUT IN PLACE.
+     */
 
     private void PickUpMedKit()
     {

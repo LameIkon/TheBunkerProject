@@ -50,7 +50,7 @@ sealed class PlayerHealth : MonoBehaviour
     }
     
     /*
-     *      This method should be called by Enemies and other
+     *      The TakeDamage method should be called by Enemies and other
      *      things that are supposed to damage the player.
      *      It is called temporarily in Update() as a placeholder.
      *
@@ -66,14 +66,6 @@ sealed class PlayerHealth : MonoBehaviour
         _currentHealth -= amount;
         UpdateHealthBar();
     }
-    
-    /*
-     *      This method should be called when made contact with a Med Kit.
-     *      Remember to not let the Med Kit despawn if the Med Kit inventory is full.
-     *      It is called temporarily in Update() in MedKitViewer.cs as a placeholder.
-     * 
-     *      REMOVE THIS COMMENT ONCE A PERMANENT SOLUTION IS PUT IN PLACE.
-     */
 
     public void GainHealth()
     {
