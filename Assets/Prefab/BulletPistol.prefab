@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7201113755249420398}
   - component: {fileID: -2021745810187888005}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: BulletPistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,7 +112,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &7201113755249420398
 CapsuleCollider2D:
@@ -161,4 +161,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8137dcbaca596e748b96d0dbdf436d71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSpeed: 2
+  _bullet: {fileID: 11400000, guid: fc11004b9da2f6d40b7f5e9422a74187, type: 2}
