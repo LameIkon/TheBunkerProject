@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7047755da78c9bd4fb83768162f81a9e, type: 3}
-  m_Name: Pistol
+  m_Script: {fileID: 11500000, guid: 437f217be105fca4e8252bf1919a2519, type: 3}
+  m_Name: EnemyMaxHealth
   m_EditorClassIdentifier: 
-  _Damage: 10
-  _GunType: 0
-  _FireRate: 1
-  _CritChance: 25
-  _CritDamage: 1.45
-  _bulletPrefab: {fileID: 7483763098893079611, guid: 45ab37e717b22f648bce40687b83993e, type: 3}
+  DevDescription: 
+  _Value: 150
+  _onValueChanged: {fileID: 0}

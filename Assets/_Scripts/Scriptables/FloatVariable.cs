@@ -4,7 +4,7 @@ using UnityEngine;
 public class FloatVariable : VariableBase
 {
 
-    [SerializeField] private float _value;
+    public float _Value;
 
     [SerializeField, Tooltip("Called when the value of the Variable changes, it can be null")]
     private GameEvent _onValueChanged;
@@ -15,31 +15,31 @@ public class FloatVariable : VariableBase
 
     public void SetValue(float value)
     {
-        _value = value;
+        _Value = value;
         OnValueChanged();
     }
 
     public void SetValue(FloatVariable value)
     {
-        _value = value._value;
+        _Value = value._Value;
         OnValueChanged();
     }
 
     public void ApplyChange(float amount)
     {
-        _value += amount;
+        _Value += amount;
         OnValueChanged();
     }
 
     public void ApplyChange(FloatVariable amount)
     {
-        _value += amount._value;
+        _Value += amount._Value;
         OnValueChanged();
     }
 
     public float GetValue()
     {
-        return _value;
+        return _Value;
     }
 
     #endregion

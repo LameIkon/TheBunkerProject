@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,8 +10,9 @@ public class Shooting : Weapon
     {
         if(context.performed)
         {
-            Fire();            
+            Fire();         
         }
     }
 
+    
 }
