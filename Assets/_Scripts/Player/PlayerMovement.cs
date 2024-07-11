@@ -21,16 +21,16 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float _moveSpeed;
     public float _movementX;
-    
+    public float _movementY;
 
-    [Header("Jumping")]
-    [SerializeField] private float _jumpPower;
-
-    [Header("Jumping")]
+    [Header("Ground")]
     [SerializeField] private Transform _groundCheckPos;
     [SerializeField] private Vector2 _groundCheckRadius;
     [SerializeField] private LayerMask _groundLayer;
 
+    [Header("Climbing")]
+    //[SerializeField] private bool _IsUsingLadder;
+    [SerializeField] private float _climbSpeed;
 
     // Update is called once per frame
     void Update()
@@ -40,8 +40,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void Movement()
     {
-        
-        _rb.velocity = new Vector2(_movementX * _moveSpeed, _rb.velocity.y);
+        if (LadderHandler._IsUsingLadder)
+        {
+            _rb.velocity = new Vector2(_rb.velocity.x, _climbSpeed * _movementY);
+        }
+        else
+        {
+            _rb.velocity = new Vector2(_movementX * _moveSpeed, _rb.velocity.y);
+        }
 
         //if (_movementX == 0)
         //{
@@ -117,13 +123,37 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    public void Jumping(InputAction.CallbackContext context)
+    public void UseLatter(InputAction.CallbackContext context)
     {
-        if (isGrounded())
+        _movementY = context.ReadValue<Vector2>().y;
+
+        if (LadderHandler._ExitLadder && LadderHandler._IsUsingLadder)
+        {
+            if (context.canceled)
+            {
+                _rb.gravityScale = 1; // Enable gavity
+                _rb.velocity = new Vector2(0, 0); // Stops the player from moving forward
+                LadderHandler._IsUsingLadder = false;
+                _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                gameObject.layer = LayerMask.NameToLayer("Default");
+                LadderHandler._LadderOnCoolDown = true;
+            }
+        }
+
+        else if (LadderHandler._CanUseLadder)
         {
             if (context.performed)
             {
-                _rb.velocity = new Vector2(_rb.velocity.x, _jumpPower);
+                _rb.gravityScale = 1; // Enable gavity
+                _rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation; // Freezes both Z and Y axis
+                gameObject.layer = LayerMask.NameToLayer("Ignore Ground"); // Allows going through floors
+                LadderHandler._IsUsingLadder = true;
+            }
+            else if (context.canceled) // When released climbing 
+            {
+                _rb.gravityScale = 0; // Disable gavity
+                _rb.velocity = new Vector2(0,0); // Stops the player from moving forward
+                LadderHandler._IsUsingLadder = false;
             }
         }       
     }
@@ -136,6 +166,7 @@ public class PlayerMovement : MonoBehaviour
         }
         return false;
     }
+
   
 
     private void Flip()
