@@ -26,10 +26,7 @@ public class MedKitCounter : MonoBehaviour
         switch (numberOfMedKits)
         {
             case 3:
-                for (int i = 0; i < _MedKitIcons.Length; i++)
-                {
-                    _MedKitIcons[i].color = _alphaOccupied;
-                }
+                AllSlotsOccupied();
                 break;
 
             case 2:
@@ -51,11 +48,24 @@ public class MedKitCounter : MonoBehaviour
                 break;
 
             case 0:
-                for (int i = 0; i < _MedKitIcons.Length; i++)
-                {
-                    _MedKitIcons[i].color = _alphaEmpty;
-                }
+                AllSlotsEmpty();
                 break;
         }
+    }
+
+    private void AllSlotsOccupied()
+    {
+        for (int i = 0; i < _MedKitIcons.Length; i++)
+        {
+            _MedKitIcons[i].color = _alphaOccupied;
+        } 
+    }
+
+    private void AllSlotsEmpty()
+    {
+        for (int i = 0; i < _MedKitIcons.Length; i++)
+        {
+            _MedKitIcons[i].color = _alphaEmpty;
+        } 
     }
 }
