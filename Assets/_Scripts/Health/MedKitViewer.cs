@@ -1,22 +1,24 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Serialization;
 
 sealed class MedKitViewer : MonoBehaviour
 {
     [SerializeField] private PlayerHealth _playerHealth;
-    [SerializeField] private MedKitBar _medKitBar;
+    [SerializeField] private MedKitCounter _medKitCounter;
     [SerializeField] private uint _numberOfMedKits;
     private bool _fullMedKitInventory;
     private bool _emptyMedKitInventory;
 
     void Start()
     {
-        _medKitBar.SetMedKitCount(_numberOfMedKits);
+        _medKitCounter.SetMedKitCountNew(_numberOfMedKits);
     }
 
     void Update()
     {
         FullOrEmptyChecker();
+        
 
         /*
          *      The if-statements with an Input.GetKey() method are placeholder logic to
@@ -64,7 +66,7 @@ sealed class MedKitViewer : MonoBehaviour
         _playerHealth.GainHealth();
         UpdateMedKitBar();
     }
-    
+
     /*
      *      The PickUpMedKit method should be called when made contact with a Med Kit.
      *      Remember to not let the Med Kit despawn if the Med Kit inventory is full.
@@ -99,10 +101,12 @@ sealed class MedKitViewer : MonoBehaviour
                 _fullMedKitInventory = false;
                 _emptyMedKitInventory = true;
                 break;
+
             case 3:
                 _fullMedKitInventory = true;
                 _emptyMedKitInventory = false;
                 break;
+
             default:
                 _fullMedKitInventory = false;
                 _emptyMedKitInventory = false;
@@ -112,6 +116,6 @@ sealed class MedKitViewer : MonoBehaviour
 
     private void UpdateMedKitBar()
     {
-        _medKitBar.SetMedKitCount(_numberOfMedKits);
+        _medKitCounter.SetMedKitCountNew(_numberOfMedKits);
     }
 }
