@@ -1,9 +1,11 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MedKitCounter : MonoBehaviour
 {
-    [SerializeField] Image[] _MedKitIcons;
+    [SerializeField] private Image[] _MedKitIcons;
+    [SerializeField] private TextMeshProUGUI _medKitCounter;
     [SerializeField] private float _OccupiedSlot = 1f;
     [SerializeField] private float _EmptySlot = 0.4f;
     private Color _alphaOccupied;
@@ -19,6 +21,8 @@ public class MedKitCounter : MonoBehaviour
 
     public void SetMedKitCountNew(uint numberOfMedKits)
     {
+        _medKitCounter.text = numberOfMedKits.ToString();
+        
         switch (numberOfMedKits)
         {
             case 3:

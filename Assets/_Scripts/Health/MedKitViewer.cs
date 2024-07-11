@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Serialization;
 
 sealed class MedKitViewer : MonoBehaviour
 {
@@ -10,12 +8,12 @@ sealed class MedKitViewer : MonoBehaviour
     private bool _fullMedKitInventory;
     private bool _emptyMedKitInventory;
 
-    void Start()
+    private void Start()
     {
         _medKitCounter.SetMedKitCountNew(_numberOfMedKits);
     }
 
-    void Update()
+    private void Update()
     {
         FullOrEmptyChecker();
         
