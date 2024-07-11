@@ -6,17 +6,37 @@ using UnityEngine.InputSystem;
 public class Door : MonoBehaviour
 {
     [SerializeField] private Animator animator;
+    [SerializeField] private Highlight _highlightScript;
     private bool _interact; // will change to a new system later
     private bool _isOpen;
+    public static bool _ThisDoorOnly;
+
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {
-        _interact = true;
+    {       
+        if (collision.CompareTag("Player"))
+        {
+            if (_highlightScript == null)
+            {
+                _highlightScript = GetComponentInChildren<Highlight>();
+            }
+
+            if (!_highlightScript.TriggerEnter(gameObject)) // Checks if you can interact or not
+            {
+                return; // If it can't it stops here
+            }
+            _interact = true;
+        }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _interact = false;
+        if (collision.CompareTag("Player"))
+        {
+            _highlightScript.TriggerExit(gameObject);
+            _interact = false;
+        }
     }
 
     public void UseDoor(InputAction.CallbackContext context)
