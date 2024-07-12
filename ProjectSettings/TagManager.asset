@@ -11,10 +11,10 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Ladder
+  - Ignore Ground
+  - Obstacle
+  - Background
   - 
   - 
   - 
@@ -40,4 +40,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ladder
+    uniqueID: 336720875
+    locked: 0
+  - name: Grounds
+    uniqueID: 4271370995
+    locked: 0
+  - name: Beings
+    uniqueID: 2594551939
     locked: 0
