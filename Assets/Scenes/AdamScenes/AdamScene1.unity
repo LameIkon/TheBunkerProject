@@ -775,6 +775,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7012186411862257885, guid: eb663a81479324d48b0efa0af53a9e24, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012186411862257885, guid: eb663a81479324d48b0efa0af53a9e24, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012186411862257885, guid: eb663a81479324d48b0efa0af53a9e24, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7246766634336494694, guid: eb663a81479324d48b0efa0af53a9e24, type: 3}
       propertyPath: _healthBar
       value: 

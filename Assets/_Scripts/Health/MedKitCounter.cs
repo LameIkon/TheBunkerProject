@@ -11,7 +11,7 @@ public class MedKitCounter : MonoBehaviour
     private Color _alphaOccupied;
     private Color _alphaEmpty;
 
-    private void Start()
+    private void Awake()
     {
         _alphaOccupied = _MedKitIcons[0].color;
         _alphaOccupied.a = _OccupiedSlot;
