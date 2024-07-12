@@ -14,27 +14,27 @@ public class Door : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {       
-        if (collision.CompareTag("Player"))
-        {
-            if (_highlightScript == null)
-            {
-                _highlightScript = GetComponentInChildren<Highlight>();
-            }
+        //if (collision.CompareTag("Player"))
+        //{
+        //    if (_highlightScript == null)
+        //    {
+        //        _highlightScript = GetComponentInChildren<Highlight>();
+        //    }
 
-            if (!_highlightScript.TriggerEnter(gameObject)) // Checks if you can interact or not
-            {
-                return; // If it can't it stops here
-            }
-            _interact = true;
-        }
+        //    if (!_highlightScript.TriggerEnter(gameObject)) // Checks if you can interact or not
+        //    {
+        //        return; // If it can't it stops here
+        //    }
+        //}
 
+        _interact = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            _highlightScript.TriggerExit(gameObject);
+            //_highlightScript.TriggerExit(gameObject);
             _interact = false;
         }
     }
