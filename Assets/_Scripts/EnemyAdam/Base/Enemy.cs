@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable
+public class Enemy : MonoBehaviour, IDamageableTemp, IEnemyMoveable
 {
     [field: SerializeField] public float _MaxHealth { get; set; } = 100f;
     public float _CurrentHealth { get; set; }

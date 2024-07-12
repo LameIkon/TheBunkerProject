@@ -1,4 +1,4 @@
-public interface IDamageable
+public interface IDamageableTemp
 {
     void Damage(float damageAmount);
 
