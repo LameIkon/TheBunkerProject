@@ -13,7 +13,7 @@ public struct HealthStats
     }
 }
 
-sealed class PlayerHealth : MonoBehaviour
+public sealed class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private HealthBar _healthBar;
     [SerializeField] private HealthStats _healthStats;
@@ -28,7 +28,7 @@ sealed class PlayerHealth : MonoBehaviour
         _currentHealth = _healthStats._MaxHealth;
     }
 
-    void Update()
+    private void Update()
     {
         HealthChecker();
         
