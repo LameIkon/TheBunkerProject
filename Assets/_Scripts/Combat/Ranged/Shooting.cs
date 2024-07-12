@@ -10,6 +10,7 @@ public class Shooting : Weapon
     {
         if(context.performed)
         {
+            Debug.Log("shooting");
             Fire();         
         }
     }
