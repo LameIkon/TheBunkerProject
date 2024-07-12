@@ -5,19 +5,28 @@ using UnityEngine;
 public class AttackTestScript : MonoBehaviour
 {
     [SerializeField] private WeaponBase _currentWeapon;
+    [SerializeField] private Transform _attackPoint;
 
-    private void Attack() 
+
+    private void Attack()
     {
-        _currentWeapon.Attack(this);
+        StartCoroutine(_currentWeapon.Attack(this));
     }
 
 
-    void Update() 
+    void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        if (Input.GetKeyDown(KeyCode.V))
         {
             Attack();
         }
     }
 
+
+    private void OnDrawGizmosSelected()
+    {
+        _currentWeapon.Draw(this);
+    }
+
+    public Vector3 GetAttackPoint() => _attackPoint.position;
 }
