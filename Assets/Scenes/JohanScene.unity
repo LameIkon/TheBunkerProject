@@ -1353,7 +1353,7 @@ PrefabInstance:
     - target: {fileID: 2344034754827274859, guid: eb663a81479324d48b0efa0af53a9e24, type: 3}
       propertyPath: _medKitBar
       value: 
-      objectReference: {fileID: 1853196340}
+      objectReference: {fileID: 0}
     - target: {fileID: 5269786520809334512, guid: eb663a81479324d48b0efa0af53a9e24, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1873,17 +1873,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e7fa56a933136147a625e2407135bb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1853196340 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2346431266124738788, guid: 150c229403f757943b4198f892805901, type: 3}
-  m_PrefabInstance: {fileID: 1853196338}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd05cac39de6f6546a9f29468f000276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1939215479
