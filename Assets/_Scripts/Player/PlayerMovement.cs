@@ -29,8 +29,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask _groundLayer;
 
     [Header("Climbing")]
-    //[SerializeField] private bool _IsUsingLadder;
     [SerializeField] private float _climbSpeed;
+
+    [Header("Interact With")]
+    [SerializeField] private Door _currentDoor; // Used to check which door player interacts with
+    [SerializeField] private Elevator _currentElevator; // Used to check which elevator player interacts with
+
 
     // Update is called once per frame
     void Update()
@@ -122,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-
+    #region Ladder
     public void UseLatter(InputAction.CallbackContext context)
     {
         _movementY = context.ReadValue<Vector2>().y;
@@ -157,6 +161,51 @@ public class PlayerMovement : MonoBehaviour
             }
         }       
     }
+    #endregion
+    #region Interacting
+    public void Interact(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (_currentDoor != null && _currentDoor._Interact) // Door
+            {
+                StartCoroutine(_currentDoor.DoorTransition()); // Call the door script coroutine
+            }
+            else if (_currentElevator != null && _currentElevator._Interact) // Elevator
+            {
+                _currentElevator.ShowFloorPanel();
+            }
+        }
+    }
+    #endregion
+    #region Trigger
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Door")) // If trigger door
+        {
+            _currentDoor = collision.GetComponentInChildren<Door>(); // Get the door script
+        }
+        if (collision.CompareTag("Elevator")) // If trigger elevator
+        {
+            _currentElevator = collision.GetComponentInParent<Elevator>(); // Get the elevator script
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Door"))
+        {
+            if (_currentDoor != null && collision.GetComponentInChildren<Door>() == _currentDoor) // Might not need to be this complicated but only deselect if exiting that door trigger
+            {
+                _currentDoor = null; // Set to null since dont need anymore
+            }
+        }
+        if (collision.CompareTag("Elevator") && collision.GetComponentInParent<Elevator>() == _currentElevator) // Deselect elevator trigger
+        {
+            _currentElevator = null; // Set to null since dont need anymore
+        }
+    }
+    #endregion
 
     private bool isGrounded()
     {

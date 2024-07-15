@@ -207,7 +207,6 @@ GameObject:
   - component: {fileID: 2364349366641915018}
   - component: {fileID: 2344034754827274859}
   - component: {fileID: 7246766634336494694}
-  - component: {fileID: 4582775781755435289}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -399,10 +398,6 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: d4dbfdea-e9f3-42e1-92ba-28b83f53992d
-    m_ActionName: Player/Jump[/Keyboard/w,/Keyboard/upArrow,/Keyboard/space]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 2d0e390c-c019-4eb7-a1a2-9e8976a5a491
     m_ActionName: Player/MoveRight[/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
@@ -427,9 +422,9 @@ MonoBehaviour:
     m_ActionName: Player/test[/Keyboard/upArrow,/Keyboard/w,/Keyboard/downArrow,/Keyboard/s]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Door, Assembly-CSharp
-        m_MethodName: UseDoor
+      - m_Target: {fileID: 2364349366641915018}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: Interact
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -502,18 +497,6 @@ MonoBehaviour:
   _currentHealth: 0
   _IsAtMaxHealth: 0
   _IsDead: 0
---- !u!114 &4582775781755435289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5269786520809334512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7750de8f820077b43aac950e13b9f6e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8896540433105570357
 GameObject:
   m_ObjectHideFlags: 0
