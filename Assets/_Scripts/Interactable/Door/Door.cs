@@ -25,7 +25,6 @@ public class Door : MonoBehaviour
         //        return; // If it can't it stops here
         //    }
         //}
-        Debug.Log("entered");
         _Interact = true;
     }
 
