@@ -21,7 +21,7 @@ public class Elevator : MonoBehaviour
 
     private void Awake()
     {
-         _elevatorPlatform.position = GetFloorPosition(_currentFloor);
+         _elevatorPlatform.position = GetFloorPosition(_currentFloor); // Set the floor you want the elevator to start at
     }
 
     IEnumerator MoveToFloor(Floor targetFloor)
@@ -51,7 +51,7 @@ public class Elevator : MonoBehaviour
         }
      }
 
-    public void ShowFloorPanel()
+    public void ShowFloorPanel() // Player input will show up canvas with buttons
     {
         if (_FloorCanvas != null && !_FloorCanvas.activeSelf && !_isMoving)
         {
@@ -59,7 +59,7 @@ public class Elevator : MonoBehaviour
         }
     }
 
-     public void SetInteract(bool interact)
+     public void SetInteract(bool interact) // On trigger it will say you can interact 
      {
         _Interact = interact;
      }
