@@ -1,22 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TopLadder : LadderHandler
+public class TopLadder : MonoBehaviour
 {
+    [SerializeField] private LadderHandler _ladderHandler;
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && !_ExitLadder)
+        if (collision.CompareTag("Player"))
         {
-            _ExitLadder = true;
+            if (_ladderHandler._UsingLadder)
+            {
+                _ladderHandler.SetExit(true);
+            }
+            else if (!_ladderHandler._UsingLadder)
+            {
+                _ladderHandler.SetExit(false);
+            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            _ExitLadder = false;
+            _ladderHandler.SetExit(false);
         }
     }
 }

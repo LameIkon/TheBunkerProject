@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Interact With")]
     [SerializeField] private Door _currentDoor; // Used to check which door player interacts with
     [SerializeField] private Elevator _currentElevator; // Used to check which elevator player interacts with
+    [SerializeField] private LadderHandler _currentLadder; // Used to check which ladder player interacts with
 
 
     // Update is called once per frame
@@ -44,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Movement()
     {
-        if (LadderHandler._IsUsingLadder)
+        if (_currentLadder != null && _currentLadder._UsingLadder)
         {
             _rb.velocity = new Vector2(_rb.velocity.x, _climbSpeed * _movementY);
         }
@@ -131,35 +132,37 @@ public class PlayerMovement : MonoBehaviour
     {
         _movementY = context.ReadValue<Vector2>().y;
 
-        if (LadderHandler._ExitLadder && LadderHandler._IsUsingLadder)
+        if (_currentLadder != null)
         {
-            if (context.canceled)
+            if (_currentLadder._ExitLadder) // Exit ladder
             {
-                _rb.gravityScale = 1; // Enable gavity
-                _rb.velocity = new Vector2(0, 0); // Stops the player from moving forward
-                LadderHandler._IsUsingLadder = false;
-                _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                gameObject.layer = LayerMask.NameToLayer("Default");
-                LadderHandler._LadderOnCoolDown = true;
+                if (context.canceled)
+                {
+                    _rb.gravityScale = 1; // Enable gavity
+                    _rb.velocity = new Vector2(0, 0); // Stops the player from moving forward
+                    _currentLadder.CurrentlyUsingLadder(false);
+                    _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                    gameObject.layer = LayerMask.NameToLayer("Default");
+                }
             }
-        }
 
-        else if (LadderHandler._CanUseLadder)
-        {
-            if (context.performed)
+            else if (_currentLadder._Interact)
             {
-                _rb.gravityScale = 1; // Enable gavity
-                _rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation; // Freezes both Z and Y axis
-                gameObject.layer = LayerMask.NameToLayer("Ignore Ground"); // Allows going through floors
-                LadderHandler._IsUsingLadder = true;
-            }
-            else if (context.canceled) // When released climbing 
-            {
-                _rb.gravityScale = 0; // Disable gavity
-                _rb.velocity = new Vector2(0,0); // Stops the player from moving forward
-                LadderHandler._IsUsingLadder = false;
-            }
-        }       
+                if (context.performed) // Climb ladder
+                {
+                    _rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation; // Freezes both Z and Y axis
+                    gameObject.layer = LayerMask.NameToLayer("Ignore Ground"); // Allows going through floors
+                    _currentLadder.CurrentlyUsingLadder(true);
+                }
+                else if (context.canceled) // Pause while on ladder
+                {
+                    _rb.gravityScale = 0; // Disable gavity
+                    _rb.velocity = new Vector2(0,0); // Stops the player from moving forward
+                    _currentLadder.CurrentlyUsingLadder(false);
+                }
+            }       
+        }
+        
     }
     #endregion
     #region Interacting
@@ -189,20 +192,25 @@ public class PlayerMovement : MonoBehaviour
         {
             _currentElevator = collision.GetComponentInParent<Elevator>(); // Get the elevator script
         }
+        if (collision.CompareTag("Ladder")) // if trigger ladder
+        {
+            _currentLadder = collision.GetComponentInParent<LadderHandler>(); // Get the ladder script
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Door"))
+        if (collision.CompareTag("Door") && collision.GetComponentInChildren<Door>() == _currentDoor) // Might not need to be this complicated but only deselect if exiting that door trigger
         {
-            if (_currentDoor != null && collision.GetComponentInChildren<Door>() == _currentDoor) // Might not need to be this complicated but only deselect if exiting that door trigger
-            {
-                _currentDoor = null; // Set to null since dont need anymore
-            }
+            _currentDoor = null; // Set to null since dont need anymore          
         }
         if (collision.CompareTag("Elevator") && collision.GetComponentInParent<Elevator>() == _currentElevator) // Deselect elevator trigger
         {
             _currentElevator = null; // Set to null since dont need anymore
+        }
+        if (collision.CompareTag("Ladder") && collision.GetComponentInParent<LadderHandler>() == _currentLadder)
+        {
+            _currentLadder = null; // Set to null since dont need anymore
         }
     }
     #endregion

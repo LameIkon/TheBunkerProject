@@ -1,12 +1,14 @@
 using UnityEngine;
 
-public class BotLadder : LadderHandler
+public class BotLadder : MonoBehaviour
 {
+    [SerializeField] private LadderHandler _ladderHandler;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && _ladderHandler._UsingLadder)
         {
-            _ExitLadder = true;
+             _ladderHandler.SetExit(true);
         }
     }
 
@@ -14,7 +16,7 @@ public class BotLadder : LadderHandler
     {
         if (collision.CompareTag("Player"))
         {
-            _ExitLadder = false;
+            _ladderHandler.SetExit(false);
         }
     }
 }

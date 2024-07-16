@@ -1173,10 +1173,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1514623503}
     m_Modifications:
-    - target: {fileID: 3454820135721799045, guid: 81e1444d45894564891ede30fa01bc5a, type: 3}
-      propertyPath: _currentFloor
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4083434862793998858, guid: 81e1444d45894564891ede30fa01bc5a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1260,10 +1256,6 @@ PrefabInstance:
     - target: {fileID: 5039740538773258802, guid: 81e1444d45894564891ede30fa01bc5a, type: 3}
       propertyPath: m_Name
       value: Elevator
-      objectReference: {fileID: 0}
-    - target: {fileID: 6888169721817114742, guid: 81e1444d45894564891ede30fa01bc5a, type: 3}
-      propertyPath: m_EdgeRadius
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

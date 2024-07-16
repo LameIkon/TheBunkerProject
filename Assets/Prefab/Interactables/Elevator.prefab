@@ -444,7 +444,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0.5
+  m_EdgeRadius: 0
 --- !u!114 &800743015896935305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -780,7 +780,7 @@ MonoBehaviour:
   _floor2: {fileID: 4718297089407305786}
   _FloorCanvas: {fileID: 2887425633769221692}
   _speed: 1.5
-  _currentFloor: 0
+  _currentFloor: 1
   _isMoving: 0
 --- !u!1 &5063788736743566879
 GameObject:

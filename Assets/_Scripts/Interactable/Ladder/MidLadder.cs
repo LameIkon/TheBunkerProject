@@ -1,15 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MidLadder : LadderHandler
+public class MidLadder : MonoBehaviour
 {
+    [SerializeField] private LadderHandler _ladderHandler;
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision) 
     {
-        if (collision.CompareTag("Player") && !_CanUseLadder)
+        if (collision.CompareTag("Player"))
         {
-            _CanUseLadder = true;
+            _ladderHandler.SetInteract(true);
         }
     }
 
@@ -17,7 +16,7 @@ public class MidLadder : LadderHandler
     {
         if (collision.CompareTag("Player"))
         {
-            _CanUseLadder = false;
+            _ladderHandler.SetInteract(false);
         }
     }
 }

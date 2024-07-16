@@ -42,6 +42,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3167814573259151950}
+  - component: {fileID: 2006150057294641789}
   m_Layer: 6
   m_Name: Ladder
   m_TagString: Untagged
@@ -57,7 +58,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5052930099054914954}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.67, y: 4.9700003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -67,6 +68,18 @@ Transform:
   - {fileID: 3455924624738007054}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2006150057294641789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5052930099054914954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 309fd6eb52aeb4c45a714bf3a9d48949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5091591722971598086
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,7 +224,7 @@ GameObject:
   - component: {fileID: 7982613733950786200}
   m_Layer: 6
   m_Name: MidLadder
-  m_TagString: Untagged
+  m_TagString: Ladder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -344,6 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac9cc547bb88a5d4b8e0dae4f2b0b669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ladderHandler: {fileID: 2006150057294641789}
 --- !u!1 &5543747776713176150
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,6 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4723dae255fbdd458271cc192faa08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ladderHandler: {fileID: 2006150057294641789}
 --- !u!61 &2180294283697499321
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -479,6 +494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcad81e3cf180c5489864c50f875e6e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ladderHandler: {fileID: 2006150057294641789}
 --- !u!61 &7730443944300715158
 BoxCollider2D:
   m_ObjectHideFlags: 0
