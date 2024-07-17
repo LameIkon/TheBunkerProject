@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class MidLadder : MonoBehaviour
+public class LadderTrigger : MonoBehaviour
 {
-    [SerializeField] private LadderHandler _ladderHandler;
+    [SerializeField] private Ladder _ladderHandler;
 
     private void OnTriggerStay2D(Collider2D collision) 
     {

@@ -34,8 +34,10 @@ public class PlayerMovement : MonoBehaviour
     [Header("Interact With")]
     [SerializeField] private Door _currentDoor; // Used to check which door player interacts with
     [SerializeField] private Elevator _currentElevator; // Used to check which elevator player interacts with
-    [SerializeField] private LadderHandler _currentLadder; // Used to check which ladder player interacts with
+    [SerializeField] private Ladder _currentLadder; // Used to check which ladder player interacts with
 
+     private float _ladderXPosition;
+     private float _ladderCenteringSpeed = 5f;
 
     // Update is called once per frame
     void Update()
@@ -48,6 +50,15 @@ public class PlayerMovement : MonoBehaviour
         if (_currentLadder != null && _currentLadder._UsingLadder)
         {
             _rb.velocity = new Vector2(_rb.velocity.x, _climbSpeed * _movementY);
+
+            // Center the player to the ladder's x position
+            if (Mathf.Abs(transform.position.x - _ladderXPosition) > 0.02f) // Tolerance. Stop centering when getting sufficently close
+            {
+                
+                Vector2 targetPosition = new Vector2(_ladderXPosition, transform.position.y);
+                transform.position = Vector2.Lerp(transform.position, targetPosition, _ladderCenteringSpeed * Time.deltaTime);
+                Debug.Log("called");
+            }
         }
         else
         {
@@ -152,7 +163,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     _rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation; // Freezes both Z and Y axis
                     gameObject.layer = LayerMask.NameToLayer("Ignore Ground"); // Allows going through floors
-                    _currentLadder.CurrentlyUsingLadder(true);
+                    _currentLadder.CurrentlyUsingLadder(true);               
                 }
                 else if (context.canceled) // Pause while on ladder
                 {
@@ -161,9 +172,11 @@ public class PlayerMovement : MonoBehaviour
                     _currentLadder.CurrentlyUsingLadder(false);
                 }
             }       
-        }
-        
+        }      
     }
+
+
+
     #endregion
     #region Interacting
     public void Interact(InputAction.CallbackContext context)
@@ -194,7 +207,8 @@ public class PlayerMovement : MonoBehaviour
         }
         if (collision.CompareTag("Ladder")) // if trigger ladder
         {
-            _currentLadder = collision.GetComponentInParent<LadderHandler>(); // Get the ladder script
+            _currentLadder = collision.GetComponentInParent<Ladder>(); // Get the ladder script
+            _ladderXPosition = _currentLadder.transform.position.x; // Store the ladder's x position
         }
     }
 
@@ -208,7 +222,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _currentElevator = null; // Set to null since dont need anymore
         }
-        if (collision.CompareTag("Ladder") && collision.GetComponentInParent<LadderHandler>() == _currentLadder)
+        if (collision.CompareTag("Ladder") && collision.GetComponentInParent<Ladder>() == _currentLadder)
         {
             _currentLadder = null; // Set to null since dont need anymore
         }

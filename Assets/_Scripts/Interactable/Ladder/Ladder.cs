@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class LadderHandler : MonoBehaviour
+public class Ladder : MonoBehaviour
 {
     //public static bool _CanUseLadder; // CHecks when a player collides with latter
     //public static bool _IsUsingLadder;
