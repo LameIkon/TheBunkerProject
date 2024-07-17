@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 233725717393508476}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.01, z: 0}
+  m_LocalPosition: {x: 0.15, y: -1.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -463,6 +463,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _climbSpeed: 3
+  _currentDoor: {fileID: 0}
+  _currentElevator: {fileID: 0}
+  _currentLadder: {fileID: 0}
 --- !u!114 &2344034754827274859
 MonoBehaviour:
   m_ObjectHideFlags: 0
