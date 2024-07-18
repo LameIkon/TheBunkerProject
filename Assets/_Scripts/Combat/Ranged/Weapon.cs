@@ -10,17 +10,15 @@ public abstract class Weapon : MonoBehaviour
     private float _damage;
     private GunType _gunType;
     private float _fireRate;
-    private int _critChance;
+    private int _critChance; //25 gives 25% chance
     private float _critDamage; //needs to be in decimal. 1.25 give 125% crit damage
     private float _range; //not sure if need, raycast Linebullet still instansiate even if you arent in range to hit enemy maybe a animation so we cant see the bullet line would work
 
     private float _nextTimeTofire = 0f;
 
-    [SerializeField] private WeaponSO _weapon;
+    [SerializeField] private WeaponSO _weapon; //ScriptableObject Weapon needs to placed here.
     [SerializeField] private Transform _shootingPoint; //where we shoot from
     
-
-
 
     private void Awake()
     {
@@ -56,7 +54,7 @@ public abstract class Weapon : MonoBehaviour
 
             if (hit)
             {
-                EnemyHealth enemy = hit.transform.GetComponent<EnemyHealth>();
+                Health enemy = hit.transform.GetComponent<Health>();
                 //Vector2 hitpos;
                 if (hit.collider != null)
                 {

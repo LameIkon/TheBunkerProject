@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        EnemyHealth enemy = collision.GetComponent<EnemyHealth>();
+        Health enemy = collision.GetComponent<Health>();
         if (enemy != null)
         {
             print("Enemy hit");

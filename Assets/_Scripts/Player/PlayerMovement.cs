@@ -174,9 +174,7 @@ public class PlayerMovement : MonoBehaviour
         if (_isFacingRight && _movementX < 0f || !_isFacingRight && _movementX > 0f)
         {
             _isFacingRight = !_isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
+            transform.Rotate(0f,180f,0f);
         }
     }
 

@@ -2,7 +2,9 @@ using UnityEngine;
 
 sealed class MedKitViewer : MonoBehaviour
 {
-    [SerializeField] private PlayerHealth _playerHealth;
+    [SerializeField] private FloatVariable _playerHealth;
+    [SerializeField] private FloatVariable _playerHealthMax;
+    [SerializeField] private int _medkitGain;
     [SerializeField] private MedKitCounter _medKitCounter;
     [SerializeField] private uint _numberOfMedKits;
     private bool _fullMedKitInventory;
@@ -42,12 +44,12 @@ sealed class MedKitViewer : MonoBehaviour
 
     private void UseMedKit()
     {
-        if (_playerHealth._IsDead)
+        if (_playerHealth <= 0)
         {
             return;
         }
 
-        if (_playerHealth._IsAtMaxHealth)
+        if (_playerHealth >= _playerHealthMax)
         {
             print("Your health is already at maximum.");
             return;
@@ -61,7 +63,7 @@ sealed class MedKitViewer : MonoBehaviour
 
         _numberOfMedKits -= 1;
         print("You have successfully gained full health.");
-        _playerHealth.GainHealth();
+        _playerHealth.ApplyChange(_medkitGain);
         UpdateMedKitBar();
     }
 
@@ -75,7 +77,7 @@ sealed class MedKitViewer : MonoBehaviour
 
     private void PickUpMedKit()
     {
-        if (_playerHealth._IsDead)
+        if (_playerHealth <= 0)
         {
             return;
         }
