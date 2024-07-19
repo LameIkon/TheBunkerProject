@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 7853012328190308139}
   - component: {fileID: 2364349366641915018}
   - component: {fileID: 2344034754827274859}
-  - component: {fileID: 7246766634336494694}
+  - component: {fileID: 7959316033241839916}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -478,10 +478,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64e856961a706db41842e72e1263989a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerHealth: {fileID: 7246766634336494694}
+  _playerHealth: {fileID: 11400000, guid: e970641cf585c2f4d9617360444342db, type: 2}
+  _playerHealthMax: {fileID: 11400000, guid: 4fa55c2595f279a4cb962d0f8b563021, type: 2}
+  _medkitGain: 10
   _medKitCounter: {fileID: 0}
   _numberOfMedKits: 0
---- !u!114 &7246766634336494694
+--- !u!114 &7959316033241839916
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -490,16 +492,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5269786520809334512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d498ec1892e9bee48bd200812c08e465, type: 3}
+  m_Script: {fileID: 11500000, guid: 56cc37312ba63af429da7752ad384a53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthBar: {fileID: 0}
-  _healthStats:
-    _MaxHealth: 100
-    _MinHealth: 0
-  _currentHealth: 0
-  _IsAtMaxHealth: 0
-  _IsDead: 0
+  _health: {fileID: 11400000, guid: e970641cf585c2f4d9617360444342db, type: 2}
+  _startHealth: {fileID: 11400000, guid: 4fa55c2595f279a4cb962d0f8b563021, type: 2}
 --- !u!1 &8896540433105570357
 GameObject:
   m_ObjectHideFlags: 0
