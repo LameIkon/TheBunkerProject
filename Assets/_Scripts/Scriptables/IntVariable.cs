@@ -1,10 +1,10 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Float Variable", menuName = "Variable/Float")]
-public class FloatVariable : VariableBase
+[CreateAssetMenu(fileName = "New Int Variable", menuName = "Variable/Int")]
+public class IntVariable : VariableBase
 {
 
-    public float _Value;
+    public int _Value;
 
     [SerializeField, Tooltip("Called when the value of the Variable is changed, it can also be null")]
     private GameEvent _onValueChanged;
@@ -13,31 +13,31 @@ public class FloatVariable : VariableBase
 
     #region Setters and Getters    
 
-    public void SetValue(float value)
+    public void SetValue(int value)
     {
         _Value = value;
         OnValueChanged();
     }
 
-    public void SetValue(FloatVariable value)
+    public void SetValue(IntVariable value)
     {
         _Value = value._Value;
         OnValueChanged();
     }
 
-    public void ApplyChange(float amount)
+    public void ApplyChange(int amount)
     {
         _Value += amount;
         OnValueChanged();
     }
 
-    public void ApplyChange(FloatVariable amount)
+    public void ApplyChange(IntVariable amount)
     {
         _Value += amount._Value;
         OnValueChanged();
     }
 
-    public float GetValue()
+    public int GetValue()
     {
         return _Value;
     }
@@ -53,7 +53,7 @@ public class FloatVariable : VariableBase
         }
     }
 
-    public static implicit operator float(FloatVariable v)
+    public static implicit operator int(IntVariable v)
     {
         return v.GetValue();
     }

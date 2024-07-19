@@ -6,7 +6,6 @@ using static UnityEngine.UI.Image;
 
 public abstract class Weapon : MonoBehaviour
 {
-
     private float _damage;
     private GunType _gunType;
     private float _fireRate;
@@ -26,7 +25,7 @@ public abstract class Weapon : MonoBehaviour
     {
         _damage = _weapon._Damage;
         _fireRate = _weapon._FireRate;
-        _gunType = _weapon._GunType;
+        _gunType = _weapon._WeaponCategory;
         _critChance = _weapon._CritChance;
         _critDamage = _weapon._CritDamage;
         _range = _weapon._Range;
@@ -45,7 +44,7 @@ public abstract class Weapon : MonoBehaviour
         void RayCastShoot(Vector2 origin, Vector2 direction, float range) //can add a layermask to check if the layer is hit.
         {
             RaycastHit2D hit = Physics2D.Raycast(origin, direction, range); //can add a layermask to check if the layer is hit.
-            GameObject bullet = Instantiate(_weapon._bulletPrefab, _shootingPoint.position, Quaternion.identity);
+            GameObject bullet = Instantiate(_weapon._BulletPrefab, _shootingPoint.position, Quaternion.identity);
             LineRenderer bulletLine = bullet.GetComponent<LineRenderer>();
 
             if (bulletLine != null)
