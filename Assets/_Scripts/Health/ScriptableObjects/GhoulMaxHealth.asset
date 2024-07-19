@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 437f217be105fca4e8252bf1919a2519, type: 3}
-  m_Name: EnemyMaxHealth
+  m_Name: GhoulMaxHealth
   m_EditorClassIdentifier: 
-  DevDescription: 
+  DevDescription: 'Ghouls only need Maxhealth.
+
+    This determines their starting
+    health.'
   _Value: 150
   _onValueChanged: {fileID: 0}

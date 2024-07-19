@@ -1,26 +1,44 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.InputSystem.InputAction;
 
 sealed class HealthBar : MonoBehaviour
 {
-    [SerializeField] private Slider _Slider;
-    [SerializeField] private Gradient _Gradient;
-    [SerializeField] private Image _Fill;
+    [SerializeField] private Slider _slider;
+    [SerializeField] private Gradient _gradient;
+    [SerializeField] private Image _fill;
     [SerializeField] private TextMeshProUGUI _healthCounter;
+    [SerializeField] private FloatVariable _health;
+    [SerializeField] private FloatVariable _maxHealth;
 
-    public void SetMaxHealth(int health)
+    private void Awake()
     {
-        _Slider.maxValue = health;
-        _Slider.value = health;
-        _Fill.color = _Gradient.Evaluate(1f);
-        _healthCounter.text = health.ToString();
+        SetMaxHealth(_maxHealth);
     }
 
-    public void SetHealth(int health)
+    private void Update()
     {
-        _Slider.value = health;
-        _Fill.color = _Gradient.Evaluate(_Slider.normalizedValue);
-        _healthCounter.text = health.ToString();
+        SetHealth(_health);
+    }
+
+    private void SetMaxHealth(FloatVariable health)
+    {
+        _slider.maxValue = health;
+        _slider.value = health;
+        _fill.color = _gradient.Evaluate(1f);
+        _healthCounter.text = health.GetValue().ToString();
+    }
+
+    private void SetHealth(FloatVariable health)
+    {
+        _slider.value = health;
+        _healthCounter.text = health.GetValue().ToString();
+        _fill.color = _gradient.Evaluate(_slider.normalizedValue);
+        
+        if (health >= _maxHealth)
+        {
+            health.SetValue(_maxHealth);    
+        }
     }
 }
