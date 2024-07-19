@@ -7,9 +7,8 @@ public class Door : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private Highlight _highlightScript;
-    private bool _interact; // will change to a new system later
+    public bool _Interact  { get; private set; } // will change to a new system later
     private bool _isOpen;
-    public static bool _ThisDoorOnly;
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,8 +25,7 @@ public class Door : MonoBehaviour
         //        return; // If it can't it stops here
         //    }
         //}
-
-        _interact = true;
+        _Interact = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -35,24 +33,15 @@ public class Door : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             //_highlightScript.TriggerExit(gameObject);
-            _interact = false;
+            _Interact = false;
         }
     }
 
-    public void UseDoor(InputAction.CallbackContext context)
+    public IEnumerator DoorTransition()
     {
-        if (context.performed && _interact)
+        if (_Interact)
         {
-            StartCoroutine(DoorTransition());
-        }
-    }
-
-
-    IEnumerator DoorTransition()
-    {
-        if (_interact)
-        {
-            _interact = false;
+            _Interact = false;
             if (_isOpen)
             {
                 animator.Play("Close Door");
@@ -63,7 +52,7 @@ public class Door : MonoBehaviour
             }
             yield return new WaitForSeconds(0.6f);
             _isOpen = !_isOpen;
-            _interact = true;
+            _Interact = true;
         }
     }
 }

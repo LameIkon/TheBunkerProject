@@ -55,15 +55,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""UseLatter"",
-                    ""type"": ""Button"",
-                    ""id"": ""d4dbfdea-e9f3-42e1-92ba-28b83f53992d"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""MoveRight"",
                     ""type"": ""Button"",
                     ""id"": ""2d0e390c-c019-4eb7-a1a2-9e8976a5a491"",
@@ -82,7 +73,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""test"",
+                    ""name"": ""UseLadder"",
                     ""type"": ""Value"",
                     ""id"": ""6d48cbfe-fba1-4346-b4f7-bda092934f2e"",
                     ""expectedControlType"": ""Vector2"",
@@ -279,50 +270,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2954eb5b-7e25-471e-abfd-2a8c9cfe52f2"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""UseLatter"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""4c7de158-1bc5-47a1-86e9-603ab1fdef51"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""UseLatter"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""86d1b4d6-7d21-448d-b583-c0e27467ccdd"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""UseLatter"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d94734c0-5ef7-40ce-838a-07477129962a"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""UseLatter"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""b5e701cd-e468-455b-b32f-4cf487e3e7bf"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
@@ -372,7 +319,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""test"",
+                    ""action"": ""UseLadder"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -383,7 +330,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""test"",
+                    ""action"": ""UseLadder"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -394,7 +341,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""test"",
+                    ""action"": ""UseLadder"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -405,7 +352,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""test"",
+                    ""action"": ""UseLadder"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -416,7 +363,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""test"",
+                    ""action"": ""UseLadder"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -1018,10 +965,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
-        m_Player_UseLatter = m_Player.FindAction("UseLatter", throwIfNotFound: true);
         m_Player_MoveRight = m_Player.FindAction("MoveRight", throwIfNotFound: true);
         m_Player_MoveLeft = m_Player.FindAction("MoveLeft", throwIfNotFound: true);
-        m_Player_test = m_Player.FindAction("test", throwIfNotFound: true);
+        m_Player_UseLadder = m_Player.FindAction("UseLadder", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -1099,10 +1045,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
-    private readonly InputAction m_Player_UseLatter;
     private readonly InputAction m_Player_MoveRight;
     private readonly InputAction m_Player_MoveLeft;
-    private readonly InputAction m_Player_test;
+    private readonly InputAction m_Player_UseLadder;
     private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
@@ -1111,10 +1056,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
-        public InputAction @UseLatter => m_Wrapper.m_Player_UseLatter;
         public InputAction @MoveRight => m_Wrapper.m_Player_MoveRight;
         public InputAction @MoveLeft => m_Wrapper.m_Player_MoveLeft;
-        public InputAction @test => m_Wrapper.m_Player_test;
+        public InputAction @UseLadder => m_Wrapper.m_Player_UseLadder;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -1134,18 +1078,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
-            @UseLatter.started += instance.OnUseLatter;
-            @UseLatter.performed += instance.OnUseLatter;
-            @UseLatter.canceled += instance.OnUseLatter;
             @MoveRight.started += instance.OnMoveRight;
             @MoveRight.performed += instance.OnMoveRight;
             @MoveRight.canceled += instance.OnMoveRight;
             @MoveLeft.started += instance.OnMoveLeft;
             @MoveLeft.performed += instance.OnMoveLeft;
             @MoveLeft.canceled += instance.OnMoveLeft;
-            @test.started += instance.OnTest;
-            @test.performed += instance.OnTest;
-            @test.canceled += instance.OnTest;
+            @UseLadder.started += instance.OnUseLadder;
+            @UseLadder.performed += instance.OnUseLadder;
+            @UseLadder.canceled += instance.OnUseLadder;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
@@ -1162,18 +1103,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
-            @UseLatter.started -= instance.OnUseLatter;
-            @UseLatter.performed -= instance.OnUseLatter;
-            @UseLatter.canceled -= instance.OnUseLatter;
             @MoveRight.started -= instance.OnMoveRight;
             @MoveRight.performed -= instance.OnMoveRight;
             @MoveRight.canceled -= instance.OnMoveRight;
             @MoveLeft.started -= instance.OnMoveLeft;
             @MoveLeft.performed -= instance.OnMoveLeft;
             @MoveLeft.canceled -= instance.OnMoveLeft;
-            @test.started -= instance.OnTest;
-            @test.performed -= instance.OnTest;
-            @test.canceled -= instance.OnTest;
+            @UseLadder.started -= instance.OnUseLadder;
+            @UseLadder.performed -= instance.OnUseLadder;
+            @UseLadder.canceled -= instance.OnUseLadder;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
@@ -1362,10 +1300,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
-        void OnUseLatter(InputAction.CallbackContext context);
         void OnMoveRight(InputAction.CallbackContext context);
         void OnMoveLeft(InputAction.CallbackContext context);
-        void OnTest(InputAction.CallbackContext context);
+        void OnUseLadder(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
     }
     public interface IUIActions

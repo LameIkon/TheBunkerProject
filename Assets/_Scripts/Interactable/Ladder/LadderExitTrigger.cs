@@ -1,20 +1,20 @@
 using UnityEngine;
 
-public class TopLadder : MonoBehaviour
+public class LadderExitTrigger : MonoBehaviour
 {
-    [SerializeField] private Ladder _ladder;
+    [SerializeField] private Ladder _ladderHandler;
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            if (_ladder._UsingLadder)
+            if (_ladderHandler._UsingLadder)
             {
-                _ladder.SetExit(true);
+                _ladderHandler.SetExit(true);
             }
-            else if (!_ladder._UsingLadder)
+            else if (!_ladderHandler._UsingLadder)
             {
-                _ladder.SetExit(false);
+                _ladderHandler.SetExit(false);
             }
         }
     }
@@ -23,7 +23,7 @@ public class TopLadder : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            _ladder.SetExit(false);
+            _ladderHandler.SetExit(false);
         }
     }
 }
