@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class Ladder : MonoBehaviour
 {
-    //public static bool _CanUseLadder; // CHecks when a player collides with latter
-    //public static bool _IsUsingLadder;
-    ////public static bool _ExitLadder; // Checks when a player hits the end of a latter
     private bool _ladderOnCoolDown; // Delay before can use latter again
 
     public bool _Interact  { get; private set; }  // Used to check when you can interact

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
 
      private float _ladderXPosition;
      private float _ladderCenteringSpeed = 5f;
+     private bool _isCenteringLadder;
 
     // Update is called once per frame
     void Update()
@@ -36,20 +38,13 @@ public class PlayerController : MonoBehaviour
 
     public void Movement()
     {
-        if (_currentLadder != null && _currentLadder._UsingLadder)
+        if (_currentLadder != null && _currentLadder._UsingLadder) // Use Ladder
         {
             _rb.velocity = new Vector2(_rb.velocity.x, _climbSpeed * _movementY);
-
-            // Center the player to the ladder's x position
-            if (Mathf.Abs(transform.position.x - _ladderXPosition) > 0.02f) // Tolerance. Stop centering when getting sufficently close
-            {
-                
-                Vector2 targetPosition = new Vector2(_ladderXPosition, transform.position.y);
-                transform.position = Vector2.Lerp(transform.position, targetPosition, _ladderCenteringSpeed * Time.deltaTime);
-                Debug.Log("called");
-            }
+            StartCoroutine(LadderCentering());
+            
         }
-        else
+        else // Walk
         {
             _rb.velocity = new Vector2(_movementX * _moveSpeed, _rb.velocity.y);
         }
@@ -97,6 +92,23 @@ public class PlayerController : MonoBehaviour
                 }
             }       
         }      
+    }
+
+    private IEnumerator LadderCentering()
+    {
+        // Center the player to the ladder
+        if (!_isCenteringLadder) // Ensure only once instance
+        {
+            _isCenteringLadder = true;
+            while (Mathf.Abs(transform.position.x - _ladderXPosition) > 0.02f) // Tolerance. Stop centering when getting sufficiently close
+            {
+                Vector2 targetPosition = new Vector2(_ladderXPosition, transform.position.y);
+                transform.position = Vector2.Lerp(transform.position, targetPosition, _ladderCenteringSpeed * Time.deltaTime);
+                Debug.Log("Centering...");
+                yield return new WaitForFixedUpdate(); // Wait for the next fixed frame
+            }
+            _isCenteringLadder = false;
+        }    
     }
 
 
