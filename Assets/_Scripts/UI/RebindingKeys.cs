@@ -1,19 +1,28 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class RebindingKeys : MonoBehaviour
 {
-    [SerializeField] private InputActionReference _interactAction; // The input key 
+    [System.Serializable]
+    private class RebindingItem
+    {
+        public InputActionReference _ActionReference; // The input key
+        public GameObject _StartRebindingButton; // The button to be selected for rebinding
+        public TextMeshProUGUI _BindingDisplayText; // The button text
+    }
+
     [SerializeField] private PlayerController _playerController; // Get reference to the player input
-    [SerializeField] private GameObject _startRebinding; // The button to be selected for rebinding
-    [SerializeField] private TextMeshProUGUI _bindingDisplayText; // The button text
     [SerializeField] private GameObject _waitingForInput; // Text saying waiting for input
+    [SerializeField] private List<RebindingItem> _rebindingItems; // List of rebinding items
+
 
     private const string _rebindsKey = "rebinds"; // Rebinds stored as string to json
     private const string _defaultRebindsKey = "defaultRebinds"; // Default rebinds stored as string to json
 
     private InputActionRebindingExtensions.RebindingOperation _rebindingOperation;
+    private RebindingItem _currentRebindingItem;
 
     private void Start()
     {
@@ -21,15 +30,19 @@ public class RebindingKeys : MonoBehaviour
         LoadRebinds();       
     }
 
-    public void StartRebinding() // Called from button
+    public void StartRebinding(int index) // Called from button
     {
+        _currentRebindingItem = _rebindingItems[index];
         _playerController.PlayerInput.SwitchCurrentActionMap("No Input");
 
-        _startRebinding.SetActive(false);
-        _waitingForInput.SetActive(true);   
+        _currentRebindingItem._StartRebindingButton.SetActive(false);
+        _waitingForInput.SetActive(true);
 
-        _rebindingOperation = _interactAction.action.PerformInteractiveRebinding()
-            .WithControlsExcluding("Mouse")
+
+
+        _rebindingOperation = _currentRebindingItem._ActionReference.action.PerformInteractiveRebinding()
+            .WithControlsExcluding("<Keyboard>/escape")
+            .WithControlsExcluding("<keyboard>/anyKey")
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => RebindComplete())
             .Start();
@@ -37,11 +50,11 @@ public class RebindingKeys : MonoBehaviour
     
     private void RebindComplete()
     {
-        UpdateBindingText();
+        UpdateBindingText(_currentRebindingItem);
 
         _rebindingOperation.Dispose();
 
-        _startRebinding.SetActive(true);
+        _currentRebindingItem._StartRebindingButton.SetActive(true);
         _waitingForInput.SetActive(false);
 
         _playerController.PlayerInput.SwitchCurrentActionMap("Player");
@@ -61,14 +74,21 @@ public class RebindingKeys : MonoBehaviour
     {
         string rebinds = PlayerPrefs.GetString(_rebindsKey, string.Empty);
 
-        if (string.IsNullOrEmpty(rebinds)) // If dont have stored rebinds
+        if (string.IsNullOrEmpty(rebinds)) // If i have stored rebinds
         {
-            Debug.Log("no rebinds");
+            Debug.Log("no changing");
+            foreach (var rebindingKey in _rebindingItems)
+            {
+                UpdateBindingText(rebindingKey); // Display the settings
+            }
             return; // Return nothing
         }
 
         _playerController.PlayerInput.actions.LoadBindingOverridesFromJson(rebinds); // Get the stored rebinds from json
-        UpdateBindingText(); // Display the settings
+        foreach (var rebindingKey in _rebindingItems)
+        {
+            UpdateBindingText(rebindingKey); // Display the settings
+        }
         Debug.Log("loaded rebinds");
     }
 
@@ -77,7 +97,10 @@ public class RebindingKeys : MonoBehaviour
         string defaultRebinds = PlayerPrefs.GetString(_defaultRebindsKey, string.Empty);
 
         _playerController.PlayerInput.actions.LoadBindingOverridesFromJson(defaultRebinds); // Load default bindings
-        UpdateBindingText(); // Display the settings
+        foreach (var rebindingKey in _rebindingItems)
+        {
+            UpdateBindingText(rebindingKey); // Display the settings
+        }
         SaveRebinds(); // Save default settings
         Debug.Log("loaded default rebinds");
     }
@@ -93,10 +116,10 @@ public class RebindingKeys : MonoBehaviour
         }
     }
 
-    private void UpdateBindingText()
+    private void UpdateBindingText(RebindingItem rebindingItem)
     {
-        int bindingIndex = _interactAction.action.GetBindingIndexForControl(_interactAction.action.controls[0]);
-        _bindingDisplayText.text = InputControlPath.ToHumanReadableString(_interactAction.action.bindings[bindingIndex].effectivePath,
+        int bindingIndex = rebindingItem._ActionReference.action.GetBindingIndexForControl(rebindingItem._ActionReference.action.controls[0]);
+        rebindingItem._BindingDisplayText.text = InputControlPath.ToHumanReadableString(rebindingItem._ActionReference.action.bindings[bindingIndex].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
     }
 }
