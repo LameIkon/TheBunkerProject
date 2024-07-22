@@ -373,11 +373,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3167814573259151950, guid: 50d3ac407e0bf87418227b7fe8d2a985, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.7
+      value: 4.5259914
       objectReference: {fileID: 0}
     - target: {fileID: 3167814573259151950, guid: 50d3ac407e0bf87418227b7fe8d2a985, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.9700003
+      value: 4.92
       objectReference: {fileID: 0}
     - target: {fileID: 3167814573259151950, guid: 50d3ac407e0bf87418227b7fe8d2a985, type: 3}
       propertyPath: m_LocalPosition.z
@@ -435,8 +435,9 @@ GameObject:
   m_Component:
   - component: {fileID: 704834909}
   - component: {fileID: 704834910}
+  - component: {fileID: 704834911}
   m_Layer: 0
-  m_Name: Floor (1)
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -451,7 +452,7 @@ Transform:
   m_GameObject: {fileID: 704834908}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.33, y: -0.6799998, z: 0}
+  m_LocalPosition: {x: -5.4, y: -0.6799998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -509,6 +510,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &704834911
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704834908}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.15}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6.4, y: 3.4}
+    newSize: {x: 6.4, y: 3.4}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 6.4, y: 2.7}
+  m_EdgeRadius: 0
 --- !u!1 &727722741
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,11 +702,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3167814573259151950, guid: 50d3ac407e0bf87418227b7fe8d2a985, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.67
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3167814573259151950, guid: 50d3ac407e0bf87418227b7fe8d2a985, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.9700003
+      value: 4.92
       objectReference: {fileID: 0}
     - target: {fileID: 3167814573259151950, guid: 50d3ac407e0bf87418227b7fe8d2a985, type: 3}
       propertyPath: m_LocalPosition.z
@@ -794,8 +840,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1230003281}
   - component: {fileID: 1230003282}
+  - component: {fileID: 1230003283}
   m_Layer: 0
-  m_Name: Floor (2)
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -810,7 +857,7 @@ Transform:
   m_GameObject: {fileID: 1230003280}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.67, y: -0.6799998, z: 0}
+  m_LocalPosition: {x: 7.4, y: -0.6799998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -868,6 +915,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &1230003283
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230003280}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.15}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6.4, y: 3.4}
+    newSize: {x: 6.4, y: 3.4}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 6.4, y: 2.7}
+  m_EdgeRadius: 0
 --- !u!1 &1302881333
 GameObject:
   m_ObjectHideFlags: 0
@@ -1302,8 +1394,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1629082205}
   - component: {fileID: 1629082206}
+  - component: {fileID: 1629082207}
   m_Layer: 0
-  m_Name: Floor
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1376,6 +1469,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &1629082207
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629082204}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.15}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6.4, y: 3.4}
+    newSize: {x: 6.4, y: 3.4}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 6.4, y: 2.7}
+  m_EdgeRadius: 0
 --- !u!1001 &1701148165
 PrefabInstance:
   m_ObjectHideFlags: 0
