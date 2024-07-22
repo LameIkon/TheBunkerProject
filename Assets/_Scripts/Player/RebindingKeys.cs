@@ -45,9 +45,11 @@ public class RebindingKeys : MonoBehaviour
         _waitingForInput.SetActive(false);
 
         _playerController.PlayerInput.SwitchCurrentActionMap("Player");
+
+        SaveRebinds();
     }
 
-    public void SaveRebinds() // Called from button
+    public void SaveRebinds() 
     {
         string rebinds = _playerController.PlayerInput.actions.SaveBindingOverridesAsJson();
         PlayerPrefs.SetString(_rebindsKey, rebinds);
