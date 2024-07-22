@@ -915,6 +915,34 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""No Input"",
+            ""id"": ""bd1d53a9-bf29-420d-b764-ab0ac62c2ef6"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""82efbd7b-057e-4b76-9d24-d1ca6a8d458d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""1be95491-9417-4d77-a8a0-96d609cb9ed5"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1002,6 +1030,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // No Input
+        m_NoInput = asset.FindActionMap("No Input", throwIfNotFound: true);
+        m_NoInput_Newaction = m_NoInput.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1279,6 +1310,52 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // No Input
+    private readonly InputActionMap m_NoInput;
+    private List<INoInputActions> m_NoInputActionsCallbackInterfaces = new List<INoInputActions>();
+    private readonly InputAction m_NoInput_Newaction;
+    public struct NoInputActions
+    {
+        private @PlayerControls m_Wrapper;
+        public NoInputActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_NoInput_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_NoInput; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(NoInputActions set) { return set.Get(); }
+        public void AddCallbacks(INoInputActions instance)
+        {
+            if (instance == null || m_Wrapper.m_NoInputActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_NoInputActionsCallbackInterfaces.Add(instance);
+            @Newaction.started += instance.OnNewaction;
+            @Newaction.performed += instance.OnNewaction;
+            @Newaction.canceled += instance.OnNewaction;
+        }
+
+        private void UnregisterCallbacks(INoInputActions instance)
+        {
+            @Newaction.started -= instance.OnNewaction;
+            @Newaction.performed -= instance.OnNewaction;
+            @Newaction.canceled -= instance.OnNewaction;
+        }
+
+        public void RemoveCallbacks(INoInputActions instance)
+        {
+            if (m_Wrapper.m_NoInputActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(INoInputActions instance)
+        {
+            foreach (var item in m_Wrapper.m_NoInputActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_NoInputActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public NoInputActions @NoInput => new NoInputActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1347,5 +1424,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface INoInputActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }

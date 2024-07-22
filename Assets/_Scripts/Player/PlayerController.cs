@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D _rb;
     private bool _isFacingRight = true;
 
+    [SerializeField] private PlayerInput _playerInput;
+    public PlayerInput PlayerInput => _playerInput;
 
     [Header("Movement")]
     [SerializeField] private float _moveSpeed;
@@ -30,10 +32,12 @@ public class PlayerController : MonoBehaviour
      private float _ladderCenteringSpeed = 5f;
      private bool _isCenteringLadder;
 
+
+
     // Update is called once per frame
     void Update()
     {
-        Movement();       
+         Movement();       
     }
 
     public void Movement()
