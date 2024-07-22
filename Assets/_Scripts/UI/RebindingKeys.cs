@@ -11,10 +11,11 @@ public class RebindingKeys : MonoBehaviour
         public InputActionReference _ActionReference; // The input key
         public GameObject _StartRebindingButton; // The button to be selected for rebinding
         public TextMeshProUGUI _BindingDisplayText; // The button text
+        public GameObject _WaitingForInput; // Text saying waiting for input
     }
 
     [SerializeField] private PlayerController _playerController; // Get reference to the player input
-    [SerializeField] private GameObject _waitingForInput; // Text saying waiting for input
+    //[SerializeField] private GameObject _waitingForInput; // Text saying waiting for input
     [SerializeField] private List<RebindingItem> _rebindingItems; // List of rebinding items
 
 
@@ -36,7 +37,7 @@ public class RebindingKeys : MonoBehaviour
         _playerController.PlayerInput.SwitchCurrentActionMap("No Input");
 
         _currentRebindingItem._StartRebindingButton.SetActive(false);
-        _waitingForInput.SetActive(true);
+        _currentRebindingItem._WaitingForInput.SetActive(true);
 
 
 
@@ -55,7 +56,7 @@ public class RebindingKeys : MonoBehaviour
         _rebindingOperation.Dispose();
 
         _currentRebindingItem._StartRebindingButton.SetActive(true);
-        _waitingForInput.SetActive(false);
+        _currentRebindingItem._WaitingForInput.SetActive(false);
 
         _playerController.PlayerInput.SwitchCurrentActionMap("Player");
 
