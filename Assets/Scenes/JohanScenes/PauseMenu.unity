@@ -1784,6 +1784,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7097482151552407475, guid: 150c229403f757943b4198f892805901, type: 3}
+      propertyPath: _playerController
+      value: 
+      objectReference: {fileID: 2104418637}
     - target: {fileID: 7707082528815085861, guid: 150c229403f757943b4198f892805901, type: 3}
       propertyPath: m_Name
       value: UICanvas
