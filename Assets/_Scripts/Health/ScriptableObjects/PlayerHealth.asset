@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PlayerHealth
   m_EditorClassIdentifier: 
   DevDescription: 
-  _Value: 100
+  _Value: 10.5
   _onValueChanged: {fileID: 0}
