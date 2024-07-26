@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
                     _rb.velocity = new Vector2(0, 0); // Stops the player from moving forward
                     _currentLadder.CurrentlyUsingLadder(false);
                     _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                    gameObject.layer = LayerMask.NameToLayer("Default");
+                    gameObject.layer = LayerMask.NameToLayer("Player");
                 }
             }
 

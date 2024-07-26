@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 2
-  _attackCoolDowm: 1
+  _attackCoolDowm: 2
   _range: 1
   _colliderDistance: 1
   _capsuleCollider: {fileID: 6487814263742240087}
@@ -148,7 +148,8 @@ MonoBehaviour:
   _leftEdge: {fileID: 8949416269299487845}
   _rightEdge: {fileID: 6324941536648561648}
   _enemy: {fileID: 1951664081005122511}
-  _speed: 1
+  _speed: 7
+  _idleDuration: 2
 --- !u!1 &987469016684094076
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +175,7 @@ Transform:
   m_GameObject: {fileID: 987469016684094076}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.8666973, y: -0.303468, z: -0.050813213}
+  m_LocalPosition: {x: 2.5, y: -0.303468, z: -0.050813213}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -289,7 +290,7 @@ Transform:
   m_GameObject: {fileID: 3138174462835615089}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.1333025, y: -0.303468, z: -0.050813213}
+  m_LocalPosition: {x: -2.5, y: -0.303468, z: -0.050813213}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -319,8 +320,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4142198968007022403}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.13330245, y: 0.303468, z: 0.050813213}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
