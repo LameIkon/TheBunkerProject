@@ -30,7 +30,7 @@ public class AmmoCounter : MonoBehaviour
          *      The if-statements with an Input.GetKey() method are placeholder logic to
          *      demonstrate the functions that reduces and replenishes ammunition.
          *
-         *      MUST BE REMOVED OR REPLACED AT A LATER TIME!!
+         *      TODO: MUST BE REMOVED OR REPLACED AT A LATER TIME!!
          */
 
         #region THESE IF-STATEMENTS MUST BE DELETED IN THE FUTURE

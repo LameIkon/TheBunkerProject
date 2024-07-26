@@ -95,23 +95,8 @@ sealed class MedKitViewer : MonoBehaviour
 
     private void FullOrEmptyChecker()
     {
-        switch (_numberOfMedKits)
-        {
-            case 0:
-                _fullMedKitInventory = false;
-                _emptyMedKitInventory = true;
-                break;
-
-            case 3:
-                _fullMedKitInventory = true;
-                _emptyMedKitInventory = false;
-                break;
-
-            default:
-                _fullMedKitInventory = false;
-                _emptyMedKitInventory = false;
-                break;
-        }
+        _fullMedKitInventory = (_numberOfMedKits == 3);
+        _emptyMedKitInventory = (_numberOfMedKits == 0);
     }
 
     private void UpdateMedKitBar()
