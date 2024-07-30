@@ -411,6 +411,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4231606994661690739, guid: 50d3ac407e0bf87418227b7fe8d2a985, type: 3}
+      propertyPath: _outlineMaterial
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: cca1741463c3105408f2bf352f8e4717, type: 3}
     - target: {fileID: 5052930099054914954, guid: 50d3ac407e0bf87418227b7fe8d2a985, type: 3}
       propertyPath: m_Name
       value: Ladder (1)
@@ -883,7 +887,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: cca1741463c3105408f2bf352f8e4717, type: 3}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

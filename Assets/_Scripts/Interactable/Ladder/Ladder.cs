@@ -4,10 +4,17 @@ using UnityEngine;
 public class Ladder : MonoBehaviour
 {
     private bool _ladderOnCoolDown; // Delay before can use latter again
+    public ShowOutlineMaterial _ShowOutlineMaterial; // Highlight Interaction
 
     public bool _Interact  { get; private set; }  // Used to check when you can interact
     public bool _ExitLadder  { get; private set; }  // Used to check when you can interact
     public bool _UsingLadder  { get; private set; }  // Used to check when you can interact
+
+
+    private void Start()
+    {
+        _ShowOutlineMaterial = GetComponentInChildren<ShowOutlineMaterial>();
+    }
 
     // Update is called once per frame
     void Update()
