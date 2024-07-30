@@ -842,7 +842,7 @@ GameObject:
   - component: {fileID: 1230003282}
   - component: {fileID: 1230003283}
   m_Layer: 3
-  m_Name: Sprite
+  m_Name: OutlineTestSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -883,7 +883,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: -876546973899608171, guid: cca1741463c3105408f2bf352f8e4717, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
