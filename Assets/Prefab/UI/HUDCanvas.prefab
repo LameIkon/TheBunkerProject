@@ -853,7 +853,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4239803887586932380}
   - component: {fileID: 5066013230836318885}
-  - component: {fileID: 1838752974789844089}
   - component: {fileID: 7097482151552407475}
   m_Layer: 5
   m_Name: PauseHUD
@@ -900,28 +899,6 @@ MonoBehaviour:
   _settings: {fileID: 698521367303350113}
   _exitText: {fileID: 5188010127992155278}
   currentState: 0
---- !u!114 &1838752974789844089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2958169362117666836}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9da6f0a73e4552408472973ad94f886, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerController: {fileID: 0}
-  _rebindingItems:
-  - _ActionReference: {fileID: 373147484901921752, guid: 0470fbb97319d6846a5fc263ef5f1802, type: 3}
-    _StartRebindingButton: {fileID: 8160170614942181142}
-    _BindingDisplayText: {fileID: 7928888585961399458}
-    _WaitingForInput: {fileID: 7221331887738674223}
-  - _ActionReference: {fileID: 9134465127825523181, guid: 0470fbb97319d6846a5fc263ef5f1802, type: 3}
-    _StartRebindingButton: {fileID: 3380689399587870599}
-    _BindingDisplayText: {fileID: 2135493396281712774}
-    _WaitingForInput: {fileID: 1547820450093740146}
 --- !u!114 &7097482151552407475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2846,10 +2823,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7097482151552407475}
     - target: {fileID: 4280510859993445076, guid: db255e274cb90ab40b23f6d7b2fb9031, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1838752974789844089}
-    - target: {fileID: 4280510859993445076, guid: db255e274cb90ab40b23f6d7b2fb9031, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 7097482151552407475}
@@ -2857,10 +2830,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7097482151552407475}
-    - target: {fileID: 6332643695335019363, guid: db255e274cb90ab40b23f6d7b2fb9031, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1838752974789844089}
     - target: {fileID: 7058377897714442168, guid: db255e274cb90ab40b23f6d7b2fb9031, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
