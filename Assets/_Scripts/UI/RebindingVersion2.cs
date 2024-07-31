@@ -39,6 +39,7 @@ public class RebindingVersion2 : MonoBehaviour
         _currentRebindingItem._StartRebindingButton.SetActive(false);
         _currentRebindingItem._WaitingForInput.SetActive(true);
 
+        Debug.Log("pressed key");
         _rebindingOperation = _currentRebindingItem._ActionReference.action.PerformInteractiveRebinding(_currentRebindingItem._BindingIndex)
             .WithControlsExcluding("<Keyboard>/escape")
             .WithControlsExcluding("<keyboard>/anyKey")
