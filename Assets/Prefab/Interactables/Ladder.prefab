@@ -43,6 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2500202115171532058}
   - component: {fileID: 7969693046241956206}
+  - component: {fileID: 4231606994661690739}
   m_Layer: 0
   m_Name: LadderSprite
   m_TagString: Untagged
@@ -117,6 +118,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4231606994661690739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4914254286457346268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ac2a854b7e4114faae1ec9ef6232ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _outlineMaterial: {fileID: -876546973899608171, guid: cca1741463c3105408f2bf352f8e4717, type: 3}
 --- !u!1 &5052930099054914954
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b5748fdc8998e244b0913b613178118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ShowOutlineMaterial: {fileID: 0}
 --- !u!1 &5091591722971598086
 GameObject:
   m_ObjectHideFlags: 0

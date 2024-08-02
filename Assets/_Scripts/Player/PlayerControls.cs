@@ -300,17 +300,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""Up"",
-                    ""id"": ""689cbb0e-6e8a-4ff6-85a1-5cfd0b141fdb"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""UseLadder"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": ""up"",
                     ""id"": ""64236cc1-3abf-4445-8a8d-21a251f7a3b2"",
                     ""path"": ""<Keyboard>/w"",
@@ -322,9 +311,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""Down"",
-                    ""id"": ""a7bcaf91-a528-4093-a2c1-911c8c02ae19"",
-                    ""path"": ""<Keyboard>/downArrow"",
+                    ""name"": ""Up"",
+                    ""id"": ""689cbb0e-6e8a-4ff6-85a1-5cfd0b141fdb"",
+                    ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -336,6 +325,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""down"",
                     ""id"": ""a5b5562b-3589-456a-b0b9-61e3ccca1478"",
                     ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""UseLadder"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Down"",
+                    ""id"": ""a7bcaf91-a528-4093-a2c1-911c8c02ae19"",
+                    ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",

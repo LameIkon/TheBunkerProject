@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class RebindingVersion2 : MonoBehaviour
+public class RebindingKeys : MonoBehaviour
 {
     [System.Serializable]
     private class RebindingItem
@@ -75,7 +75,6 @@ public class RebindingVersion2 : MonoBehaviour
 
         if (string.IsNullOrEmpty(rebinds)) // If no stored rebinds
         {
-            Debug.Log("No rebinds found");
             foreach (var rebindingItem in _rebindingItems)
             {
                 UpdateBindingText(rebindingItem); // Display default settings
@@ -88,7 +87,6 @@ public class RebindingVersion2 : MonoBehaviour
         {
             UpdateBindingText(rebindingItem); // Display rebinds
         }
-        Debug.Log("Loaded rebinds");
     }
 
     public void LoadDefault() // Button to load default settings

@@ -9,6 +9,7 @@ public class LadderTrigger : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             _ladderHandler.SetInteract(true);
+            _ladderHandler._ShowOutlineMaterial.ChangeToHighlightMaterial();
         }
     }
 
@@ -17,6 +18,7 @@ public class LadderTrigger : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             _ladderHandler.SetInteract(false);
+            _ladderHandler._ShowOutlineMaterial.ChangeToOriginalMaterial();
         }
     }
 }
