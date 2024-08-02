@@ -8,22 +8,25 @@ public class LadderExitTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (_ladderHandler._UsingLadder)
+            if (_ladderHandler._UsingLadder) // If already using ladder
             {
                 _ladderHandler.SetExit(true);
+                
             }
-            else if (!_ladderHandler._UsingLadder)
+            else if (!_ladderHandler._UsingLadder) // If at ladder but havent used it yet
             {
                 _ladderHandler.SetExit(false);
+                _ladderHandler._HighlightEmission.Highlight();
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player")) // Leaving ladder
         {
             _ladderHandler.SetExit(false);
+            _ladderHandler._HighlightEmission.ReturnToOriginal();
         }
     }
 }

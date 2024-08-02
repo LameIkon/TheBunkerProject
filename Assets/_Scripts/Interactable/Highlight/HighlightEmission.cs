@@ -6,8 +6,8 @@ public class HighlightEmission : MonoBehaviour
     [SerializeField] private List<Transform> _objectsToHighlight = new List<Transform>();
 
 
-    [SerializeField] private bool _haveUniq1;
-    [SerializeField] private bool _haveUniq2;
+    [SerializeField] private bool _haveUniq1; // If we want to change to uniq sprite or not
+    [SerializeField] private bool _haveUniq2; // If we want to change to uniq sprite or not
 
     [Header("Original")]
     [SerializeField] private Sprite _default;
@@ -28,39 +28,34 @@ public class HighlightEmission : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        Highlight();
-    }
-
     public void Highlight() // Change sprites to highlighted sprite
     {
         if (_objectsToHighlight.Count > 0)
         {
             // Change the sprite of the first object to the unique 1 sprite
             SpriteRenderer firstUniqueSprite = _objectsToHighlight[0].GetComponent<SpriteRenderer>();
-            if (firstUniqueSprite != null && _haveUniq1)
+            if (firstUniqueSprite != null && _haveUniq1) // If uniq bool is checked we are allowed to use an uniq sprite
             {
                 firstUniqueSprite.sprite = _uniq1Highlight;
             }
-            else if (firstUniqueSprite != null && !_haveUniq1)
+            else if (firstUniqueSprite != null && !_haveUniq1) // Else give default
             {
                 firstUniqueSprite.sprite = _defaultHighlight;
             }
 
             // Change the sprite of the last object to the unique 2 sprite
             SpriteRenderer lastUniqueSprite = _objectsToHighlight[_objectsToHighlight.Count - 1].GetComponent<SpriteRenderer>();
-            if (lastUniqueSprite != null && _haveUniq2)
+            if (lastUniqueSprite != null && _haveUniq2) // If uniq bool is checked we are allowed to use an uniq sprite
             {
                 lastUniqueSprite.sprite = _uniq2Highlight;
             }
-            else if (firstUniqueSprite != null && !_haveUniq2)
+            else if (firstUniqueSprite != null && !_haveUniq2) // Else give default
             {
                 lastUniqueSprite.sprite = _uniq2Highlight;
             }
 
             // Change the sprites of the middle objects to the default sprite
-            for (int i = 1; i < _objectsToHighlight.Count - 1; i++)
+            for (int i = 1; i < _objectsToHighlight.Count - 1; i++) // Ignores the first and last sprite
             {
                 SpriteRenderer spriteRenderer = _objectsToHighlight[i].GetComponent<SpriteRenderer>();
                 if (spriteRenderer != null)
@@ -71,7 +66,7 @@ public class HighlightEmission : MonoBehaviour
         }
     }
 
-    public void ReturnToOriginal() // Return to default sprites before change
+    public void ReturnToOriginal() // Return to original sprites before change
     {
         if (_objectsToHighlight.Count > 0)
         {

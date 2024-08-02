@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ladder : MonoBehaviour
 {
     private bool _ladderOnCoolDown; // Delay before can use latter again
-    public ShowOutlineMaterial _ShowOutlineMaterial; // Highlight Interaction
+    public HighlightEmission _HighlightEmission; // Highlight Interaction
 
 
     public bool _Interact  { get; private set; }  // Used to check when you can interact
@@ -15,7 +15,7 @@ public class Ladder : MonoBehaviour
 
     private void Start()
     {
-        _ShowOutlineMaterial = GetComponentInChildren<ShowOutlineMaterial>();
+        _HighlightEmission = GetComponentInChildren<HighlightEmission>(); // Used by the triggerscripts components in its children
     }
 
     // Update is called once per frame
