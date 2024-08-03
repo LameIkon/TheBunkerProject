@@ -10,6 +10,12 @@ public class Door : MonoBehaviour
     public bool _Interact  { get; private set; } // will change to a new system later
     private bool _isOpen;
 
+    public HighlightEmission _HighlightEmission; // Highlight Interaction
+
+    private void Start()
+    {
+        _HighlightEmission = GetComponentInChildren<HighlightEmission>(); // Used by the triggerscripts components in its children
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {       
@@ -26,6 +32,7 @@ public class Door : MonoBehaviour
         //    }
         //}
         _Interact = true;
+        //_HighlightEmission.Highlight();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
