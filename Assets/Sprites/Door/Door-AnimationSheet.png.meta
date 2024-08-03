@@ -518,7 +518,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures:
-    - texture: {fileID: 2800000, guid: 77f9ba4d8cffd23499a422242bcbf2d5, type: 3}
+    - texture: {fileID: 2800000, guid: 38513e239bd96194fac085323c84212f, type: 3}
       name: _Emission
     nameFileIdTable:
       Door-AnimationSheet_0: 1656678796

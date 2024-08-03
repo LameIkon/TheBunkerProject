@@ -2,21 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ladder : MonoBehaviour
+public class Ladder : Highlight
 {
     private bool _ladderOnCoolDown; // Delay before can use latter again
-    public HighlightEmission _HighlightEmission; // Highlight Interaction
-
-
-    public bool _Interact  { get; private set; }  // Used to check when you can interact
+    
     public bool _ExitLadder  { get; private set; }  // Used to check when you can interact
     public bool _UsingLadder  { get; private set; }  // Used to check when you can interact
 
 
-    private void Start()
-    {
-        _HighlightEmission = GetComponentInChildren<HighlightEmission>(); // Used by the triggerscripts components in its children
-    }
 
     // Update is called once per frame
     void Update()
@@ -36,11 +29,6 @@ public class Ladder : MonoBehaviour
         // Can be expanded. Stopped since im too lazy to continue
 
     }
-
-     public void SetInteract(bool interact) // On trigger it will say you can interact 
-     {
-        _Interact = interact;
-     }
 
     public void CurrentlyUsingLadder(bool isUsingLadder) // Is currently interacting with ladder
     {

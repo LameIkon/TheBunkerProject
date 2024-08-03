@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RedEmission
+  m_Name: WhiteEmission
   m_Shader: {fileID: -6465566751694194690, guid: 20883ca987c06154abf94d85a52dbb3b, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -46,9 +46,9 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - _Color: {r: 9.938317, g: 0, b: 0, a: 0}
+    - _Color: {r: 7.201033, g: 8.083741, b: 9.849155, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &8102779621849031441
+--- !u!114 &297799435149006458
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

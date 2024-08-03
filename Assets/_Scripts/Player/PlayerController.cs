@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("Door")) // If trigger door
         {
-            _currentDoor = collision.GetComponentInChildren<Door>(); // Get the door script
+            _currentDoor = collision.GetComponentInParent<Door>(); // Get the door script
         }
         if (collision.CompareTag("Elevator")) // If trigger elevator
         {

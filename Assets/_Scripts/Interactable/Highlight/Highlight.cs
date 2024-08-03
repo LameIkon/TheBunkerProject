@@ -1,61 +1,22 @@
 using UnityEngine;
 
-public class Highlight : PriorityManager
+
+public class Highlight : MonoBehaviour
 {
-    [SerializeField] private GameObject _showInteraction; // Used to get the GameObject named showInteraction
+    [Header("Highlight Components")]
+    public HighlightEmission _HighlightEmission; // Highlight Interaction
 
-    private void Start()
+    public bool _Interact;
+
+    // Start is called before the first frame update
+    void Start()
     {
-        _showInteraction.SetActive(false); // Set false if by chance its active
+        _HighlightEmission = GetComponentInChildren<HighlightEmission>(); // Used by the triggerscripts components in its children
     }
 
-
-    public override bool TriggerEnter(GameObject gameobject)
+    public void SetInteract(bool interact) // Used for triggers. Tells if you can or cannot interact 
     {
-        if (_CompareGameObject == null)
-        {
-            _CompareGameObject = gameobject;
-        }
-
-        if (_CompareGameObject == gameobject && _PriorityInteractable && _CanInteract)
-        {
-            base.TriggerEnter(gameobject);
-            AdditionalTriggerEnterImplementation();
-            return true;
-        }
-        return false;
+        _Interact = interact;
     }
 
-    public override void TriggerExit(GameObject gameobject)
-    {
-        if (_CompareGameObject == gameobject)
-        {
-            AdditionalTriggerExitImplementation();
-            base.TriggerExit(gameobject);
-            _CompareGameObject = null;
-        }
-    }
-
-    public override void TriggerUse(bool state)
-    {
-        if (state)
-        {
-            _showInteraction.SetActive(false);
-        }
-        else if (!state)
-        {
-            _showInteraction.SetActive(true);
-        }
-    }
-
-    // changed
-    protected override void AdditionalTriggerEnterImplementation()
-    {
-        _showInteraction.SetActive(true);
-    }
-
-    protected override void AdditionalTriggerExitImplementation()
-    {
-        _showInteraction.SetActive(false);
-    }
 }

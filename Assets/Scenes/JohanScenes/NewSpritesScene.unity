@@ -2100,7 +2100,7 @@ GameObject:
   - component: {fileID: 559083891}
   - component: {fileID: 559083892}
   m_Layer: 0
-  m_Name: Trigger (1)
+  m_Name: DoorTrigger
   m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2175,12 +2175,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 559083888}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cdc14ea8ff01084ea89f966f80d336c, type: 3}
+  m_Script: {fileID: 11500000, guid: cc558809a890edf4db11c8bef7e0ecc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1110755861}
-  _highlightScript: {fileID: 0}
-  _HighlightEmission: {fileID: 0}
 --- !u!1 &572132212
 GameObject:
   m_ObjectHideFlags: 0
@@ -3458,9 +3455,10 @@ GameObject:
   m_Component:
   - component: {fileID: 772901865}
   - component: {fileID: 772901866}
+  - component: {fileID: 772901867}
   m_Layer: 0
-  m_Name: DoorTest2
-  m_TagString: Untagged
+  m_Name: Door
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3502,6 +3500,21 @@ MonoBehaviour:
   _defaultHighlight: {fileID: 21300000, guid: c2b24f6f052e8f44ba7a634b465b431c, type: 3}
   _uniq1Highlight: {fileID: 0}
   _uniq2Highlight: {fileID: 0}
+--- !u!114 &772901867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772901864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cdc14ea8ff01084ea89f966f80d336c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _HighlightEmission: {fileID: 0}
+  _Interact: 0
+  animator: {fileID: 1110755861}
 --- !u!1 &784959008
 GameObject:
   m_ObjectHideFlags: 0
@@ -4227,7 +4240,7 @@ GameObject:
   - component: {fileID: 1110755861}
   - component: {fileID: 1110755864}
   m_Layer: 0
-  m_Name: Door-AnimationSheet_0
+  m_Name: DoorSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4241,7 +4254,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1110755860}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 79f3d07ea284abc4b8e7fe659be40ea5, type: 2}
   m_CullingMode: 0

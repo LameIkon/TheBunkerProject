@@ -1,60 +1,28 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class Door : MonoBehaviour
+
+public class Door : Highlight
 {
+    [Header ("Door Components")]
     [SerializeField] private Animator animator;
-    [SerializeField] private Highlight _highlightScript;
-    public bool _Interact  { get; private set; } // will change to a new system later
     private bool _isOpen;
 
-    public HighlightEmission _HighlightEmission; // Highlight Interaction
-
-    private void Start()
-    {
-        _HighlightEmission = GetComponentInChildren<HighlightEmission>(); // Used by the triggerscripts components in its children
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {       
-        //if (collision.CompareTag("Player"))
-        //{
-        //    if (_highlightScript == null)
-        //    {
-        //        _highlightScript = GetComponentInChildren<Highlight>();
-        //    }
-
-        //    if (!_highlightScript.TriggerEnter(gameObject)) // Checks if you can interact or not
-        //    {
-        //        return; // If it can't it stops here
-        //    }
-        //}
-        _Interact = true;
-        //_HighlightEmission.Highlight();
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            //_highlightScript.TriggerExit(gameObject);
-            _Interact = false;
-        }
-    }
 
     public IEnumerator DoorTransition()
     {
         if (_Interact)
         {
+            Debug.Log("called for door");
             _Interact = false;
             if (_isOpen)
             {
+                Debug.Log("Open");
                 animator.Play("Close Door");
             }
             else
             {
+                Debug.Log("Close");
                 animator.Play("Open Door");
             }
             yield return new WaitForSeconds(0.6f);
