@@ -52,19 +52,14 @@ public sealed class DialogueManager : MonoBehaviour
         if (_Lines.Count == 1 && Dialogue._StaticQuestionWillBeAsked)
         {
             // Call a question block
-            
-            /*
-             * {
+            {
+             /* 
              *   switch (answer)
              *   {
-             *      case
+             *      case: ENUM
              *   }
-             * }
-             *
-             *
-             * 
              */
-            
+            }
             _ProceduralButton.enabled = false;
             _ProceduralText.text = "";
         }
@@ -86,6 +81,7 @@ public sealed class DialogueManager : MonoBehaviour
         {
             _DialogueText.text += letter;
             yield return new WaitForSecondsRealtime(_TypingSpeed);
+            // IF TYPING, DISABLE PROCEDURAL BUTTON
         }
     }
 
