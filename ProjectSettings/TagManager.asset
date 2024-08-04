@@ -53,6 +53,9 @@ TagManager:
   - name: Grounds
     uniqueID: 4271370995
     locked: 0
+  - name: IgnoreLight
+    uniqueID: 3947028171
+    locked: 0
   - name: Beings
     uniqueID: 2594551939
     locked: 0
