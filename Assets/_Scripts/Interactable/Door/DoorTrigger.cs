@@ -4,19 +4,6 @@ public class DoorTrigger : MonoBehaviour
 {
     private Door _door;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision) 
     {
         if (collision.CompareTag("Player"))
@@ -25,7 +12,14 @@ public class DoorTrigger : MonoBehaviour
             {
                 _door = GetComponentInParent<Door>();
             }
+            if (_door._Renderer  == null)
+            {
+                _door.GetRenderer();
+            }
             _door.SetInteract(true);
+            //_door._Renderer.material = _door._GreenEmission;
+            _door._HighlightEmission.Highlight();
+
         }
     }
 
@@ -34,6 +28,8 @@ public class DoorTrigger : MonoBehaviour
         if (collision.CompareTag("Player")) // Leaving Door
         {
             _door.SetInteract(false);
+            //_door._Renderer.material = _door._RedEmission;
+            _door._HighlightEmission.ReturnToOriginal();
         }
     }
 }

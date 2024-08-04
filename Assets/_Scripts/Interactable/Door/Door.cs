@@ -5,8 +5,9 @@ using UnityEngine;
 public class Door : Highlight
 {
     [Header ("Door Components")]
-    [SerializeField] private Animator animator;
-    private bool _isOpen;
+    public Animator _Animator;
+    public bool _IsOpen;
+
 
 
     public IEnumerator DoorTransition()
@@ -15,18 +16,18 @@ public class Door : Highlight
         {
             Debug.Log("called for door");
             _Interact = false;
-            if (_isOpen)
+            if (_IsOpen)
             {
                 Debug.Log("Open");
-                animator.Play("Close Door");
+                _Animator.Play("Close Door");
             }
             else
             {
                 Debug.Log("Close");
-                animator.Play("Open Door");
+                _Animator.Play("Open Door");
             }
             yield return new WaitForSeconds(0.6f);
-            _isOpen = !_isOpen;
+            _IsOpen = !_IsOpen;
             _Interact = true;
         }
     }

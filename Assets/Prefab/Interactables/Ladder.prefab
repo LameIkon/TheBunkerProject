@@ -303,12 +303,15 @@ MonoBehaviour:
   _objectsToHighlight: []
   _haveUniq1: 1
   _haveUniq2: 1
+  _allowChangeSprites: 1
+  _activateHiddenObjects: 0
   _default: {fileID: 21300000, guid: b47cf2ce298ebe6409df95c806fd32de, type: 3}
   _uniq1: {fileID: 21300000, guid: 09ee2bd3dfa9fc24aa9c79249b5425e1, type: 3}
   _uniq2: {fileID: 21300000, guid: 3ebfc13121940844c90316b07010e803, type: 3}
   _defaultHighlight: {fileID: 21300000, guid: 3f9bf08f5492fb8419426a69c1e78c52, type: 3}
   _uniq1Highlight: {fileID: 21300000, guid: 183bce41d596be741a2cfa13fd5de2ca, type: 3}
   _uniq2Highlight: {fileID: 21300000, guid: 296e0fb1ff20a8544ab51b47a3067f92, type: 3}
+  _objectsToHideAndShow: []
 --- !u!1 &3109326393501713266
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,6 +394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _HighlightEmission: {fileID: 0}
+  _Interact: 0
 --- !u!1 &5091591722971598086
 GameObject:
   m_ObjectHideFlags: 0

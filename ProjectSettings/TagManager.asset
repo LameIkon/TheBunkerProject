@@ -47,6 +47,9 @@ TagManager:
   - name: Ladder
     uniqueID: 336720875
     locked: 0
+  - name: Door
+    uniqueID: 1522514973
+    locked: 0
   - name: Grounds
     uniqueID: 4271370995
     locked: 0

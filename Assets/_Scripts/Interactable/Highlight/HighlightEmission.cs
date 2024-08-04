@@ -8,17 +8,26 @@ public class HighlightEmission : MonoBehaviour
 
     [SerializeField] private bool _haveUniq1; // If we want to change to uniq sprite or not
     [SerializeField] private bool _haveUniq2; // If we want to change to uniq sprite or not
+    [SerializeField] private bool _allowChangeSprites; // Can change sprite from original to another 
+    [SerializeField] private bool _activateHiddenObjects; // If sprites just arent active
+    [SerializeField] private bool _ChangeMaterial;
 
     [Header("Original")]
     [SerializeField] private Sprite _default;
     [SerializeField] private Sprite _uniq1;
     [SerializeField] private Sprite _uniq2;
 
-    [Header("highlighted")]
+    [Header("Highlighted")]
     [SerializeField] private Sprite _defaultHighlight;
     [SerializeField] private Sprite _uniq1Highlight;
     [SerializeField] private Sprite _uniq2Highlight;
 
+    [Header("Hidden Sprites")]
+    [SerializeField] private List<GameObject> _objectsToHideAndShow = new List<GameObject>(); 
+
+    [Header("Change between Emission")]
+    [SerializeField] private Material _redEmission;
+    [SerializeField] private Material _greenEmission;
 
     private void Awake()
     {
@@ -30,7 +39,7 @@ public class HighlightEmission : MonoBehaviour
 
     public void Highlight() // Change sprites to highlighted sprite
     {
-        if (_objectsToHighlight.Count > 0)
+        if (_objectsToHighlight.Count > 0 && _allowChangeSprites)
         {
             // Change the sprite of the first object to the unique 1 sprite
             SpriteRenderer firstUniqueSprite = _objectsToHighlight[0].GetComponent<SpriteRenderer>();
@@ -64,11 +73,72 @@ public class HighlightEmission : MonoBehaviour
                 }
             }
         }
+        if (_activateHiddenObjects)
+        {
+            ActivateHiddenObjects();
+        }
+
+        if (_ChangeMaterial)
+        {
+            ChangeGreenMaterial();
+        }
+    }
+
+    private void ActivateHiddenObjects()
+    {
+        if (_objectsToHideAndShow.Count > 0)
+        {
+            foreach (GameObject @object in _objectsToHideAndShow)
+            {
+                @object.SetActive(true);
+            }
+        }
+    }
+
+    private void DeactivateHiddenSprites()
+    {
+        if (_objectsToHideAndShow.Count > 0)
+        {
+            foreach (GameObject @object in _objectsToHideAndShow)
+            {
+                @object.SetActive(false);
+            }
+        }
+    }
+
+    private void ChangeRedMaterial()
+    {
+        if (_objectsToHighlight.Count > 0)
+        {
+            for (int i = 0; i < _objectsToHighlight.Count; i++) // Ignores the first and last sprite
+            {
+                SpriteRenderer spriteRenderer = _objectsToHighlight[i].GetComponent<SpriteRenderer>();
+                if (spriteRenderer != null)
+                {
+                    spriteRenderer.material = _redEmission;
+                }
+            }
+        }
+    }
+
+    private void ChangeGreenMaterial()
+    {
+        if (_objectsToHighlight.Count > 0)
+        {
+            for (int i = 0; i < _objectsToHighlight.Count; i++) // Ignores the first and last sprite
+            {
+                SpriteRenderer spriteRenderer = _objectsToHighlight[i].GetComponent<SpriteRenderer>();
+                if (spriteRenderer != null)
+                {
+                    spriteRenderer.material = _greenEmission;
+                }
+            }
+        }
     }
 
     public void ReturnToOriginal() // Return to original sprites before change
     {
-        if (_objectsToHighlight.Count > 0)
+        if (_objectsToHighlight.Count > 0 && _allowChangeSprites)
         {
             // Change the sprite of the first object to the unique 1 sprite
             SpriteRenderer firstUniqueSprite = _objectsToHighlight[0].GetComponent<SpriteRenderer>();
@@ -101,6 +171,16 @@ public class HighlightEmission : MonoBehaviour
                     spriteRenderer.sprite = _default;
                 }
             }
+        }
+
+        if (_activateHiddenObjects)
+        {
+            DeactivateHiddenSprites();
+        }
+
+        if (_ChangeMaterial)
+        {
+            ChangeRedMaterial();
         }
     }
 }
