@@ -82,6 +82,7 @@ public class RebindingKeys : MonoBehaviour
             return; // Return if no rebinds found
         }
 
+        // Else
         _playerController.PlayerInput.actions.LoadBindingOverridesFromJson(rebinds); // Load stored rebinds from JSON
         foreach (var rebindingItem in _rebindingItems)
         {
