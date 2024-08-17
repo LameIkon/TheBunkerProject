@@ -26,7 +26,7 @@ public class WeaponSO : ScriptableObject
     private bool _fullMagazine;
     private bool _emptyMagazine;
 
-    public void SetAmmoToMax()
+    public void SetAmmoToMax() //Used in Awake in Weapon.cs
     {
         _CurrentAmmoCount.ApplyChange(_MaxAmmoCapacity);
     }
@@ -62,6 +62,7 @@ public class WeaponSO : ScriptableObject
 
 public enum GunType
 {
+    Knife,
     Pistol,
     Shotgun,
     Rifle

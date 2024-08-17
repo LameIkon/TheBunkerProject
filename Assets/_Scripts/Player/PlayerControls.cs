@@ -98,6 +98,42 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeToKnife"",
+                    ""type"": ""Button"",
+                    ""id"": ""b00d9585-44ef-4ba7-9d1d-ae767cc1c9c2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeToPistol"",
+                    ""type"": ""Button"",
+                    ""id"": ""5e96621d-ef48-4b2d-870e-0872bd3d9cfe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeToRifle"",
+                    ""type"": ""Button"",
+                    ""id"": ""263feac9-dfab-4f81-9e9e-aacd340dd908"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeToShotgun"",
+                    ""type"": ""Button"",
+                    ""id"": ""a5115edb-2beb-4f98-9e5a-48f612b1ad80"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -362,6 +398,50 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c77bffbc-3249-4de0-84d5-24c7def24f23"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ChangeToKnife"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c4ddb71-f8c4-4cfb-bc04-9de25d6e2354"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ChangeToPistol"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""67d8bb07-9e01-48f2-9a59-94ca5d0b3183"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ChangeToRifle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3449fa25-9c19-4afd-92d6-edd6026d94e8"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ChangeToShotgun"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -985,6 +1065,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_UseLadder = m_Player.FindAction("UseLadder", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_ChangeToKnife = m_Player.FindAction("ChangeToKnife", throwIfNotFound: true);
+        m_Player_ChangeToPistol = m_Player.FindAction("ChangeToPistol", throwIfNotFound: true);
+        m_Player_ChangeToRifle = m_Player.FindAction("ChangeToRifle", throwIfNotFound: true);
+        m_Player_ChangeToShotgun = m_Player.FindAction("ChangeToShotgun", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1069,6 +1153,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_UseLadder;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_ChangeToKnife;
+    private readonly InputAction m_Player_ChangeToPistol;
+    private readonly InputAction m_Player_ChangeToRifle;
+    private readonly InputAction m_Player_ChangeToShotgun;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -1081,6 +1169,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @UseLadder => m_Wrapper.m_Player_UseLadder;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @ChangeToKnife => m_Wrapper.m_Player_ChangeToKnife;
+        public InputAction @ChangeToPistol => m_Wrapper.m_Player_ChangeToPistol;
+        public InputAction @ChangeToRifle => m_Wrapper.m_Player_ChangeToRifle;
+        public InputAction @ChangeToShotgun => m_Wrapper.m_Player_ChangeToShotgun;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1114,6 +1206,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @ChangeToKnife.started += instance.OnChangeToKnife;
+            @ChangeToKnife.performed += instance.OnChangeToKnife;
+            @ChangeToKnife.canceled += instance.OnChangeToKnife;
+            @ChangeToPistol.started += instance.OnChangeToPistol;
+            @ChangeToPistol.performed += instance.OnChangeToPistol;
+            @ChangeToPistol.canceled += instance.OnChangeToPistol;
+            @ChangeToRifle.started += instance.OnChangeToRifle;
+            @ChangeToRifle.performed += instance.OnChangeToRifle;
+            @ChangeToRifle.canceled += instance.OnChangeToRifle;
+            @ChangeToShotgun.started += instance.OnChangeToShotgun;
+            @ChangeToShotgun.performed += instance.OnChangeToShotgun;
+            @ChangeToShotgun.canceled += instance.OnChangeToShotgun;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1142,6 +1246,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @ChangeToKnife.started -= instance.OnChangeToKnife;
+            @ChangeToKnife.performed -= instance.OnChangeToKnife;
+            @ChangeToKnife.canceled -= instance.OnChangeToKnife;
+            @ChangeToPistol.started -= instance.OnChangeToPistol;
+            @ChangeToPistol.performed -= instance.OnChangeToPistol;
+            @ChangeToPistol.canceled -= instance.OnChangeToPistol;
+            @ChangeToRifle.started -= instance.OnChangeToRifle;
+            @ChangeToRifle.performed -= instance.OnChangeToRifle;
+            @ChangeToRifle.canceled -= instance.OnChangeToRifle;
+            @ChangeToShotgun.started -= instance.OnChangeToShotgun;
+            @ChangeToShotgun.performed -= instance.OnChangeToShotgun;
+            @ChangeToShotgun.canceled -= instance.OnChangeToShotgun;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1378,6 +1494,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnUseLadder(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnChangeToKnife(InputAction.CallbackContext context);
+        void OnChangeToPistol(InputAction.CallbackContext context);
+        void OnChangeToRifle(InputAction.CallbackContext context);
+        void OnChangeToShotgun(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

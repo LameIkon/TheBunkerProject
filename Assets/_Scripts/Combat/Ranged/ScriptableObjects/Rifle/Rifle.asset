@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7047755da78c9bd4fb83768162f81a9e, type: 3}
-  m_Name: Pistol
+  m_Name: Rifle
   m_EditorClassIdentifier: 
-  _WeaponCategory: 1
+  _WeaponCategory: 3
   _BulletPrefab: {fileID: 8996890269392672782, guid: eee6e1a45ba8c9748808f938ca00ed8e, type: 3}
-  _Damage: 25
-  _FireRate: 1
-  _Range: 100
-  _MaxAmmoCapacity: 12
-  _Magazine: {fileID: 11400000, guid: 69e1c3ca414f6164cbddae0d880520ea, type: 2}
-  _CurrentAmmoCount: {fileID: 11400000, guid: 047eee042ff152c43889ce2af29d14c3, type: 2}
-  _CritChance: 25
-  _CritDamage: 1.25
+  _Damage: 20
+  _FireRate: 4
+  _Range: 120
+  _MaxAmmoCapacity: 25
+  _Magazine: {fileID: 11400000, guid: 410273ab89bcb904caf39bbedc049e8a, type: 2}
+  _CurrentAmmoCount: {fileID: 11400000, guid: 3d0cdd6ea20d57a49ac9128a47177c1f, type: 2}
+  _CritChance: 10
+  _CritDamage: 1.15

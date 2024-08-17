@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.UI.Image;
 
-public abstract class Weapon : MonoBehaviour
+public abstract class Weapon : AmmoCounter
 {
     private float _damage;
     private GunType _gunType;
@@ -15,12 +15,13 @@ public abstract class Weapon : MonoBehaviour
 
     private float _nextTimeTofire = 0f;
 
-    [SerializeField] private WeaponSO _weapon; //ScriptableObject Weapon needs to placed here.
+    //[SerializeField] private WeaponSO _weapon; //ScriptableObject Weapon needs to placed here.
     [SerializeField] private Transform _shootingPoint; //where we shoot from
     
 
     private void Awake()
     {
+        _weapon.SetAmmoToMax();
         _damage = _weapon._Damage;
         _fireRate = _weapon._FireRate;
         _gunType = _weapon._WeaponCategory;
@@ -29,15 +30,25 @@ public abstract class Weapon : MonoBehaviour
         _range = _weapon._Range;
     }
 
-    public abstract void Shoot(InputAction.CallbackContext context);
+   // public abstract void Shoot(InputAction.CallbackContext context);
 
     public void Fire()
     {
-        if (CheckFireRate())
+        if(CurrentWeapon._currentWeapon._weapon._WeaponCategory != GunType.Knife) //If not a Knife
         {
-            RayCastShoot(_shootingPoint.position, _shootingPoint.right, _range);
-            //InstanceBullet(_shootingPoint);            
+            if (CheckFireRate() && _weapon._CurrentAmmoCount > 0)
+            {
+                RayCastShoot(_shootingPoint.position, _shootingPoint.right, _range);
+                _weapon.ReduceAmmoByShooting(); //takes 1 from ammo amount
+                //InstanceBullet(_shootingPoint);            
+            }
         }
+
+        else if (CurrentWeapon._currentWeapon._weapon._WeaponCategory == GunType.Knife)
+        {
+            //SETUP LOGIC FOR KNIFE
+        }
+        
 
         void RayCastShoot(Vector2 origin, Vector2 direction, float range) //can add a layermask to check if the layer is hit.
         {

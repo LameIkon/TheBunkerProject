@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af2cefe9994edb44a8a7ac3fece79ef2, type: 3}
+  m_Name: RifleMagazine
+  m_EditorClassIdentifier: 
+  _maniputatedValue: {fileID: 11400000, guid: 3d0cdd6ea20d57a49ac9128a47177c1f, type: 2}
+  _maxValue:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 4cef049f520a9c749a6e8b47489a6709, type: 2}
+  _minValue:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}

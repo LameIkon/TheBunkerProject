@@ -3,11 +3,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AmmoCounter : MonoBehaviour
+public abstract class AmmoCounter : MonoBehaviour
 {
     [SerializeField] private Image[] _currentAmmoSprite;
     [SerializeField] private TextMeshProUGUI _ammoText;
-    [SerializeField] private WeaponSO _weapon;
+    [SerializeField] public WeaponSO _weapon;
 
     private readonly Dictionary<GunType, int> _ammoSpriteIndexMap = new()
     {
@@ -16,10 +16,6 @@ public class AmmoCounter : MonoBehaviour
         { GunType.Rifle, 2 } 
     };
 
-    private void Awake()
-    {
-        _weapon.SetAmmoToMax();
-    }
 
     private void Update()
     {
