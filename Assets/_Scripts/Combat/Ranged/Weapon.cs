@@ -46,7 +46,7 @@ public abstract class Weapon : AmmoCounter
 
         else if (CurrentWeapon._currentWeapon._weapon._WeaponCategory == GunType.Knife)
         {
-            //SETUP LOGIC FOR KNIFE
+            //Put in method for melee attack
         }
         
 

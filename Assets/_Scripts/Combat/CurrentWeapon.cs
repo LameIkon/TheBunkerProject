@@ -39,8 +39,7 @@ public class CurrentWeapon : MonoBehaviour
         {
             //if (_Weapons[i]._weapon._WeaponCategory == GunType.Knife && _IsKnife)
             //{
-            //    _currentWeapon = _Weapons[i];
-            //    print(i);
+            //    _currentWeapon = _Weapons[i];           
             //}
 
             if(_Weapons[i]._weapon._WeaponCategory == GunType.Pistol && _IsPistol)
