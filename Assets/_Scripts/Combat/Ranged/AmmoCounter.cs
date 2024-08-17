@@ -31,11 +31,7 @@ public abstract class AmmoCounter : MonoBehaviour
 
         #region THESE IF-STATEMENTS MUST BE DELETED IN THE FUTURE
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            _weapon.ReduceAmmoByShooting();
-        }
-
+  
         if (Input.GetKeyDown(KeyCode.R))
         {
             _weapon.GainAmmo();
