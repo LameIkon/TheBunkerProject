@@ -3528,7 +3528,6 @@ MonoBehaviour:
   - {fileID: 1355637012}
   _ammoText: {fileID: 302904922}
   _weapon: {fileID: 11400000, guid: f53047be1a76e3f44b1e986cef161436, type: 2}
-  _AttackRadius: 0
   _shootingPoint: {fileID: 1135826045}
 --- !u!1 &659100842
 GameObject:
@@ -10576,10 +10575,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac01769ff6da034d80bc335c2799688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentAmmoSprite: []
-  _ammoText: {fileID: 0}
+  _currentAmmoSprite:
+  - {fileID: 756019815}
+  _ammoText: {fileID: 302904922}
   _weapon: {fileID: 11400000, guid: 97be78f0d37a0ff48958f9666e1d5d4e, type: 2}
-  _AttackRadius: 1
   _shootingPoint: {fileID: 1135826045}
 --- !u!1 &1618127749
 GameObject:
