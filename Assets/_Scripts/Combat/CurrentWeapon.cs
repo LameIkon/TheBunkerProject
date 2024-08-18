@@ -37,12 +37,12 @@ public class CurrentWeapon : MonoBehaviour
     {        
         for (int i = 0 ; i < _Weapons.Length; i++)
         {
-            //if (_Weapons[i]._weapon._WeaponCategory == GunType.Knife && _IsKnife)
-            //{
-            //    _currentWeapon = _Weapons[i];           
-            //}
+            if (_Weapons[i]._weapon._WeaponCategory == GunType.Knife && _IsKnife)
+            {
+                _currentWeapon = _Weapons[i];
+            }
 
-            if(_Weapons[i]._weapon._WeaponCategory == GunType.Pistol && _IsPistol)
+            else if (_Weapons[i]._weapon._WeaponCategory == GunType.Pistol && _IsPistol)
             {
                 _currentWeapon = _Weapons[i];               
             }
@@ -55,9 +55,8 @@ public class CurrentWeapon : MonoBehaviour
             else if (_Weapons[i]._weapon._WeaponCategory == GunType.Shotgun && _IsShotgun)
             {
                 _currentWeapon = _Weapons[i];                
-            }
+            }            
         }        
-    }
-     
+    }    
 
 }

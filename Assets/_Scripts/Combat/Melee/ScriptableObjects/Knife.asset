@@ -9,15 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a97ffea315a20f4bbfe64f9ac15d55c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7047755da78c9bd4fb83768162f81a9e, type: 3}
   m_Name: Knife
   m_EditorClassIdentifier: 
-  _Name: 
-  _Discription: 
-  _WeaponSprite: {fileID: 0}
-  _MinDamage: 2
-  _MaxDamage: 5
-  _CritChance: 2
-  _CritMultiplyer: 2.5
-  _AttackPoint: {x: 1, y: 0, z: 0}
-  _AttackRadius: 0.5
+  _WeaponCategory: 0
+  _BulletPrefab: {fileID: 0}
+  _Damage: 10
+  _FireRate: 1
+  _Range: 1
+  _MaxAmmoCapacity: 0
+  _Magazine: {fileID: 0}
+  _CurrentAmmoCount: {fileID: 0}
+  _CritChance: 25
+  _CritDamage: 1.25

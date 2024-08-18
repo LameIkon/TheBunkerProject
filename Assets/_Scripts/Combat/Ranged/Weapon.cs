@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,10 +13,13 @@ public abstract class Weapon : AmmoCounter
     private int _critChance; //25 gives 25% chance
     private float _critDamage; //needs to be in decimal. 1.25 give 125% crit damage
     private float _range; //not sure if need, raycast Linebullet still instansiate even if you arent in range to hit enemy maybe a animation so we cant see the bullet line would work
+    //public float _AttackRadius; // Only set for knife. Guns dont need this. 
 
     private float _nextTimeTofire = 0f;
 
-    //[SerializeField] private WeaponSO _weapon; //ScriptableObject Weapon needs to placed here.
+    //private RaycastHit2D[] _hits; //for knife attacks. 
+
+    //[SerializeField] private WeaponSO _weapon; //Been moved to AmmoCounter.
     [SerializeField] private Transform _shootingPoint; //where we shoot from
     
 
@@ -44,9 +48,12 @@ public abstract class Weapon : AmmoCounter
             }
         }
 
-        else if (CurrentWeapon._currentWeapon._weapon._WeaponCategory == GunType.Knife)
-        {
-            //Put in method for melee attack
+        else if (CurrentWeapon._currentWeapon._weapon._WeaponCategory == GunType.Knife) //If it is knife
+        {            
+            if(CheckFireRate())
+            {
+                KnifeAttack(_shootingPoint.position, _shootingPoint.right, _range);
+            }
         }
         
 
@@ -82,7 +89,9 @@ public abstract class Weapon : AmmoCounter
                             print("no critical hit");
                         }
                        
-                    }                    
+                    }     
+                    
+                    ///Setup logic here for when a collider is hit but dont have Health script on it, and needs to go through. ex. Ladders/doors.
                 }
             }
             else
@@ -94,6 +103,35 @@ public abstract class Weapon : AmmoCounter
                 //TEST END
             }
             Destroy(bullet, 0.04f);
+        }
+
+        void KnifeAttack(Vector2 origin, Vector2 direction, float range)
+        {
+            //_hits = Physics2D.CircleCastAll(origin, radius, direction); //Needs interface on enmies or you kill urself.
+            RaycastHit2D hit = Physics2D.Raycast(origin, direction, range);
+
+            if(hit)
+            {
+                Health enemy = hit.transform.GetComponent<Health>();
+                if (hit.collider != null)
+                {                
+                    if (enemy != null)
+                    {
+                        if (CritChance(_critChance))
+                        {
+                            enemy.TakeDamage(_damage * _critDamage);
+                            print("A critical hit dealt: " + _damage * _critDamage + " damage!");
+                        }
+
+                        else if (!CritChance(_critChance))
+                        {
+                            enemy.TakeDamage(_damage);
+                            print("no critical hit");
+                        }
+                    }
+                }
+            }            
+            return;
         }
 
         //public GameObject InstanceBullet(Transform origin)

@@ -3528,6 +3528,7 @@ MonoBehaviour:
   - {fileID: 1355637012}
   _ammoText: {fileID: 302904922}
   _weapon: {fileID: 11400000, guid: f53047be1a76e3f44b1e986cef161436, type: 2}
+  _AttackRadius: 0
   _shootingPoint: {fileID: 1135826045}
 --- !u!1 &659100842
 GameObject:
@@ -3576,6 +3577,7 @@ MonoBehaviour:
   _Weapons:
   - {fileID: 887893009}
   - {fileID: 644711912}
+  - {fileID: 1609531422}
 --- !u!1 &703091939
 GameObject:
   m_ObjectHideFlags: 0
@@ -10539,6 +10541,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1609531421}
+  - component: {fileID: 1609531422}
   m_Layer: 0
   m_Name: Knife
   m_TagString: Untagged
@@ -10561,6 +10564,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1888995040}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1609531422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609531420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ac01769ff6da034d80bc335c2799688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentAmmoSprite: []
+  _ammoText: {fileID: 0}
+  _weapon: {fileID: 11400000, guid: 97be78f0d37a0ff48958f9666e1d5d4e, type: 2}
+  _AttackRadius: 1
+  _shootingPoint: {fileID: 1135826045}
 --- !u!1 &1618127749
 GameObject:
   m_ObjectHideFlags: 0
@@ -12924,11 +12944,11 @@ PrefabInstance:
       objectReference: {fileID: 463315556}
     - target: {fileID: 5748170804189542173, guid: 35f5ec91b16d4df49aceeb9d98e921b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.8
+      value: -8.97
       objectReference: {fileID: 0}
     - target: {fileID: 5748170804189542173, guid: 35f5ec91b16d4df49aceeb9d98e921b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.2
+      value: -2.46
       objectReference: {fileID: 0}
     - target: {fileID: 5748170804189542173, guid: 35f5ec91b16d4df49aceeb9d98e921b7, type: 3}
       propertyPath: m_LocalPosition.z
