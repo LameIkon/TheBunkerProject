@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class AmmoCounter : MonoBehaviour
+public class AmmoCounter : MonoBehaviour
 {
     [SerializeField] private Image[] _currentAmmoSprite;
     [SerializeField] private TextMeshProUGUI _ammoText;
@@ -15,7 +15,6 @@ public abstract class AmmoCounter : MonoBehaviour
         { GunType.Shotgun, 1 },
         { GunType.Rifle, 2 } 
     };
-
 
     private void Update()
     {

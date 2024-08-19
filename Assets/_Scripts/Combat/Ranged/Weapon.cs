@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.UI.Image;
 
-public abstract class Weapon : AmmoCounter
+public abstract class Weapon : MonoBehaviour
 {
     private float _damage;
     private GunType _gunType;
@@ -19,7 +19,7 @@ public abstract class Weapon : AmmoCounter
 
     //private RaycastHit2D[] _hits; //for knife attacks. 
 
-    //[SerializeField] private WeaponSO _weapon; //Been moved to AmmoCounter.
+    public WeaponSO _weapon; //Been moved to AmmoCounter.
     [SerializeField] private Transform _shootingPoint; //where we shoot from
     
 
