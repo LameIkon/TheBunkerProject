@@ -116,10 +116,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseHUD
       objectReference: {fileID: 0}
-    - target: {fileID: 1487160476393515118, guid: f47fa6c6d37d8b5409950ea7d28d4095, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2246081644373251625, guid: f47fa6c6d37d8b5409950ea7d28d4095, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
