@@ -387,32 +387,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e5914e28cd5bad40a0bc959ee5501b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectsToHighlight: []
-  _haveUniq1: 0
-  _haveUniq2: 0
-  _allowChangeSprites: 0
-  _activateHiddenObjects: 1
-  _ChangeMaterial: 0
-  _default: {fileID: 21300000, guid: b47cf2ce298ebe6409df95c806fd32de, type: 3}
-  _uniq1: {fileID: 21300000, guid: 09ee2bd3dfa9fc24aa9c79249b5425e1, type: 3}
-  _uniq2: {fileID: 21300000, guid: 3ebfc13121940844c90316b07010e803, type: 3}
-  _defaultHighlight: {fileID: 21300000, guid: 3f9bf08f5492fb8419426a69c1e78c52, type: 3}
-  _uniq1Highlight: {fileID: 21300000, guid: 183bce41d596be741a2cfa13fd5de2ca, type: 3}
-  _uniq2Highlight: {fileID: 21300000, guid: 296e0fb1ff20a8544ab51b47a3067f92, type: 3}
+  _allowActivateHiddenObjects: 1
   _objectsToHideAndShow:
   - {fileID: 7545657953272603467}
   - {fileID: 2237282614960779469}
   - {fileID: 8686094862135584157}
   - {fileID: 8822477535130242051}
+  _allowChangeMaterial: 0
   _redEmission: {fileID: 0}
   _greenEmission: {fileID: 0}
-  _renderer: []
-  _spriteType1: []
-  _spriteType2: []
-  _spriteType3: []
-  _spriteType1Highlight: {fileID: 0}
-  _spriteType2Highlight: {fileID: 0}
-  _spriteType3Highlight: {fileID: 0}
+  _objectsToChangeEmission: []
 --- !u!1 &3109326393501713266
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,7 +479,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _HighlightEmission: {fileID: 0}
-  _Renderer: {fileID: 0}
   _Interact: 0
 --- !u!1 &5091591722971598086
 GameObject:
