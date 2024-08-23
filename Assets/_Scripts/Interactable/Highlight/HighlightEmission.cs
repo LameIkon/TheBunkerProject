@@ -3,29 +3,25 @@ using UnityEngine;
 
 public class HighlightEmission : MonoBehaviour
 {
-
-    [SerializeField] private bool _allowChangeSprites; // Can change sprite from original to another 
-    [SerializeField] private bool _activateHiddenObjects; // If sprites just arent active
-    [SerializeField] private bool _ChangeMaterial;
-
     [Header("Hidden Sprites")]
+    [SerializeField] private bool _allowActivateHiddenObjects; // If sprites just arent active
     [SerializeField] private List<GameObject> _objectsToHideAndShow = new List<GameObject>(); 
 
     [Header("Change between Emission")]
+    [SerializeField] private bool _allowChangeMaterial;
     [SerializeField] private Material _redEmission;
     [SerializeField] private Material _greenEmission;
-
     [SerializeField] private List<Transform> _objectsToChangeEmission = new List<Transform>();
 
 
     public void Highlight() // Change sprites to highlighted sprite
     {
-        if (_activateHiddenObjects)
+        if (_allowActivateHiddenObjects)
         {
             ActivateHiddenObjects();
         }
 
-        if (_ChangeMaterial)
+        if (_allowChangeMaterial)
         {
             ChangeGreenMaterial();
         }
@@ -85,12 +81,12 @@ public class HighlightEmission : MonoBehaviour
 
     public void ReturnToOriginal() // Return to original sprites before change
     {
-        if (_activateHiddenObjects)
+        if (_allowActivateHiddenObjects)
         {
             DeactivateHiddenSprites();
         }
 
-        if (_ChangeMaterial)
+        if (_allowChangeMaterial)
         {
             ChangeRedMaterial();
         }

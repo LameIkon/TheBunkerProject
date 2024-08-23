@@ -12,10 +12,6 @@ public class DoorTrigger : MonoBehaviour
             {
                 _door = GetComponentInParent<Door>();
             }
-            if (_door._Renderer  == null)
-            {
-                _door.GetRenderer();
-            }
             _door.SetInteract(true);
             //_door._Renderer.material = _door._GreenEmission;
             _door._HighlightEmission.Highlight();
