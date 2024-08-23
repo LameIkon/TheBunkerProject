@@ -29,6 +29,20 @@ public class HighlightEmission : MonoBehaviour
     [SerializeField] private Material _redEmission;
     [SerializeField] private Material _greenEmission;
 
+    [Header("Change Material")]
+    [SerializeField] private List<Sprite> _renderer = new List<Sprite>();
+
+    [Header("Original Sprites")]
+    [SerializeField] private List<Sprite> _spriteType1 = new List<Sprite>();
+    [SerializeField] private List<Sprite> _spriteType2 = new List<Sprite>();
+    [SerializeField] private List<Sprite> _spriteType3 = new List<Sprite>();
+
+    [Header("Highlighted Sprites")]
+    [SerializeField] private Sprite _spriteType1Highlight;
+    [SerializeField] private Sprite _spriteType2Highlight;
+    [SerializeField] private Sprite _spriteType3Highlight;
+
+
     private void Awake()
     {
         foreach (Transform @object in transform)
