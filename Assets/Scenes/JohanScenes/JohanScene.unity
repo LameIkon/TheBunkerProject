@@ -13134,9 +13134,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1302881334}
     m_Modifications:
+    - target: {fileID: 946835463542593353, guid: 9bc834328ea45644685a941d540047c6, type: 3}
+      propertyPath: _allowAutomaticClose
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4885265498049867683, guid: 9bc834328ea45644685a941d540047c6, type: 3}
       propertyPath: m_Name
-      value: DoorV2
+      value: Door
       objectReference: {fileID: 0}
     - target: {fileID: 9090244214193069645, guid: 9bc834328ea45644685a941d540047c6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15795,7 +15799,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4885265498049867683, guid: 9bc834328ea45644685a941d540047c6, type: 3}
       propertyPath: m_Name
-      value: DoorV2 (1)
+      value: Door
       objectReference: {fileID: 0}
     - target: {fileID: 9090244214193069645, guid: 9bc834328ea45644685a941d540047c6, type: 3}
       propertyPath: m_LocalPosition.x
