@@ -255,6 +255,7 @@ MonoBehaviour:
   _Interact: 0
   _Animator: {fileID: 6289328989118851219}
   _IsOpen: 0
+  _allowAutomaticClose: 1
 --- !u!1 &5180325545043766084
 GameObject:
   m_ObjectHideFlags: 0
