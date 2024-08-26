@@ -12,11 +12,14 @@ public class DoorTrigger : MonoBehaviour
             {
                 _door = GetComponentInParent<Door>();
             }
+            if (_door._Renderer  == null)
+            {
+                _door.GetRenderer();
+            }
             _door.SetInteract(true);
             //_door._Renderer.material = _door._GreenEmission;
             _door._HighlightEmission.Highlight();
 
-            StopCoroutine(_door._AutomaticDoorCloseCoroutine); // prevent door closing in your face
         }
     }
 
@@ -27,11 +30,6 @@ public class DoorTrigger : MonoBehaviour
             _door.SetInteract(false);
             //_door._Renderer.material = _door._RedEmission;
             _door._HighlightEmission.ReturnToOriginal();
-
-            if (_door._IsOpen) // Close door after you
-            {
-                _door._AutomaticDoorCloseCoroutine = StartCoroutine(_door.DoorAutomaticClose());
-            }
         }
     }
 }
