@@ -59,3 +59,6 @@ TagManager:
   - name: Beings
     uniqueID: 2594551939
     locked: 0
+  - name: Shadows
+    uniqueID: 4253392581
+    locked: 0
