@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7047755da78c9bd4fb83768162f81a9e, type: 3}
-  m_Name: Rifle
+  m_Name: Shotgun
   m_EditorClassIdentifier: 
-  _WeaponCategory: 3
+  _WeaponCategory: 2
   _BulletPrefab: {fileID: 8996890269392672782, guid: eee6e1a45ba8c9748808f938ca00ed8e, type: 3}
-  _Damage: 20
-  _FireRate: 4
-  _Range: 40
-  _MaxAmmoCapacity: 25
-  _Magazine: {fileID: 11400000, guid: 410273ab89bcb904caf39bbedc049e8a, type: 2}
-  _CurrentAmmoCount: {fileID: 11400000, guid: 3d0cdd6ea20d57a49ac9128a47177c1f, type: 2}
-  _CritChance: 10
-  _CritDamage: 1.15
+  _Damage: 45
+  _FireRate: 0.5
+  _Range: 10
+  _MaxAmmoCapacity: 6
+  _Magazine: {fileID: 11400000, guid: 43b7cfcaab5045845bfa23c62121038d, type: 2}
+  _CurrentAmmoCount: {fileID: 11400000, guid: 88a4812d5eef54a4b85f56a6442b7508, type: 2}
+  _CritChance: 30
+  _CritDamage: 1.5

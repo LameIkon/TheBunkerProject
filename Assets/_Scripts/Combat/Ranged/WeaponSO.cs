@@ -28,7 +28,7 @@ public class WeaponSO : ScriptableObject
 
     public void SetAmmoToMax() //Used in Awake in Weapon.cs
     {
-        _CurrentAmmoCount.ApplyChange(_MaxAmmoCapacity);
+        _CurrentAmmoCount.SetValue(_MaxAmmoCapacity);
     }
 
     public void UpdateAmmoCount()

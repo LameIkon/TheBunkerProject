@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 942cb63c27e47344797a5f52266d7557, type: 3}
-  m_Name: CurrentRifleAmmo
+  m_Name: CurrentKnifeAmmo
   m_EditorClassIdentifier: 
   DevDescription: 
-  _Value: 25
+  _Value: 0
   _onValueChanged: {fileID: 0}

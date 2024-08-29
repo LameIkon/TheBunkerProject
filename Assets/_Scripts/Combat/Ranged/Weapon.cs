@@ -19,13 +19,16 @@ public abstract class Weapon : MonoBehaviour
 
     //private RaycastHit2D[] _hits; //for knife attacks. 
 
-    public WeaponSO _weapon; //Been moved to AmmoCounter.
+    public WeaponSO _weapon; 
     [SerializeField] private Transform _shootingPoint; //where we shoot from
     
 
     private void Awake()
     {
-        _weapon.SetAmmoToMax();
+        if(_weapon._WeaponCategory != GunType.Knife)
+        {
+            _weapon.SetAmmoToMax();
+        }        
         _damage = _weapon._Damage;
         _fireRate = _weapon._FireRate;
         _gunType = _weapon._WeaponCategory;

@@ -128,11 +128,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac01769ff6da034d80bc335c2799688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentAmmoSprite:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _ammoText: {fileID: 0}
   _weapon: {fileID: 11400000, guid: 487b6e8cb30f30f4eace62e3648579cd, type: 2}
   _shootingPoint: {fileID: 957217721741931008}
 --- !u!1 &1496480575782166289
@@ -245,9 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac01769ff6da034d80bc335c2799688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentAmmoSprite:
-  - {fileID: 0}
-  _ammoText: {fileID: 0}
   _weapon: {fileID: 11400000, guid: 97be78f0d37a0ff48958f9666e1d5d4e, type: 2}
   _shootingPoint: {fileID: 957217721741931008}
 --- !u!1 &2477404503397195206
@@ -815,6 +807,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3408464325836346605}
+  - component: {fileID: 6401735677963802344}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -837,6 +830,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2757628810558592401}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6401735677963802344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7382917052026221293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ac01769ff6da034d80bc335c2799688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weapon: {fileID: 11400000, guid: d35099cf4ac75dd4991f8009440d22a3, type: 2}
+  _shootingPoint: {fileID: 957217721741931008}
 --- !u!1 &8133345368113176354
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,6 +892,7 @@ MonoBehaviour:
   - {fileID: 1850750774519148837}
   - {fileID: 8305511787583937887}
   - {fileID: 6154849993210738746}
+  - {fileID: 6401735677963802344}
 --- !u!1 &8442031932464782162
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,11 +982,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac01769ff6da034d80bc335c2799688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentAmmoSprite:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _ammoText: {fileID: 0}
   _weapon: {fileID: 11400000, guid: f53047be1a76e3f44b1e986cef161436, type: 2}
   _shootingPoint: {fileID: 957217721741931008}
 --- !u!1 &9174664857193902606
