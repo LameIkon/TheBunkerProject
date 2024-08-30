@@ -320,6 +320,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3978911636552807806}
     m_Modifications:
+    - target: {fileID: 768359100071412177, guid: 5a5d1532efef7ab45ac2e833188c284d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4804354238522613656, guid: 5a5d1532efef7ab45ac2e833188c284d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -421,6 +425,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6458643094787686564}
   m_SourcePrefab: {fileID: 100100000, guid: 5a5d1532efef7ab45ac2e833188c284d, type: 3}
+--- !u!114 &1987639036342991406 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7180830618543346323, guid: 5a5d1532efef7ab45ac2e833188c284d, type: 3}
+  m_PrefabInstance: {fileID: 8661244839388129469}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2158814865881437580 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7333912861524639025, guid: 5a5d1532efef7ab45ac2e833188c284d, type: 3}
@@ -496,5 +511,11 @@ MonoBehaviour:
   - {fileID: 3844590977564594380}
   - {fileID: 6216668289224293700}
   - {fileID: 6690170499921985676}
+  - {fileID: 1987639036342991406}
   _ammoText: {fileID: 5870526632097893524}
-  _weapon: {fileID: 11400000, guid: 487b6e8cb30f30f4eace62e3648579cd, type: 2}
+  _currentWeapon: {fileID: 0}
+  _Weapons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

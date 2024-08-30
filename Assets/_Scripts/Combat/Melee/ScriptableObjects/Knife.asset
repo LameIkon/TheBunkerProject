@@ -18,7 +18,7 @@ MonoBehaviour:
   _FireRate: 10
   _Range: 2
   _MaxAmmoCapacity: 0
-  _Magazine: {fileID: 11400000, guid: 69e1c3ca414f6164cbddae0d880520ea, type: 2}
-  _CurrentAmmoCount: {fileID: 11400000, guid: 047eee042ff152c43889ce2af29d14c3, type: 2}
+  _Magazine: {fileID: 11400000, guid: 770bc55a667d785489a0af0baa5cf515, type: 2}
+  _CurrentAmmoCount: {fileID: 11400000, guid: c38bdb5256b8ae34cb931a094cbf8afb, type: 2}
   _CritChance: 25
   _CritDamage: 1.25

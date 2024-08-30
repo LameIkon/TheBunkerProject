@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] private Animator _animator;
     private bool _isFacingRight = true;
 
     [SerializeField] private PlayerInput _playerInput;
@@ -56,8 +57,19 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        _movementX = context.ReadValue<Vector2>().x;
-        Flip();
+        if (context.performed)
+        {
+            Debug.Log("Walking");
+            _movementX = context.ReadValue<Vector2>().x; // read its moving
+            Flip();
+            _animator.Play("Walking");
+        }
+        else if (context.canceled)
+        {
+            Debug.Log("Idle");
+            _movementX = context.ReadValue<Vector2>().x; // read its 0
+            _animator.Play("Idle");
+        }
     }
 
 

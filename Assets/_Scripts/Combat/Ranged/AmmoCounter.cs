@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,47 +7,44 @@ public class AmmoCounter : MonoBehaviour
 {
     [SerializeField] private Image[] _currentAmmoSprite;
     [SerializeField] private TextMeshProUGUI _ammoText;
-    [SerializeField] public WeaponSO _weapon;
+    [SerializeField] private Weapon _currentWeapon;
+    [SerializeField] private Weapon[] _Weapons;
 
     private readonly Dictionary<GunType, int> _ammoSpriteIndexMap = new()
     {
         { GunType.Pistol, 0 },
-        { GunType.Shotgun, 1 },
-        { GunType.Rifle, 2 } 
+        { GunType.Rifle, 1 },
+        { GunType.Shotgun, 2 },
+        { GunType.Knife, 3 }
     };
 
     private void Update()
     {
-        SetAmmoCount(_weapon._CurrentAmmoCount);
+        SetAmmoCount(_currentWeapon._weapon._CurrentAmmoCount);
         DisplayAmmoSprite();
+        WeaponSelection();
 
-        /*
-         *      The if-statements with an Input.GetKey() method are placeholder logic to
-         *      demonstrate the functions that reduces and replenishes ammunition.
-         *
-         *      TODO: MUST BE REMOVED OR REPLACED AT A LATER TIME!!
-         */
-
-        #region THESE IF-STATEMENTS MUST BE DELETED IN THE FUTURE
-
-  
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            _weapon.GainAmmo();
-        }
-
-        #endregion
     }
 
     private void SetAmmoCount(IntVariable ammoCount)
     {
-        _weapon.UpdateAmmoCount();
-        _ammoText.text = ammoCount.GetValue().ToString();
+        _currentWeapon._weapon.UpdateAmmoCount();
+
+        if(_currentWeapon._weapon._WeaponCategory != GunType.Knife)
+        {
+            _ammoText.text = ammoCount.GetValue().ToString();
+        }
+
+        else if (_currentWeapon._weapon._WeaponCategory == GunType.Knife)
+        {
+            _ammoText.text = "∞";
+        }
+        
     }
 
     private void DisplayAmmoSprite()
     {
-        if (_ammoSpriteIndexMap.TryGetValue(_weapon._WeaponCategory, out int ammoIndex))
+        if (_ammoSpriteIndexMap.TryGetValue(_currentWeapon._weapon._WeaponCategory, out int ammoIndex))
         {
             for (int i = 0; i < _currentAmmoSprite.Length; i++)
             {
@@ -60,7 +57,33 @@ public class AmmoCounter : MonoBehaviour
             {
                 sprite.gameObject.SetActive(false);
             }
-            // Activate melee sprite here
+           
+        }
+    }
+
+    private void WeaponSelection()
+    {
+        for (int i = 0; i < _Weapons.Length; i++)
+        {
+            if (_Weapons[i]._weapon._WeaponCategory == GunType.Knife && CurrentWeapon._IsKnife)
+            {
+                _currentWeapon = _Weapons[i];
+            }
+
+            else if (_Weapons[i]._weapon._WeaponCategory == GunType.Pistol && CurrentWeapon._IsPistol)
+            {
+                _currentWeapon = _Weapons[i];
+            }
+
+            else if (_Weapons[i]._weapon._WeaponCategory == GunType.Rifle && CurrentWeapon._IsRifle)
+            {
+                _currentWeapon = _Weapons[i];
+            }
+
+            else if (_Weapons[i]._weapon._WeaponCategory == GunType.Shotgun && CurrentWeapon._IsShotgun)
+            {
+                _currentWeapon = _Weapons[i];
+            }
         }
     }
 }

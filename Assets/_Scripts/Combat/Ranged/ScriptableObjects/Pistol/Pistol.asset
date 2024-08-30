@@ -16,7 +16,7 @@ MonoBehaviour:
   _BulletPrefab: {fileID: 8996890269392672782, guid: eee6e1a45ba8c9748808f938ca00ed8e, type: 3}
   _Damage: 25
   _FireRate: 1
-  _Range: 100
+  _Range: 40
   _MaxAmmoCapacity: 12
   _Magazine: {fileID: 11400000, guid: 69e1c3ca414f6164cbddae0d880520ea, type: 2}
   _CurrentAmmoCount: {fileID: 11400000, guid: 047eee042ff152c43889ce2af29d14c3, type: 2}

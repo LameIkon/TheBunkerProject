@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 using UnityEngine.Rendering;
 
 public class CurrentWeapon : MonoBehaviour
@@ -9,7 +10,9 @@ public class CurrentWeapon : MonoBehaviour
     public static bool _IsKnife = false;
     public static bool _IsPistol = false;
     public static bool _IsRifle = false;
-    public static bool _IsShotgun = false;  
+    public static bool _IsShotgun = false;
+
+    private bool _isFiring = false; //we use this in order to have AUTO fire when holding down
 
     public Weapon[] _Weapons;
     public static Weapon _currentWeapon;
@@ -18,19 +21,31 @@ public class CurrentWeapon : MonoBehaviour
     private void Update()
     {
         WeaponSelection();
+
+        if(_isFiring)
+        {
+            UseWeapon(_currentWeapon);
+        }
     }
 
     private void UseWeapon (Weapon currentWeapon)
     {      
-            currentWeapon.Fire();
+        currentWeapon.Fire();
     }
 
     public void Attack (InputAction.CallbackContext context)
-    {
-        if(context.performed)
+    {       
+        if (context.started && !context.canceled) //Fires an event whenever action/key is pressed. Together with the one below the whole method basicly chekcs if the key is hold down. 
         {
-            UseWeapon(_currentWeapon);
-        }        
+            _isFiring = true;
+           
+        }
+
+        if(context.canceled) //needs to be here to fire an event whenever we let go of the "action"/key.
+        {
+            _isFiring = false;
+        }
+       
     }   
 
     private void WeaponSelection()
