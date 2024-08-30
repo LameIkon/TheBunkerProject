@@ -16,7 +16,10 @@ public class DoorTrigger : MonoBehaviour
             //_door._Renderer.material = _door._GreenEmission;
             _door._HighlightEmission.Highlight();
 
-            StopCoroutine(_door._AutomaticDoorCloseCoroutine); // prevent door closing in your face
+            if (_door._AutomaticDoorCloseCoroutine != null) // If coroutine is running do:
+            {
+                StopCoroutine(_door._AutomaticDoorCloseCoroutine); // prevent door closing in your face
+            }
         }
     }
 

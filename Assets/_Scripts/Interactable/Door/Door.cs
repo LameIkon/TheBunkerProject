@@ -31,7 +31,6 @@ public class Door : Highlight
                 _IsOpen = true;
             }
             yield return new WaitForSeconds(0.6f);
-            //_IsOpen = !_IsOpen;
             _Interact = true;
         }
     }
