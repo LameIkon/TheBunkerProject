@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 894fdb4e3975e564890b433ba75cd8eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 2
+  _damage: 5
   _attackCoolDowm: 2
   _range: 1
   _colliderDistance: 1
@@ -148,8 +148,13 @@ MonoBehaviour:
   _leftEdge: {fileID: 8949416269299487845}
   _rightEdge: {fileID: 6324941536648561648}
   _enemy: {fileID: 1951664081005122511}
-  _speed: 7
+  _moveSpeed: 3
+  _chaseSpeed: 4
   _idleDuration: 2
+  _player: {fileID: 0}
+  _maxChaseDist: 2
+  _minChaseDist: 5
+  _isChasing: 0
 --- !u!1 &987469016684094076
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,7 +257,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1700415357
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c754d04751b65324a9e4e6c67857504c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

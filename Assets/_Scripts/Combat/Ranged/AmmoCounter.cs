@@ -23,7 +23,6 @@ public class AmmoCounter : MonoBehaviour
         SetAmmoCount(_currentWeapon._weapon._CurrentAmmoCount);
         DisplayAmmoSprite();
         WeaponSelection();
-
     }
 
     private void SetAmmoCount(IntVariable ammoCount)
@@ -38,8 +37,7 @@ public class AmmoCounter : MonoBehaviour
         else if (_currentWeapon._weapon._WeaponCategory == GunType.Knife)
         {
             _ammoText.text = "∞";
-        }
-        
+        }        
     }
 
     private void DisplayAmmoSprite()
@@ -51,13 +49,13 @@ public class AmmoCounter : MonoBehaviour
                 _currentAmmoSprite[i].gameObject.SetActive(i == ammoIndex);
             }
         }
+
         else // Default case
         {
             foreach (var sprite in _currentAmmoSprite)
             {
                 sprite.gameObject.SetActive(false);
-            }
-           
+            }           
         }
     }
 

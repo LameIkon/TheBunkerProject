@@ -31,22 +31,21 @@ public class MeleeEnemy : MonoBehaviour
     {
         _coolDownTimer += Time.deltaTime;
 
-        if (PlayerInSight())
-        {
+       
             if (_coolDownTimer >= _attackCoolDowm)
             {
                 _coolDownTimer = 0;
+                DamagePlayer();
                 // _anim.SetTrigger(attackAnimation); This must be uncommented once we have implemented animations in the game
             }
-        }
 
         if (_enemyPatrol != null)
         {
-            _enemyPatrol.enabled = !PlayerInSight();
+            _enemyPatrol.enabled = !PlayerInRange();
         }
     }
 
-    private bool PlayerInSight()
+    private bool PlayerInRange()
     {
         var bounds = _capsuleCollider.bounds;
         var trans = transform;
@@ -72,7 +71,7 @@ public class MeleeEnemy : MonoBehaviour
 
     private void DamagePlayer() // Needs to be set on the attack animation
     {
-        if (PlayerInSight())
+        if (PlayerInRange())
         {
             _playerHealth.TakeDamage(_damage);
         }
