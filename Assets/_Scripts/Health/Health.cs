@@ -5,15 +5,14 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
 
-    [SerializeField] private FloatVariable _health; // ONLY SET ON PLAYER - Enemies need to be empty in order to create seperate floatvariables. 
+    [SerializeField] private FloatVariable _health; // ONLY SET ON PLAYER - Enemies need to be empty in order to create seperate floatvariables. Or they all die when u kill the first one.
     [SerializeField] private FloatVariable _startHealth; //start health. For monsters this sets what their health is going to be when created. For player, it reset health to starthealth on awake.
 
     private void Awake()
     {
         if ( _health == null ) //for monsters
         {
-            _health = ScriptableObject.CreateInstance<FloatVariable>();
-            _health.SetValue(_startHealth);
+            _health = ScriptableObject.CreateInstance<FloatVariable>();            
         }
 
         _health.SetValue(_startHealth); //for player
@@ -25,7 +24,8 @@ public class Health : MonoBehaviour
         _health.ApplyChange(-damage);
 
         if(_health._Value <= 0)
-        {                   
+        {   
+            //need to implent death animation depending on if its monster or player
             Destroy(gameObject);
         }
     }

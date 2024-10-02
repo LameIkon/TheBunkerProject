@@ -21,7 +21,7 @@ public class LightRoom : MonoBehaviour
         TurnOnLights();
     }
 
-    private void GetDoorsAndLights()
+    private void GetDoorsAndLights() //gets doors and lights components in children and stores them in seperate arrays.
     {
         if (_lights == null)
         {
@@ -33,7 +33,7 @@ public class LightRoom : MonoBehaviour
             _doors = GetComponentsInChildren<Door>();
         }
 
-        if (_lights != null)
+        if (_lights != null) //turns off lights from start.
         {
             for (int i = 0; i < _lights.Length; i++)
             {
@@ -46,11 +46,7 @@ public class LightRoom : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            //for (int i = 0; i < _lights.Length; i++)
-            //{
-            //    _lights[i].enabled = true;
-            //}
-            _insideRoom = true;
+            _insideRoom = true; //checks if player is inside room
         }
     }
 
@@ -58,35 +54,31 @@ public class LightRoom : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            //for (int i = 0; i < _lights.Length; i++)
-            //{
-            //    _lights[i].enabled = false;
-            //}
-            _insideRoom = false;
+            _insideRoom = false; //checks if player leaves room
         }
     }
 
     private void DetectLightsSwitch()
     {
         
-            if (_doors[0]._IsOpen || _doors[1]._IsOpen)
+            if (_doors[0]._IsOpen || _doors[1]._IsOpen) //if one of the doors are opened lights are on.
             {
                 _lightsOn = true;
             }
 
-            else if (!_doors[0]._IsOpen && _insideRoom || !_doors[1]._IsOpen && _insideRoom)
+            else if (!_doors[0]._IsOpen && _insideRoom || !_doors[1]._IsOpen && _insideRoom) //if doors are closed but player is inside room, lights is on.
             {
                 _lightsOn = true;
             }
 
-            else if (!_doors[0]._IsOpen && !_insideRoom || !_doors[1]._IsOpen && !_insideRoom)
+            else if (!_doors[0]._IsOpen && !_insideRoom || !_doors[1]._IsOpen && !_insideRoom) //if doors are closed and player is not inside room, lights is off.
             {
                 _lightsOn = false;
             }
         
     }
 
-    private void TurnOnLights()
+    private void TurnOnLights() //turns lights off/on depending on the bool _lightsOn.
     {
         if(_lightsOn)
         {

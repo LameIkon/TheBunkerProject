@@ -22,7 +22,7 @@ public class EnemyPatrol : MonoBehaviour
     private float _idleTimer;
 
     [Space(5f)] [Header("Chasing")]
-    [SerializeField] private Transform _player;
+    [SerializeField] private Transform _player; //put player object inside for monster to chase.
     [SerializeField] private int _maxChaseDist;
     [SerializeField] private int _minChaseDist;
     [SerializeField] private bool _isChasing = false;
@@ -104,14 +104,14 @@ public class EnemyPatrol : MonoBehaviour
     private void ChasePlayer()
     {       
         
-        if (Vector3.Distance(transform.position, _player.position) <= _minChaseDist)
+        if (Vector3.Distance(transform.position, _player.position) <= _minChaseDist) //checks if player is inside a certain dist to chase.
         {
             MoveTowardsPlayer();
             Flip();           
             _isChasing = true;       
         }
 
-        else if (Vector3.Distance(transform.position, _player.position) >= _maxChaseDist)
+        else if (Vector3.Distance(transform.position, _player.position) >= _maxChaseDist) //if player is outside max "range" for chasing. 
         {
             _isChasing = false;
             
@@ -123,7 +123,7 @@ public class EnemyPatrol : MonoBehaviour
     {
              
         Vector2 enemyPos = _enemy.position; //stores pos before we move
-        transform.position = Vector2.MoveTowards(transform.position, _player.position, _chaseSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, _player.position, _chaseSpeed * Time.deltaTime); //moves monster towards player.pos.
         Vector2 enemyPosLast = _enemy.position; //stores pos after we move, to compare and see if we go left or right.
 
         //used for flipping to check if we are moving left or right when chasing.
