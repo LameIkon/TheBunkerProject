@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (_currentElevator != null && _currentElevator._Interact) // Elevator
             {
-                _currentElevator.ShowFloorPanel();
+                _currentElevator.ShowFloorPanel(); // Call the elevator script
             }
         }
     }

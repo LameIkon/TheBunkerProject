@@ -16,7 +16,9 @@ public class Elevator : MonoBehaviour
     public enum Floor
     {
         Floor1,
-        Floor2
+        Floor2,
+        Floor3,
+        Floor4
     }
 
     private void Awake()
@@ -53,10 +55,15 @@ public class Elevator : MonoBehaviour
 
     public void ShowFloorPanel() // Player input will show up canvas with buttons
     {
-        if (_FloorCanvas != null && !_FloorCanvas.activeSelf && !_isMoving)
+        if (_FloorCanvas != null && _FloorCanvas.activeSelf && !_isMoving) // Close screen if active
+        {
+            _FloorCanvas.SetActive(false);
+        }
+        else if (_FloorCanvas != null && !_FloorCanvas.activeSelf && !_isMoving) // Open screen if not active
         {
             _FloorCanvas.SetActive(true);
         }
+        
     }
 
      public void SetInteract(bool interact) // On trigger it will say you can interact 
