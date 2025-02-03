@@ -820,12 +820,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7970517110280521535}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fd38d12f0064d14f866009aba2d9b95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 6
+  offsetDirection: 31
 --- !u!114 &7178550306489763650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -833,7 +834,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7970517110280521535}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b16b1cf3e85825440a96df3a16a91c63, type: 3}
   m_Name: 

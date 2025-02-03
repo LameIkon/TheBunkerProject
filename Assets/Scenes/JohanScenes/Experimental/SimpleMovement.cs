@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SimpleMovement : MonoBehaviour
 {
-    [SerializeField] private float movementSpeed;
+    [SerializeField] private float _movementSpeed;
     private float SpeedX, SpeedY;
     private Rigidbody2D rb;
 
@@ -23,8 +23,8 @@ public class SimpleMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        SpeedX = Input.GetAxisRaw("Horizontal") * movementSpeed;
-        SpeedY = Input.GetAxisRaw("Vertical") * movementSpeed;
+        SpeedX = Input.GetAxisRaw("Horizontal") * _movementSpeed;
+        SpeedY = Input.GetAxisRaw("Vertical") * _movementSpeed;
         rb.velocity = new Vector2 (SpeedX, SpeedY);
     }
 }

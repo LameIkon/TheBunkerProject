@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 6
+  offsetDirection: 90
 --- !u!114 &1241069952482228380
 MonoBehaviour:
   m_ObjectHideFlags: 0
