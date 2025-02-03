@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3383299667997443885}
   - component: {fileID: 8942649540801418843}
   - component: {fileID: 6676234895989126951}
-  - component: {fileID: 9020392590763655140}
   m_Layer: 0
   m_Name: BulletPrefab
   m_TagString: Untagged
@@ -28,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 2567059270255790818}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7925318, y: -0.5050662, z: 1.945406}
-  m_LocalScale: {x: 0.05, y: 0.1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -113,16 +112,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &9020392590763655140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2567059270255790818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7324dd5d2c88674088f4ff6a71a5572, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 100

@@ -787,8 +787,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd38d12f0064d14f866009aba2d9b95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 6
-  offsetDirection: 90
+  _rotationSpeed: 6
+  _offsetDirection: 0
 --- !u!114 &863963896143659553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -801,7 +801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b16b1cf3e85825440a96df3a16a91c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
+  _movementSpeed: 0
 --- !u!50 &6270230969636187175
 Rigidbody2D:
   serializedVersion: 4
