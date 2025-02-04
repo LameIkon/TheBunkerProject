@@ -15,8 +15,7 @@ public class Shooting : MousePosition
     [SerializeField] private float _bulletSpeed;
 
     [Header("Bullet Offset")]
-    [SerializeField] private float _minAngleOffset = -5f;  
-    [SerializeField] private float _maxAngleOffset = 5f;   
+    [SerializeField] private float _accuracy = 5f;
 
     private void Start()
     {
@@ -48,7 +47,7 @@ public class Shooting : MousePosition
         Vector3 direction = -_bulletTransform.up; 
 
         // Randomize the angle offset for the bullet direction
-        float randomAngleOffset = UnityEngine.Random.Range(_minAngleOffset, _maxAngleOffset);
+        float randomAngleOffset = UnityEngine.Random.Range(-_accuracy, _accuracy);
         direction = Quaternion.Euler(0, 0, randomAngleOffset) * direction;
 
         // Get the Rigidbody2D and set velocity
@@ -56,7 +55,9 @@ public class Shooting : MousePosition
         rb.velocity = direction * _bulletSpeed;
 
         float bulletRotation = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bullet.transform.rotation = Quaternion.Euler(0, 0, bulletRotation); 
+        bullet.transform.rotation = Quaternion.Euler(0, 0, bulletRotation);
+
+        Destroy(bullet, 3f);
     }
 
     IEnumerator FireRate()

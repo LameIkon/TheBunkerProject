@@ -8,7 +8,7 @@ public class MousePosition : MonoBehaviour
     protected Vector3 mousePos;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }

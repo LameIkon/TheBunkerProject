@@ -9,14 +9,10 @@ public class RotateObject : MousePosition
     [SerializeField] private float _downAngle = -40f; // Minimum rotation angle
     [SerializeField] private float _upAngle = 40f;  // Maximum rotation angle
 
-    private float _initialAngle;
-    void Start()
-    {
+    [SerializeField] private Transform parentObject;
+    private bool _isFlipped = false;
 
-       
-        _initialAngle = pivot.eulerAngles.z; // Store initial angle
-        mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-    }
+
     void Update()
     {
         Mousedirection();
@@ -26,22 +22,40 @@ public class RotateObject : MousePosition
     {
         // Get the mouse position in world space
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 direction = mousePos - pivot.position; 
+        Vector3 direction = mousePos - pivot.position;
+
+        // Determine whether to flip
+        if (mousePos.x < pivot.position.x && !_isFlipped)
+        {
+            parentObject.localScale = new Vector3(-1, 1, 1);
+            _isFlipped = true;
+        }
+        else if (mousePos.x > pivot.position.x && _isFlipped)
+        {
+            parentObject.localScale = new Vector3(1, 1, 1);
+            _isFlipped = false;
+        }
+
+        // Adjust direction based on flipping
+        if (_isFlipped)
+        {
+            direction.y = -direction.y; 
+            direction.x = -direction.x;
+        }
+
+        // Flip angle constraints when flipped
+        float minAngle = _isFlipped ? -_upAngle : _downAngle;
+        float maxAngle = _isFlipped ? -_downAngle : _upAngle;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + _offsetDirection;
+        
+        // Clamp within the flipped range
+        float clampedAngle = Mathf.Clamp(angle, minAngle, maxAngle);
 
-        // Convert to local angle relative to the initial angle
-        float relativeAngle = Mathf.DeltaAngle(_initialAngle, angle);
-
-        // Clamp the relative angle within the allowed range
-        float clampedAngle = Mathf.Clamp(relativeAngle, _downAngle, _upAngle);
-
-        // Compute final rotation by applying the clamped angle to the initial angle
-        float finalAngle = _initialAngle + clampedAngle;
-
-        Quaternion targetRotation = Quaternion.Euler(0, 0, finalAngle);
+        Quaternion targetRotation = Quaternion.Euler(0, 0, clampedAngle);
 
         // Smoothly rotate the pivot object
         pivot.rotation = Quaternion.Slerp(pivot.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+
     }
 }
