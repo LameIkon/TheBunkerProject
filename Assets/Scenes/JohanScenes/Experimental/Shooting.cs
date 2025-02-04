@@ -8,14 +8,13 @@ public class Shooting : MousePosition
     [Header("Gun properties")]
     [SerializeField] private bool _canFire;
     [SerializeField] private float _timeBetweenFiring;
+    [SerializeField] private float _bulletSpeed;
+    [SerializeField] private float _accuracy = 5f;
 
-    [Header("Bullet properties")]
+    [Header("References")]
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private Transform _bulletTransform;
-    [SerializeField] private float _bulletSpeed;
 
-    [Header("Bullet Offset")]
-    [SerializeField] private float _accuracy = 5f;
 
     private void Start()
     {

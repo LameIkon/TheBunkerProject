@@ -1,61 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class RotateObject : MousePosition
+public class RotateObject : MonoBehaviour
 {
-    [SerializeField] private Transform pivot;
+    [Header("References")]
+    private Transform parentObject; // what to rotate
+    [SerializeField] private Transform pivot; // What to rotate around
+    [SerializeField] private RotationManager rotationManager; // Rotation Manager
+
+    [Header("Rotation Settings")]
+    [SerializeField] private float _downAngle = -40f;   // Minimum rotation angle
+    [SerializeField] private float _upAngle = 40f;      // Maximum rotation angle
     [SerializeField] private float _rotationSpeed = 6f; // Adjust in inspector
-    [SerializeField] private float _offsetDirection = 0f; // Adjust in inspector. Offsets sprite
+    [SerializeField] private float _offsetDirection = 0f; // Adjust in inspector. Offsets sprite mouse direction
+    [SerializeField] private bool _flipToDefault = false;
 
-    [SerializeField] private float _downAngle = -40f; // Minimum rotation angle
-    [SerializeField] private float _upAngle = 40f;  // Maximum rotation angle
-
-    [SerializeField] private Transform parentObject;
-    private bool _isFlipped = false;
-
+    private void Start()
+    {
+        parentObject = FindTopParent(transform);
+    }
 
     void Update()
     {
-        Mousedirection();
+        // Call the RotationManager's UpdateRotation method
+        rotationManager.UpdateRotation(parentObject, pivot, _upAngle, _downAngle, _offsetDirection, _rotationSpeed, _flipToDefault);
+
     }
 
-    private void Mousedirection()
+    Transform FindTopParent(Transform currentTransform)
     {
-        // Get the mouse position in world space
-        mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 direction = mousePos - pivot.position;
-
-        // Determine whether to flip
-        if (mousePos.x < pivot.position.x && !_isFlipped)
+        while (currentTransform.parent != null)
         {
-            parentObject.localScale = new Vector3(-1, 1, 1);
-            _isFlipped = true;
+            currentTransform = currentTransform.parent;
         }
-        else if (mousePos.x > pivot.position.x && _isFlipped)
-        {
-            parentObject.localScale = new Vector3(1, 1, 1);
-            _isFlipped = false;
-        }
-
-        // Adjust direction based on flipping
-        if (_isFlipped)
-        {
-            direction.y = -direction.y; 
-            direction.x = -direction.x;
-        }
-
-        // Flip angle constraints when flipped
-        float minAngle = _isFlipped ? -_upAngle : _downAngle;
-        float maxAngle = _isFlipped ? -_downAngle : _upAngle;
-
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + _offsetDirection;
-        
-        // Clamp within the flipped range
-        float clampedAngle = Mathf.Clamp(angle, minAngle, maxAngle);
-
-        Quaternion targetRotation = Quaternion.Euler(0, 0, clampedAngle);
-
-        // Smoothly rotate the pivot object
-        pivot.rotation = Quaternion.Slerp(pivot.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
-
+        return currentTransform;
     }
 }
