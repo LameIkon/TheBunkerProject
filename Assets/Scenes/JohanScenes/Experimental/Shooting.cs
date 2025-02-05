@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooting : MousePosition
+public class Shooting : MonoBehaviour
 {
     [Header("Gun properties")]
     [SerializeField] private bool _canFire;
@@ -14,6 +14,7 @@ public class Shooting : MousePosition
     [Header("References")]
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private Transform _bulletTransform;
+    private Camera _camera;
 
 
     private void Start()

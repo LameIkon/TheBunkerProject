@@ -1635,7 +1635,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4121003862576611871, guid: a3dc069068f695e4fb245e615cac0151, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4871644618705263213, guid: a3dc069068f695e4fb245e615cac0151, type: 3}
       propertyPath: rotationManager
