@@ -7,7 +7,7 @@ public class RotateObject : MonoBehaviour
     [Header("References")]
     private Transform parentObject; // what to rotate
     [SerializeField] private Transform pivot; // What to rotate around
-    [SerializeField] private RotationManager rotationManager; // Rotation Manager
+    private RotationManager rotationManager; // Rotation Manager
 
     [Header("Rotation Settings")]
     [SerializeField] private float _downAngle = -40f;   // Minimum rotation angle
@@ -19,13 +19,13 @@ public class RotateObject : MonoBehaviour
     private void Start()
     {
         parentObject = FindTopParent(transform);
+        rotationManager = RotationManager.Instance;
     }
 
     void Update()
     {
         // Call the RotationManager's UpdateRotation method
         rotationManager.UpdateRotation(parentObject, pivot, _upAngle, _downAngle, _offsetDirection, _rotationSpeed, _flipToDefault);
-
     }
 
     Transform FindTopParent(Transform currentTransform)

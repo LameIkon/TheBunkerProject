@@ -8,7 +8,19 @@ public class RotationManager : MonoBehaviour
     private Coroutine angleResetCoroutine;
     private float previousAngle;
 
+    public static RotationManager Instance { get; private set; }
 
+    private void Awake()
+    {
+        if (Instance != null && Instance != this) // if instance already exists destroy
+        {
+            Destroy(this);
+        }
+        else // Else make this the singleton
+        {
+            Instance = this;
+        }
+    }
     public void UpdateRotation(Transform parentObject, Transform pivot, float upAngle, float downAngle, float offsetDirection, float rotationSpeed, bool flipDefault)
     {
         // Get the mouse position in world space
@@ -16,12 +28,12 @@ public class RotationManager : MonoBehaviour
         Vector3 direction = mousePos - pivot.position;
 
         // Determine whether to flip
-        if (mousePos.x < pivot.position.x && !_isFlipped)
+        if (mousePos.x < pivot.position.x && !_isFlipped) // Look left
         {
             parentObject.localScale = new Vector3(-1, 1, 1);
             _isFlipped = true;
         }
-        else if (mousePos.x > pivot.position.x && _isFlipped)
+        else if (mousePos.x > pivot.position.x && _isFlipped) // Look right
         {
             parentObject.localScale = new Vector3(1, 1, 1);
             _isFlipped = false;
