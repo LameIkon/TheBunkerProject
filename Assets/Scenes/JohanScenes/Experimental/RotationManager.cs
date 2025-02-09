@@ -38,23 +38,29 @@ public class RotationManager : MonoBehaviour
             parentObject.localScale = new Vector3(1, 1, 1);
             _isFlipped = false;
         }
-       
-
-        // Adjust direction based on flipping
-        if (_isFlipped)
-        {
-            direction.y = -direction.y; 
-            direction.x = -direction.x;
-        }
 
         // Flip angle constraints when flipped
         float minAngle = _isFlipped ? -upAngle : downAngle;
         float maxAngle = _isFlipped ? -downAngle : upAngle;
 
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + offsetDirection;
-        
+        // If flipped we use minus else it will be a plus
+        float angle = Mathf.Atan2(
+            _isFlipped ? -direction.y : direction.y,
+            _isFlipped ? -direction.x : direction.x
+        ) * Mathf.Rad2Deg + offsetDirection;
+
         float zAngle = pivot.localEulerAngles.z;
-        if(flipDefault)
+
+        // Clamp within the flipped range
+        float clampedAngle = Mathf.Clamp(angle, minAngle, maxAngle);
+
+        Quaternion targetRotation = Quaternion.Euler(0, 0, clampedAngle);
+
+        // Smoothly rotate the pivot object
+        pivot.rotation = Quaternion.Slerp(pivot.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        // experimental code below. Currently does nothing
+        if (flipDefault)
         {
             if (zAngle > 160f)
             {
@@ -64,20 +70,14 @@ public class RotationManager : MonoBehaviour
             {
                 if (angleResetCoroutine == null)
                 {
-                    angleResetCoroutine = StartCoroutine(ResetAngleCoroutine(angle, OnResetComplete));
+                    angleResetCoroutine = StartCoroutine(ResetAngleCoroutine(angle,OnResetComplete));
                 }
             }
         }
 
 
 
-            // Clamp within the flipped range
-            float clampedAngle = Mathf.Clamp(angle, minAngle, maxAngle);
-
-            Quaternion targetRotation = Quaternion.Euler(0, 0, clampedAngle);
-
-            // Smoothly rotate the pivot object
-            pivot.rotation = Quaternion.Slerp(pivot.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+           
         
 
     }

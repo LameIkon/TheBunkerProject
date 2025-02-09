@@ -5,16 +5,17 @@ using UnityEngine;
 public class RotateObject : MonoBehaviour
 {
     [Header("References")]
-    private Transform parentObject; // what to rotate
-    [SerializeField] private Transform pivot; // What to rotate around
+    private Transform parentObject; // To know what to flip
+    [SerializeField] private Transform _rotationPivot; // What to rotate around
     private RotationManager rotationManager; // Rotation Manager
+    [SerializeField, TextArea(1,2)] private string _description; // Write a comment 
 
     [Header("Rotation Settings")]
     [SerializeField] private float _downAngle = -40f;   // Minimum rotation angle
     [SerializeField] private float _upAngle = 40f;      // Maximum rotation angle
     [SerializeField] private float _rotationSpeed = 6f; // Adjust in inspector
     [SerializeField] private float _offsetDirection = 0f; // Adjust in inspector. Offsets sprite mouse direction
-    [SerializeField] private bool _flipToDefault = false;
+    [SerializeField] private bool _flipToDefault = false; // Experimental code atm
 
     private void Start()
     {
@@ -25,7 +26,7 @@ public class RotateObject : MonoBehaviour
     void Update()
     {
         // Call the RotationManager's UpdateRotation method
-        rotationManager.UpdateRotation(parentObject, pivot, _upAngle, _downAngle, _offsetDirection, _rotationSpeed, _flipToDefault);
+        rotationManager.UpdateRotation(parentObject, _rotationPivot, _upAngle, _downAngle, _offsetDirection, _rotationSpeed, _flipToDefault);
     }
 
     Transform FindTopParent(Transform currentTransform)
