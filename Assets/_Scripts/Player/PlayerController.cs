@@ -62,13 +62,13 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Walking");
             _movementX = context.ReadValue<Vector2>().x; // read its moving
             Flip();
-            _animator.Play("Walking");
+            _animator.Play("WalkingUnarmed");
         }
         else if (context.canceled)
         {
             Debug.Log("Idle");
             _movementX = context.ReadValue<Vector2>().x; // read its 0
-            _animator.Play("Idle");
+            _animator.Play("IdleUnarmed");
         }
     }
 
