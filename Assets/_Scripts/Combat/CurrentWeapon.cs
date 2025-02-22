@@ -7,6 +7,7 @@ using UnityEngine.Rendering;
 
 public class CurrentWeapon : MonoBehaviour
 {
+    public static bool _isUnarmed = false;
     public static bool _IsKnife = false;
     public static bool _IsPistol = false;
     public static bool _IsRifle = false;

@@ -33,6 +33,9 @@ public class PlayerController : MonoBehaviour
      private float _ladderCenteringSpeed = 5f;
      private bool _isCenteringLadder;
 
+    [Header("State")]
+    public string actionState = "Walking"; // What type of movement player is doing - changes depending what player do of movement
+    public string weaponType = "Unarmed"; // What weapon player is holding - changes depending what player is holding
 
 
     // Update is called once per frame
@@ -57,18 +60,13 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        _movementX = context.ReadValue<Vector2>().x;
+        Flip();
+
+        if (context.performed || context.canceled)
         {
-            Debug.Log("Walking");
-            _movementX = context.ReadValue<Vector2>().x; // read its moving
-            Flip();
-            _animator.Play("WalkingUnarmed");
-        }
-        else if (context.canceled)
-        {
-            Debug.Log("Idle");
-            _movementX = context.ReadValue<Vector2>().x; // read its 0
-            _animator.Play("IdleUnarmed");
+            actionState = context.performed ? "Walking" : "Idle";
+            AnimationHandler($"{actionState}{weaponType}");
         }
     }
 
@@ -199,6 +197,29 @@ public class PlayerController : MonoBehaviour
         {
             _isFacingRight = !_isFacingRight;
             transform.Rotate(0f,180f,0f);
+        }
+    }
+
+    private void AnimationHandler(string state)
+    {
+        Debug.Log(state);
+        switch (state)
+        {
+            case "WalkingHoldingRifle":
+                _animator.Play("WalkingHoldingRifle");
+                break;
+            case "WalkingUnarmed":
+                _animator.Play("WalkingUnarmed");
+                break;
+            case "IdleHoldingRifle":
+                _animator.Play("IdleHoldingRifle");
+                break;
+            case "IdleUnarmed":
+                _animator.Play("IdleUnarmed");
+                break;
+            default:
+                _animator.Play("IdleUnarmed");
+                break;
         }
     }
 
