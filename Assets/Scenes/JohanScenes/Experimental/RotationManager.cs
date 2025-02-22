@@ -29,16 +29,23 @@ public class RotationManager : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 direction = mousePos - pivot.position;
 
-        // Determine whether to flip
-        if (mousePos.x < pivot.position.x && !_isFlipped) // Look left
+        float deadZone = 0.1f; // Prevent flipping near the center
+
+        
+
+        if (Mathf.Abs(mousePos.x - pivot.position.x) > deadZone) // only flip when mouse isnt too close to center
         {
-            parentObject.localScale = new Vector3(-1, 1, 1);
-            _isFlipped = true;
-        }
-        else if (mousePos.x > pivot.position.x && _isFlipped) // Look right
-        {
-            parentObject.localScale = new Vector3(1, 1, 1);
-            _isFlipped = false;
+            // Determine whether to flip
+            if (mousePos.x < pivot.position.x) // Look left
+            {
+                parentObject.localScale = new Vector3(-1, 1, 1);
+                _isFlipped = true;
+            }
+            else if (mousePos.x > pivot.position.x) // Look right
+            {
+                parentObject.localScale = new Vector3(1, 1, 1);
+                _isFlipped = false;
+            }
         }
 
         // Flip angle constraints when flipped
