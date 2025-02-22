@@ -8,7 +8,7 @@ public class ChangeToKnife : CurrentWeapon
     public void ChangeWeapon(InputAction.CallbackContext context)
     {
         if (context.performed)
-        {
+        {         
             _IsKnife = true;
             _IsPistol = false;
             _IsRifle = false;

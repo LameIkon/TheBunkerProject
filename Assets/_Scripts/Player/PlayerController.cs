@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerController : MonoBehaviour
 {
@@ -34,14 +35,25 @@ public class PlayerController : MonoBehaviour
      private bool _isCenteringLadder;
 
     [Header("State")]
-    public string actionState = "Walking"; // What type of movement player is doing - changes depending what player do of movement
+    public string actionState = "Idle"; // What type of movement player is doing - changes depending what player do of movement
     public string weaponType = "Unarmed"; // What weapon player is holding - changes depending what player is holding
+
+
+    private void OnEnable()
+    {
+        CurrentWeapon.OnWeaponChanged += UpdateWeaponType;
+    }
+
+    private void OnDisable()
+    {
+        CurrentWeapon.OnWeaponChanged -= UpdateWeaponType;
+    }
 
 
     // Update is called once per frame
     void Update()
     {
-         Movement();       
+        Movement();
     }
 
     public void Movement()
@@ -61,7 +73,7 @@ public class PlayerController : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         _movementX = context.ReadValue<Vector2>().x;
-        Flip();
+        Flip(context);
 
         if (context.performed || context.canceled)
         {
@@ -191,12 +203,22 @@ public class PlayerController : MonoBehaviour
 
   
 
-    private void Flip()
-    {     
+    private void Flip(CallbackContext context)
+    {
+        //_movementX = context.ReadValue<Vector2>().x; // Determind what direction player is looking
         if (_isFacingRight && _movementX < 0f || !_isFacingRight && _movementX > 0f)
         {
             _isFacingRight = !_isFacingRight;
             transform.Rotate(0f,180f,0f);
+        }
+    }
+
+    private void UpdateWeaponType()
+    {
+        if (CurrentWeapon._currentWeapon != null)
+        {
+            weaponType = CurrentWeapon._currentWeapon._weapon._WeaponCategory.ToString(); // Convert enum to string
+            AnimationHandler($"{actionState}{weaponType}");
         }
     }
 
@@ -205,13 +227,13 @@ public class PlayerController : MonoBehaviour
         Debug.Log(state);
         switch (state)
         {
-            case "WalkingHoldingRifle":
+            case "WalkingRifle":
                 _animator.Play("WalkingHoldingRifle");
                 break;
             case "WalkingUnarmed":
                 _animator.Play("WalkingUnarmed");
                 break;
-            case "IdleHoldingRifle":
+            case "IdleRifle":
                 _animator.Play("IdleHoldingRifle");
                 break;
             case "IdleUnarmed":

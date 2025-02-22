@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ using UnityEngine.Rendering;
 
 public class CurrentWeapon : MonoBehaviour
 {
+    public static event Action OnWeaponChanged; // Event 
+
     public static bool _isUnarmed = false;
     public static bool _IsKnife = false;
     public static bool _IsPistol = false;
@@ -22,8 +25,7 @@ public class CurrentWeapon : MonoBehaviour
     private void Update()
     {
         WeaponSelection();
-
-        if(_isFiring)
+        if (_isFiring)
         {
             UseWeapon(_currentWeapon);
         }
@@ -49,7 +51,7 @@ public class CurrentWeapon : MonoBehaviour
        
     }   
 
-    private void WeaponSelection()
+    public void WeaponSelection()
     {        
         for (int i = 0 ; i < _Weapons.Length; i++)
         {
@@ -72,7 +74,9 @@ public class CurrentWeapon : MonoBehaviour
             {
                 _currentWeapon = _Weapons[i];                
             }            
-        }        
+        }
+        OnWeaponChanged.Invoke(); // For other scripts to trigger. For example players animation, that needs to know what weapon to hold
+        Debug.Log("event invoked");
     }    
 
 }
