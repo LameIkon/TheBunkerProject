@@ -76,7 +76,6 @@ public class CurrentWeapon : MonoBehaviour
             }            
         }
         OnWeaponChanged.Invoke(); // For other scripts to trigger. For example players animation, that needs to know what weapon to hold
-        Debug.Log("event invoked");
     }    
 
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class RotateObject : MonoBehaviour
 {
     [Header("References")]
-    private Transform parentObject; // To know what to flip
+    [SerializeField] private Transform parentObject; // To know what to flip
     [SerializeField] private Transform _rotationPivot; // What to rotate around
     private RotationManager rotationManager; // Rotation Manager
     [SerializeField, TextArea(1,2)] private string _description; // Write a comment 
@@ -19,22 +19,16 @@ public class RotateObject : MonoBehaviour
 
     private void Start()
     {
-        parentObject = FindTopParent(transform);
         rotationManager = RotationManager.Instance;
     }
 
     void Update()
     {
         // Call the RotationManager's UpdateRotation method
-        rotationManager.UpdateRotation(parentObject, _rotationPivot, _upAngle, _downAngle, _offsetDirection, _rotationSpeed, _flipToDefault);
-    }
-
-    Transform FindTopParent(Transform currentTransform)
-    {
-        while (currentTransform.parent != null)
+        if (RotationManager.CanRotate)
         {
-            currentTransform = currentTransform.parent;
+            rotationManager.UpdateRotation(parentObject, _rotationPivot, _upAngle, _downAngle, _offsetDirection, _rotationSpeed, _flipToDefault);
+
         }
-        return currentTransform;
     }
 }

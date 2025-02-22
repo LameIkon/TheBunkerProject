@@ -7,6 +7,7 @@ public class RotationManager : MonoBehaviour
     private bool _isFlipped = false;
     private Coroutine angleResetCoroutine;
     private float previousAngle;
+    public static bool CanRotate;
 
     public static RotationManager Instance { get; private set; }
 
@@ -21,6 +22,7 @@ public class RotationManager : MonoBehaviour
             Instance = this;
         }
     }
+
     public void UpdateRotation(Transform parentObject, Transform pivot, float upAngle, float downAngle, float offsetDirection, float rotationSpeed, bool flipDefault)
     {
         // Get the mouse position in world space
@@ -58,6 +60,8 @@ public class RotationManager : MonoBehaviour
 
         // Smoothly rotate the pivot object
         pivot.rotation = Quaternion.Slerp(pivot.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+
 
         // experimental code below. Currently does nothing
         if (flipDefault)

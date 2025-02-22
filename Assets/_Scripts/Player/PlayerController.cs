@@ -72,14 +72,26 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
+        if (weaponType != "Unarmed") // Can only flip if not armed. RotationManager will handle weapons
+        { 
+            RotationManager.CanRotate = true;
+        }
+        else
+        {
+            Flip(context);
+            RotationManager.CanRotate = false;
+        }
+
         _movementX = context.ReadValue<Vector2>().x;
-        Flip(context);
+        
 
         if (context.performed || context.canceled)
         {
             actionState = context.performed ? "Walking" : "Idle";
             AnimationHandler($"{actionState}{weaponType}");
         }
+        
+
     }
 
 
@@ -205,26 +217,43 @@ public class PlayerController : MonoBehaviour
 
     private void Flip(CallbackContext context)
     {
-        //_movementX = context.ReadValue<Vector2>().x; // Determind what direction player is looking
-        if (_isFacingRight && _movementX < 0f || !_isFacingRight && _movementX > 0f)
+        if (_movementX < 0f)
         {
-            _isFacingRight = !_isFacingRight;
-            transform.Rotate(0f,180f,0f);
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+        else if (_movementX > 0f)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
         }
     }
 
     private void UpdateWeaponType()
     {
+
         if (CurrentWeapon._currentWeapon != null)
         {
+            if (weaponType != "Unarmed") // Can only flip if not armed. RotationManager will handle weapons
+            {
+                RotationManager.CanRotate = true;
+            }
+            else
+            {
+                RotationManager.CanRotate = false;
+            }
+
             weaponType = CurrentWeapon._currentWeapon._weapon._WeaponCategory.ToString(); // Convert enum to string
+
+            if ("Knife" == weaponType) // REMOVE LATER. only to show animations work. reason is we dont have a unarmed state at the moment
+            {
+                weaponType = "Unarmed";
+            }
+
             AnimationHandler($"{actionState}{weaponType}");
         }
     }
 
     private void AnimationHandler(string state)
     {
-        Debug.Log(state);
         switch (state)
         {
             case "WalkingRifle":
