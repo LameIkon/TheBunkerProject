@@ -16,8 +16,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _currentMoveSpeed;
     [SerializeField] private float _walkingSpeed;
     [SerializeField] private float _runningSpeed;
+    [SerializeField] private float _crouchingSpeed;
     [SerializeField] private float _backwardsMoveSpeed;
     private bool _isRunning;
+    private bool _isCrouching;
     public float _movementX;
     public float _movementY;
     private Vector2 _currentMovementInput; // Store the movement input. Used for the running
@@ -96,6 +98,12 @@ public class PlayerController : MonoBehaviour
         UpdateMovement();
     }
 
+    public void Crouching(InputAction.CallbackContext context)
+    {
+        _isCrouching = context.performed;
+        UpdateMovement();
+    }
+
     private void UpdateMovement()
     {
         bool isFacingLeft = Camera.main.ScreenToWorldPoint(Input.mousePosition).x < transform.position.x;
@@ -111,6 +119,11 @@ public class PlayerController : MonoBehaviour
         {
             _currentMoveSpeed = _runningSpeed;
             actionState = _movementX != 0 ? "Running" : "Idle";
+        }
+        else if (_isCrouching)
+        {
+            _currentMoveSpeed = _crouchingSpeed;
+            actionState = _movementX != 0 ? "Crouching" : "Idle";
         }
         else
         {
@@ -302,6 +315,11 @@ public class PlayerController : MonoBehaviour
                 break;
             case "RunningRifle":
                 _animator.Play("RunningRifle");
+                break;
+
+            // Crouching
+            case "CrouchingUnarmed":
+                _animator.Play("CrouchingUnarmed");
                 break;
 
             // Idle

@@ -562,6 +562,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: a5115edb-2beb-4f98-9e5a-48f612b1ad80
     m_ActionName: Player/ChangeToShotgun[/Keyboard/4]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2364349366641915018}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Sprint
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d82d62a3-d704-4863-998b-d8e297e95c6e
+    m_ActionName: Player/Sprint[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2364349366641915018}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Crouching
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1472c45f-6dc0-4d7d-b2f3-61d93619b413
+    m_ActionName: Player/Crouch[/Keyboard/leftCtrl]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -583,9 +615,10 @@ MonoBehaviour:
   _animator: {fileID: 6200498995360149276}
   _playerInput: {fileID: 7853012328190308139}
   _currentMoveSpeed: 0
-  _normalMoveSpeed: 5
+  _walkingSpeed: 5
+  _runningSpeed: 8
+  _crouchingSpeed: 2
   _backwardsMoveSpeed: 2.5
-  _RunningSpeed: 0
   _movementX: 0
   _movementY: 0
   _groundCheckPos: {fileID: 4171289171185101090}
