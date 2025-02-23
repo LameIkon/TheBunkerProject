@@ -134,6 +134,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""d82d62a3-d704-4863-998b-d8e297e95c6e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -442,6 +451,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""ChangeToShotgun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c226781-a77e-4f68-8527-892dc60c9e10"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1069,6 +1089,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_ChangeToPistol = m_Player.FindAction("ChangeToPistol", throwIfNotFound: true);
         m_Player_ChangeToRifle = m_Player.FindAction("ChangeToRifle", throwIfNotFound: true);
         m_Player_ChangeToShotgun = m_Player.FindAction("ChangeToShotgun", throwIfNotFound: true);
+        m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1157,6 +1178,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ChangeToPistol;
     private readonly InputAction m_Player_ChangeToRifle;
     private readonly InputAction m_Player_ChangeToShotgun;
+    private readonly InputAction m_Player_Sprint;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -1173,6 +1195,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @ChangeToPistol => m_Wrapper.m_Player_ChangeToPistol;
         public InputAction @ChangeToRifle => m_Wrapper.m_Player_ChangeToRifle;
         public InputAction @ChangeToShotgun => m_Wrapper.m_Player_ChangeToShotgun;
+        public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1218,6 +1241,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ChangeToShotgun.started += instance.OnChangeToShotgun;
             @ChangeToShotgun.performed += instance.OnChangeToShotgun;
             @ChangeToShotgun.canceled += instance.OnChangeToShotgun;
+            @Sprint.started += instance.OnSprint;
+            @Sprint.performed += instance.OnSprint;
+            @Sprint.canceled += instance.OnSprint;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1258,6 +1284,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ChangeToShotgun.started -= instance.OnChangeToShotgun;
             @ChangeToShotgun.performed -= instance.OnChangeToShotgun;
             @ChangeToShotgun.canceled -= instance.OnChangeToShotgun;
+            @Sprint.started -= instance.OnSprint;
+            @Sprint.performed -= instance.OnSprint;
+            @Sprint.canceled -= instance.OnSprint;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1498,6 +1527,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnChangeToPistol(InputAction.CallbackContext context);
         void OnChangeToRifle(InputAction.CallbackContext context);
         void OnChangeToShotgun(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

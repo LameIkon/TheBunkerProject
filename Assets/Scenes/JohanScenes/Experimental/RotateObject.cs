@@ -28,7 +28,6 @@ public class RotateObject : MonoBehaviour
         if (RotationManager.CanRotate)
         {
             rotationManager.UpdateRotation(parentObject, _rotationPivot, _upAngle, _downAngle, _offsetDirection, _rotationSpeed, _flipToDefault);
-
         }
     }
 }

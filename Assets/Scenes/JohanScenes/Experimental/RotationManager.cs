@@ -8,6 +8,7 @@ public class RotationManager : MonoBehaviour
     private Coroutine angleResetCoroutine;
     private float previousAngle;
     public static bool CanRotate;
+    public static event Action OnFlipped;
 
     public static RotationManager Instance { get; private set; }
 
@@ -35,17 +36,15 @@ public class RotationManager : MonoBehaviour
 
         if (Mathf.Abs(mousePos.x - pivot.position.x) > deadZone) // only flip when mouse isnt too close to center
         {
-            // Determine whether to flip
-            if (mousePos.x < pivot.position.x) // Look left
+            bool newFlipState = mousePos.x < pivot.position.x; // true if facing left, false if facing right
+
+            if (newFlipState != _isFlipped) // Only invoke event if flip state changes
             {
-                parentObject.localScale = new Vector3(-1, 1, 1);
-                _isFlipped = true;
+                _isFlipped = newFlipState;
+                OnFlipped.Invoke(); // Notify all listeners
             }
-            else if (mousePos.x > pivot.position.x) // Look right
-            {
-                parentObject.localScale = new Vector3(1, 1, 1);
-                _isFlipped = false;
-            }
+
+            parentObject.localScale = new Vector3(_isFlipped ? -1 : 1, 1, 1);
         }
 
         // Flip angle constraints when flipped
@@ -84,13 +83,7 @@ public class RotationManager : MonoBehaviour
                     angleResetCoroutine = StartCoroutine(ResetAngleCoroutine(angle,OnResetComplete));
                 }
             }
-        }
-
-
-
-           
-        
-
+        }    
     }
 
     private IEnumerator ResetAngleCoroutine(float angel, Action<float> OnResetComplete)
