@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour
         else if (_isCrouching)
         {
             _currentMoveSpeed = _crouchingSpeed;
-            actionState = _movementX != 0 ? "Crouching" : "Idle";
+            actionState = _movementX != 0 ? "CrouchingWalking" : "CrouchingIdle";
         }
         else
         {
@@ -318,8 +318,11 @@ public class PlayerController : MonoBehaviour
                 break;
 
             // Crouching
-            case "CrouchingUnarmed":
-                _animator.Play("CrouchingUnarmed");
+            case "CrouchingIdleUnarmed":
+                _animator.Play("CrouchingIdleUnarmed");
+                break;
+            case "CrouchingWalkingUnarmed":
+                _animator.Play("CrouchingWalkingUnarmed");
                 break;
 
             // Idle
