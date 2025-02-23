@@ -595,6 +595,8 @@ MonoBehaviour:
   _currentDoor: {fileID: 0}
   _currentElevator: {fileID: 0}
   _currentLadder: {fileID: 0}
+  actionState: Idle
+  weaponType: Unarmed
 --- !u!114 &2344034754827274859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -970,7 +972,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 535923547578525370, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 535923547578525370, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1012,17 +1014,45 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1245232598518952001, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99736494
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245232598518952001, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.07254895
+      objectReference: {fileID: 0}
     - target: {fileID: 2117657193579470211, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2117657193579470211, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
+      propertyPath: parentObject
+      value: 
+      objectReference: {fileID: 1746590337889344681}
     - target: {fileID: 2671019070931256274, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2671019070931256274, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
+      propertyPath: parentObject
+      value: 
+      objectReference: {fileID: 1746590337889344681}
     - target: {fileID: 2991440919951187465, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
       propertyPath: m_Name
-      value: Human_holding_riffle
+      value: Sprites
+      objectReference: {fileID: 0}
+    - target: {fileID: 3222090056232039283, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9994773
+      objectReference: {fileID: 0}
+    - target: {fileID: 3222090056232039283, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.032329928
+      objectReference: {fileID: 0}
+    - target: {fileID: 7428937356621350993, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.00915483
       objectReference: {fileID: 0}
     - target: {fileID: 7880213341273552435, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
       propertyPath: m_Enabled
@@ -1033,13 +1063,33 @@ PrefabInstance:
     - {fileID: 7880213341273552435, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2991440919951187465, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6129199513433666296}
   m_SourcePrefab: {fileID: 100100000, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
 --- !u!95 &6200498995360149276 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2874088770706994844, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
   m_PrefabInstance: {fileID: 8209578878733539712}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6372017142580397961 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2991440919951187465, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
+  m_PrefabInstance: {fileID: 8209578878733539712}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6129199513433666296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6372017142580397961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fd38d12f0064d14f866009aba2d9b95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8539304138802544442 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 535923547578525370, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}

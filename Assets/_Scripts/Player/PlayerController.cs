@@ -13,7 +13,9 @@ public class PlayerController : MonoBehaviour
     public PlayerInput PlayerInput => _playerInput;
 
     [Header("Movement")]
-    [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _currentMoveSpeed;
+    [SerializeField] private float _normalMoveSpeed;
+    [SerializeField] private float _backwardsMoveSpeed;
     public float _movementX;
     public float _movementY;
 
@@ -49,6 +51,11 @@ public class PlayerController : MonoBehaviour
         CurrentWeapon.OnWeaponChanged -= UpdateWeaponType;
     }
 
+    private void Start()
+    {
+        _currentMoveSpeed = _normalMoveSpeed; // Assign movement speed
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -66,12 +73,23 @@ public class PlayerController : MonoBehaviour
         }
         else // Walk
         {
-            _rb.velocity = new Vector2(_movementX * _moveSpeed, _rb.velocity.y);
+            _rb.velocity = new Vector2(_movementX * _currentMoveSpeed, _rb.velocity.y);
         }
     }
 
     public void Move(InputAction.CallbackContext context)
     {
+        _movementX = context.ReadValue<Vector2>().x;
+
+
+        // Get the mouse position and determine which direction the player is facing
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        bool isFacingLeft = mousePos.x < transform.position.x; 
+        bool isFacingRight = mousePos.x > transform.position.x;
+
+        // Check if the player is moving in the opposite direction
+        bool isMovingOpposite = (isFacingLeft && _movementX > 0) || (isFacingRight && _movementX < 0);
+
         if (weaponType != "Unarmed") // Can only flip if not armed. RotationManager will handle weapons
         { 
             RotationManager.CanRotate = true;
@@ -80,14 +98,22 @@ public class PlayerController : MonoBehaviour
         {
             Flip(context);
             RotationManager.CanRotate = false;
-        }
-
-        _movementX = context.ReadValue<Vector2>().x;
-        
+        }  
 
         if (context.performed || context.canceled)
         {
-            actionState = context.performed ? "Walking" : "Idle";
+            if (weaponType != "Unarmed" && isMovingOpposite) // Figure out if should go backwards depending on where you are aiming
+            {
+                Debug.Log("going backwards");
+                _currentMoveSpeed = _backwardsMoveSpeed;
+                actionState = context.performed ? "WalkingBackwards" : "Idle";
+            }
+            else
+            {
+                _currentMoveSpeed = _normalMoveSpeed;
+                actionState = context.performed ? "Walking" : "Idle";
+            }
+
             AnimationHandler($"{actionState}{weaponType}");
         }
         
@@ -258,6 +284,9 @@ public class PlayerController : MonoBehaviour
         {
             case "WalkingRifle":
                 _animator.Play("WalkingHoldingRifle");
+                break;
+            case "WalkingBackwardsRifle":
+                _animator.Play("WalkingBackwardsRifle");
                 break;
             case "WalkingUnarmed":
                 _animator.Play("WalkingUnarmed");
