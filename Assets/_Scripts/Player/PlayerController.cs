@@ -86,11 +86,9 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        float newMovementX = context.ReadValue<Vector2>().x;
-        if (newMovementX == 0 && context.control.IsPressed()) return; // Ignore if value is = 0 while another key is still being held down. Causes animation bugs if not implemented
-        _movementX = newMovementX;
+        _movementX = context.ReadValue<Vector2>().x;
         Flip();
-        UpdateMovement();
+        Invoke(nameof(UpdateMovement), 0f); // Invoke next frame. Sometimes causes rare animation bug if not implemented
     }
 
 
