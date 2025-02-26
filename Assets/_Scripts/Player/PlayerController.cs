@@ -86,7 +86,9 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        _movementX = context.ReadValue<Vector2>().x;
+        float newMovementX = context.ReadValue<Vector2>().x;
+        if (newMovementX == 0 && context.control.IsPressed()) return; // Ignore if value is = 0 while another key is still being held down. Causes animation bugs if not implemented
+        _movementX = newMovementX;
         Flip();
         UpdateMovement();
     }
