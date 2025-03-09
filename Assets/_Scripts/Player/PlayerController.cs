@@ -6,8 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour, IMovable
 {
     [SerializeField] private Rigidbody2D _rb;
-    [SerializeField] private Animator _animator;
-    private Dictionary<string, string> _animationStates; // This will hold all the animations
+    private PlayerAnimationController _animationController;
     private bool _isFacingRight = true;
 
     [SerializeField] private PlayerInput _playerInput;
@@ -56,8 +55,8 @@ public class PlayerController : MonoBehaviour, IMovable
 
     private void Start()
     {
+        _animationController = GetComponent<PlayerAnimationController>();
         _currentMoveSpeed = _movementConfig.WalkingSpeed; // Assign movement speed
-        populateAnimationStates(); // Check what type of animationStates you can use
     }
 
 
@@ -334,32 +333,9 @@ public class PlayerController : MonoBehaviour, IMovable
         }
     }
 
-    private void populateAnimationStates()
-    {
-        _animationStates = new Dictionary<string, string> // Fill it
-        {
-            // Walking
-            { "WalkingRifle", "WalkingHoldingRifle" },
-            { "WalkingBackwardsRifle", "WalkingBackwardsRifle" },
-            { "WalkingUnarmed", "WalkingUnarmed" },
-
-            // Running
-            { "RunningUnarmed", "RunningUnarmed" },
-            { "RunningRifle", "RunningRifle" },
-
-            // Crouching
-            { "CrouchingIdleUnarmed", "CrouchingIdleUnarmed" },
-            { "CrouchingWalkingUnarmed", "CrouchingWalkingUnarmed" },
-
-            // Idle
-            { "IdleRifle", "IdleHoldingRifle" },
-            { "IdleUnarmed", "IdleUnarmed" }
-        };
-    }
-
     private void AnimationHandler(string state)
     {
-        _animator.Play(_animationStates.ContainsKey(state) ? _animationStates[state] : "IdleUnarmed");
+        _animationController.PlayAnimation(state);
     }
 
     private void OnDrawGizmosSelected()
