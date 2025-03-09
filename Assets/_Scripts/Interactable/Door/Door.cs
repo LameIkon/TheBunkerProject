@@ -6,10 +6,10 @@ public class Door : Highlight
 {
     [Header ("Door Components")]
     public Animator _Animator;
-    public bool _IsOpen;
-    [SerializeField] private bool _allowAutomaticClose;
-    private float _closingTimer = 2f;
+    public  bool _IsOpen;
+    public bool _allowAutomaticClose;
     public Coroutine _AutomaticDoorCloseCoroutine;
+    private float _closingTimer = 2f;
 
 
     public IEnumerator DoorTransition()
