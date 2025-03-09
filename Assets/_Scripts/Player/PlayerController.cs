@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour, IMovable
 
     public void Move(float movementX, float movementY)
     {
+        Debug.Log("Move");
         _movementX = movementX;
         _movementY = movementY;
         Flip();
@@ -109,6 +110,7 @@ public class PlayerController : MonoBehaviour, IMovable
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        Debug.Log("OnMove");
         Vector2 input = context.ReadValue<Vector2>();
         Move(input.x, input.y);
 
