@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +7,7 @@ public class PlayerController : MonoBehaviour, IMovable
 {
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private Animator _animator;
+    private Dictionary<string, string> _animationStates; // This will hold all the animations
     private bool _isFacingRight = true;
 
     [SerializeField] private PlayerInput _playerInput;
@@ -55,6 +57,7 @@ public class PlayerController : MonoBehaviour, IMovable
     private void Start()
     {
         _currentMoveSpeed = _movementConfig.WalkingSpeed; // Assign movement speed
+        populateAnimationStates(); // Check what type of animationStates you can use
     }
 
 
@@ -127,7 +130,7 @@ public class PlayerController : MonoBehaviour, IMovable
 
     public void OnClimb(InputAction.CallbackContext context)
     {
-        UseLatter(context);
+        UseLadder(context);
         if (context.performed)
             Climb(true);
         else if (context.canceled)
@@ -168,7 +171,7 @@ public class PlayerController : MonoBehaviour, IMovable
 
     #endregion
     #region Ladder
-    private void UseLatter(InputAction.CallbackContext context)
+    private void UseLadder(InputAction.CallbackContext context)
     {
         _movementY = context.ReadValue<Vector2>().y;
 
@@ -319,52 +322,36 @@ public class PlayerController : MonoBehaviour, IMovable
                 weaponType = "Unarmed";
             }
 
-            AnimationHandler($"{actionState}{weaponType}");
+            AnimationHandler($"{actionState}{weaponType}"); // Combine the 2 strings together. The string name needs to be specific to the named animation
         }
+    }
+
+    private void populateAnimationStates()
+    {
+        _animationStates = new Dictionary<string, string> // Fill it
+        {
+            // Walking
+            { "WalkingRifle", "WalkingHoldingRifle" },
+            { "WalkingBackwardsRifle", "WalkingBackwardsRifle" },
+            { "WalkingUnarmed", "WalkingUnarmed" },
+
+            // Running
+            { "RunningUnarmed", "RunningUnarmed" },
+            { "RunningRifle", "RunningRifle" },
+
+            // Crouching
+            { "CrouchingIdleUnarmed", "CrouchingIdleUnarmed" },
+            { "CrouchingWalkingUnarmed", "CrouchingWalkingUnarmed" },
+
+            // Idle
+            { "IdleRifle", "IdleHoldingRifle" },
+            { "IdleUnarmed", "IdleUnarmed" }
+        };
     }
 
     private void AnimationHandler(string state)
     {
-        switch (state)
-        {
-            // Walking
-            case "WalkingRifle":
-                _animator.Play("WalkingHoldingRifle");
-                break;
-            case "WalkingBackwardsRifle":
-                _animator.Play("WalkingBackwardsRifle");
-                break;
-            case "WalkingUnarmed":
-                _animator.Play("WalkingUnarmed");
-                break;
-
-            // Running
-            case "RunningUnarmed":
-                _animator.Play("RunningUnarmed");
-                break;
-            case "RunningRifle":
-                _animator.Play("RunningRifle");
-                break;
-
-            // Crouching
-            case "CrouchingIdleUnarmed":
-                _animator.Play("CrouchingIdleUnarmed");
-                break;
-            case "CrouchingWalkingUnarmed":
-                _animator.Play("CrouchingWalkingUnarmed");
-                break;
-
-            // Idle
-            case "IdleRifle":
-                _animator.Play("IdleHoldingRifle");
-                break;
-            case "IdleUnarmed":
-                _animator.Play("IdleUnarmed");
-                break;
-            default:
-                _animator.Play("IdleUnarmed");
-                break;
-        }
+        _animator.Play(_animationStates.ContainsKey(state) ? _animationStates[state] : "IdleUnarmed");
     }
 
     private void OnDrawGizmosSelected()
