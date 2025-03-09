@@ -1,25 +1,32 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
-using UnityEngine.Rendering;
+
+
 
 public class CurrentWeapon : MonoBehaviour
 {
     public static event Action OnWeaponChanged; // Event 
 
-    public static bool _isUnarmed = false;
-    public static bool _IsKnife = false;
-    public static bool _IsPistol = false;
-    public static bool _IsRifle = false;
-    public static bool _IsShotgun = false;
+    public RangedWeaponSO currentRangedWeapon;
+    public MeleeWeaponSO currentMeleeWeapon;
 
+    //private WeaponType _currentWeaponType;
+    public WeaponType _WeaponCategory;
     private bool _isFiring = false; //we use this in order to have AUTO fire when holding down
 
     public Weapon[] _Weapons;
     public static Weapon _currentWeapon;
+
+
+    public enum WeaponType
+    {
+        Unarmed,
+        Knife,
+        Pistol,
+        Rifle,
+        Shotgun
+    }
 
 
     private void Update()
@@ -38,13 +45,13 @@ public class CurrentWeapon : MonoBehaviour
 
     public void Attack (InputAction.CallbackContext context)
     {       
-        if (context.started && !context.canceled) //Fires an event whenever action/key is pressed. Together with the one below the whole method basicly chekcs if the key is hold down. 
+        if (context.started) //Fires an event whenever action/key is pressed. Together with the one below the whole method basicly chekcs if the key is hold down. 
         {
             _isFiring = true;
            
         }
 
-        if(context.canceled) //needs to be here to fire an event whenever we let go of the "action"/key.
+        if (context.canceled) //needs to be here to fire an event whenever we let go of the "action"/key.
         {
             _isFiring = false;
         }
@@ -52,30 +59,24 @@ public class CurrentWeapon : MonoBehaviour
     }   
 
     public void WeaponSelection()
-    {        
-        for (int i = 0 ; i < _Weapons.Length; i++)
+    {
+        // Iterate over weapons and select based on WeaponType
+        foreach (Weapon weapon in _Weapons)
         {
-            if (_Weapons[i]._weapon._WeaponCategory == GunType.Knife && _IsKnife)
+            if (weapon._WeaponCategory == _currentWeaponType)
             {
-                _currentWeapon = _Weapons[i];
+                _currentWeapon = weapon;
+                break;
             }
-
-            else if (_Weapons[i]._weapon._WeaponCategory == GunType.Pistol && _IsPistol)
-            {
-                _currentWeapon = _Weapons[i];               
-            }
-
-            else if (_Weapons[i]._weapon._WeaponCategory == GunType.Rifle && _IsRifle)
-            {
-                _currentWeapon = _Weapons[i];                
-            }
-
-            else if (_Weapons[i]._weapon._WeaponCategory == GunType.Shotgun && _IsShotgun)
-            {
-                _currentWeapon = _Weapons[i];                
-            }            
         }
         OnWeaponChanged.Invoke(); // For other scripts to trigger. For example players animation, that needs to know what weapon to hold
-    }    
+    }
+
+    public void SetCurrentWeapon(WeaponType weaponType) // Called by other scripts
+    {
+        _currentWeaponType = weaponType;
+    }
+
+
 
 }

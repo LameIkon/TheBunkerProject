@@ -10,12 +10,12 @@ public class AmmoCounter : MonoBehaviour
     [SerializeField] private Weapon _currentWeapon;
     [SerializeField] private Weapon[] _Weapons;
 
-    private readonly Dictionary<GunType, int> _ammoSpriteIndexMap = new()
+    private readonly Dictionary<RangedWeaponType, int> _ammoSpriteIndexMap = new()
     {
-        { GunType.Pistol, 0 },
-        { GunType.Rifle, 1 },
-        { GunType.Shotgun, 2 },
-        { GunType.Knife, 3 }
+        { RangedWeaponType.Pistol, 0 },
+        { RangedWeaponType.Rifle, 1 },
+        { RangedWeaponType.Shotgun, 2 },
+        { RangedWeaponType.Knife, 3 }
     };
 
     private void Update()
@@ -29,12 +29,12 @@ public class AmmoCounter : MonoBehaviour
     {
         _currentWeapon._weapon.UpdateAmmoCount();
 
-        if(_currentWeapon._weapon._WeaponCategory != GunType.Knife)
+        if(_currentWeapon._weapon._RangedWeaponCategory != RangedWeaponType.Knife)
         {
             _ammoText.text = ammoCount.GetValue().ToString();
         }
 
-        else if (_currentWeapon._weapon._WeaponCategory == GunType.Knife)
+        else if (_currentWeapon._weapon._RangedWeaponCategory == RangedWeaponType.Knife)
         {
             _ammoText.text = "∞";
         }        
@@ -42,7 +42,7 @@ public class AmmoCounter : MonoBehaviour
 
     private void DisplayAmmoSprite()
     {
-        if (_ammoSpriteIndexMap.TryGetValue(_currentWeapon._weapon._WeaponCategory, out int ammoIndex))
+        if (_ammoSpriteIndexMap.TryGetValue(_currentWeapon._weapon._RangedWeaponCategory, out int ammoIndex))
         {
             for (int i = 0; i < _currentAmmoSprite.Length; i++)
             {
@@ -63,22 +63,22 @@ public class AmmoCounter : MonoBehaviour
     {
         for (int i = 0; i < _Weapons.Length; i++)
         {
-            if (_Weapons[i]._weapon._WeaponCategory == GunType.Knife && CurrentWeapon._IsKnife)
+            if (_Weapons[i]._weapon._RangedWeaponCategory == RangedWeaponType.Knife && CurrentWeapon._IsKnife)
             {
                 _currentWeapon = _Weapons[i];
             }
 
-            else if (_Weapons[i]._weapon._WeaponCategory == GunType.Pistol && CurrentWeapon._IsPistol)
+            else if (_Weapons[i]._weapon._RangedWeaponCategory == RangedWeaponType.Pistol && CurrentWeapon._IsPistol)
             {
                 _currentWeapon = _Weapons[i];
             }
 
-            else if (_Weapons[i]._weapon._WeaponCategory == GunType.Rifle && CurrentWeapon._IsRifle)
+            else if (_Weapons[i]._weapon._RangedWeaponCategory == RangedWeaponType.Rifle && CurrentWeapon._IsRifle)
             {
                 _currentWeapon = _Weapons[i];
             }
 
-            else if (_Weapons[i]._weapon._WeaponCategory == GunType.Shotgun && CurrentWeapon._IsShotgun)
+            else if (_Weapons[i]._weapon._RangedWeaponCategory == RangedWeaponType.Shotgun && CurrentWeapon._IsShotgun)
             {
                 _currentWeapon = _Weapons[i];
             }

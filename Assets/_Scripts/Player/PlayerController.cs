@@ -36,9 +36,24 @@ public class PlayerController : MonoBehaviour, IMovable
     private float _ladderCenteringSpeed = 5f;
     private bool _isCenteringLadder;
 
-    [Header("State")]
-    public string actionState = "Idle"; // What type of movement player is doing - changes depending what player do of movement
-    public string weaponType = "Unarmed"; // What weapon player is holding - changes depending what player is holding
+    public enum ActionState // What type of movement player is doing - changes depending what player do of movement
+    {
+        Idle,
+        Walking,
+        Running,
+        CrouchingWalking,
+        CrouchingIdle,
+        WalkingBackwards
+    }
+    public enum WeaponType // What weapon player is holding - changes depending what player is holding
+    {
+        Unarmed,
+        Knife,
+        Gun
+    }
+
+    public ActionState actionState = ActionState.Idle;
+    public WeaponType weaponType = WeaponType.Unarmed;
 
 
     private void OnEnable()
@@ -139,28 +154,28 @@ public class PlayerController : MonoBehaviour, IMovable
         bool isFacingRight = !isFacingLeft;
         bool isMovingOpposite = (isFacingLeft && _movementX > 0) || (isFacingRight && _movementX < 0);
 
-        if (weaponType != "Unarmed" && isMovingOpposite)
+        if (weaponType != WeaponType.Unarmed && isMovingOpposite)
         {
             _currentMoveSpeed = _movementConfig.BackwardsMoveSpeed;
-            actionState = _movementX != 0 ? "WalkingBackwards" : "Idle";
+            actionState = _movementX != 0 ? ActionState.WalkingBackwards : ActionState.Idle;
         }
         else if (_isRunning)
         {
             _currentMoveSpeed = _movementConfig.RunningSpeed;
-            actionState = _movementX != 0 ? "Running" : "Idle";
+            actionState = _movementX != 0 ? ActionState.Running : ActionState.Idle;
         }
         else if (_isCrouching)
         {
             _currentMoveSpeed = _movementConfig.CrouchingSpeed;
-            actionState = _movementX != 0 ? "CrouchingWalking" : "CrouchingIdle";
+            actionState = _movementX != 0 ? ActionState.CrouchingWalking : ActionState.CrouchingIdle;
         }
         else
         {
             _currentMoveSpeed = _movementConfig.WalkingSpeed;
-            actionState = _movementX != 0 ? "Walking" : "Idle";
+            actionState = _movementX != 0 ? ActionState.Walking : ActionState.Idle;
         }
 
-        AnimationHandler($"{actionState}{weaponType}");
+        AnimationHandler($"{actionState.ToString()}{weaponType.ToString()}"); // Combine together to a string
     }
 
 
@@ -313,7 +328,7 @@ public class PlayerController : MonoBehaviour, IMovable
 
         if (CurrentWeapon._currentWeapon != null)
         {
-            if (weaponType != "Unarmed") // Can only flip if not armed. RotationManager will handle weapons
+            if (weaponType != WeaponType.Unarmed) // Can only flip if not armed. RotationManager will handle weapons
             {
                 RotationManager.CanRotate = true;
             }
@@ -322,7 +337,8 @@ public class PlayerController : MonoBehaviour, IMovable
                 RotationManager.CanRotate = false;
             }
 
-            weaponType = CurrentWeapon._currentWeapon._weapon._WeaponCategory.ToString(); // Convert enum to string
+            weaponType = CurrentWeapon._currentWeapon._weapon._RangedWeaponCategory; // Convert enum to string
+            
 
             if ("Knife" == weaponType) // REMOVE LATER. only to show animations work. reason is we dont have a unarmed state at the moment
             {

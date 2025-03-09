@@ -1,28 +1,16 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Gun", menuName = "Guns/Gun")]
-public class WeaponSO : ScriptableObject
+//[CreateAssetMenu(fileName = "Gun", menuName = "Weapons/Gun")]
+public class RangedWeaponSO : WeaponStats
 {
-    public GunType _WeaponCategory;
-    public GameObject _BulletPrefab;
-    [Space(5f)]
+    public RangedWeaponType _RangedWeaponCategory;
     
-    [Header("Stats")] 
-    public float _Damage;
-    public float _FireRate;
-    public float _Range;
-    public int _MaxAmmoCapacity;
     [Space(5f)] 
-    
     [Header("Ammunition")]
+    public GameObject _BulletPrefab;
+    public int _MaxAmmoCapacity;
     public IntReferencer _Magazine;
     public IntVariable _CurrentAmmoCount;
-    [Space(5f)] 
-    
-    [Header("Critical Damage")]
-    public int _CritChance;
-    public float _CritDamage;
-
     private bool _fullMagazine;
     private bool _emptyMagazine;
 
@@ -60,9 +48,8 @@ public class WeaponSO : ScriptableObject
     }
 }
 
-public enum GunType
+public enum RangedWeaponType
 {
-    Knife,
     Pistol,
     Shotgun,
     Rifle

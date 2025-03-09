@@ -1,14 +1,10 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using static UnityEngine.UI.Image;
+
 
 public abstract class Weapon : MonoBehaviour
 {
     private float _damage;
-    private GunType _gunType;
+    private RangedWeaponType _gunType;
     private float _fireRate;
     private int _critChance; //25 gives 25% chance
     private float _critDamage; //needs to be in decimal. 1.25 give 125% crit damage
@@ -19,19 +15,19 @@ public abstract class Weapon : MonoBehaviour
 
     //private RaycastHit2D[] _hits; //for knife attacks. 
 
-    public WeaponSO _weapon; 
+    public RangedWeaponSO _weapon; 
     [SerializeField] private Transform _shootingPoint; //where we shoot from
     
 
     private void Awake()
     {
-        if(_weapon._WeaponCategory != GunType.Knife)
+        if(_weapon._RangedWeaponCategory != RangedWeaponType.Knife)
         {
             _weapon.SetAmmoToMax();
         }        
         _damage = _weapon._Damage;
         _fireRate = _weapon._FireRate;
-        _gunType = _weapon._WeaponCategory;
+        _gunType = _weapon._RangedWeaponCategory;
         _critChance = _weapon._CritChance;
         _critDamage = _weapon._CritDamage;
         _range = _weapon._Range;
@@ -41,7 +37,7 @@ public abstract class Weapon : MonoBehaviour
 
     public void Fire()
     {
-        if(CurrentWeapon._currentWeapon._weapon._WeaponCategory != GunType.Knife) //If not a Knife
+        if(CurrentWeapon._currentWeapon._weapon._RangedWeaponCategory != RangedWeaponType.Knife) //If not a Knife
         {
             if (CheckFireRate() && _weapon._CurrentAmmoCount > 0)
             {
@@ -51,7 +47,7 @@ public abstract class Weapon : MonoBehaviour
             }
         }
 
-        else if (CurrentWeapon._currentWeapon._weapon._WeaponCategory == GunType.Knife) //If it is knife
+        else if (CurrentWeapon._currentWeapon._weapon._RangedWeaponCategory == RangedWeaponType.Knife) //If it is knife
         {            
             if(CheckFireRate())
             {
