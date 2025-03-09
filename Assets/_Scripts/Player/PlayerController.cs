@@ -82,11 +82,9 @@ public class PlayerController : MonoBehaviour, IMovable
         }
     }
 
-    public void Move(float movementX, float movementY)
+    public void Move(float movementX)
     {
-        Debug.Log("Move");
         _movementX = movementX;
-        _movementY = movementY;
         Flip();
         Invoke(nameof(UpdateMovement), 0f); // Invoke next frame. Sometimes causes rare animation bug if not implemented
     }
@@ -106,16 +104,15 @@ public class PlayerController : MonoBehaviour, IMovable
     public void Climb(bool isClimbing)
     {
         _isClimbing = isClimbing;
+        //HandleLadderInteraction(_isClimbing);
     }
 
 
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        Debug.Log("OnMove");
         Vector2 input = context.ReadValue<Vector2>();
-        Move(input.x, input.y);
-
+        Move(input.x);
     }
 
     public void OnSprint(InputAction.CallbackContext context)
@@ -130,7 +127,7 @@ public class PlayerController : MonoBehaviour, IMovable
 
     public void OnClimb(InputAction.CallbackContext context)
     {
-        UseLadder(context);
+        HandleLadderInteraction(context);
         if (context.performed)
             Climb(true);
         else if (context.canceled)
@@ -171,40 +168,51 @@ public class PlayerController : MonoBehaviour, IMovable
 
     #endregion
     #region Ladder
-    private void UseLadder(InputAction.CallbackContext context)
+    private void HandleLadderInteraction(InputAction.CallbackContext context)
     {
         _movementY = context.ReadValue<Vector2>().y;
 
         if (_currentLadder != null)
         {
-            if (_currentLadder._ExitLadder) // Exit ladder
+            if (_currentLadder._ExitLadder && context.canceled) // Exit ladder
             {
-                if (context.canceled)
-                {
-                    _rb.gravityScale = 1; // Enable gavity
-                    _rb.velocity = new Vector2(0, 0); // Stops the player from moving forward
-                    _currentLadder.CurrentlyUsingLadder(false);
-                    _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                    gameObject.layer = LayerMask.NameToLayer("Player");
-                }
+                ExitLadder();
             }
-
             else if (_currentLadder._Interact)
             {
                 if (context.performed) // Climb ladder
                 {
-                    _rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation; // Freezes both Z and Y axis
-                    gameObject.layer = LayerMask.NameToLayer("Ignore Ground"); // Allows going through floors
-                    _currentLadder.CurrentlyUsingLadder(true);
+                    EnterLadder();
                 }
                 else if (context.canceled) // Pause while on ladder
                 {
-                    _rb.gravityScale = 0; // Disable gavity
-                    _rb.velocity = new Vector2(0, 0); // Stops the player from moving forward
-                    _currentLadder.CurrentlyUsingLadder(false);
+                    PauseLadder();
                 }
             }
         }
+    }
+
+    private void EnterLadder()
+    {
+        _rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation; // Freezes both Z and Y axis
+        gameObject.layer = LayerMask.NameToLayer("Ignore Ground"); // Allows going through floors
+        _currentLadder.CurrentlyUsingLadder(true);
+    }
+
+    private void ExitLadder()
+    {
+        _rb.gravityScale = 1; // Enable gavity
+        _rb.velocity = new Vector2(0, 0); // Stops the player from moving forward
+        _currentLadder.CurrentlyUsingLadder(false);
+        _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        gameObject.layer = LayerMask.NameToLayer("Player");
+    }
+
+    private void PauseLadder()
+    {
+        _rb.gravityScale = 0; // Disable gavity
+        _rb.velocity = new Vector2(0, 0); // Stops the player from moving forward
+        _currentLadder.CurrentlyUsingLadder(false);
     }
 
     private IEnumerator LadderCentering()
