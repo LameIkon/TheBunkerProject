@@ -13,24 +13,18 @@ public class PlayerController : MonoBehaviour
     public PlayerInput PlayerInput => _playerInput;
 
     [Header("Movement")]
-    [SerializeField] private float _currentMoveSpeed;
-    [SerializeField] private float _walkingSpeed;
-    [SerializeField] private float _runningSpeed;
-    [SerializeField] private float _crouchingSpeed;
-    [SerializeField] private float _backwardsMoveSpeed;
+    [SerializeField] private MovementConfig _movementConfig;
+    private float _currentMoveSpeed;
     private bool _isRunning;
     private bool _isCrouching;
     public float _movementX;
     public float _movementY;
-    private Vector2 _currentMovementInput; // Store the movement input. Used for the running
 
     [Header("Ground")]
     [SerializeField] private Transform _groundCheckPos;
     [SerializeField] private Vector2 _groundCheckRadius;
     [SerializeField] private LayerMask _groundLayer;
 
-    [Header("Climbing")]
-    [SerializeField] private float _climbSpeed;
 
     [Header("Interact With")]
     [SerializeField] private Door _currentDoor; // Used to check which door player interacts with
@@ -60,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        _currentMoveSpeed = _walkingSpeed; // Assign movement speed
+        _currentMoveSpeed = _movementConfig.WalkingSpeed; // Assign movement speed
     }
 
 
@@ -74,7 +68,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_currentLadder != null && _currentLadder._UsingLadder) // Use Ladder
         {
-            _rb.velocity = new Vector2(_rb.velocity.x, _climbSpeed * _movementY);
+            _rb.velocity = new Vector2(_rb.velocity.x, _movementConfig.ClimbSpeed * _movementY);
             StartCoroutine(LadderCentering());
             
         }
@@ -112,22 +106,22 @@ public class PlayerController : MonoBehaviour
 
         if (weaponType != "Unarmed" && isMovingOpposite)
         {
-            _currentMoveSpeed = _backwardsMoveSpeed;
+            _currentMoveSpeed = _movementConfig.BackwardsMoveSpeed;
             actionState = _movementX != 0 ? "WalkingBackwards" : "Idle";
         }
         else if (_isRunning)
         {
-            _currentMoveSpeed = _runningSpeed;
+            _currentMoveSpeed = _movementConfig.RunningSpeed;
             actionState = _movementX != 0 ? "Running" : "Idle";
         }
         else if (_isCrouching)
         {
-            _currentMoveSpeed = _crouchingSpeed;
+            _currentMoveSpeed = _movementConfig.CrouchingSpeed;
             actionState = _movementX != 0 ? "CrouchingWalking" : "CrouchingIdle";
         }
         else
         {
-            _currentMoveSpeed = _walkingSpeed;
+            _currentMoveSpeed = _movementConfig.WalkingSpeed;
             actionState = _movementX != 0 ? "Walking" : "Idle";
         }
 
