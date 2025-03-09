@@ -1,9 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.InputSystem.InputAction;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IMovable
 {
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private Animator _animator;
@@ -17,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private float _currentMoveSpeed;
     private bool _isRunning;
     private bool _isCrouching;
+    private bool _isClimbing;
     public float _movementX;
     public float _movementY;
 
@@ -31,9 +31,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Elevator _currentElevator; // Used to check which elevator player interacts with
     [SerializeField] private Ladder _currentLadder; // Used to check which ladder player interacts with
 
-     private float _ladderXPosition;
-     private float _ladderCenteringSpeed = 5f;
-     private bool _isCenteringLadder;
+    private float _ladderXPosition;
+    private float _ladderCenteringSpeed = 5f;
+    private bool _isCenteringLadder;
 
     [Header("State")]
     public string actionState = "Idle"; // What type of movement player is doing - changes depending what player do of movement
@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
     {
         Movement();
     }
+
     #region Movement
     public void Movement()
     {
@@ -70,7 +71,7 @@ public class PlayerController : MonoBehaviour
         {
             _rb.velocity = new Vector2(_rb.velocity.x, _movementConfig.ClimbSpeed * _movementY);
             StartCoroutine(LadderCentering());
-            
+
         }
         else // Walk
         {
@@ -78,24 +79,59 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Move(InputAction.CallbackContext context)
+    public void Move(float movementX, float movementY)
     {
-        _movementX = context.ReadValue<Vector2>().x;
+        Debug.Log("Move");
+        _movementX = movementX;
+        _movementY = movementY;
         Flip();
         Invoke(nameof(UpdateMovement), 0f); // Invoke next frame. Sometimes causes rare animation bug if not implemented
     }
 
-
-    public void Sprint(InputAction.CallbackContext context)
+    public void Sprint(bool isSprinting)
     {
-        _isRunning = context.performed;
+        _isRunning = isSprinting;
         UpdateMovement();
     }
 
-    public void Crouching(InputAction.CallbackContext context)
+    public void Crouch(bool isCrouching)
     {
-        _isCrouching = context.performed;
+        _isCrouching = isCrouching;
         UpdateMovement();
+    }
+
+    public void Climb(bool isClimbing)
+    {
+        _isClimbing = isClimbing;
+    }
+
+
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        Debug.Log("OnMove");
+        Vector2 input = context.ReadValue<Vector2>();
+        Move(input.x, input.y);
+
+    }
+
+    public void OnSprint(InputAction.CallbackContext context)
+    {
+        Sprint(context.performed);
+    }
+
+    public void OnCrouch(InputAction.CallbackContext context)
+    {
+        Crouch(context.performed);
+    }
+
+    public void OnClimb(InputAction.CallbackContext context)
+    {
+        UseLatter(context);
+        if (context.performed)
+            Climb(true);
+        else if (context.canceled)
+            Climb(false);
     }
 
     private void UpdateMovement()
@@ -132,7 +168,7 @@ public class PlayerController : MonoBehaviour
 
     #endregion
     #region Ladder
-    public void UseLatter(InputAction.CallbackContext context)
+    private void UseLatter(InputAction.CallbackContext context)
     {
         _movementY = context.ReadValue<Vector2>().y;
 
@@ -156,16 +192,16 @@ public class PlayerController : MonoBehaviour
                 {
                     _rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation; // Freezes both Z and Y axis
                     gameObject.layer = LayerMask.NameToLayer("Ignore Ground"); // Allows going through floors
-                    _currentLadder.CurrentlyUsingLadder(true);               
+                    _currentLadder.CurrentlyUsingLadder(true);
                 }
                 else if (context.canceled) // Pause while on ladder
                 {
                     _rb.gravityScale = 0; // Disable gavity
-                    _rb.velocity = new Vector2(0,0); // Stops the player from moving forward
+                    _rb.velocity = new Vector2(0, 0); // Stops the player from moving forward
                     _currentLadder.CurrentlyUsingLadder(false);
                 }
-            }       
-        }      
+            }
+        }
     }
 
     private IEnumerator LadderCentering()
@@ -182,12 +218,11 @@ public class PlayerController : MonoBehaviour
                 yield return new WaitForFixedUpdate(); // Wait for the next fixed frame
             }
             _isCenteringLadder = false;
-        }    
+        }
     }
 
-
-
     #endregion
+
     #region Interacting
     public void Interact(InputAction.CallbackContext context)
     {
@@ -249,7 +284,7 @@ public class PlayerController : MonoBehaviour
     //    return false;
     //}
 
-  
+
 
     private void Flip()
     {
