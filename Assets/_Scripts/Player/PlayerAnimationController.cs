@@ -13,14 +13,14 @@ public class PlayerAnimationController : MonoBehaviour
         PopulateAnimationStates();
     }
 
-    public void PlayAnimation(string state)
+    public void PlayAnimation(string state) // Called from other scripts
     {
-        _animator.Play(_animationStates.ContainsKey(state) ? _animationStates[state] : "IdleUnarmed");
+        _animator.Play(_animationStates.ContainsKey(state) ? _animationStates[state] : "IdleUnarmed"); // if contains state play that otherwise play IdleUnarmed
     }
 
     private void PopulateAnimationStates()
     {
-        _animationStates = new Dictionary<string, string> // Fill it
+        _animationStates = new Dictionary<string, string> // Fill it with animations
         {
             // Walking
             { "WalkingRifle", "WalkingHoldingRifle" },
