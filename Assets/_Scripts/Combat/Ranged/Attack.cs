@@ -1,6 +1,6 @@
 using UnityEngine.InputSystem;
 
-public class Attack : Weapon
+public class Attack : WeaponController
 {
     public void Shoot()
     {  

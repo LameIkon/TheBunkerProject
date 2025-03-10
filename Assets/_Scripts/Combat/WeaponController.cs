@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour
+public abstract class WeaponController : MonoBehaviour
 {
     private float _damage;
     private RangedWeaponType _gunType;

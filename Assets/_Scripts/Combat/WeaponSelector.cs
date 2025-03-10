@@ -9,8 +9,8 @@ public class WeaponSelector : MonoBehaviour
 {
     public static event Action<WeaponType> OnWeaponChanged; // Event 
     [SerializeField] private PlayerInput _playerInput;
-    [SerializeField] private WeaponType _currentWeaponType; // This is used for other scripts to access the weapon you are currently holding   
-    private Dictionary<int, WeaponType> _allWeapontypes;
+    private WeaponType _currentWeaponType; // This is used for other scripts to access the weapon you are currently holding. Parameter for OnWeaponChanged Event   
+    private Dictionary<int, WeaponType> _allWeapontypes; // index number from PlayerInput and enum weapontypes
 
 
 
@@ -19,9 +19,9 @@ public class WeaponSelector : MonoBehaviour
         PopulateWeaponTypes();
     }
 
-    public void EquipWeapon(int bindindIndex)
+    private void EquipWeapon(int bindindIndex)
     {
-        if (_allWeapontypes.TryGetValue(bindindIndex, out WeaponType selectedWeapon))
+        if (_allWeapontypes.TryGetValue(bindindIndex, out WeaponType selectedWeapon)) // Check the index and take the corresponding weapon
         {
             _currentWeaponType = selectedWeapon; // Update the selected weapon type
         }
@@ -30,7 +30,7 @@ public class WeaponSelector : MonoBehaviour
 
     private void PopulateWeaponTypes()
     {
-        _allWeapontypes = new Dictionary<int, WeaponType> // InputAction index location and corresponding weapon
+        _allWeapontypes = new Dictionary<int, WeaponType> // PlayerInput index location and corresponding weapon
         {
             // A lot of temporary weapontypes. Will be changed
             {0, WeaponType.Unarmed },
@@ -48,11 +48,9 @@ public class WeaponSelector : MonoBehaviour
 
     public void ChangeWeapon(InputAction.CallbackContext context)
     {
-        Debug.Log("ChangeWeapon");
         if (context.performed)
         {
             int bindingIndex = context.action.GetBindingIndexForControl(context.control); // Read the key pressed
-            Debug.Log("the index pressed: " + bindingIndex);
             EquipWeapon(bindingIndex);
         }
     }

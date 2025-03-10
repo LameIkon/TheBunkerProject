@@ -4152,7 +4152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerInput: {fileID: 852640001}
-  _currentWeaponType: 0
 --- !u!114 &1509229483 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6719046680071295589, guid: eb663a81479324d48b0efa0af53a9e24, type: 3}

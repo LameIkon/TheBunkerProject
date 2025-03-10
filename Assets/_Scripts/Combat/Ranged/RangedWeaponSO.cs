@@ -1,6 +1,6 @@
 using UnityEngine;
 
-//[CreateAssetMenu(fileName = "Gun", menuName = "Weapons/Gun")]
+[CreateAssetMenu(fileName = "RangedWeapon", menuName = "Weapons/RangedWeapon")]
 public class RangedWeaponSO : WeaponStats
 {
     public RangedWeaponType _RangedWeaponCategory;
