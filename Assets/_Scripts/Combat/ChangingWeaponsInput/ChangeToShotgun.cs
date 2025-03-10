@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ChangeToShotgun : CurrentWeapon
+public class ChangeToShotgun : WeaponSelector
 {
-    public void ChangeWeapon(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            _IsKnife = false;
-            _IsPistol = false;
-            _IsRifle = false;
-            _IsShotgun = true;
+    //public void ChangeWeapon(InputAction.CallbackContext context)
+    //{
+    //    if (context.performed)
+    //    {
+    //        _IsKnife = false;
+    //        _IsPistol = false;
+    //        _IsRifle = false;
+    //        _IsShotgun = true;
 
-            print("Knife is: " + _IsKnife + " |Pistol is: " + _IsPistol + " |Rifle is: " + _IsRifle + " |Shotgun is: " + _IsShotgun);
-        }
-    }
+    //        print("Knife is: " + _IsKnife + " |Pistol is: " + _IsPistol + " |Rifle is: " + _IsRifle + " |Shotgun is: " + _IsShotgun);
+    //    }
+    //}
 }

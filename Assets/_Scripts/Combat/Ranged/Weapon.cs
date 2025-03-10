@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public abstract class Weapon : MonoBehaviour
 {
     private float _damage;
@@ -21,147 +20,147 @@ public abstract class Weapon : MonoBehaviour
 
     private void Awake()
     {
-        if(_weapon._RangedWeaponCategory != RangedWeaponType.Knife)
-        {
-            _weapon.SetAmmoToMax();
-        }        
-        _damage = _weapon._Damage;
-        _fireRate = _weapon._FireRate;
-        _gunType = _weapon._RangedWeaponCategory;
-        _critChance = _weapon._CritChance;
-        _critDamage = _weapon._CritDamage;
-        _range = _weapon._Range;
+        //if(_weapon._RangedWeaponCategory != RangedWeaponType.Knife)
+        //{
+        //    _weapon.SetAmmoToMax();
+        //}        
+        //_damage = _weapon._Damage;
+        //_fireRate = _weapon._FireRate;
+        //_gunType = _weapon._RangedWeaponCategory;
+        //_critChance = _weapon._CritChance;
+        //_critDamage = _weapon._CritDamage;
+        //_range = _weapon._Range;
     }
 
    // public abstract void Shoot(InputAction.CallbackContext context);
 
-    public void Fire()
-    {
-        if(CurrentWeapon._currentWeapon._weapon._RangedWeaponCategory != RangedWeaponType.Knife) //If not a Knife
-        {
-            if (CheckFireRate() && _weapon._CurrentAmmoCount > 0)
-            {
-                RayCastShoot(_shootingPoint.position, _shootingPoint.right, _range);
-                _weapon.ReduceAmmoByShooting(); //takes 1 from ammo amount
-                //InstanceBullet(_shootingPoint);            
-            }
-        }
+    //public void Fire()
+    //{
+    //    if(WeaponSelector._currentWeapon._weapon._RangedWeaponCategory != RangedWeaponType.Knife) //If not a Knife
+    //    {
+    //        if (CheckFireRate() && _weapon._CurrentAmmoCount > 0)
+    //        {
+    //            RayCastShoot(_shootingPoint.position, _shootingPoint.right, _range);
+    //            _weapon.ReduceAmmoByShooting(); //takes 1 from ammo amount
+    //            //InstanceBullet(_shootingPoint);            
+    //        }
+    //    }
 
-        else if (CurrentWeapon._currentWeapon._weapon._RangedWeaponCategory == RangedWeaponType.Knife) //If it is knife
-        {            
-            if(CheckFireRate())
-            {
-                KnifeAttack(_shootingPoint.position, _shootingPoint.right, _range);
-            }
-        }
+    //    else if (WeaponSelector._currentWeapon._weapon._RangedWeaponCategory == RangedWeaponType.Knife) //If it is knife
+    //    {            
+    //        if(CheckFireRate())
+    //        {
+    //            KnifeAttack(_shootingPoint.position, _shootingPoint.right, _range);
+    //        }
+    //    }
         
 
-        void RayCastShoot(Vector2 origin, Vector2 direction, float range) //can add a layermask to check if the layer is hit.
-        {
-            RaycastHit2D hit = Physics2D.Raycast(origin, direction, range); //can add a layermask to check if the layer is hit.
-            GameObject bullet = Instantiate(_weapon._BulletPrefab, _shootingPoint.position, Quaternion.identity);
-            LineRenderer bulletLine = bullet.GetComponent<LineRenderer>();
+    //    void RayCastShoot(Vector2 origin, Vector2 direction, float range) //can add a layermask to check if the layer is hit.
+    //    {
+    //        RaycastHit2D hit = Physics2D.Raycast(origin, direction, range); //can add a layermask to check if the layer is hit.
+    //        GameObject bullet = Instantiate(_weapon._BulletPrefab, _shootingPoint.position, Quaternion.identity);
+    //        LineRenderer bulletLine = bullet.GetComponent<LineRenderer>();
 
-            if (bulletLine != null)
-            {
-                bulletLine.SetPosition(0, _shootingPoint.position);
-                bulletLine.SetPosition(1, hit.point);
-            }
+    //        if (bulletLine != null)
+    //        {
+    //            bulletLine.SetPosition(0, _shootingPoint.position);
+    //            bulletLine.SetPosition(1, hit.point);
+    //        }
 
-            if (hit)
-            {
-                Health enemy = hit.transform.GetComponent<Health>();
-                //Vector2 hitpos;
-                if (hit.collider != null)
-                {
-                    if (enemy != null)
-                    {
-                        if(CritChance(_critChance))
-                        {
-                            enemy.TakeDamage(_damage * _critDamage);
-                            print("A critical hit dealt: " + _damage * _critDamage + " damage!");
-                        }
+    //        if (hit)
+    //        {
+    //            Health enemy = hit.transform.GetComponent<Health>();
+    //            //Vector2 hitpos;
+    //            if (hit.collider != null)
+    //            {
+    //                if (enemy != null)
+    //                {
+    //                    if(CritChance(_critChance))
+    //                    {
+    //                        enemy.TakeDamage(_damage * _critDamage);
+    //                        print("A critical hit dealt: " + _damage * _critDamage + " damage!");
+    //                    }
 
-                        else if (!CritChance(_critChance))
-                        {
-                            enemy.TakeDamage(_damage);
-                            print("no critical hit");
-                        }
+    //                    else if (!CritChance(_critChance))
+    //                    {
+    //                        enemy.TakeDamage(_damage);
+    //                        print("no critical hit");
+    //                    }
                        
-                    }     
+    //                }     
                     
-                    ///Setup logic here for when a collider is hit but dont have Health script on it, and needs to go through. ex. Ladders/doors.
-                }
-            }
-            else
-            {
-                // Setup logic if bullet doesn't hit any colliders.
-                //TEST. Probably needs something better
-                bulletLine.SetPosition(0, _shootingPoint.position);
-                bulletLine.SetPosition(1, _shootingPoint.position + _shootingPoint.right * 100);
-                //TEST END
-            }
-            Destroy(bullet, 0.04f);
-        }
+    //                ///Setup logic here for when a collider is hit but dont have Health script on it, and needs to go through. ex. Ladders/doors.
+    //            }
+    //        }
+    //        else
+    //        {
+    //            // Setup logic if bullet doesn't hit any colliders.
+    //            //TEST. Probably needs something better
+    //            bulletLine.SetPosition(0, _shootingPoint.position);
+    //            bulletLine.SetPosition(1, _shootingPoint.position + _shootingPoint.right * 100);
+    //            //TEST END
+    //        }
+    //        Destroy(bullet, 0.04f);
+    //    }
 
-        void KnifeAttack(Vector2 origin, Vector2 direction, float range)
-        {
-            //_hits = Physics2D.CircleCastAll(origin, radius, direction); //Needs interface on enmies or you kill urself.
-            RaycastHit2D hit = Physics2D.Raycast(origin, direction, range);
+    //    void KnifeAttack(Vector2 origin, Vector2 direction, float range)
+    //    {
+    //        //_hits = Physics2D.CircleCastAll(origin, radius, direction); //Needs interface on enmies or you kill urself.
+    //        RaycastHit2D hit = Physics2D.Raycast(origin, direction, range);
 
-            if(hit)
-            {
-                Health enemy = hit.transform.GetComponent<Health>();
-                if (hit.collider != null)
-                {                
-                    if (enemy != null)
-                    {
-                        if (CritChance(_critChance))
-                        {
-                            enemy.TakeDamage(_damage * _critDamage);
-                            print("A critical hit dealt: " + _damage * _critDamage + " damage!");
-                        }
+    //        if(hit)
+    //        {
+    //            Health enemy = hit.transform.GetComponent<Health>();
+    //            if (hit.collider != null)
+    //            {                
+    //                if (enemy != null)
+    //                {
+    //                    if (CritChance(_critChance))
+    //                    {
+    //                        enemy.TakeDamage(_damage * _critDamage);
+    //                        print("A critical hit dealt: " + _damage * _critDamage + " damage!");
+    //                    }
 
-                        else if (!CritChance(_critChance))
-                        {
-                            enemy.TakeDamage(_damage);
-                            print("no critical hit");
-                        }
-                    }
-                }
-            }            
-            return;
-        }
+    //                    else if (!CritChance(_critChance))
+    //                    {
+    //                        enemy.TakeDamage(_damage);
+    //                        print("no critical hit");
+    //                    }
+    //                }
+    //            }
+    //        }            
+    //        return;
+    //    }
 
-        //public GameObject InstanceBullet(Transform origin)
-        //{
-        //    GameObject bullet = Instantiate(_weapon._bulletPrefab, origin.position, transform.rotation, null);
+    //    //public GameObject InstanceBullet(Transform origin)
+    //    //{
+    //    //    GameObject bullet = Instantiate(_weapon._bulletPrefab, origin.position, transform.rotation, null);
 
-        //    return bullet;
-        //}
+    //    //    return bullet;
+    //    //}
 
-        bool CheckFireRate()
-        {
-            if (Time.time > _nextTimeTofire)
-            {
-                _nextTimeTofire = Time.time + (1f / _fireRate);
-                return true;
-            }
-            return false;
-        }
+    //    bool CheckFireRate()
+    //    {
+    //        if (Time.time > _nextTimeTofire)
+    //        {
+    //            _nextTimeTofire = Time.time + (1f / _fireRate);
+    //            return true;
+    //        }
+    //        return false;
+    //    }
 
-        bool CritChance(int hitChance)
-        {
-            int randomNumber = Random.Range(0, 101);
-            if(randomNumber <= hitChance)
-            {
-                return true;
-            }
+    //    bool CritChance(int hitChance)
+    //    {
+    //        int randomNumber = Random.Range(0, 101);
+    //        if(randomNumber <= hitChance)
+    //        {
+    //            return true;
+    //        }
 
-            else 
-            { 
-                return false; 
-            }
-        }
-    }
+    //        else 
+    //        { 
+    //            return false; 
+    //        }
+    //    }
+    //}
 }

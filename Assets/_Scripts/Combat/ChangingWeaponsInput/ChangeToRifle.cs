@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ChangeToRifle : CurrentWeapon
+public class ChangeToRifle : WeaponSelector
 {
-    public void ChangeWeapon(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            WeaponType type = WeaponType.Rifle;
-        }
-    }
+    //public void ChangeWeapon(InputAction.CallbackContext context)
+    //{
+    //    if (context.performed)
+    //    {
+    //        WeaponType type = WeaponType.Rifle;
+    //    }
+    //}
 }

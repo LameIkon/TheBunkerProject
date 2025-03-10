@@ -4,6 +4,6 @@ public class Attack : Weapon
 {
     public void Shoot()
     {  
-        Fire();       
+        //Fire();       
     }
 }

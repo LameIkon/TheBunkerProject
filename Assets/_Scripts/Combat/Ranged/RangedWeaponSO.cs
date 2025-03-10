@@ -4,7 +4,7 @@ using UnityEngine;
 public class RangedWeaponSO : WeaponStats
 {
     public RangedWeaponType _RangedWeaponCategory;
-    
+
     [Space(5f)] 
     [Header("Ammunition")]
     public GameObject _BulletPrefab;
@@ -46,11 +46,4 @@ public class RangedWeaponSO : WeaponStats
             SetAmmoToMax();
         }
     }
-}
-
-public enum RangedWeaponType
-{
-    Pistol,
-    Shotgun,
-    Rifle
 }

@@ -14,8 +14,8 @@ public class AmmoCounter : MonoBehaviour
     {
         { RangedWeaponType.Pistol, 0 },
         { RangedWeaponType.Rifle, 1 },
-        { RangedWeaponType.Shotgun, 2 },
-        { RangedWeaponType.Knife, 3 }
+        { RangedWeaponType.Shotgun, 2 }
+        //{ RangedWeaponType.Knife, 3 }
     };
 
     private void Update()
@@ -29,15 +29,15 @@ public class AmmoCounter : MonoBehaviour
     {
         _currentWeapon._weapon.UpdateAmmoCount();
 
-        if(_currentWeapon._weapon._RangedWeaponCategory != RangedWeaponType.Knife)
-        {
-            _ammoText.text = ammoCount.GetValue().ToString();
-        }
+        //if(_currentWeapon._weapon._RangedWeaponCategory != RangedWeaponType.Knife)
+        //{
+        //    _ammoText.text = ammoCount.GetValue().ToString();
+        //}
 
-        else if (_currentWeapon._weapon._RangedWeaponCategory == RangedWeaponType.Knife)
-        {
-            _ammoText.text = "∞";
-        }        
+        //else if (_currentWeapon._weapon._RangedWeaponCategory == RangedWeaponType.Knife)
+        //{
+        //    _ammoText.text = "∞";
+        //}        
     }
 
     private void DisplayAmmoSprite()
@@ -61,27 +61,27 @@ public class AmmoCounter : MonoBehaviour
 
     private void WeaponSelection()
     {
-        for (int i = 0; i < _Weapons.Length; i++)
-        {
-            if (_Weapons[i]._weapon._RangedWeaponCategory == RangedWeaponType.Knife && CurrentWeapon._IsKnife)
-            {
-                _currentWeapon = _Weapons[i];
-            }
+        //for (int i = 0; i < _Weapons.Length; i++)
+        //{
+        //    if (_Weapons[i]._weapon._RangedWeaponCategory == RangedWeaponType.Knife && WeaponSelector._IsKnife)
+        //    {
+        //        _currentWeapon = _Weapons[i];
+        //    }
 
-            else if (_Weapons[i]._weapon._RangedWeaponCategory == RangedWeaponType.Pistol && CurrentWeapon._IsPistol)
-            {
-                _currentWeapon = _Weapons[i];
-            }
+        //    else if (_Weapons[i]._weapon._RangedWeaponCategory == RangedWeaponType.Pistol && WeaponSelector._IsPistol)
+        //    {
+        //        _currentWeapon = _Weapons[i];
+        //    }
 
-            else if (_Weapons[i]._weapon._RangedWeaponCategory == RangedWeaponType.Rifle && CurrentWeapon._IsRifle)
-            {
-                _currentWeapon = _Weapons[i];
-            }
+        //    else if (_Weapons[i]._weapon._RangedWeaponCategory == RangedWeaponType.Rifle && WeaponSelector._IsRifle)
+        //    {
+        //        _currentWeapon = _Weapons[i];
+        //    }
 
-            else if (_Weapons[i]._weapon._RangedWeaponCategory == RangedWeaponType.Shotgun && CurrentWeapon._IsShotgun)
-            {
-                _currentWeapon = _Weapons[i];
-            }
-        }
+        //    else if (_Weapons[i]._weapon._RangedWeaponCategory == RangedWeaponType.Shotgun && WeaponSelector._IsShotgun)
+        //    {
+        //        _currentWeapon = _Weapons[i];
+        //    }
+        //}
     }
 }

@@ -45,12 +45,12 @@ public class PlayerController : MonoBehaviour, IMovable
         CrouchingIdle,
         WalkingBackwards
     }
-    public enum WeaponType // What weapon player is holding - changes depending what player is holding
-    {
-        Unarmed,
-        Knife,
-        Gun
-    }
+    //public enum WeaponType // What weapon player is holding - changes depending what player is holding
+    //{
+    //    Unarmed,
+    //    Knife,
+    //    Gun
+    //}
 
     public ActionState actionState = ActionState.Idle;
     public WeaponType weaponType = WeaponType.Unarmed;
@@ -58,13 +58,13 @@ public class PlayerController : MonoBehaviour, IMovable
 
     private void OnEnable()
     {
-        CurrentWeapon.OnWeaponChanged += UpdateWeaponType;
+        WeaponSelector.OnWeaponChanged += CheckWeaponType;
         RotationManager.OnFlipped += UpdateMovement;
     }
 
     private void OnDisable()
     {
-        CurrentWeapon.OnWeaponChanged -= UpdateWeaponType;
+        WeaponSelector.OnWeaponChanged -= CheckWeaponType;
         RotationManager.OnFlipped -= UpdateMovement;
     }
 
@@ -323,30 +323,17 @@ public class PlayerController : MonoBehaviour, IMovable
         }
     }
 
-    private void UpdateWeaponType()
+    private void CheckWeaponType(WeaponType weaponType)
     {
-
-        if (CurrentWeapon._currentWeapon != null)
+        if (weaponType != WeaponType.Unarmed) // Can only flip if not armed. RotationManager will handle weapons
         {
-            if (weaponType != WeaponType.Unarmed) // Can only flip if not armed. RotationManager will handle weapons
-            {
-                RotationManager.CanRotate = true;
-            }
-            else
-            {
-                RotationManager.CanRotate = false;
-            }
-
-            weaponType = CurrentWeapon._currentWeapon._weapon._RangedWeaponCategory; // Convert enum to string
-            
-
-            if ("Knife" == weaponType) // REMOVE LATER. only to show animations work. reason is we dont have a unarmed state at the moment
-            {
-                weaponType = "Unarmed";
-            }
-
-            AnimationHandler($"{actionState}{weaponType}"); // Combine the 2 strings together. The string name needs to be specific to the named animation
+            RotationManager.CanRotate = true;
         }
+        else
+        {
+            RotationManager.CanRotate = false;
+        }
+        AnimationHandler($"{actionState}{weaponType}"); // Combine the 2 strings together. The string name needs to be specific to the named animation
     }
 
     private void AnimationHandler(string state)
