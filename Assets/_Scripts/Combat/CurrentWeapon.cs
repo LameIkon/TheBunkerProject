@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,12 +13,14 @@ public class CurrentWeapon : MonoBehaviour
     public MeleeWeaponSO currentMeleeWeapon;
 
     //private WeaponType _currentWeaponType;
-    public WeaponType _WeaponCategory;
+    public WeaponType _WeaponType;
     private bool _isFiring = false; //we use this in order to have AUTO fire when holding down
 
     public Weapon[] _Weapons;
     public static Weapon _currentWeapon;
+    
 
+    private Dictionary<int, Weapon> _weas;
 
     public enum WeaponType
     {
@@ -31,7 +34,7 @@ public class CurrentWeapon : MonoBehaviour
 
     private void Update()
     {
-        WeaponSelection();
+        EquipWeapon();
         if (_isFiring)
         {
             UseWeapon(_currentWeapon);
@@ -58,10 +61,10 @@ public class CurrentWeapon : MonoBehaviour
        
     }   
 
-    public void WeaponSelection()
+    public void EquipWeapon()
     {
         // Iterate over weapons and select based on WeaponType
-        foreach (Weapon weapon in _Weapons)
+        foreach (WeaponType weapon in _weaponType)
         {
             if (weapon._WeaponCategory == _currentWeaponType)
             {
@@ -72,11 +75,18 @@ public class CurrentWeapon : MonoBehaviour
         OnWeaponChanged.Invoke(); // For other scripts to trigger. For example players animation, that needs to know what weapon to hold
     }
 
-    public void SetCurrentWeapon(WeaponType weaponType) // Called by other scripts
-    {
-        _currentWeaponType = weaponType;
-    }
+    //public void SetCurrentWeapon(WeaponType weaponType) // Called by other scripts
+    //{
+    //    _currentWeaponType = weaponType;
+    //}
 
+    public void ChangeWeapon(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Debug.Log(context);
+        }
+    }
 
 
 }
