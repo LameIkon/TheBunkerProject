@@ -36,24 +36,8 @@ public class PlayerController : MonoBehaviour, IMovable
     private float _ladderCenteringSpeed = 5f;
     private bool _isCenteringLadder;
 
-    public enum ActionState // What type of movement player is doing - changes depending what player do of movement
-    {
-        Idle,
-        Walking,
-        Running,
-        CrouchingWalking,
-        CrouchingIdle,
-        WalkingBackwards
-    }
-    //public enum WeaponType // What weapon player is holding - changes depending what player is holding
-    //{
-    //    Unarmed,
-    //    Knife,
-    //    Gun
-    //}
-
-    public ActionState actionState = ActionState.Idle;
-    public WeaponType weaponType = WeaponType.Unarmed;
+    private EntityActionState _currentActionState = EntityActionState.Idle;
+    private WeaponType _currentWeaponType = WeaponType.Unarmed;
 
 
     private void OnEnable()
@@ -154,28 +138,28 @@ public class PlayerController : MonoBehaviour, IMovable
         bool isFacingRight = !isFacingLeft;
         bool isMovingOpposite = (isFacingLeft && _movementX > 0) || (isFacingRight && _movementX < 0);
 
-        if (weaponType != WeaponType.Unarmed && isMovingOpposite)
+        if (_currentWeaponType != WeaponType.Unarmed && isMovingOpposite)
         {
             _currentMoveSpeed = _movementConfig.BackwardsMoveSpeed;
-            actionState = _movementX != 0 ? ActionState.WalkingBackwards : ActionState.Idle;
+            _currentActionState = _movementX != 0 ? EntityActionState.WalkingBackwards : EntityActionState.Idle;
         }
         else if (_isRunning)
         {
             _currentMoveSpeed = _movementConfig.RunningSpeed;
-            actionState = _movementX != 0 ? ActionState.Running : ActionState.Idle;
+            _currentActionState = _movementX != 0 ? EntityActionState.Running : EntityActionState.Idle;
         }
         else if (_isCrouching)
         {
             _currentMoveSpeed = _movementConfig.CrouchingSpeed;
-            actionState = _movementX != 0 ? ActionState.CrouchingWalking : ActionState.CrouchingIdle;
+            _currentActionState = _movementX != 0 ? EntityActionState.CrouchingWalking : EntityActionState.CrouchingIdle;
         }
         else
         {
             _currentMoveSpeed = _movementConfig.WalkingSpeed;
-            actionState = _movementX != 0 ? ActionState.Walking : ActionState.Idle;
+            _currentActionState = _movementX != 0 ? EntityActionState.Walking : EntityActionState.Idle;
         }
 
-        AnimationHandler($"{actionState.ToString()}{weaponType.ToString()}"); // Combine together to a string
+        AnimationHandler($"{_currentActionState.ToString()}{_currentWeaponType.ToString()}"); // Combine together to a string
     }
 
 
@@ -333,7 +317,8 @@ public class PlayerController : MonoBehaviour, IMovable
         {
             RotationManager.CanRotate = false;
         }
-        AnimationHandler($"{actionState}{weaponType}"); // Combine the 2 strings together. The string name needs to be specific to the named animation
+        _currentWeaponType = weaponType;
+        AnimationHandler($"{_currentActionState}{weaponType}"); // Combine the 2 strings together. The string name needs to be specific to the named animation
     }
 
     private void AnimationHandler(string state)

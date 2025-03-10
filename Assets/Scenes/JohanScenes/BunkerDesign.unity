@@ -4151,10 +4151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06a5998d530518a4e88df7d867194f0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentRangedWeapon: {fileID: 0}
-  _currentMeleeWeapon: {fileID: 0}
   _playerInput: {fileID: 852640001}
-  _WeaponType: 0
+  _currentWeaponType: 0
 --- !u!114 &1509229483 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6719046680071295589, guid: eb663a81479324d48b0efa0af53a9e24, type: 3}

@@ -13,7 +13,7 @@ public enum RangedWeaponType
     Rifle
 }
 
-// Combined together. Reason ive split it up is for the scriptable objects make it easier to select the right. otherwise i need all together
+// Combined together. Reason ive split it up above is for the scriptable objects make it easier to select the right. otherwise i need all together
 public enum WeaponType
 {
     Unarmed,
