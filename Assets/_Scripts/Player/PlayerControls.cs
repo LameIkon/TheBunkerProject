@@ -125,6 +125,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeWeapon"",
+                    ""type"": ""Value"",
+                    ""id"": ""ca0c5796-0809-494d-b6e8-c627704c9881"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -378,6 +387,105 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1fcd4fd9-326c-4d57-a26b-fce1eebde243"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""02da0eaf-12b6-4ba8-b8b4-e251e5912541"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c768af1-6e8b-4f15-9c63-9016898952b0"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56cb61a4-3f24-4b77-9011-873fdc48ef58"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""762b0aff-14d7-45f2-a9d5-38d2734830e4"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0af208f6-daba-43c1-86f0-2485d65cb147"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""717f5505-c772-4d15-8b91-eb12914ba58c"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6174d89e-c755-45b7-8259-521651920d3d"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""238ea06c-f3a1-44ef-b6a8-955fd939448d"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1004,6 +1112,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_ChangeToPistol = m_Player.FindAction("ChangeToPistol", throwIfNotFound: true);
         m_Player_ChangeToRifle = m_Player.FindAction("ChangeToRifle", throwIfNotFound: true);
         m_Player_ChangeToShotgun = m_Player.FindAction("ChangeToShotgun", throwIfNotFound: true);
+        m_Player_ChangeWeapon = m_Player.FindAction("ChangeWeapon", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1091,6 +1200,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ChangeToPistol;
     private readonly InputAction m_Player_ChangeToRifle;
     private readonly InputAction m_Player_ChangeToShotgun;
+    private readonly InputAction m_Player_ChangeWeapon;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -1106,6 +1216,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @ChangeToPistol => m_Wrapper.m_Player_ChangeToPistol;
         public InputAction @ChangeToRifle => m_Wrapper.m_Player_ChangeToRifle;
         public InputAction @ChangeToShotgun => m_Wrapper.m_Player_ChangeToShotgun;
+        public InputAction @ChangeWeapon => m_Wrapper.m_Player_ChangeWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1148,6 +1259,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ChangeToShotgun.started += instance.OnChangeToShotgun;
             @ChangeToShotgun.performed += instance.OnChangeToShotgun;
             @ChangeToShotgun.canceled += instance.OnChangeToShotgun;
+            @ChangeWeapon.started += instance.OnChangeWeapon;
+            @ChangeWeapon.performed += instance.OnChangeWeapon;
+            @ChangeWeapon.canceled += instance.OnChangeWeapon;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1185,6 +1299,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ChangeToShotgun.started -= instance.OnChangeToShotgun;
             @ChangeToShotgun.performed -= instance.OnChangeToShotgun;
             @ChangeToShotgun.canceled -= instance.OnChangeToShotgun;
+            @ChangeWeapon.started -= instance.OnChangeWeapon;
+            @ChangeWeapon.performed -= instance.OnChangeWeapon;
+            @ChangeWeapon.canceled -= instance.OnChangeWeapon;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1424,6 +1541,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnChangeToPistol(InputAction.CallbackContext context);
         void OnChangeToRifle(InputAction.CallbackContext context);
         void OnChangeToShotgun(InputAction.CallbackContext context);
+        void OnChangeWeapon(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
