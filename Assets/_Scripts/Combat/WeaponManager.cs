@@ -15,6 +15,6 @@ public class WeaponManager : MonoBehaviour
 
     private void Update()
     {
-        MeleeWeaponHandler.UpdateCooldowns(); // Handles attack rate for every instance of weapons... idk if this is performance friendly
+        MeleeWeaponHandler.UpdateCooldowns(); // Handles attack cooldown for every instance of weapons... idk if this is performance friendly
     }
 }

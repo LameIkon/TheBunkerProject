@@ -13,7 +13,9 @@ public class SOWeaponStats : ScriptableObject
 
     [Space(5f)]
     [Header("Critical Damage")]
+    [Tooltip("CritChance is from 0-100. Each number is considered as %.")]
     public int SO_CritChance; // Chance to deal critical damage
+    [Tooltip(" CritMultiplier will multiply with the given number. so the number 2 means you multiply 'damage*2'")]
     public float SO_CritMultiplyer; // Extra damage from a critical hit
 
 
