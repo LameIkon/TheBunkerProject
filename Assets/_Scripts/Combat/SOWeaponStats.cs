@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class SOWeaponStats : ScriptableObject
 {
-    [Space(5f)]
     [Header("Stats")]
     public float SO_MinDamage;
     public float SO_MaxDamage; 
     public float SO_AttackRate; // Speed of the attacks (attacks per second)
     public float SO_AttackRange; // How far the weapon can hit (range of attack)
 
-    [Space(5f)]
     [Header("Critical Damage")]
     [Tooltip("CritChance is from 0-100. Each number is considered as %.")]
     public int SO_CritChance; // Chance to deal critical damage
