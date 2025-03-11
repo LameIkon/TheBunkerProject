@@ -4,7 +4,8 @@ using System.Collections.Generic;
 public enum MeleeWeaponType
 {
     Unarmed,
-    Knife
+    Knife,
+    GhoulMelee
 }
 
 public enum RangedWeaponType
@@ -19,6 +20,7 @@ public enum WeaponType
 {
     Unarmed,
     Knife,
+    GhoulMelee,
     Pistol,
     Rifle,
     Shotgun
@@ -28,8 +30,13 @@ public static class WeaponTypes // Connect WeaponType to the two other enums.
 {
     private static readonly Dictionary<WeaponType, MeleeWeaponType> _meleeWeapontype = new() // Connect type to melee weapons
     {
+        // Humans Weapons
         {WeaponType.Unarmed, MeleeWeaponType.Unarmed },
-        {WeaponType.Knife, MeleeWeaponType.Knife }
+        {WeaponType.Knife, MeleeWeaponType.Knife },
+
+        // Enemies Weapons
+        {WeaponType.GhoulMelee, MeleeWeaponType.GhoulMelee }
+
     };
 
     private static readonly Dictionary<WeaponType, RangedWeaponType> _rangedWeapontype = new() // Connect type to ranged weapons

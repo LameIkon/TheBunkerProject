@@ -54,7 +54,7 @@ public static class MeleeWeaponHandler
         }
 
         _activeCoroutines[attackerId].Add(meleeWeapon);
-        WeaponManager.Instance.StartMeleeWeaponCooldown(attackerId, meleeWeapon, weaponData.SO_AttackRate); // Starts the cooldown for the weapon. Dont call this every frame it causes bugs.
+        GlobalWeaponManager.Instance.StartMeleeWeaponCooldown(attackerId, meleeWeapon, weaponData.SO_AttackRate); // Starts the cooldown for the weapon. Dont call this every frame it causes bugs.
     }
 
 
@@ -100,7 +100,7 @@ public static class MeleeWeaponHandler
             attackerCooldowns[meleeWeapon] -= Time.deltaTime; // Reduce cooldown time
             yield return null;
         }
-        WeaponManager.Instance.CoroutineFinished(); // For debugging
+        GlobalWeaponManager.Instance.CoroutineFinished(); // For debugging
         attackerCooldowns.Remove(meleeWeapon); // Once cooldown is done, remove the weapon from the cooldown list
         _activeCoroutines[attackerId].Remove(meleeWeapon); // Remove the coroutine from the list
     }

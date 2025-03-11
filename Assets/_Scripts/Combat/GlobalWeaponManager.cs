@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponManager : MonoBehaviour
+public class GlobalWeaponManager : MonoBehaviour
 {
     [SerializeField] private SORangedWeapon[] _rangedWeapons; // For the game to know how many scriptable ranged weapons exist
     [SerializeField] private SOMeleeWeapon[] _meleeWeapons; // For the game to know how many scriptable melee weapons exist
 
-    [SerializeField] private int _activeCoroutines = 0; // For debugging. checking how many entities are attacking and is on cooldown
+    [SerializeField] private int _activeCoroutines = 0; // For debugging. checking how many entities are attacking and is on cooldown.
 
-    public static WeaponManager Instance { get; private set; }
+    public static GlobalWeaponManager Instance { get; private set; }
 
     private void Awake()
     {
