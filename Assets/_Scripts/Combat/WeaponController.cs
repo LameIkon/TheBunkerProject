@@ -1,9 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class WeaponController : MonoBehaviour
 {
+
+    private WeaponType _currentWeaponType = WeaponType.Unarmed;
+    private Dictionary<WeaponType, MeleeWeaponType> _meleeWeapontype;
+    private Dictionary<WeaponType, RangedWeaponType> _rangedWeapontype;
+
+
     private float _damage;
-    private RangedWeaponType _gunType;
     private float _fireRate;
     private int _critChance; //25 gives 25% chance
     private float _critDamage; //needs to be in decimal. 1.25 give 125% crit damage
@@ -14,9 +21,19 @@ public abstract class WeaponController : MonoBehaviour
 
     //private RaycastHit2D[] _hits; //for knife attacks. 
 
-    public RangedWeaponSO _weapon; 
+    public SORangedWeapon _weapon; 
     [SerializeField] private Transform _shootingPoint; //where we shoot from
-    
+
+    private void OnEnable()
+    {
+        WeaponSelectionHandler.OnWeaponChanged += WeaponChecker;
+    }
+
+    private void OnDisable()
+    {
+        WeaponSelectionHandler.OnWeaponChanged -= WeaponChecker;
+    }
+
 
     private void Awake()
     {
@@ -32,7 +49,7 @@ public abstract class WeaponController : MonoBehaviour
         //_range = _weapon._Range;
     }
 
-   // public abstract void Shoot(InputAction.CallbackContext context);
+    // public abstract void Shoot(InputAction.CallbackContext context);
 
     //public void Fire()
     //{
@@ -53,7 +70,7 @@ public abstract class WeaponController : MonoBehaviour
     //            KnifeAttack(_shootingPoint.position, _shootingPoint.right, _range);
     //        }
     //    }
-        
+
 
     //    void RayCastShoot(Vector2 origin, Vector2 direction, float range) //can add a layermask to check if the layer is hit.
     //    {
@@ -86,9 +103,9 @@ public abstract class WeaponController : MonoBehaviour
     //                        enemy.TakeDamage(_damage);
     //                        print("no critical hit");
     //                    }
-                       
+
     //                }     
-                    
+
     //                ///Setup logic here for when a collider is hit but dont have Health script on it, and needs to go through. ex. Ladders/doors.
     //            }
     //        }
@@ -162,5 +179,25 @@ public abstract class WeaponController : MonoBehaviour
     //            return false; 
     //        }
     //    }
-    //}
+
+    private void Attack()
+    {
+        // something
+    }
+
+    private void WeaponChecker(WeaponType state)
+    {
+        _currentWeaponType = state;
+
+
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed) //Fires an event whenever action/key is pressed. Together with the one below the whole method basicly chekcs if the key is hold down. 
+        {
+            Attack();
+
+        }
+    }
 }

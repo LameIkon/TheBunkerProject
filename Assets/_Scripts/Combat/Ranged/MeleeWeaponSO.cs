@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MeleeWeapon", menuName = "Weapons/MeleeWeapon")]
-public class MeleeWeaponSO : WeaponStats
+public class MeleeWeaponSO : SOWeaponStats
 {
     public MeleeWeaponType _MeleeWeaponCategory;
 

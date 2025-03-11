@@ -20,7 +20,7 @@ public class AmmoCounter : MonoBehaviour
 
     private void Update()
     {
-        SetAmmoCount(_currentWeapon._weapon._CurrentAmmoCount);
+        SetAmmoCount(_currentWeapon._weapon.SO_CurrentAmmoCount);
         DisplayAmmoSprite();
         WeaponSelection();
     }

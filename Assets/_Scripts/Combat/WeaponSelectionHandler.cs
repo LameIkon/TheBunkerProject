@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 
 
-public class WeaponSelector : MonoBehaviour
+public class WeaponSelectionHandler : MonoBehaviour
 {
     public static event Action<WeaponType> OnWeaponChanged; // Event 
     [SerializeField] private PlayerInput _playerInput;
@@ -37,7 +37,7 @@ public class WeaponSelector : MonoBehaviour
             {1, WeaponType.Knife },
             {2, WeaponType.Rifle },
             {3, WeaponType.Shotgun },
-            {4, WeaponType.Unarmed },
+            {4, WeaponType.Pistol },
             {5, WeaponType.Unarmed },
             {6, WeaponType.Unarmed },
             {7, WeaponType.Unarmed },
