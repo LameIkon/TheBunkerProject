@@ -132,7 +132,8 @@ MonoBehaviour:
   _capsuleCollider: {fileID: 6487814263742240087}
   _playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
+  _targetHealth: {fileID: 0}
 --- !u!114 &6093644382444448879
 MonoBehaviour:
   m_ObjectHideFlags: 0

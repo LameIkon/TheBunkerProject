@@ -18,7 +18,7 @@ public class MeleeEnemy : MonoBehaviour
     [Header("Player Layer")]
     [SerializeField] private LayerMask _playerLayer;
 
-    private Health _playerHealth;
+    private Health _targetHealth;
     private Animator _anim;
     private sEnemyPatrol _enemyPatrol;
     float _coolDownTimer = Mathf.Infinity;
@@ -56,7 +56,7 @@ public class MeleeEnemy : MonoBehaviour
 
         if (hit.collider != null)
         {
-            _playerHealth = hit.transform.GetComponent<Health>();
+            _targetHealth = hit.transform.GetComponent<Health>();
         }
 
         return hit.collider != null;
@@ -75,7 +75,7 @@ public class MeleeEnemy : MonoBehaviour
     {
         if (PlayerInRange())
         {
-            _playerHealth.TakeDamage(_damage);
+            _targetHealth.TakeDamage(_damage);
         }
     }
 }
