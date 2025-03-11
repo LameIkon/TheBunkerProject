@@ -12,4 +12,9 @@ public class WeaponManager : MonoBehaviour
         RangedWeaponHandler.Initialize(_rangedWeapons);
         MeleeWeaponHandler.Initialize(_meleeWeapons);
     }
+
+    private void Update()
+    {
+        MeleeWeaponHandler.UpdateCooldowns(); // Handles attack rate for every instance of weapons... idk if this is performance friendly
+    }
 }

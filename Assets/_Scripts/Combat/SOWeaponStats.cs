@@ -8,7 +8,7 @@ public class SOWeaponStats : ScriptableObject
     [Header("Stats")]
     public float SO_MinDamage;
     public float SO_MaxDamage; 
-    public float SO_AttackSpeed; // Speed of the attacks (attacks per second)
+    public float SO_AttackRate; // Speed of the attacks (attacks per second)
     public float SO_AttackRange; // How far the weapon can hit (range of attack)
 
     [Space(5f)]
@@ -23,6 +23,7 @@ public class SOWeaponStats : ScriptableObject
 
         if (Random.Range(0, 100) <= SO_CritChance) 
         {
+            Debug.Log("crit strike");
             damage *= SO_CritMultiplyer;
         }
 

@@ -9,6 +9,7 @@ public class SOMeleeWeapon : SOWeaponStats
 
     public void PerfomAttack(Transform attacker)
     {
+
         Vector2 attackOrigin = attacker.position; // attacker position
         Vector2 attackDirection = attacker.transform.right * Mathf.Sign(attacker.parent.localScale.x); ; // attack direction
 
