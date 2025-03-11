@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec5c4dd622f26cc4ba36180b6ff57ed5, type: 3}
   m_Name: Knife
   m_EditorClassIdentifier: 
-  SO_MinDamage: 0
-  SO_MaxDamage: 0
-  SO_AttackSpeed: 0
-  SO_Range: 0
+  SO_MinDamage: 1
+  SO_MaxDamage: 2
+  SO_AttackSpeed: 1
+  SO_AttackRange: 1
   SO_CritChance: 0
   SO_CritMultiplyer: 0
   SO_MeleeWeaponType: 1

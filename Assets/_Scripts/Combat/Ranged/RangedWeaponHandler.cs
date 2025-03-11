@@ -7,7 +7,7 @@ public static class RangedWeaponHandler
     private static Dictionary<RangedWeaponType, SORangedWeapon> _rangedWeaponData;
 
 
-    public static void Initialize(SORangedWeapon[] allRangedWeaponTypes)
+    public static void Initialize(SORangedWeapon[] allRangedWeaponTypes) // Check what type of weapons exist
     {
         _rangedWeaponData = new Dictionary<RangedWeaponType, SORangedWeapon>();
 
@@ -21,8 +21,9 @@ public static class RangedWeaponHandler
     public static void PerfomRangedAttack(RangedWeaponType rangedWeapon)
     {
         if (_rangedWeaponData.TryGetValue(rangedWeapon, out SORangedWeapon weaponData))
-        {   
-            
+        {
+            Debug.Log("attacked using: " + weaponData.SO_RangedWeapontype);
+            weaponData.PerformAttack();
         }
     }
 }

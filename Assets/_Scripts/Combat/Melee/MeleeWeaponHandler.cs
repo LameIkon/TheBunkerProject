@@ -18,9 +18,13 @@ public static class MeleeWeaponHandler
     }
 
 
-    public static void PerformMeleeAttack(MeleeWeaponType meleeWeapon)
+    public static void PerformMeleeAttack(MeleeWeaponType meleeWeapon, Transform attacker)
     {
-        Debug.Log(meleeWeapon);
+        if (_meleeWeaponData.TryGetValue(meleeWeapon, out SOMeleeWeapon weaponData)) // Get the specific weapontype scriptable 
+        {
+            Debug.Log("attacked using: " + weaponData.SO_MeleeWeaponType);
+            weaponData.PerfomAttack(attacker); // Access scriptable object method
+        }
     }
 
 }

@@ -14,6 +14,12 @@ public class SORangedWeapon : SOWeaponStats
     private bool _fullMagazine;
     private bool _emptyMagazine;
 
+    public void PerformAttack()
+    {
+
+    }
+
+
     public void SetAmmoToMax() //Used in Awake in Weapon.cs
     {
         SO_CurrentAmmoCount.SetValue(_MaxAmmoCapacity);

@@ -6,6 +6,7 @@ public class WeaponController : MonoBehaviour
 {
 
     [SerializeField]private WeaponType _currentWeaponType = WeaponType.Unarmed;
+    [SerializeField] private Transform _attackPoint;
 
     private void OnEnable()
     {
@@ -35,7 +36,7 @@ public class WeaponController : MonoBehaviour
         // Check what type of weapon you currently have
         if (WeaponTypes.TryGetMeleeType(_currentWeaponType, out MeleeWeaponType meleeWeapon)) // You use melee
         {
-            MeleeWeaponHandler.PerformMeleeAttack(meleeWeapon);
+            MeleeWeaponHandler.PerformMeleeAttack(meleeWeapon, _attackPoint); // use meleeWeapon and know its own position
         }
         else if (WeaponTypes.TryGetRangedType(_currentWeaponType, out RangedWeaponType rangedWeapon)) // You use range
         {

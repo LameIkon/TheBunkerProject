@@ -13,8 +13,6 @@ public class MeleeWeapon : WeaponBase
     private RaycastHit2D[] _hits;
     private List<IDamageable> _iDamageables = new List<IDamageable>(); // This List is made for future profing the way we handle hits.
 
-
-    // In the future the implementation should change such that it relies on the animation that plays when attacking.
     public override IEnumerator Attack(AttackTestScript player)
     {
         // Takes all the GameObject that it overlaps with 

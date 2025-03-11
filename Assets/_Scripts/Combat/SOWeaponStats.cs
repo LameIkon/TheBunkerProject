@@ -6,9 +6,10 @@ public class SOWeaponStats : ScriptableObject
 {
     [Space(5f)]
     [Header("Stats")]
-    public float SO_MinDamage, SO_MaxDamage; // Variation in damage
+    public float SO_MinDamage;
+    public float SO_MaxDamage; 
     public float SO_AttackSpeed; // Speed of the attacks (attacks per second)
-    public float SO_Range; // How far the weapon can hit (range of attack)
+    public float SO_AttackRange; // How far the weapon can hit (range of attack)
 
     [Space(5f)]
     [Header("Critical Damage")]
@@ -16,7 +17,7 @@ public class SOWeaponStats : ScriptableObject
     public float SO_CritMultiplyer; // Extra damage from a critical hit
 
 
-    protected int DamageOutput() // DELETE MAYBE, since we might need an damage handler that can combine all stats together
+    protected int DamageOutput()
     {
         float damage = Random.Range(SO_MinDamage, SO_MaxDamage);
 
