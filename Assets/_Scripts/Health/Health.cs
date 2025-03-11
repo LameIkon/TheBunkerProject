@@ -22,7 +22,7 @@ public class Health : MonoBehaviour, IDamageable
     public void TakeDamage (float damage) //used for combat
     {
         _health.ApplyChange(-damage);
-        Debug.Log(_health._Value);
+        //Debug.Log(_health._Value);
         if(_health._Value <= 0)
         {   
             //need to implent death animation depending on if its monster or player

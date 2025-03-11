@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,6 @@ public static class MeleeWeaponHandler
 {
     public static Dictionary<string, Dictionary<MeleeWeaponType, float>> _weaponCooldowns = new Dictionary<string, Dictionary<MeleeWeaponType, float>>();  // For weapon cooldown. The dictionary holds a string and then another dictionary. First it looks for an entity and this entity(like player) can hold multiple weapons with their cooldowns 
     private static Dictionary<MeleeWeaponType, SOMeleeWeapon> _meleeWeaponData; // Access to scriptableObject from the given enum
-
 
     public static void Initialize(SOMeleeWeapon[] allMeleeWeaponTypes) //Populate dictionary with all melee weapons in an awake method
     {
@@ -23,6 +23,7 @@ public static class MeleeWeaponHandler
     public static void PerformMeleeAttack(MeleeWeaponType meleeWeapon, Transform attacker)
     {
         string attackerId = attacker.GetInstanceID().ToString(); // Uniq id to the instance of the one perfoming the attack
+        Debug.Log("unique attacker id: " + attackerId);
         if (!_weaponCooldowns.ContainsKey(attackerId)) // If there is no such id then save it
         {
             _weaponCooldowns[attackerId] = new Dictionary<MeleeWeaponType, float>();
@@ -37,10 +38,11 @@ public static class MeleeWeaponHandler
         {
             Debug.Log("attacked using: " + weaponData.SO_MeleeWeaponType);
             weaponData.PerfomAttack(attacker); // Access scriptable object method
+            WeaponManager.Instance.StartMeleeWeaponCooldown(attackerId, meleeWeapon, weaponData.SO_AttackRate); // Starts the cooldown for the weapon. Dont call this every frame it causes bugs.
             //_weaponCooldowns[attackerId][meleeWeapon] = weaponData.SO_AttackRate; // Set the weapon on cooldown
-            WeaponManager.Instance.StartMeleeWeaponCooldownCoroutine(attackerId, meleeWeapon, weaponData.SO_AttackRate); // Starts the cooldown for the weapon
         }
     }
+
 
     //public static void UpdateCooldowns() // WeaponManager handles cooldown of all weapons
     //{
@@ -71,6 +73,7 @@ public static class MeleeWeaponHandler
     {
         if (!_weaponCooldowns.ContainsKey(attackerId)) // If attacker doesn't exist in the cooldown dictionary, add it
         {
+            Debug.Log(attackerId);
             _weaponCooldowns[attackerId] = new Dictionary<MeleeWeaponType, float>();
         }
 
@@ -82,9 +85,9 @@ public static class MeleeWeaponHandler
         {
             attackerCooldowns[meleeWeapon] -= Time.deltaTime; // Reduce cooldown time
             yield return null;
-        }     
-        attackerCooldowns.Remove(meleeWeapon); // Once cooldown is done, remove the weapon from the cooldown list
+        }
         WeaponManager.Instance.CoroutineFinished();
+        attackerCooldowns.Remove(meleeWeapon); // Once cooldown is done, remove the weapon from the cooldown list
     }
 
 }

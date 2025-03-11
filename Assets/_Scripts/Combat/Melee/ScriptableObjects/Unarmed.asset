@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SO_MinDamage: 1
   SO_MaxDamage: 2
-  SO_AttackRate: 0
+  SO_AttackRate: 1
   SO_AttackRange: 1
-  SO_CritChance: 0
+  SO_CritChance: 2
   SO_CritMultiplyer: 0
   SO_verticalAttackRange: 1
   SO_MeleeWeaponType: 0
