@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4029300360560211347}
   - component: {fileID: 6487814263742240087}
   - component: {fileID: 1081334169626308652}
-  - component: {fileID: 2940115347578413111}
-  - component: {fileID: 5317518454824638425}
+  - component: {fileID: 7651652058875381652}
+  - component: {fileID: 6093644382444448879}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: {fileID: 0}
   _startHealth: {fileID: 11400000, guid: 91369f6394f38314892e02c1b2ede851, type: 2}
---- !u!114 &2940115347578413111
+--- !u!114 &7651652058875381652
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 374922586706852480}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 894fdb4e3975e564890b433ba75cd8eb, type: 3}
+  m_Script: {fileID: 11500000, guid: a5fd4f388492402498cc65b957ed507d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 5
@@ -132,8 +132,8 @@ MonoBehaviour:
   _capsuleCollider: {fileID: 6487814263742240087}
   _playerLayer:
     serializedVersion: 2
-    m_Bits: 1024
---- !u!114 &5317518454824638425
+    m_Bits: 0
+--- !u!114 &6093644382444448879
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 374922586706852480}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 715ab059a0c881b4c9c1730b13bc7648, type: 3}
+  m_Script: {fileID: 11500000, guid: 992a34980a9777540981abe732dae0ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _leftEdge: {fileID: 8949416269299487845}

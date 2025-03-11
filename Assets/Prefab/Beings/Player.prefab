@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac01769ff6da034d80bc335c2799688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weapon: {fileID: 11400000, guid: 487b6e8cb30f30f4eace62e3648579cd, type: 2}
-  _shootingPoint: {fileID: 957217721741931008}
+  _currentWeaponType: 0
+  _attackPoint: {fileID: 0}
 --- !u!1 &1496480575782166289
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,11 +105,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8975101443322775967}
-  - {fileID: 6819334258907069483}
-  - {fileID: 4973162225966727605}
-  - {fileID: 905243396094833413}
+  m_Children: []
   m_Father: {fileID: 2757628810558592401}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2388096168288962995
@@ -156,53 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac01769ff6da034d80bc335c2799688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weapon: {fileID: 11400000, guid: 97be78f0d37a0ff48958f9666e1d5d4e, type: 2}
-  _shootingPoint: {fileID: 957217721741931008}
---- !u!1 &2477404503397195206
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4973162225966727605}
-  - component: {fileID: 4611292935109410602}
-  m_Layer: 0
-  m_Name: ChangeToRifle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4973162225966727605
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2477404503397195206}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 337131219538436362}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4611292935109410602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2477404503397195206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9be8a17786ed9c84aacf39bfcfecd59f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Weapons: []
+  _currentWeaponType: 0
+  _attackPoint: {fileID: 0}
 --- !u!1 &2816473052666278069
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +179,7 @@ Transform:
   m_GameObject: {fileID: 2816473052666278069}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.56, y: 0, z: 0}
+  m_LocalPosition: {x: 1.0300012, y: 0.6500001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -249,6 +200,9 @@ GameObject:
   - component: {fileID: 2364349366641915018}
   - component: {fileID: 2344034754827274859}
   - component: {fileID: 7959316033241839916}
+  - component: {fileID: 7042057296900772580}
+  - component: {fileID: 760993591631632595}
+  - component: {fileID: 8343961947435198785}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -365,8 +319,8 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2364349366641915018}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: Move
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -379,14 +333,10 @@ MonoBehaviour:
     m_ActionId: bba55449-7c04-441c-a1bf-caa4321a5479
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 280e2677-5779-41f4-aa46-2a2531121817
-    m_ActionName: Player/Look[/Mouse/delta]
-  - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5890848616002762703}
-        m_TargetAssemblyTypeName: CurrentWeapon, Assembly-CSharp
-        m_MethodName: Attack
+      - m_Target: {fileID: 7042057296900772580}
+        m_TargetAssemblyTypeName: WeaponController, Assembly-CSharp
+        m_MethodName: OnAttack
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -439,18 +389,10 @@ MonoBehaviour:
     m_ActionId: 61a4d62e-0c14-4db2-8934-b11f1adc5760
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 2d0e390c-c019-4eb7-a1a2-9e8976a5a491
-    m_ActionName: Player/MoveRight[/Keyboard/d,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5912094d-beee-4230-8145-e06dd3436959
-    m_ActionName: Player/MoveLeft[/Keyboard/a,/Keyboard/leftArrow]
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2364349366641915018}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: UseLatter
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnClimb
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -500,73 +442,9 @@ MonoBehaviour:
     m_ActionName: No Input/New action
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6719046680071295589}
-        m_TargetAssemblyTypeName: ChangeToKnife, Assembly-CSharp
-        m_MethodName: ChangeWeapon
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: b00d9585-44ef-4ba7-9d1d-ae767cc1c9c2
-    m_ActionName: Player/ChangeToKnife[/Keyboard/1]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8553957478019508901}
-        m_TargetAssemblyTypeName: ChangeToPistol, Assembly-CSharp
-        m_MethodName: ChangeWeapon
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 5e96621d-ef48-4b2d-870e-0872bd3d9cfe
-    m_ActionName: Player/ChangeToPistol[/Keyboard/2]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4611292935109410602}
-        m_TargetAssemblyTypeName: ChangeToRifle, Assembly-CSharp
-        m_MethodName: ChangeWeapon
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 263feac9-dfab-4f81-9e9e-aacd340dd908
-    m_ActionName: Player/ChangeToRifle[/Keyboard/3]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4835186120896971822}
-        m_TargetAssemblyTypeName: ChangeToShotgun, Assembly-CSharp
-        m_MethodName: ChangeWeapon
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: a5115edb-2beb-4f98-9e5a-48f612b1ad80
-    m_ActionName: Player/ChangeToShotgun[/Keyboard/4]
-  - m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 2364349366641915018}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: Sprint
+        m_MethodName: OnSprint
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -582,7 +460,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2364349366641915018}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: Crouching
+        m_MethodName: OnCrouch
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -594,6 +472,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 1472c45f-6dc0-4d7d-b2f3-61d93619b413
     m_ActionName: Player/Crouch[/Keyboard/leftCtrl]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 760993591631632595}
+        m_TargetAssemblyTypeName: WeaponSelectionHandler, Assembly-CSharp
+        m_MethodName: ChangeWeapon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ca0c5796-0809-494d-b6e8-c627704c9881
+    m_ActionName: Player/ChangeWeapon[/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4,/Keyboard/5,/Keyboard/6,/Keyboard/7,/Keyboard/8,/Keyboard/9]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -612,13 +506,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 6327884526701069224}
-  _animator: {fileID: 6200498995360149276}
   _playerInput: {fileID: 7853012328190308139}
-  _currentMoveSpeed: 0
-  _walkingSpeed: 5
-  _runningSpeed: 8
-  _crouchingSpeed: 2
-  _backwardsMoveSpeed: 2.5
+  _movementConfig: {fileID: 11400000, guid: 34a185fdda081c74995901e009ced63a, type: 2}
   _movementX: 0
   _movementY: 0
   _groundCheckPos: {fileID: 4171289171185101090}
@@ -626,12 +515,9 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  _climbSpeed: 3
   _currentDoor: {fileID: 0}
   _currentElevator: {fileID: 0}
   _currentLadder: {fileID: 0}
-  actionState: Idle
-  weaponType: Unarmed
 --- !u!114 &2344034754827274859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -663,96 +549,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: {fileID: 11400000, guid: e970641cf585c2f4d9617360444342db, type: 2}
   _startHealth: {fileID: 11400000, guid: 4fa55c2595f279a4cb962d0f8b563021, type: 2}
---- !u!1 &5535930262673055224
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 905243396094833413}
-  - component: {fileID: 4835186120896971822}
-  m_Layer: 0
-  m_Name: ChangeToShotgun
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &905243396094833413
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5535930262673055224}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 337131219538436362}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4835186120896971822
+--- !u!114 &7042057296900772580
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5535930262673055224}
+  m_GameObject: {fileID: 5269786520809334512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40a15553a15610e4c9f7293c7c7fac52, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d98a9979166b294692be596112a64ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Weapons: []
---- !u!1 &5894562455022788485
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6819334258907069483}
-  - component: {fileID: 8553957478019508901}
-  m_Layer: 0
-  m_Name: ChangeToPistol
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6819334258907069483
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5894562455022788485}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 337131219538436362}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8553957478019508901
+  _currentWeaponType: 0
+  _attackPoint: {fileID: 957217721741931008}
+--- !u!114 &760993591631632595
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5894562455022788485}
+  m_GameObject: {fileID: 5269786520809334512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88703431a97645b468229c838541d5ed, type: 3}
+  m_Script: {fileID: 11500000, guid: 06a5998d530518a4e88df7d867194f0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Weapons: []
+  _playerInput: {fileID: 7853012328190308139}
+--- !u!114 &8343961947435198785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5269786520809334512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0659ef008b34f43409ea458c0ca800bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7382917052026221293
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,102 +632,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac01769ff6da034d80bc335c2799688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weapon: {fileID: 11400000, guid: d35099cf4ac75dd4991f8009440d22a3, type: 2}
-  _shootingPoint: {fileID: 957217721741931008}
---- !u!1 &8133345368113176354
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5945775453464720645}
-  - component: {fileID: 5890848616002762703}
-  m_Layer: 10
-  m_Name: CurrentWeapon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5945775453464720645
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8133345368113176354}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2757628810558592401}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5890848616002762703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8133345368113176354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2155be643921dd546a84791608e10b5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Weapons:
-  - {fileID: 1850750774519148837}
-  - {fileID: 8305511787583937887}
-  - {fileID: 6154849993210738746}
-  - {fileID: 6401735677963802344}
---- !u!1 &8442031932464782162
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8975101443322775967}
-  - component: {fileID: 6719046680071295589}
-  m_Layer: 0
-  m_Name: ChangeToKnife
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8975101443322775967
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8442031932464782162}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 337131219538436362}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6719046680071295589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8442031932464782162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a29df3db2ac043949a4ee684dca23b54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Weapons: []
+  _currentWeaponType: 0
+  _attackPoint: {fileID: 0}
 --- !u!1 &8896540433105570357
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,8 +678,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac01769ff6da034d80bc335c2799688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weapon: {fileID: 11400000, guid: f53047be1a76e3f44b1e986cef161436, type: 2}
-  _shootingPoint: {fileID: 957217721741931008}
+  _currentWeaponType: 0
+  _attackPoint: {fileID: 0}
 --- !u!1 &9174664857193902606
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,7 +709,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5945775453464720645}
   - {fileID: 3043102444399153995}
   - {fileID: 7228759090522907089}
   - {fileID: 3884195895116502806}
@@ -1082,11 +822,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6129199513433666296}
   m_SourcePrefab: {fileID: 100100000, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
---- !u!95 &6200498995360149276 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2874088770706994844, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
-  m_PrefabInstance: {fileID: 8209578878733539712}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6372017142580397961 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2991440919951187465, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
