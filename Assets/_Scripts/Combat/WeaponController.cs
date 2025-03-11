@@ -7,6 +7,46 @@ public class WeaponController : MonoBehaviour
 
     [SerializeField]private WeaponType _currentWeaponType = WeaponType.Unarmed;
 
+    private void OnEnable()
+    {
+        WeaponSelectionHandler.s_OnWeaponChanged += WeaponChecker;
+    }
+
+    private void OnDisable()
+    {
+        WeaponSelectionHandler.s_OnWeaponChanged -= WeaponChecker;
+    }
+
+    private void WeaponChecker(WeaponType state) // Called from event to check current weapon
+    {
+        _currentWeaponType = state;
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed) //Fires an event whenever action/key is pressed.  
+        {
+            Attack();
+        }
+    }
+
+    private void Attack()
+    {
+        // Check what type of weapon you currently have
+        if (WeaponTypes.TryGetMeleeType(_currentWeaponType, out MeleeWeaponType meleeWeapon)) // You use melee
+        {
+            MeleeWeaponHandler.PerformMeleeAttack(meleeWeapon);
+        }
+        else if (WeaponTypes.TryGetRangedType(_currentWeaponType, out RangedWeaponType rangedWeapon)) // You use range
+        {
+            RangedWeaponHandler.PerfomRangedAttack(rangedWeapon);
+        }
+    }
+
+
+
+
+
     //private float _damage;
     //private float _fireRate;
     //private int _critChance; //25 gives 25% chance
@@ -20,43 +60,6 @@ public class WeaponController : MonoBehaviour
 
     //public SORangedWeapon _weapon; 
     //[SerializeField] private Transform _shootingPoint; //where we shoot from
-
-    private void OnEnable()
-    {
-        WeaponSelectionHandler.s_OnWeaponChanged += WeaponChecker;
-    }
-
-    private void OnDisable()
-    {
-        WeaponSelectionHandler.s_OnWeaponChanged -= WeaponChecker;
-    }
-
-    private void Attack()
-    {
-        if (WeaponTypes.TryGetMeleeType(_currentWeaponType, out MeleeWeaponType meleeWeapon))
-        {
-            Debug.Log("melee");
-        }
-        else if (WeaponTypes.TryGetRangedType(_currentWeaponType, out RangedWeaponType rangedWeapon))
-        {
-            Debug.Log("Ranged");
-        }
-    }
-
-    private void WeaponChecker(WeaponType state)
-    {
-        _currentWeaponType = state;
-    }
-
-    public void OnAttack(InputAction.CallbackContext context)
-    {
-        if (context.performed) //Fires an event whenever action/key is pressed. Together with the one below the whole method basicly chekcs if the key is hold down. 
-        {
-            Attack();
-
-        }
-    }
-
 
 
     private void Awake()

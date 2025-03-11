@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeWeaponHandler : MonoBehaviour
+public static class MeleeWeaponHandler
 {
-    // Start is called before the first frame update
-    void Start()
+    private static Dictionary<MeleeWeaponType, SOMeleeWeapon> _meleeWeaponData;
+
+
+    public static void Initialize(SOMeleeWeapon[] allMeleeWeaponTypes)
     {
-        
+        _meleeWeaponData = new Dictionary<MeleeWeaponType, SOMeleeWeapon>();
+
+        foreach (SOMeleeWeapon meleeWeapon in allMeleeWeaponTypes)
+        {
+            _meleeWeaponData[meleeWeapon.SO_MeleeWeaponType] = meleeWeapon;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public static void PerformMeleeAttack(MeleeWeaponType meleeWeapon)
     {
-        
+        Debug.Log(meleeWeapon);
     }
+
 }

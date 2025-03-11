@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7047755da78c9bd4fb83768162f81a9e, type: 3}
+  m_Name: Knife
+  m_EditorClassIdentifier: 
+  _WeaponCategory: 0
+  _BulletPrefab: {fileID: 8996890269392672782, guid: eee6e1a45ba8c9748808f938ca00ed8e, type: 3}
+  _Damage: 10
+  _FireRate: 10
+  _Range: 2
+  _MaxAmmoCapacity: 0
+  _Magazine: {fileID: 11400000, guid: 770bc55a667d785489a0af0baa5cf515, type: 2}
+  _CurrentAmmoCount: {fileID: 11400000, guid: c38bdb5256b8ae34cb931a094cbf8afb, type: 2}
+  _CritChance: 25
+  _CritDamage: 1.25

@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "RangedWeapon", menuName = "Weapons/RangedWeapon")]
 public class SORangedWeapon : SOWeaponStats
 {
-    public RangedWeaponType _RangedWeaponCategory;
+    public RangedWeaponType SO_RangedWeapontype;
 
     [Space(5f)] 
     [Header("Ammunition")]
