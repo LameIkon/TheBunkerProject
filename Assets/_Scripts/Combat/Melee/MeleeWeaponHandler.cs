@@ -8,6 +8,7 @@ public static class MeleeWeaponHandler
 {
     public static Dictionary<string, Dictionary<MeleeWeaponType, float>> _weaponCooldowns = new Dictionary<string, Dictionary<MeleeWeaponType, float>>();  // For weapon cooldown. The dictionary holds a string and then another dictionary. First it looks for an entity and this entity(like player) can hold multiple weapons with their cooldowns 
     private static Dictionary<MeleeWeaponType, SOMeleeWeapon> _meleeWeaponData; // Access to scriptableObject from the given enum
+    private static Dictionary<string, HashSet<MeleeWeaponType>> _activeCoroutines = new Dictionary<string, HashSet<MeleeWeaponType>>(); // Track active coroutines
 
     public static void Initialize(SOMeleeWeapon[] allMeleeWeaponTypes) //Populate dictionary with all melee weapons in an awake method
     {
@@ -38,9 +39,22 @@ public static class MeleeWeaponHandler
         {
             Debug.Log("attacked using: " + weaponData.SO_MeleeWeaponType);
             weaponData.PerfomAttack(attacker); // Access scriptable object method
-            WeaponManager.Instance.StartMeleeWeaponCooldown(attackerId, meleeWeapon, weaponData.SO_AttackRate); // Starts the cooldown for the weapon. Dont call this every frame it causes bugs.
             //_weaponCooldowns[attackerId][meleeWeapon] = weaponData.SO_AttackRate; // Set the weapon on cooldown
         }
+
+        
+        if (!_activeCoroutines.ContainsKey(attackerId)) // Check if a coroutine is already running for this attacker and weapon type
+        {
+            _activeCoroutines[attackerId] = new HashSet<MeleeWeaponType>(); // Add to Hashset over active coroutines
+        }
+
+        if (_activeCoroutines[attackerId].Contains(meleeWeapon)) // Stop if there is an coroutine with that type running
+        {
+            return; // Skip starting the coroutine if it's already active
+        }
+
+        _activeCoroutines[attackerId].Add(meleeWeapon);
+        WeaponManager.Instance.StartMeleeWeaponCooldown(attackerId, meleeWeapon, weaponData.SO_AttackRate); // Starts the cooldown for the weapon. Dont call this every frame it causes bugs.
     }
 
 
@@ -86,8 +100,9 @@ public static class MeleeWeaponHandler
             attackerCooldowns[meleeWeapon] -= Time.deltaTime; // Reduce cooldown time
             yield return null;
         }
-        WeaponManager.Instance.CoroutineFinished();
+        WeaponManager.Instance.CoroutineFinished(); // For debugging
         attackerCooldowns.Remove(meleeWeapon); // Once cooldown is done, remove the weapon from the cooldown list
+        _activeCoroutines[attackerId].Remove(meleeWeapon); // Remove the coroutine from the list
     }
 
 }
