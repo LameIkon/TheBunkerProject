@@ -20,14 +20,14 @@ public class AmmoCounter : MonoBehaviour
 
     private void Update()
     {
-        SetAmmoCount(_currentWeapon._weapon.SO_CurrentAmmoCount);
+        //SetAmmoCount(_currentWeapon._weapon.SO_CurrentAmmoCount);
         DisplayAmmoSprite();
         WeaponSelection();
     }
 
     private void SetAmmoCount(IntVariable ammoCount)
     {
-        _currentWeapon._weapon.UpdateAmmoCount();
+        //_currentWeapon._weapon.UpdateAmmoCount();
 
         //if(_currentWeapon._weapon._RangedWeaponCategory != RangedWeaponType.Knife)
         //{
@@ -42,21 +42,21 @@ public class AmmoCounter : MonoBehaviour
 
     private void DisplayAmmoSprite()
     {
-        if (_ammoSpriteIndexMap.TryGetValue(_currentWeapon._weapon._RangedWeaponCategory, out int ammoIndex))
-        {
-            for (int i = 0; i < _currentAmmoSprite.Length; i++)
-            {
-                _currentAmmoSprite[i].gameObject.SetActive(i == ammoIndex);
-            }
-        }
+        //if (_ammoSpriteIndexMap.TryGetValue(_currentWeapon._weapon._RangedWeaponCategory, out int ammoIndex))
+        //{
+        //    for (int i = 0; i < _currentAmmoSprite.Length; i++)
+        //    {
+        //        _currentAmmoSprite[i].gameObject.SetActive(i == ammoIndex);
+        //    }
+        //}
 
-        else // Default case
-        {
-            foreach (var sprite in _currentAmmoSprite)
-            {
-                sprite.gameObject.SetActive(false);
-            }           
-        }
+        //else // Default case
+        //{
+        //    foreach (var sprite in _currentAmmoSprite)
+        //    {
+        //        sprite.gameObject.SetActive(false);
+        //    }           
+        //}
     }
 
     private void WeaponSelection()

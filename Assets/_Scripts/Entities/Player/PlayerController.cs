@@ -42,13 +42,13 @@ public class PlayerController : MonoBehaviour, IMovable
 
     private void OnEnable()
     {
-        WeaponSelectionHandler.OnWeaponChanged += CheckWeaponType;
+        WeaponSelectionHandler.s_OnWeaponChanged += CheckWeaponType;
         RotationManager.OnFlipped += UpdateMovement;
     }
 
     private void OnDisable()
     {
-        WeaponSelectionHandler.OnWeaponChanged -= CheckWeaponType;
+        WeaponSelectionHandler.s_OnWeaponChanged -= CheckWeaponType;
         RotationManager.OnFlipped -= UpdateMovement;
     }
 

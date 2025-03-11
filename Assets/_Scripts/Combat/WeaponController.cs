@@ -2,37 +2,61 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public abstract class WeaponController : MonoBehaviour
+public class WeaponController : MonoBehaviour
 {
 
-    private WeaponType _currentWeaponType = WeaponType.Unarmed;
-    private Dictionary<WeaponType, MeleeWeaponType> _meleeWeapontype;
-    private Dictionary<WeaponType, RangedWeaponType> _rangedWeapontype;
+    [SerializeField]private WeaponType _currentWeaponType = WeaponType.Unarmed;
 
+    //private float _damage;
+    //private float _fireRate;
+    //private int _critChance; //25 gives 25% chance
+    //private float _critDamage; //needs to be in decimal. 1.25 give 125% crit damage
+    //private float _range; //not sure if need, raycast Linebullet still instansiate even if you arent in range to hit enemy maybe a animation so we cant see the bullet line would work
+    ////public float _AttackRadius; // Only set for knife. Guns dont need this. 
 
-    private float _damage;
-    private float _fireRate;
-    private int _critChance; //25 gives 25% chance
-    private float _critDamage; //needs to be in decimal. 1.25 give 125% crit damage
-    private float _range; //not sure if need, raycast Linebullet still instansiate even if you arent in range to hit enemy maybe a animation so we cant see the bullet line would work
-    //public float _AttackRadius; // Only set for knife. Guns dont need this. 
-
-    private float _nextTimeTofire = 0f;
+    //private float _nextTimeTofire = 0f;
 
     //private RaycastHit2D[] _hits; //for knife attacks. 
 
-    public SORangedWeapon _weapon; 
-    [SerializeField] private Transform _shootingPoint; //where we shoot from
+    //public SORangedWeapon _weapon; 
+    //[SerializeField] private Transform _shootingPoint; //where we shoot from
 
     private void OnEnable()
     {
-        WeaponSelectionHandler.OnWeaponChanged += WeaponChecker;
+        WeaponSelectionHandler.s_OnWeaponChanged += WeaponChecker;
     }
 
     private void OnDisable()
     {
-        WeaponSelectionHandler.OnWeaponChanged -= WeaponChecker;
+        WeaponSelectionHandler.s_OnWeaponChanged -= WeaponChecker;
     }
+
+    private void Attack()
+    {
+        if (WeaponTypes.TryGetMeleeType(_currentWeaponType, out MeleeWeaponType meleeWeapon))
+        {
+            Debug.Log("melee");
+        }
+        else if (WeaponTypes.TryGetRangedType(_currentWeaponType, out RangedWeaponType rangedWeapon))
+        {
+            Debug.Log("Ranged");
+        }
+    }
+
+    private void WeaponChecker(WeaponType state)
+    {
+        _currentWeaponType = state;
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed) //Fires an event whenever action/key is pressed. Together with the one below the whole method basicly chekcs if the key is hold down. 
+        {
+            Attack();
+
+        }
+    }
+
 
 
     private void Awake()
@@ -180,24 +204,46 @@ public abstract class WeaponController : MonoBehaviour
     //        }
     //    }
 
-    private void Attack()
-    {
-        // something
-    }
 
-    private void WeaponChecker(WeaponType state)
-    {
-        _currentWeaponType = state;
+    //[SerializeField] private RangedWeaponSO _rangedWeapon;
+    //[SerializeField] private MeleeWeaponSO _meleeWeapon;
 
+    //private bool _isFiring = false; //we use this in order to have AUTO fire when holding down
+    //private WeaponType _currentWeaponType;
+    //public Weapon[] _Weapons;
+    //public static Weapon _currentWeapon;
 
-    }
+    //private void Update()
+    //{
+    //    //EquipWeapon();
+    //    if (_isFiring)
+    //    {
+    //        UseWeapon(_currentWeapon);
+    //    }
+    //}
 
-    public void OnAttack(InputAction.CallbackContext context)
-    {
-        if (context.performed) //Fires an event whenever action/key is pressed. Together with the one below the whole method basicly chekcs if the key is hold down. 
-        {
-            Attack();
+    //public void SetCurrentWeapon(WeaponType weaponType) // Called by other scripts
+    //{
+    //    _currentWeaponType = weaponType;
+    //}
 
-        }
-    }
+    //private void UseWeapon (Weapon currentWeapon)
+    //{      
+    //    currentWeapon.Fire();
+    //}
+
+    //public void Attack (InputAction.CallbackContext context)
+    //{       
+    //    if (context.started && !context.canceled) //Fires an event whenever action/key is pressed. Together with the one below the whole method basicly chekcs if the key is hold down. 
+    //    {
+    //        _isFiring = true;
+
+    //    }
+
+    //    if (context.canceled) //needs to be here to fire an event whenever we let go of the "action"/key.
+    //    {
+    //        _isFiring = false;
+    //    }
+
+    //}  
 }
