@@ -26,11 +26,17 @@ public class SOMeleeWeapon : SOWeaponStats
             {
                 Debug.Log(hit.collider.name);
 
-                if (hit.collider.TryGetComponent<IDamageable>(out IDamageable damageable)) // Try to get an IDamageable component from the hit object
+                // Try to get IDamageable from the hit object first
+                if (hit.collider.TryGetComponent<IDamageable>(out IDamageable damageable))
                 {
-                    // Apply damage to the enemy
                     damageable.TakeDamage(DamageOutput());
                     Debug.Log("Hit " + hit.collider.name);
+                }
+                else if (hit.collider.transform.parent != null && hit.collider.transform.parent.TryGetComponent<IDamageable>(out damageable))
+                {
+                    // If not found on the object, check the parent
+                    damageable.TakeDamage(DamageOutput());
+                    Debug.Log("Hit parent of " + hit.collider.name);
                 }
             }
         }

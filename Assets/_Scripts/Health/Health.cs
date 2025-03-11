@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class Health : MonoBehaviour, IDamageable
 {
 
     [SerializeField] private FloatVariable _health; // ONLY SET ON PLAYER - Enemies need to be empty in order to create seperate floatvariables. Or they all die when u kill the first one.
@@ -22,7 +22,7 @@ public class Health : MonoBehaviour
     public void TakeDamage (float damage) //used for combat
     {
         _health.ApplyChange(-damage);
-
+        Debug.Log(_health._Value);
         if(_health._Value <= 0)
         {   
             //need to implent death animation depending on if its monster or player

@@ -18,4 +18,5 @@ MonoBehaviour:
   SO_AttackRange: 1
   SO_CritChance: 0
   SO_CritMultiplyer: 0
+  SO_verticalAttackRange: 1
   SO_MeleeWeaponType: 0
