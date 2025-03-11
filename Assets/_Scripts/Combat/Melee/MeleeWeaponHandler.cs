@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class MeleeWeaponHandler
 {
-    private static Dictionary<string, Dictionary<MeleeWeaponType, float>> _weaponCooldowns = new Dictionary<string, Dictionary<MeleeWeaponType, float>>();  // For weapon cooldown. The dictionary holds a string and then another dictionary. First it looks for an entity and this entity(like player) can hold multiple weapons with their cooldowns 
+    public static Dictionary<string, Dictionary<MeleeWeaponType, float>> _weaponCooldowns = new Dictionary<string, Dictionary<MeleeWeaponType, float>>();  // For weapon cooldown. The dictionary holds a string and then another dictionary. First it looks for an entity and this entity(like player) can hold multiple weapons with their cooldowns 
     private static Dictionary<MeleeWeaponType, SOMeleeWeapon> _meleeWeaponData; // Access to scriptableObject from the given enum
 
 
@@ -37,33 +37,54 @@ public static class MeleeWeaponHandler
         {
             Debug.Log("attacked using: " + weaponData.SO_MeleeWeaponType);
             weaponData.PerfomAttack(attacker); // Access scriptable object method
-            _weaponCooldowns[attackerId][meleeWeapon] = weaponData.SO_AttackRate; // Set the weapon on cooldown
+            //_weaponCooldowns[attackerId][meleeWeapon] = weaponData.SO_AttackRate; // Set the weapon on cooldown
+            WeaponManager.Instance.StartMeleeWeaponCooldownCoroutine(attackerId, meleeWeapon, weaponData.SO_AttackRate); // Starts the cooldown for the weapon
         }
     }
 
-    public static void UpdateCooldowns() // WeaponManager handles cooldown of all weapons
+    //public static void UpdateCooldowns() // WeaponManager handles cooldown of all weapons
+    //{
+    //    foreach (KeyValuePair<string, Dictionary<MeleeWeaponType, float>> attackerCooldowns in _weaponCooldowns) // Iterate through each attacker 
+    //    {
+    //        string attackerId = attackerCooldowns.Key;
+
+    //        List<MeleeWeaponType> weaponsToRemove = new List<MeleeWeaponType>(); //List for which weapons have finished cooldown
+
+    //        foreach (KeyValuePair<MeleeWeaponType, float> pair in attackerCooldowns.Value.ToList()) // Look through each weapon and cooldown timer
+    //        {
+    //            attackerCooldowns.Value[pair.Key] -= Time.deltaTime; // Reduce the cooldown time. Reduces the float value
+
+    //            if (attackerCooldowns.Value[pair.Key] <= 0f) // If cooldown is finished, remove it from the dictionary
+    //            {
+    //                weaponsToRemove.Add(pair.Key);
+    //            }
+    //        }
+
+    //        foreach (MeleeWeaponType weapon in weaponsToRemove) // Clean up the cooldown dictionary
+    //        {
+    //            attackerCooldowns.Value.Remove(weapon);
+    //        }
+    //    }  
+    //}
+
+    public static IEnumerator HandleCooldown(string attackerId, MeleeWeaponType meleeWeapon, float cooldownTime)
     {
-        foreach (KeyValuePair<string, Dictionary<MeleeWeaponType, float>> attackerCooldowns in _weaponCooldowns) // Iterate through each attacker 
+        if (!_weaponCooldowns.ContainsKey(attackerId)) // If attacker doesn't exist in the cooldown dictionary, add it
         {
-            string attackerId = attackerCooldowns.Key;
-            
-            List<MeleeWeaponType> weaponsToRemove = new List<MeleeWeaponType>(); //List for which weapons have finished cooldown
+            _weaponCooldowns[attackerId] = new Dictionary<MeleeWeaponType, float>();
+        }
 
-            foreach (KeyValuePair<MeleeWeaponType, float> pair in attackerCooldowns.Value.ToList()) // Look through each weapon and cooldown timer
-            {
-                attackerCooldowns.Value[pair.Key] -= Time.deltaTime; // Reduce the cooldown time. Reduces the float value
+        Dictionary<MeleeWeaponType, float> attackerCooldowns = _weaponCooldowns[attackerId];
+        attackerCooldowns[meleeWeapon] = cooldownTime; // Set the cooldown time for the weapon
 
-                if (attackerCooldowns.Value[pair.Key] <= 0f) // If cooldown is finished, remove it from the dictionary
-                {
-                    weaponsToRemove.Add(pair.Key);
-                }
-            }
-
-            foreach (MeleeWeaponType weapon in weaponsToRemove) // Clean up the cooldown dictionary
-            {
-                attackerCooldowns.Value.Remove(weapon);
-            }
-        }  
+        // Wait until cooldown finishes
+        while (attackerCooldowns[meleeWeapon] > 0f)
+        {
+            attackerCooldowns[meleeWeapon] -= Time.deltaTime; // Reduce cooldown time
+            yield return null;
+        }     
+        attackerCooldowns.Remove(meleeWeapon); // Once cooldown is done, remove the weapon from the cooldown list
+        WeaponManager.Instance.CoroutineFinished();
     }
 
 }

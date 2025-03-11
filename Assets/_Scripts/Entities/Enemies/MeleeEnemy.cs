@@ -76,6 +76,7 @@ public class MeleeEnemy : MonoBehaviour
         if (PlayerInRange())
         {
             _targetHealth.TakeDamage(_damage);
+            MeleeWeaponHandler.PerformMeleeAttack(MeleeWeaponType.Unarmed, transform); // Testing if other can use same attack system
         }
     }
 }
