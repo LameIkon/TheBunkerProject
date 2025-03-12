@@ -33,14 +33,6 @@ public static class MeleeWeaponHandler
             return; // If weapon is still on cooldown return
         }
 
-        if (_meleeWeaponData.TryGetValue(meleeWeapon, out SOMeleeWeapon weaponData)) // Get the specific weapontype scriptable 
-        {
-            Debug.Log("attacked using: " + weaponData.SO_MeleeWeaponType);
-            weaponData.PerfomAttack(attacker); // Access scriptable object method
-            //_weaponCooldowns[attackerId][meleeWeapon] = weaponData.SO_AttackRate; // Set the weapon on cooldown
-        }
-
-        
         if (!_activeCooldownCoroutines.ContainsKey(attackerId)) // Check if a coroutine is already running for this attacker and weapon type
         {
             _activeCooldownCoroutines[attackerId] = new HashSet<MeleeWeaponType>(); // Add to hashset over active coroutines
@@ -49,6 +41,13 @@ public static class MeleeWeaponHandler
         if (_activeCooldownCoroutines[attackerId].Contains(meleeWeapon)) // Stop if there is an coroutine with that type running
         {
             return; // Skip starting the coroutine if it's already active
+        }
+
+        if (_meleeWeaponData.TryGetValue(meleeWeapon, out SOMeleeWeapon weaponData)) // Get the specific weapontype scriptable 
+        {
+            Debug.Log("attacked using: " + weaponData.SO_MeleeWeaponType);
+            weaponData.PerfomAttack(attacker); // Access scriptable object method
+            //_weaponCooldowns[attackerId][meleeWeapon] = weaponData.SO_AttackRate; // Set the weapon on cooldown
         }
 
         _activeCooldownCoroutines[attackerId].Add(meleeWeapon); // add coroutine to hashset
