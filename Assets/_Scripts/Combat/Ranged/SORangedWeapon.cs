@@ -1,4 +1,3 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "RangedWeapon", menuName = "Weapons/RangedWeapon")]
@@ -8,12 +7,17 @@ public class SORangedWeapon : SOWeaponStats
 
     [Space(5f)] 
     [Header("Ammunition")]
-    public GameObject _BulletPrefab;
-    public int _MaxAmmoCapacity;
+    public GameObject SO_BulletPrefab;
+    public int SO_MaxAmmoCapacity;
     public IntReferencer SO_Magazine;
     public IntVariable SO_CurrentAmmoCount;
-    private bool _fullMagazine;
-    private bool _emptyMagazine;
+    private bool SO_fullMagazine;
+    private bool SO_emptyMagazine;
+
+
+    [SerializeField] private int SO_magazineMaxCapacity; // How many magazines 
+    [SerializeField] private int SO_currentMagazineAmmo; // how much ammo in current magazine
+    [SerializeField] private int SO_currentMagazineAmount; // how many magazines an entity currently has
 
     public void PerformAttack(Transform attacker)
     {
@@ -23,33 +27,52 @@ public class SORangedWeapon : SOWeaponStats
 
         float attackLength = SO_AttackRange; // Horizontal attack range
         RaycastHit2D hit = Physics2D.Raycast(attackOrigin, attackDirection, SO_AttackRange);
-        ReduceAmmoByShooting(); //takes 1 from ammo amount
+
+        Debug.DrawRay(attackOrigin, attackDirection * attackLength, Color.red, 0.5f);
 
 
         if (hit.collider != null && hit.collider.gameObject != attacker.parent.gameObject && hit.collider.gameObject != attacker.gameObject) // Check if the raycast hit something and not themselves
             {
-                //Debug.Log(hit.collider.name);
+            //Debug.Log(hit.collider.name);
 
-                // Try to get IDamageable from the hit object
-                if (hit.collider.TryGetComponent<IDamageable>(out IDamageable damageable)) // Check the gameobject for the component
+            // Try to get IDamageable from the hit object
+            if (hit.collider.TryGetComponent<IDamageable>(out IDamageable damageable)) // Check the gameobject for the component
                 {
                     damageable.TakeDamage(DamageOutput());
-                    //Debug.Log("Hit " + hit.collider.name);
                 }
                 else if (hit.collider.transform.parent != null && hit.collider.transform.parent.TryGetComponent<IDamageable>(out damageable)) // Otherwise look at parent gameobject for component
                 {
                     // If not found on the object, check the parent
                     damageable.TakeDamage(DamageOutput());
-                    //Debug.Log("Hit parent of " + hit.collider.name);
                 }
             }
     }
 
-
-    private void SetAmmoToMax() //Used in Awake in Weapon.cs
+    public bool CheckAmmonition()
     {
-        SO_CurrentAmmoCount.SetValue(_MaxAmmoCapacity);
+        Debug.Log(SO_CurrentAmmoCount._Value);
+        int currentValue = SO_CurrentAmmoCount._Value;
+        if (currentValue > 0)
+        {;
+            return true;
+        }
+        return false;
     }
+
+    private void ReduceAmmoByShooting()
+    {
+        if (!SO_emptyMagazine)
+        {
+            SO_CurrentAmmoCount.ApplyChange(-1);
+        }
+    }
+
+
+    private void SetAmmoToMax() 
+    {
+        SO_CurrentAmmoCount.SetValue(SO_MaxAmmoCapacity);
+    }
+
 
     private void UpdateAmmoCount()
     {
@@ -59,23 +82,25 @@ public class SORangedWeapon : SOWeaponStats
 
     private void CheckIfMagazineIsFullOrEmpty()
     {
-        _fullMagazine = (SO_Magazine.GetValue() == _MaxAmmoCapacity);
-        _emptyMagazine = (SO_Magazine.GetValue() <= 0);
-    }
-
-    private void ReduceAmmoByShooting()
-    {
-        if (!_emptyMagazine)
-        {
-            SO_CurrentAmmoCount.ApplyChange(-1); 
-        }
+        SO_fullMagazine = (SO_Magazine.GetValue() == SO_MaxAmmoCapacity);
+        SO_emptyMagazine = (SO_Magazine.GetValue() <= 0);
     }
 
     private void GainAmmo()
     {
-        if (!_fullMagazine)
+        if (!SO_fullMagazine)
         {
             SetAmmoToMax();
         }
+    }
+
+    private void ReloadWeapon()
+    {
+
+    }
+
+    private void GainMagazine()
+    {
+
     }
 }

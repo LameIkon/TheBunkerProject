@@ -73,7 +73,7 @@ public class MeleeEnemy : MonoBehaviour
     {
         if (PlayerInRange())
         {
-            GlobalWeaponManager.Attack(WeaponType.GhoulMelee, transform); // Testing if other can use same attack system. It just need to know what weapon type to use and what start area to attack from.
+            GlobalWeaponManager.Attack(WeaponType.Rifle, transform); // Testing if other can use same attack system. It just need to know what weapon type to use and what start area to attack from.
             //_targetHealth.TakeDamage(_damage);
         }
     }

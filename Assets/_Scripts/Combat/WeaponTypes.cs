@@ -58,16 +58,6 @@ public static class WeaponTypes // Connect WeaponType to the two other enums.
         {WeaponType.Shotgun, RangedWeaponType.Shotgun }
     };
 
-    //public static bool IsMeleeWeapon(WeaponType weaponType)
-    //{
-    //    return _meleeWeapontype.ContainsKey(weaponType);
-    //}
-
-    //public static bool IsRangedWeapon(WeaponType weaponType)
-    //{
-    //    return _rangedWeapontype.ContainsKey(weaponType);
-    //}
-
     public static bool TryGetMeleeType(WeaponType weaponType, out MeleeWeaponType meleeType) // For other script to check if you have a melee weapon
     {
         return _meleeWeapontype.TryGetValue(weaponType, out meleeType);

@@ -4,8 +4,10 @@ using UnityEngine;
 
 public static class RangedWeaponHandler
 {
-    private static Dictionary<string, Dictionary<RangedWeaponType, float>> _weaponCooldowns = new Dictionary<string, Dictionary<RangedWeaponType, float>>();  // For weapon cooldown. The dictionary holds a string and then another dictionary. First it looks for an entity and this entity(like player) can hold multiple weapons with their cooldowns 
+    private static Dictionary<string, Dictionary<RangedWeaponType, AmmunitionHandler>> _weaponAmmunition = new Dictionary<string, Dictionary<RangedWeaponType, AmmunitionHandler>>();
+
     private static Dictionary<RangedWeaponType, SORangedWeapon> _rangedWeaponData; // Access to scriptableObject from the given enum
+    private static Dictionary<string, Dictionary<RangedWeaponType, float>> _weaponCooldowns = new Dictionary<string, Dictionary<RangedWeaponType, float>>();  // For weapon cooldown. The dictionary holds a string and then another dictionary. First it looks for an entity and this entity(like player) can hold multiple weapons with their cooldowns 
     private static Dictionary<string, HashSet<RangedWeaponType>> _activeCooldownCoroutines = new Dictionary<string, HashSet<RangedWeaponType>>(); // Track active coroutines
 
 
@@ -20,10 +22,14 @@ public static class RangedWeaponHandler
     }
 
 
-    public static void PerfomRangedAttack(RangedWeaponType rangedWeapon, Transform attacker)
+    public static void PerfomRangedAttack(RangedWeaponType rangedWeapon, Transform attackerPosition)
     {
-         string attackerId = attacker.GetInstanceID().ToString(); // Uniq id to the instance of the one perfoming the attack
+        string attackerId = attackerPosition.GetInstanceID().ToString(); // Uniq id to the instance of the one perfoming the attack
         Debug.Log("unique attacker id: " + attackerId);
+
+        
+
+
         if (!_weaponCooldowns.ContainsKey(attackerId)) // If there is no such id then save it
         {
             _weaponCooldowns[attackerId] = new Dictionary<RangedWeaponType, float>();
@@ -46,14 +52,46 @@ public static class RangedWeaponHandler
 
         if (_rangedWeaponData.TryGetValue(rangedWeapon, out SORangedWeapon weaponData)) // Get the specific weapontype scriptable 
         {
+
+            CheckWeaponAmmunition(rangedWeapon, attackerPosition, attackerId);
+            AmmunitionHandler weaponAmmo = _weaponAmmunition[attackerId][rangedWeapon];
+            if (!weaponAmmo.HasAmmo()) // If you dont have ammunition
+            {
+                Debug.Log("need reload");
+                return; // need reload
+            }
+
+
             Debug.Log("attacked using: " + weaponData.SO_RangedWeapontype);
-            weaponData.PerformAttack(attacker); // Access scriptable object method
-            //_weaponCooldowns[attackerId][meleeWeapon] = weaponData.SO_AttackRate; // Set the weapon on cooldown
+            weaponAmmo.ConsumeAmmo(); // Use ammunition
+            weaponData.PerformAttack(attackerPosition); // Access scriptable object method
         }
 
         _activeCooldownCoroutines[attackerId].Add(rangedWeapon); // add coroutine to hashset
         GlobalWeaponManager.Instance.StartRangedWeaponCooldown(attackerId, rangedWeapon, weaponData.SO_AttackRate); // Starts the cooldown for the weapon. Coroutine needs to be called from not an abstract class
     }
+
+    private static void CheckWeaponAmmunition(RangedWeaponType rangedWeapon, Transform attacker, string attackerId)
+    {
+        if (!_weaponAmmunition.ContainsKey(attackerId)) // If there is no such id then save it
+        {
+            _weaponAmmunition[attackerId] = new Dictionary<RangedWeaponType, AmmunitionHandler>();
+        }
+
+        if (!_weaponAmmunition[attackerId].ContainsKey(rangedWeapon))
+        {
+            if (_rangedWeaponData.TryGetValue(rangedWeapon, out SORangedWeapon weaponData))
+            {
+                _weaponAmmunition[attackerId][rangedWeapon] = new AmmunitionHandler(weaponData);
+            }
+            else
+            {
+                Debug.LogError($"Weapon data for {rangedWeapon} not found!");
+                return;
+            }
+        }
+    }
+
 
     public static IEnumerator HandleCooldown(string attackerId, RangedWeaponType rangedWeapon, float cooldownTime)
     {

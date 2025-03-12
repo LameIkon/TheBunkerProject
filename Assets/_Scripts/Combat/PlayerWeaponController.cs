@@ -30,6 +30,14 @@ public class PlayerWeaponController : MonoBehaviour
         }
     }
 
+    public void OnReload(InputAction.CallbackContext context)
+    {
+        if (context.performed) //Fires an event whenever action/key is pressed.  
+        {
+            string attackerId = gameObject.GetInstanceID().ToString();
+        }
+    }
+
 
 
 
