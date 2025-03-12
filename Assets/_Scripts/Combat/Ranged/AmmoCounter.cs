@@ -7,8 +7,8 @@ public class AmmoCounter : MonoBehaviour
 {
     [SerializeField] private Image[] _currentAmmoSprite;
     [SerializeField] private TextMeshProUGUI _ammoText;
-    [SerializeField] private WeaponController _currentWeapon;
-    [SerializeField] private WeaponController[] _Weapons;
+    [SerializeField] private PlayerWeaponController _currentWeapon;
+    [SerializeField] private PlayerWeaponController[] _Weapons;
 
     private readonly Dictionary<RangedWeaponType, int> _ammoSpriteIndexMap = new()
     {

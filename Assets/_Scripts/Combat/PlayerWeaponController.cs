@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class WeaponController : MonoBehaviour
+public class PlayerWeaponController : MonoBehaviour
 {
     /*
     Change later so this method is for itself while other methods can be used by both user and ai
@@ -30,7 +30,8 @@ public class WeaponController : MonoBehaviour
     {
         if (context.performed) //Fires an event whenever action/key is pressed.  
         {
-            Attack();
+            GlobalWeaponManager.Attack(_currentWeaponType, _attackPoint);
+            //Attack();
         }
     }
 

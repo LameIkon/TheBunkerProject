@@ -33,6 +33,19 @@ public class GlobalWeaponManager : MonoBehaviour
         //MeleeWeaponHandler.UpdateCooldowns(); // Handles attack cooldown for every instance of weapons... idk if this is performance friendly
     }
 
+    public static void Attack(WeaponType currentweaponType, Transform attackpoint)
+    {
+        // Check what type of weapon you currently have
+        if (WeaponTypes.TryGetMeleeType(currentweaponType, out MeleeWeaponType meleeWeapon)) // You use melee
+        {
+            MeleeWeaponHandler.PerformMeleeAttack(meleeWeapon, attackpoint); // use meleeWeapon and know its own position
+        }
+        else if (WeaponTypes.TryGetRangedType(currentweaponType, out RangedWeaponType rangedWeapon)) // You use range
+        {
+            RangedWeaponHandler.PerfomRangedAttack(rangedWeapon);
+        }
+    }
+
 
     public void StartMeleeWeaponCooldown(string attackerId, MeleeWeaponType meleeWeapon, float cooldownTime)
     {

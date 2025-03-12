@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SOWeaponStats : ScriptableObject
@@ -16,7 +14,6 @@ public class SOWeaponStats : ScriptableObject
     [Tooltip(" CritMultiplier will multiply with the given number. so the number 2 means you multiply 'damage*2'")]
     public float SO_CritMultiplyer; // Extra damage from a critical hit
 
-
     protected int DamageOutput()
     {
         float damage = Random.Range(SO_MinDamage, SO_MaxDamage);
@@ -26,7 +23,6 @@ public class SOWeaponStats : ScriptableObject
             Debug.Log("crit strike");
             damage *= SO_CritMultiplyer;
         }
-
         return (int)Mathf.Floor(damage); 
     }
 }

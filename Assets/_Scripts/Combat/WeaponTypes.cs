@@ -1,5 +1,12 @@
 using System.Collections.Generic;
 
+/// <summary>
+/// These Enums are designed to be uniq meaning only one Scriptable Object may use one type of enum. 
+/// Having more Scriptable Objects use the same enum will likely cause bugs. expecially with cooldown of weapons, since each enum has its own cooldown
+/// When creating a new enum it must be part of WeaponType enum and then to one of the following Melee- or RangedWeaponType enums and then give a connection
+/// In the dictionaries below.
+/// </summary>
+
 // Global access to check what type of weapon exists. Used by SOMeleeWeapon and SORangedWeapon scriptables and WeaponSelector script
 public enum MeleeWeaponType
 {
