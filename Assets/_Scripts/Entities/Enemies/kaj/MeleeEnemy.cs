@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MeleeEnemy : MonoBehaviour
@@ -75,10 +73,8 @@ public class MeleeEnemy : MonoBehaviour
     {
         if (PlayerInRange())
         {
-            //GlobalWeaponManager.Attack(WeaponType.GhoulMelee, transform);
+            GlobalWeaponManager.Attack(WeaponType.GhoulMelee, transform); // Testing if other can use same attack system. It just need to know what weapon type to use and what start area to attack from.
             //_targetHealth.TakeDamage(_damage);
-            MeleeWeaponHandler.PerformMeleeAttack(MeleeWeaponType.GhoulMelee, transform); // Testing if other can use same attack system. It just need to know what weapon type to use and what start area to attack from.
-           
         }
     }
 }

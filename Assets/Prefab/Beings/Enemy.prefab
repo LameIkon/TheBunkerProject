@@ -125,15 +125,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5fd4f388492402498cc65b957ed507d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 5
-  _attackCoolDowm: 2
+  _damage: 0
+  _attackCoolDowm: 0
   _range: 1
   _colliderDistance: 1
   _capsuleCollider: {fileID: 6487814263742240087}
   _playerLayer:
     serializedVersion: 2
     m_Bits: 1024
-  _targetHealth: {fileID: 0}
 --- !u!114 &6093644382444448879
 MonoBehaviour:
   m_ObjectHideFlags: 0

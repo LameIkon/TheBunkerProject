@@ -4,10 +4,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerWeaponController : MonoBehaviour
 {
-    /*
-    Change later so this method is for itself while other methods can be used by both user and ai
-    */
-
     [SerializeField]private WeaponType _currentWeaponType = WeaponType.Unarmed;
     [SerializeField] private Transform _attackPoint;
 
@@ -31,23 +27,8 @@ public class PlayerWeaponController : MonoBehaviour
         if (context.performed) //Fires an event whenever action/key is pressed.  
         {
             GlobalWeaponManager.Attack(_currentWeaponType, _attackPoint);
-            //Attack();
         }
     }
-
-    private void Attack()
-    {
-        // Check what type of weapon you currently have
-        if (WeaponTypes.TryGetMeleeType(_currentWeaponType, out MeleeWeaponType meleeWeapon)) // You use melee
-        {
-            MeleeWeaponHandler.PerformMeleeAttack(meleeWeapon, _attackPoint); // use meleeWeapon and know its own position
-        }
-        else if (WeaponTypes.TryGetRangedType(_currentWeaponType, out RangedWeaponType rangedWeapon)) // You use range
-        {
-            RangedWeaponHandler.PerfomRangedAttack(rangedWeapon);
-        }
-    }
-
 
 
 
