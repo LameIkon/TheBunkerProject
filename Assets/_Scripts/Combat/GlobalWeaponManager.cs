@@ -39,7 +39,7 @@ public class GlobalWeaponManager : MonoBehaviour
         }
         else if (WeaponTypes.TryGetRangedType(currentweaponType, out RangedWeaponType rangedWeapon)) // You use range
         {
-            RangedWeaponHandler.PerfomRangedAttack(rangedWeapon);
+            RangedWeaponHandler.PerfomRangedAttack(rangedWeapon, attackpoint);
         }
     }
 
@@ -48,6 +48,12 @@ public class GlobalWeaponManager : MonoBehaviour
     {
         _activeCoroutines++; // For debugging
         StartCoroutine(MeleeWeaponHandler.HandleCooldown(attackerId, meleeWeapon, cooldownTime));  // Start the cooldown of specific weapon by specific user
+    }
+
+    public void StartRangedWeaponCooldown(string attackerId, RangedWeaponType rangedWeapon, float cooldownTime)
+    {
+        _activeCoroutines++; // For debugging
+        StartCoroutine(RangedWeaponHandler.HandleCooldown(attackerId, rangedWeapon, cooldownTime));  // Start the cooldown of specific weapon by specific user
     }
 
     public void CoroutineFinished() // For debugging

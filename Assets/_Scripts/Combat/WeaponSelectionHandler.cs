@@ -21,7 +21,7 @@ public class WeaponSelectionHandler : MonoBehaviour
         {5, WeaponType.Unarmed },
         {6, WeaponType.Unarmed },
         {7, WeaponType.Unarmed },
-        {8, WeaponType.Unarmed },
+        {8, WeaponType.GodsHand },
     };
 
     private void EquipWeapon(int bindindIndex)

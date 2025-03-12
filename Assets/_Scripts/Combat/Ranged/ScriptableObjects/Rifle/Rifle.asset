@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7047755da78c9bd4fb83768162f81a9e, type: 3}
   m_Name: Rifle
   m_EditorClassIdentifier: 
-  SO_MinDamage: 0
-  SO_MaxDamage: 0
-  SO_AttackSpeed: 0
-  SO_Range: 0
+  SO_MinDamage: 15
+  SO_MaxDamage: 20
+  SO_AttackRate: 1
+  SO_AttackRange: 10
   SO_CritChance: 0
   SO_CritMultiplyer: 0
   SO_RangedWeapontype: 2

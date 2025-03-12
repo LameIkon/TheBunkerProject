@@ -9,9 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 942cb63c27e47344797a5f52266d7557, type: 3}
-  m_Name: MaxKnifeAmmo
+  m_Script: {fileID: 11500000, guid: ec5c4dd622f26cc4ba36180b6ff57ed5, type: 3}
+  m_Name: GodsHand
   m_EditorClassIdentifier: 
-  DevDescription: 
-  _Value: 0
-  _onValueChanged: {fileID: 0}
+  SO_MinDamage: 100000
+  SO_MaxDamage: 100000
+  SO_AttackRate: 0
+  SO_AttackRange: 1
+  SO_CritChance: 100
+  SO_CritMultiplyer: 100
+  SO_verticalAttackRange: 3
+  SO_MeleeWeaponType: 3

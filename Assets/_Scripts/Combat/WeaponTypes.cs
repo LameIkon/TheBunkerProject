@@ -12,7 +12,8 @@ public enum MeleeWeaponType
 {
     Unarmed,
     Knife,
-    GhoulMelee
+    GhoulMelee,
+    GodsHand
 }
 
 public enum RangedWeaponType
@@ -28,6 +29,7 @@ public enum WeaponType
     Unarmed,
     Knife,
     GhoulMelee,
+    GodsHand,
     Pistol,
     Rifle,
     Shotgun
@@ -42,7 +44,10 @@ public static class WeaponTypes // Connect WeaponType to the two other enums.
         {WeaponType.Knife, MeleeWeaponType.Knife },
 
         // Monster Weapons
-        {WeaponType.GhoulMelee, MeleeWeaponType.GhoulMelee }
+        {WeaponType.GhoulMelee, MeleeWeaponType.GhoulMelee },
+
+        // For cheating :)
+        {WeaponType.GodsHand, MeleeWeaponType.GodsHand }
 
     };
 
