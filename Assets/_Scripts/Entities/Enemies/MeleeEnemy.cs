@@ -5,9 +5,9 @@ using UnityEngine;
 public class MeleeEnemy : MonoBehaviour
 {
     [Header("Attack Parameters")]
-    [SerializeField] private float _damage;
-    [SerializeField] private float _attackCoolDowm;
-    [SerializeField] private float _range;
+    [SerializeField] private float _damage; // Reduntant
+    [SerializeField] private float _attackCoolDowm; // Reduntant
+    [SerializeField] private float _range; // Reduntant
     [Space(5f)]
 
     [Header("Collider Parameters")]
@@ -16,12 +16,12 @@ public class MeleeEnemy : MonoBehaviour
     [Space(5f)]
 
     [Header("Player Layer")]
-    [SerializeField] private LayerMask _playerLayer;
+    [SerializeField] private LayerMask _playerLayer; // Reduntant. MeleeWeaponHandler.PerformMeleeAttack will find and handle target. We only need a way for the enemy to do the attack
 
-    private Health _targetHealth;
+    private Health _targetHealth; // Reduntant
     private Animator _anim;
     private sEnemyPatrol _enemyPatrol;
-    float _coolDownTimer = Mathf.Infinity;
+    float _coolDownTimer = Mathf.Infinity; // Reduntant
 
     private void Awake()
     {

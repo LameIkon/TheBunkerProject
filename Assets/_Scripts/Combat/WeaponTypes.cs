@@ -30,11 +30,11 @@ public static class WeaponTypes // Connect WeaponType to the two other enums.
 {
     private static readonly Dictionary<WeaponType, MeleeWeaponType> _meleeWeapontype = new() // Connect type to melee weapons
     {
-        // Humans Weapons
+        // Human Weapons
         {WeaponType.Unarmed, MeleeWeaponType.Unarmed },
         {WeaponType.Knife, MeleeWeaponType.Knife },
 
-        // Enemies Weapons
+        // Monster Weapons
         {WeaponType.GhoulMelee, MeleeWeaponType.GhoulMelee }
 
     };

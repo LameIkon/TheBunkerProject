@@ -4,6 +4,9 @@ using UnityEngine.InputSystem;
 
 public class WeaponController : MonoBehaviour
 {
+    /*
+    Change later so this method is for itself while other methods can be used by both user and ai
+    */
 
     [SerializeField]private WeaponType _currentWeaponType = WeaponType.Unarmed;
     [SerializeField] private Transform _attackPoint;

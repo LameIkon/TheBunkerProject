@@ -28,9 +28,16 @@ public class WeaponSelectionHandler : MonoBehaviour
     {
         if (s_allWeapontypes.TryGetValue(bindindIndex, out WeaponType selectedWeapon)) // Check the index and take the corresponding weapon
         {
+            float time = TimeRequiredToChangeWeapon(); // WIP
             _currentWeaponType = selectedWeapon; // Update the selected weapon type
-        }
             s_OnWeaponChanged.Invoke(_currentWeaponType); // For other scripts to trigger. For example players animation, that needs to know what weapon to hold
+        }
+    }
+
+    private float TimeRequiredToChangeWeapon()
+    {
+        float time = 2;
+        return time;
     }
 
 

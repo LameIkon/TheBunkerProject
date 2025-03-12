@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public static class MeleeWeaponHandler
@@ -32,7 +30,7 @@ public static class MeleeWeaponHandler
 
         if (_weaponCooldowns[attackerId].ContainsKey(meleeWeapon) && _weaponCooldowns[attackerId][meleeWeapon] > 0f) // Check if entity has a cooldown for that weapon and if it still is on cooldown
         {
-            return; // If weapon is still on cooldown, return early
+            return; // If weapon is still on cooldown return
         }
 
         if (_meleeWeaponData.TryGetValue(meleeWeapon, out SOMeleeWeapon weaponData)) // Get the specific weapontype scriptable 
@@ -45,7 +43,7 @@ public static class MeleeWeaponHandler
         
         if (!_activeCoroutines.ContainsKey(attackerId)) // Check if a coroutine is already running for this attacker and weapon type
         {
-            _activeCoroutines[attackerId] = new HashSet<MeleeWeaponType>(); // Add to Hashset over active coroutines
+            _activeCoroutines[attackerId] = new HashSet<MeleeWeaponType>(); // Add to hashset over active coroutines
         }
 
         if (_activeCoroutines[attackerId].Contains(meleeWeapon)) // Stop if there is an coroutine with that type running
@@ -53,8 +51,8 @@ public static class MeleeWeaponHandler
             return; // Skip starting the coroutine if it's already active
         }
 
-        _activeCoroutines[attackerId].Add(meleeWeapon);
-        GlobalWeaponManager.Instance.StartMeleeWeaponCooldown(attackerId, meleeWeapon, weaponData.SO_AttackRate); // Starts the cooldown for the weapon. Dont call this every frame it causes bugs.
+        _activeCoroutines[attackerId].Add(meleeWeapon); // add coroutine to hashset
+        GlobalWeaponManager.Instance.StartMeleeWeaponCooldown(attackerId, meleeWeapon, weaponData.SO_AttackRate); // Starts the cooldown for the weapon. Coroutine needs to be called from not an abstract class
     }
 
 
