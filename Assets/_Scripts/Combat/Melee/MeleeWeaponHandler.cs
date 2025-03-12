@@ -4,9 +4,9 @@ using UnityEngine;
 
 public static class MeleeWeaponHandler
 {
-    public static Dictionary<string, Dictionary<MeleeWeaponType, float>> _weaponCooldowns = new Dictionary<string, Dictionary<MeleeWeaponType, float>>();  // For weapon cooldown. The dictionary holds a string and then another dictionary. First it looks for an entity and this entity(like player) can hold multiple weapons with their cooldowns 
+    private static Dictionary<string, Dictionary<MeleeWeaponType, float>> _weaponCooldowns = new Dictionary<string, Dictionary<MeleeWeaponType, float>>();  // For weapon cooldown. The dictionary holds a string and then another dictionary. First it looks for an entity and this entity(like player) can hold multiple weapons with their cooldowns 
     private static Dictionary<MeleeWeaponType, SOMeleeWeapon> _meleeWeaponData; // Access to scriptableObject from the given enum
-    private static Dictionary<string, HashSet<MeleeWeaponType>> _activeCoroutines = new Dictionary<string, HashSet<MeleeWeaponType>>(); // Track active coroutines
+    private static Dictionary<string, HashSet<MeleeWeaponType>> _activeCooldownCoroutines = new Dictionary<string, HashSet<MeleeWeaponType>>(); // Track active coroutines
 
     public static void Initialize(SOMeleeWeapon[] allMeleeWeaponTypes) //Populate dictionary with all melee weapons in an awake method
     {
@@ -41,17 +41,17 @@ public static class MeleeWeaponHandler
         }
 
         
-        if (!_activeCoroutines.ContainsKey(attackerId)) // Check if a coroutine is already running for this attacker and weapon type
+        if (!_activeCooldownCoroutines.ContainsKey(attackerId)) // Check if a coroutine is already running for this attacker and weapon type
         {
-            _activeCoroutines[attackerId] = new HashSet<MeleeWeaponType>(); // Add to hashset over active coroutines
+            _activeCooldownCoroutines[attackerId] = new HashSet<MeleeWeaponType>(); // Add to hashset over active coroutines
         }
 
-        if (_activeCoroutines[attackerId].Contains(meleeWeapon)) // Stop if there is an coroutine with that type running
+        if (_activeCooldownCoroutines[attackerId].Contains(meleeWeapon)) // Stop if there is an coroutine with that type running
         {
             return; // Skip starting the coroutine if it's already active
         }
 
-        _activeCoroutines[attackerId].Add(meleeWeapon); // add coroutine to hashset
+        _activeCooldownCoroutines[attackerId].Add(meleeWeapon); // add coroutine to hashset
         GlobalWeaponManager.Instance.StartMeleeWeaponCooldown(attackerId, meleeWeapon, weaponData.SO_AttackRate); // Starts the cooldown for the weapon. Coroutine needs to be called from not an abstract class
     }
 
@@ -100,7 +100,7 @@ public static class MeleeWeaponHandler
         }
         GlobalWeaponManager.Instance.CoroutineFinished(); // For debugging
         attackerCooldowns.Remove(meleeWeapon); // Once cooldown is done, remove the weapon from the cooldown list
-        _activeCoroutines[attackerId].Remove(meleeWeapon); // Remove the coroutine from the list
+        _activeCooldownCoroutines[attackerId].Remove(meleeWeapon); // Remove the coroutine from the list
     }
 
 }
