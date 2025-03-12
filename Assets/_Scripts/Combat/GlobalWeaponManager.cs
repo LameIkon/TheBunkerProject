@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GlobalWeaponManager : MonoBehaviour
 {
@@ -40,6 +41,15 @@ public class GlobalWeaponManager : MonoBehaviour
         else if (WeaponTypes.TryGetRangedType(currentweaponType, out RangedWeaponType rangedWeapon)) // You use range
         {
             RangedWeaponHandler.PerfomRangedAttack(rangedWeapon, attackpoint);
+        }
+    }
+
+    public void ReloadWeapon(WeaponType currentWeaponType, Transform attackerPosition)
+    {
+        //string attackerId = _attackPoint.GetInstanceID().ToString(); // Unique attacker ID from the transform
+        if (WeaponTypes.TryGetRangedType(currentWeaponType, out RangedWeaponType rangedWeapon))
+        {
+            RangedWeaponHandler.ReloadWeapon(rangedWeapon, attackerPosition); // Reload the weapon based on the current weapon type
         }
     }
 

@@ -14,12 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SO_MinDamage: 15
   SO_MaxDamage: 20
-  SO_AttackRate: 1
+  SO_AttackRate: 0
   SO_AttackRange: 10
   SO_CritChance: 0
   SO_CritMultiplyer: 0
   SO_RangedWeapontype: 2
-  _BulletPrefab: {fileID: 8996890269392672782, guid: eee6e1a45ba8c9748808f938ca00ed8e, type: 3}
-  _MaxAmmoCapacity: 25
+  SO_BulletPrefab: {fileID: 0}
+  SO_MaxAmmoCapacity: 0
   SO_Magazine: {fileID: 11400000, guid: 410273ab89bcb904caf39bbedc049e8a, type: 2}
   SO_CurrentAmmoCount: {fileID: 11400000, guid: 4cef049f520a9c749a6e8b47489a6709, type: 2}
+  SO_magazineMaxCapacity: 0
+  SO_currentMagazineAmmo: 0
+  SO_currentMagazineAmount: 0

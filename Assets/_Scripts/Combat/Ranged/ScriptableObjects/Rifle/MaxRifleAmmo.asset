@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MaxRifleAmmo
   m_EditorClassIdentifier: 
   DevDescription: 
-  _Value: 25
+  _Value: 16
   _onValueChanged: {fileID: 0}

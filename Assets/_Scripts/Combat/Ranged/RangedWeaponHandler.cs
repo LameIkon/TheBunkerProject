@@ -50,18 +50,17 @@ public static class RangedWeaponHandler
             return; // Skip starting the coroutine if it's already active
         }
 
+        CheckWeaponAmmunition(rangedWeapon, attackerPosition, attackerId);
+        AmmunitionHandler weaponAmmo = _weaponAmmunition[attackerId][rangedWeapon];
+        if (!weaponAmmo.HasAmmo()) // If you dont have ammunition
+        {
+            Debug.Log("need reload");
+            //ReloadWeapon(rangedWeapon, attackerPosition);
+            return; // need reload
+        }
+
         if (_rangedWeaponData.TryGetValue(rangedWeapon, out SORangedWeapon weaponData)) // Get the specific weapontype scriptable 
         {
-
-            CheckWeaponAmmunition(rangedWeapon, attackerPosition, attackerId);
-            AmmunitionHandler weaponAmmo = _weaponAmmunition[attackerId][rangedWeapon];
-            if (!weaponAmmo.HasAmmo()) // If you dont have ammunition
-            {
-                Debug.Log("need reload");
-                return; // need reload
-            }
-
-
             Debug.Log("attacked using: " + weaponData.SO_RangedWeapontype);
             weaponAmmo.ConsumeAmmo(); // Use ammunition
             weaponData.PerformAttack(attackerPosition); // Access scriptable object method
@@ -89,6 +88,17 @@ public static class RangedWeaponHandler
                 Debug.LogError($"Weapon data for {rangedWeapon} not found!");
                 return;
             }
+        }
+    }
+
+    public static void ReloadWeapon(RangedWeaponType rangedWeapon, Transform attackerPosition)
+    {
+        string attackerId = attackerPosition.GetInstanceID().ToString();
+        if (_weaponAmmunition.ContainsKey(attackerId) && _weaponAmmunition[attackerId].ContainsKey(rangedWeapon))
+        {
+            AmmunitionHandler ammoHandler = _weaponAmmunition[attackerId][rangedWeapon];
+            ammoHandler.ReloadWeapon(); // Reload weapon
+            Debug.Log("Weapon reloaded!");
         }
     }
 

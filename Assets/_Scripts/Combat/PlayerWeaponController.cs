@@ -34,7 +34,7 @@ public class PlayerWeaponController : MonoBehaviour
     {
         if (context.performed) //Fires an event whenever action/key is pressed.  
         {
-            string attackerId = gameObject.GetInstanceID().ToString();
+            GlobalWeaponManager.Instance.ReloadWeapon(_currentWeaponType, _attackPoint);
         }
     }
 

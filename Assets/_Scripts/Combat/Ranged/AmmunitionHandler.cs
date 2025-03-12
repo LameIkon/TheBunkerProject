@@ -7,10 +7,13 @@ public class AmmunitionHandler
     public SORangedWeapon WeaponData { get; private set; }
     public int CurrentAmmo { get; private set; }
 
+    public int AmmoInStorage { get; private set; }
+
 
     public AmmunitionHandler(SORangedWeapon weaponData)
     {
         WeaponData = weaponData;
+        AmmoInStorage = weaponData.SO_CurrentAmmoCount;
         CurrentAmmo = weaponData.SO_CurrentAmmoCount._Value;
     }
 
@@ -27,7 +30,7 @@ public class AmmunitionHandler
 
     public void ReloadWeapon()
     {
-        CurrentAmmo = WeaponData.SO_MaxAmmoCapacity;
+        CurrentAmmo = 10;
     }
 
     private void GainMagazine()
