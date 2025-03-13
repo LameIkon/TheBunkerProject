@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc5481d06e7e1e44c8846adeb635988a, type: 3}
   m_Name: RifleAmmunition
   m_EditorClassIdentifier: 
-  SO_MaxAmmoCapacity: 0
-  SO_Magazine: {fileID: 11400000, guid: 410273ab89bcb904caf39bbedc049e8a, type: 2}
-  SO_CurrentAmmoCount: {fileID: 11400000, guid: 3d0cdd6ea20d57a49ac9128a47177c1f, type: 2}
-  SO_CanConsumeAmmo: 0
-  SO_CanReload: 0
+  SO_MaxAmmoCapacity: 7
+  SO_AmmoStorage: 14
+  SO_CurrentAmmoCount: 0
+  SO_DontConsumeAmmo: 1

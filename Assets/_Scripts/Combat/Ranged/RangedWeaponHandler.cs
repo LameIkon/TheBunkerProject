@@ -120,7 +120,7 @@ public static class RangedWeaponHandler
             attackerCooldowns[rangedWeapon] -= Time.deltaTime; // Reduce cooldown time
             yield return null;
         }
-        GlobalWeaponManager.Instance.CoroutineFinished(); // For debugging
+        GlobalWeaponManager.Instance.CooldownCoroutineFinished(); // For debugging
         attackerCooldowns.Remove(rangedWeapon); // Once cooldown is done, remove the weapon from the cooldown list
         _activeCooldownCoroutines[attackerId].Remove(rangedWeapon); // Remove the coroutine from the list
     }

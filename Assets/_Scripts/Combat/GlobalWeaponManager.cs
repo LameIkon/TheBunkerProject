@@ -6,7 +6,8 @@ public class GlobalWeaponManager : MonoBehaviour
     [SerializeField] private SORangedWeapon[] _rangedWeapons; // For the game to know how many scriptable ranged weapons exist
     [SerializeField] private SOMeleeWeapon[] _meleeWeapons; // For the game to know how many scriptable melee weapons exist
 
-    [SerializeField] private int _activeCoroutines = 0; // For debugging. checking how many entities have attacked and is on cooldown.
+    [SerializeField] private int _activeWeaponCooldownCoroutines = 0; // For debugging. checking how many entities have attacked and is on cooldown.
+    [SerializeField] private int _activeWeaponReloadCoroutines = 0; // For debugging. checking how many entities have attacked and is on cooldown.
 
     public static GlobalWeaponManager Instance { get; private set; }
 
@@ -56,21 +57,31 @@ public class GlobalWeaponManager : MonoBehaviour
 
     public void StartMeleeWeaponCooldown(string attackerId, MeleeWeaponType meleeWeapon, float cooldownTime)
     {
-        _activeCoroutines++; // For debugging
+        _activeWeaponCooldownCoroutines++; // For debugging
         StartCoroutine(MeleeWeaponHandler.HandleCooldown(attackerId, meleeWeapon, cooldownTime));  // Start the cooldown of specific weapon by specific user
     }
 
     public void StartRangedWeaponCooldown(string attackerId, RangedWeaponType rangedWeapon, float cooldownTime)
     {
-        _activeCoroutines++; // For debugging
+        _activeWeaponCooldownCoroutines++; // For debugging
         StartCoroutine(RangedWeaponHandler.HandleCooldown(attackerId, rangedWeapon, cooldownTime));  // Start the cooldown of specific weapon by specific user
     }
 
-    public void CoroutineFinished() // For debugging
+    public void StartReloadingWeapon()
     {
-        _activeCoroutines--;    
+        _activeWeaponReloadCoroutines++; // For debugging
+    }
+
+    public void CooldownCoroutineFinished() // For debugging
+    {
+        _activeWeaponCooldownCoroutines--;    
+    }
+
+    public void ReloadCoroutineFinished() // For debugging
+    {
+        _activeWeaponReloadCoroutines--;
     }
 
 
-  
+
 }
