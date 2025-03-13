@@ -29,8 +29,8 @@ public class AmmunitionHandler
 
         if (HasAmmo())
         {
-            Debug.Log(ammoData.SO_CurrentAmmoCount-1);
-            Debug.Log(ammoData.SO_AmmoStorage);
+            //Debug.Log(ammoData.SO_CurrentAmmoCount-1);
+            //Debug.Log(ammoData.SO_AmmoStorage);
             ammoData.ApplyAmmoChange(-1); // Decrease ammo count
         }
     }
