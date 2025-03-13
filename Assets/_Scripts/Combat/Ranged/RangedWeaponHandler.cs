@@ -49,8 +49,8 @@ public static class RangedWeaponHandler
             return; // Skip starting the coroutine if it's already active
         }
 
-        AmmunitionHandler weaponAmmo = _weaponAmmunition[attackerId][rangedWeapon];
         CheckWeaponAmmunition(rangedWeapon, attackerPosition, attackerId);
+        AmmunitionHandler weaponAmmo = _weaponAmmunition[attackerId][rangedWeapon];
         if (!weaponAmmo.HasAmmo()) // If you dont have ammunition
         {
             Debug.Log("need reload");
@@ -71,6 +71,10 @@ public static class RangedWeaponHandler
 
     private static void CheckWeaponAmmunition(RangedWeaponType rangedWeapon, Transform attacker, string attackerId)
     {
+        if (!_weaponAmmunition.ContainsKey(attackerId)) // If there is no such id then save it
+        {
+            _weaponAmmunition[attackerId] = new Dictionary<RangedWeaponType, AmmunitionHandler>();
+        }
         if (!_weaponAmmunition[attackerId].ContainsKey(rangedWeapon))
         {
             if (_rangedWeaponData.TryGetValue(rangedWeapon, out SORangedWeapon weaponData))
