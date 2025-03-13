@@ -17,7 +17,7 @@ public class WeaponSelectionHandler : MonoBehaviour
         {1, WeaponType.Knife },
         {2, WeaponType.Rifle },
         {3, WeaponType.Pistol },
-        {4, WeaponType.Unarmed },
+        {4, WeaponType.Shotgun },
         {5, WeaponType.Unarmed },
         {6, WeaponType.Unarmed },
         {7, WeaponType.Unarmed },
