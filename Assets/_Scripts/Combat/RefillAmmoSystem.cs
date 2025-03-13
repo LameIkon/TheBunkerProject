@@ -17,7 +17,7 @@ public class RefillAmmoSystem : MonoBehaviour
 
         if (userId != null && weaponUserType != null)
         {
-            string attackerId = userId.UniqueEntityId();
+            string attackerId = userId.GetUniqueEntityId();
             RefillAmmo(attackerId, weaponUserType.GetEquippedWeapon());
         }
     }

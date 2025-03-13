@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour, IMovable, IIdentifiable, IWeaponU
     private EntityActionState _currentActionState = EntityActionState.Idle;
     private WeaponType _currentWeaponType = WeaponType.Unarmed;
 
+    public static string s_PlayerId; // To find the id in the GlobalWeaponHandler and allow us to display ammo UI
+
 
     private void OnEnable()
     {
@@ -54,6 +56,7 @@ public class PlayerController : MonoBehaviour, IMovable, IIdentifiable, IWeaponU
 
     private void Start()
     {
+        s_PlayerId = GetUniqueEntityId();
         _animationController = GetComponent<PlayerAnimationController>();
         _currentMoveSpeed = _movementConfig.WalkingSpeed; // Assign movement speed
     }
@@ -326,7 +329,7 @@ public class PlayerController : MonoBehaviour, IMovable, IIdentifiable, IWeaponU
         _animationController.PlayAnimation(state);
     }
 
-    public string UniqueEntityId()
+    public string GetUniqueEntityId()
     {
         return GetInstanceID().ToString();
     }

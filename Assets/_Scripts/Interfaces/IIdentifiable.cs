@@ -1,4 +1,4 @@
 public interface IIdentifiable
 {
-    string UniqueEntityId();  // Get the unique ID for user
+    string GetUniqueEntityId();  // Get the unique ID for user
 }

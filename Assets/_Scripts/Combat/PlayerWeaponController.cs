@@ -20,7 +20,7 @@ public class PlayerWeaponController : MonoBehaviour
 
     private void Awake()
     {
-        _playerId = GetComponent<PlayerController>().UniqueEntityId();
+        _playerId = GetComponent<PlayerController>().GetUniqueEntityId();
     }
 
     private void WeaponChecker(WeaponType state) // Called from event to check current weapon

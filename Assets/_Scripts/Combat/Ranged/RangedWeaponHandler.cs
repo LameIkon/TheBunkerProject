@@ -147,17 +147,19 @@ public static class RangedWeaponHandler
 
     public static void UpdatePlayerUI(RangedWeaponType rangedWeapon, string attackerId)
     {
-        if (_weaponAmmunition[attackerId].TryGetValue(rangedWeapon, out AmmunitionHandler ammoHandler))
+        if(attackerId == PlayerController.s_PlayerId) // Check if the id is identical to player id
         {
-            int currentAmmo = ammoHandler.DisplayCurrentAmmo();
-            int totalAmmo = ammoHandler.DisplayTotalAmmo();
-            Debug.Log($"[DEBUG] Attacker: {attackerId} | Weapon: {rangedWeapon} | Current Ammo: {currentAmmo} | Total Ammo: {totalAmmo}");
+            Debug.Log("player!");
+            if (_weaponAmmunition[attackerId].TryGetValue(rangedWeapon, out AmmunitionHandler ammoHandler))
+            {
+                int currentAmmo = ammoHandler.DisplayCurrentAmmo();
+                int totalAmmo = ammoHandler.DisplayTotalAmmo();
+
+                Debug.Log($"RangedManager | Current ammo: {currentAmmo} | total Ammo: {totalAmmo}");
+
+                GlobalWeaponManager.Instance.DisplayPlayerAmmo(currentAmmo, totalAmmo);
+            }         
         }
     }
-
-    //private static bool IsPlayer(string attackerId)
-    //{
-    //    return attackerId == PlayerManager.Instance.PlayerID;
-    //}
 
 }

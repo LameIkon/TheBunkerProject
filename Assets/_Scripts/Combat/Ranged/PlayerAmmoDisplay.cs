@@ -40,14 +40,6 @@ public class PlayerAmmoDisplay : MonoBehaviour
         ChangeAmmoSprite();
     }
 
-    private void Update()
-    {
-        //SetAmmoCount(_currentWeapon._weapon.SO_CurrentAmmoCount);
-        //DisplayAmmoSprite();
-        //WeaponSelection();
-        //ChangeAmmoSprite();
-    }
-
     private void ChangeAmmoSprite()
     {
         if (_ammoSpriteIndexMap.TryGetValue(_currentWeaponType, out int spriteIndex))
@@ -71,55 +63,12 @@ public class PlayerAmmoDisplay : MonoBehaviour
 
     private string SetAmmoCount()
     {
-         //(int currentAmmo, int totalAmmo) = RangedWeaponHandler.UpdatePlayerUI(_currentWeaponType, _playerId); // Get values
+        int currentAmmo = GlobalWeaponManager.Instance.GetCurrentAmmo();  
+        int totalAmmo = GlobalWeaponManager.Instance.GetTotalAmmo();
 
-        string ammoUIDisplay = $"2";
+        Debug.Log($"Current ammo: {currentAmmo} | total Ammo: {totalAmmo}");
 
+        string ammoUIDisplay = $"{currentAmmo} / {totalAmmo}";
         return ammoUIDisplay;
-    }
-
-    private void DisplayAmmoSprite()
-    {
-        //if (_ammoSpriteIndexMap.TryGetValue(_currentWeapon._weapon._RangedWeaponCategory, out int ammoIndex))
-        //{
-        //    for (int i = 0; i < _currentAmmoSprite.Length; i++)
-        //    {
-        //        _currentAmmoSprite[i].gameObject.SetActive(i == ammoIndex);
-        //    }
-        //}
-
-        //else // Default case
-        //{
-        //    foreach (var sprite in _currentAmmoSprite)
-        //    {
-        //        sprite.gameObject.SetActive(false);
-        //    }           
-        //}
-    }
-
-    private void WeaponSelection()
-    {
-        //for (int i = 0; i < _Weapons.Length; i++)
-        //{
-        //    if (_Weapons[i]._weapon._RangedWeaponCategory == RangedWeaponType.Knife && WeaponSelector._IsKnife)
-        //    {
-        //        _currentWeapon = _Weapons[i];
-        //    }
-
-        //    else if (_Weapons[i]._weapon._RangedWeaponCategory == RangedWeaponType.Pistol && WeaponSelector._IsPistol)
-        //    {
-        //        _currentWeapon = _Weapons[i];
-        //    }
-
-        //    else if (_Weapons[i]._weapon._RangedWeaponCategory == RangedWeaponType.Rifle && WeaponSelector._IsRifle)
-        //    {
-        //        _currentWeapon = _Weapons[i];
-        //    }
-
-        //    else if (_Weapons[i]._weapon._RangedWeaponCategory == RangedWeaponType.Shotgun && WeaponSelector._IsShotgun)
-        //    {
-        //        _currentWeapon = _Weapons[i];
-        //    }
-        //}
     }
 }

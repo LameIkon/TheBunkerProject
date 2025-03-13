@@ -68,7 +68,7 @@ public class MeleeEnemy : MonoBehaviour, IIdentifiable, IWeaponUser
         Gizmos.DrawWireCube(bounds.center + trans.right * _range * trans.localScale.x * _colliderDistance,
             new Vector3(bounds.size.x * _range, bounds.size.y, bounds.size.z));
     }
-    public string UniqueEntityId()
+    public string GetUniqueEntityId()
     {
         return GetInstanceID().ToString();
     }
@@ -81,7 +81,7 @@ public class MeleeEnemy : MonoBehaviour, IIdentifiable, IWeaponUser
     {
         if (PlayerInRange())
         {
-            GlobalWeaponManager.Attack(GetEquippedWeapon(), transform, UniqueEntityId()); // Testing if other can use same attack system. It just need to know what weapon type to use and what start area to attack from.
+            GlobalWeaponManager.Attack(GetEquippedWeapon(), transform, GetUniqueEntityId()); // Testing if other can use same attack system. It just need to know what weapon type to use and what start area to attack from.
             //_targetHealth.TakeDamage(_damage);
         }
     }
