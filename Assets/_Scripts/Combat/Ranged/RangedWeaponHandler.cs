@@ -98,7 +98,6 @@ public static class RangedWeaponHandler
         {
             AmmunitionHandler ammoHandler = _weaponAmmunition[attackerId][rangedWeapon];
             ammoHandler.ReloadWeapon(); // Reload weapon
-            Debug.Log("Weapon reloaded!");
         }
     }
 

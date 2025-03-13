@@ -10,6 +10,8 @@ public class AmmunitionHandler
         ammoData = weaponData.SO_Ammunition.CreateInstance(); // Create a new instance of ammo for the player
     }
 
+    public int GetCurrentAmmo() => ammoData.SO_CurrentAmmoCount;
+
     public bool HasAmmo()
     {
         return ammoData.SO_CurrentAmmoCount > 0;
@@ -38,10 +40,10 @@ public class AmmunitionHandler
             Debug.Log("Not enough ammo to reload.");
             return; // Dont reload
         }
-
-        int ammoToReload = Mathf.Min(ammoData.SO_AmmoStorage, ammoData.SO_MaxAmmoCapacity - ammoData.SO_CurrentAmmoCount); 
-        ammoData.ApplyAmmoChange(ammoToReload); // Increase ammo count
-        ammoData.SO_AmmoStorage -= ammoToReload; // Decrease reserve ammo
+        GlobalWeaponManager.Instance.StartReloadingWeapon(this);
+        //int ammoToReload = Mathf.Min(ammoData.SO_AmmoStorage, ammoData.SO_MaxAmmoCapacity - ammoData.SO_CurrentAmmoCount); 
+        //ammoData.ApplyAmmoChange(ammoToReload); // Increase ammo count
+        //ammoData.SO_AmmoStorage -= ammoToReload; // Decrease reserve ammo
     }
 
     private bool CheckIfCanReload()
@@ -50,7 +52,7 @@ public class AmmunitionHandler
         return haveAmmo;
     }
 
-    public IEnumerator ReloadCoroutine()
+    public IEnumerator ReloadCoroutine(float reloadTime)
     {
         // Simulate reload delay (e.g., 2 seconds for reload)
         Debug.Log("Reloading...");
@@ -62,13 +64,4 @@ public class AmmunitionHandler
 
         Debug.Log($"Reload complete. Current Ammo: {ammoData.SO_CurrentAmmoCount} Ammo Storage: {ammoData.SO_AmmoStorage}");
     }
-
-    private bool CheckIfCanReload()
-    {
-        return ammoData.SO_AmmoStorage > 0; // Return true if there is ammo available to reload
-    }
-
-    public int GetCurrentAmmo() => ammoData.SO_CurrentAmmoCount;
-
-    public int GetCurrentAmmo() => ammoData.SO_CurrentAmmoCount;
 }

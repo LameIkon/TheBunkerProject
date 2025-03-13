@@ -67,9 +67,10 @@ public class GlobalWeaponManager : MonoBehaviour
         StartCoroutine(RangedWeaponHandler.HandleCooldown(attackerId, rangedWeapon, cooldownTime));  // Start the cooldown of specific weapon by specific user
     }
 
-    public void StartReloadingWeapon()
+    public void StartReloadingWeapon(AmmunitionHandler ammoHandler)
     {
         _activeWeaponReloadCoroutines++; // For debugging
+        StartCoroutine(ammoHandler.ReloadCoroutine(2f));
     }
 
     public void CooldownCoroutineFinished() // For debugging
