@@ -19,10 +19,4 @@ MonoBehaviour:
   SO_CritChance: 0
   SO_CritMultiplyer: 0
   SO_RangedWeapontype: 2
-  SO_BulletPrefab: {fileID: 0}
-  SO_MaxAmmoCapacity: 0
-  SO_Magazine: {fileID: 11400000, guid: 410273ab89bcb904caf39bbedc049e8a, type: 2}
-  SO_CurrentAmmoCount: {fileID: 11400000, guid: 4cef049f520a9c749a6e8b47489a6709, type: 2}
-  SO_magazineMaxCapacity: 0
-  SO_currentMagazineAmmo: 0
-  SO_currentMagazineAmount: 0
+  SO_Ammunition: {fileID: 11400000, guid: 59fb62e2182116f498e8d8f3df646471, type: 2}

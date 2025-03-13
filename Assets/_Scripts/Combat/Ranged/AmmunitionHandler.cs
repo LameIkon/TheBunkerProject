@@ -13,8 +13,8 @@ public class AmmunitionHandler
     public AmmunitionHandler(SORangedWeapon weaponData)
     {
         WeaponData = weaponData;
-        AmmoInStorage = weaponData.SO_CurrentAmmoCount;
-        CurrentAmmo = weaponData.SO_CurrentAmmoCount._Value;
+        AmmoInStorage = weaponData.SO_Ammunition.SO_CurrentAmmoCount;
+        CurrentAmmo = weaponData.SO_Ammunition.SO_CurrentAmmoCount._Value;
     }
 
     public bool HasAmmo() => CurrentAmmo > 0;

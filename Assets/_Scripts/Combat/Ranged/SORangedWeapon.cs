@@ -4,20 +4,21 @@ using UnityEngine;
 public class SORangedWeapon : SOWeaponStats
 {
     public RangedWeaponType SO_RangedWeapontype;
+    public SOAmmunition SO_Ammunition;
 
-    [Space(5f)] 
-    [Header("Ammunition")]
-    public GameObject SO_BulletPrefab;
-    public int SO_MaxAmmoCapacity;
-    public IntReferencer SO_Magazine;
-    public IntVariable SO_CurrentAmmoCount;
+    //[Space(5f)] 
+    //[Header("Ammunition")]
+    //public GameObject SO_BulletPrefab;
+    //public int SO_MaxAmmoCapacity;
+    //public IntReferencer SO_Magazine;
+    //public IntVariable SO_CurrentAmmoCount;
     private bool SO_fullMagazine;
     private bool SO_emptyMagazine;
 
 
-    [SerializeField] private int SO_magazineMaxCapacity; // How many magazines 
-    [SerializeField] private int SO_currentMagazineAmmo; // how much ammo in current magazine
-    [SerializeField] private int SO_currentMagazineAmount; // how many magazines an entity currently has
+    //[SerializeField] private int SO_magazineMaxCapacity; // How many magazines 
+    //[SerializeField] private int SO_currentMagazineAmmo; // how much ammo in current magazine
+    //[SerializeField] private int SO_currentMagazineAmount; // how many magazines an entity currently has
 
     public void PerformAttack(Transform attacker)
     {
@@ -50,8 +51,8 @@ public class SORangedWeapon : SOWeaponStats
 
     public bool CheckAmmonition()
     {
-        Debug.Log(SO_CurrentAmmoCount._Value);
-        int currentValue = SO_CurrentAmmoCount._Value;
+        Debug.Log(SO_Ammunition.SO_CurrentAmmoCount._Value);
+        int currentValue = SO_Ammunition.SO_CurrentAmmoCount._Value;
         if (currentValue > 0)
         {;
             return true;
@@ -61,29 +62,29 @@ public class SORangedWeapon : SOWeaponStats
 
     private void ReduceAmmoByShooting()
     {
-        if (!SO_emptyMagazine)
+        if (SO_emptyMagazine)
         {
-            SO_CurrentAmmoCount.ApplyChange(-1);
+            SO_Ammunition.SO_CurrentAmmoCount.ApplyChange(-1);
         }
     }
 
 
     private void SetAmmoToMax() 
     {
-        SO_CurrentAmmoCount.SetValue(SO_MaxAmmoCapacity);
+        SO_Ammunition.SO_CurrentAmmoCount.SetValue(SO_Ammunition.SO_MaxAmmoCapacity);
     }
 
 
     private void UpdateAmmoCount()
     {
-        SO_Magazine.SetValue(SO_CurrentAmmoCount);
+        SO_Ammunition.SO_Magazine.SetValue(SO_Ammunition.SO_CurrentAmmoCount);
         CheckIfMagazineIsFullOrEmpty();
     }
 
     private void CheckIfMagazineIsFullOrEmpty()
     {
-        SO_fullMagazine = (SO_Magazine.GetValue() == SO_MaxAmmoCapacity);
-        SO_emptyMagazine = (SO_Magazine.GetValue() <= 0);
+        SO_fullMagazine = (SO_Ammunition.SO_Magazine.GetValue() == SO_Ammunition.SO_MaxAmmoCapacity);
+        SO_emptyMagazine = (SO_Ammunition.SO_Magazine.GetValue() <= 0);
     }
 
     private void GainAmmo()
