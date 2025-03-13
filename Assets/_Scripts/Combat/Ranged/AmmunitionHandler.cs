@@ -38,14 +38,14 @@ public class AmmunitionHandler
         Debug.Log("after restock: "+ ammoData.SO_AmmoStorage);
     }
 
-    public void ReloadWeapon()
+    public void ReloadWeapon(string entityId)
     {
         if (!CheckIfCanReload()) // Check if entity has ammo
         {
             Debug.Log("Not enough ammo to reload.");
             return; // Dont reload
         }
-        GlobalWeaponManager.Instance.StartReloadingWeapon(this, weaponData.reloadTime); // Start reloading.
+        GlobalWeaponManager.Instance.StartReloadingWeapon(this, weaponData.reloadTime, entityId); // Start reloading.
     }
 
     private bool CheckIfCanReload()
@@ -54,7 +54,7 @@ public class AmmunitionHandler
         return haveAmmo;
     }
 
-    public IEnumerator ReloadCoroutine(float reloadTime)
+    public IEnumerator ReloadCoroutine(float reloadTime, string entityId)
     {
         Debug.Log("Reloading...");
         yield return new WaitForSeconds(reloadTime); 
@@ -63,6 +63,11 @@ public class AmmunitionHandler
         ammoData.ApplyAmmoChangeInWeapon(ammoToReload); // Increase ammo count
         ammoData.SO_AmmoStorage -= ammoToReload; // Decrease reserve ammo
         GlobalWeaponManager.Instance.ReloadCoroutineFinished();
+
+        if (entityId == PlayerController.s_PlayerId)
+        {
+            RangedWeaponHandler.UpdatePlayerUI(weaponData.SO_RangedWeapontype,entityId);
+        }
 
         Debug.Log($"Reload complete. Current Ammo: {ammoData.SO_CurrentAmmoCount} Ammo Storage: {ammoData.SO_AmmoStorage}");
     }

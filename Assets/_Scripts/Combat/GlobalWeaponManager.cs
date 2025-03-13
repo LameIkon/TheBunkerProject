@@ -61,10 +61,10 @@ public class GlobalWeaponManager : MonoBehaviour
         StartCoroutine(RangedWeaponHandler.HandleCooldown(attackerId, rangedWeapon, cooldownTime));  
     }
 
-    public void StartReloadingWeapon(AmmunitionHandler ammoHandler, float reloadTime) // Start the reload for a specific weapon
+    public void StartReloadingWeapon(AmmunitionHandler ammoHandler, float reloadTime, string entityId) // Start the reload for a specific weapon
     {
         _activeWeaponReloadCoroutines++; // For debugging
-        StartCoroutine(ammoHandler.ReloadCoroutine(reloadTime));
+        StartCoroutine(ammoHandler.ReloadCoroutine(reloadTime, entityId));
     }
 
     public void CooldownCoroutineFinished() // For debugging
@@ -76,28 +76,4 @@ public class GlobalWeaponManager : MonoBehaviour
     {
         _activeWeaponReloadCoroutines--;
     }
-
-
-    private int _playercCurrentAmmo;
-    private int _playerTotalAmmo;
-
-    //public void DisplayPlayerAmmo(int currentAmmoData, int totalAmmoData) // Not good that every entity calls this after shooting but cant figure out something else
-    //{
-    //    _playercCurrentAmmo = currentAmmoData;
-    //    _playerTotalAmmo = totalAmmoData;
-    //}
-
-    //public int GetCurrentAmmo()
-    //{
-    //    // Return the current ammo for the player
-    //    return _playercCurrentAmmo;
-    //}
-
-    //public int GetTotalAmmo()
-    //{
-    //    // Return the total ammo for the player
-    //    return _playerTotalAmmo;
-    //}
-
-
 }

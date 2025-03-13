@@ -97,7 +97,7 @@ public static class RangedWeaponHandler
         if (_weaponAmmunition.ContainsKey(attackerId) && _weaponAmmunition[attackerId].ContainsKey(rangedWeapon))
         {
             AmmunitionHandler ammoHandler = _weaponAmmunition[attackerId][rangedWeapon];
-            ammoHandler.ReloadWeapon(); // Reload weapon
+            ammoHandler.ReloadWeapon(attackerId); // Reload weapon
         }
     }
 
@@ -158,11 +158,34 @@ public static class RangedWeaponHandler
                 int totalAmmo = ammoHandler.DisplayTotalAmmo();
 
                 Debug.Log($"RangedManager | Current ammo: {currentAmmo} | total Ammo: {totalAmmo}");
-
-                //GlobalWeaponManager.Instance.DisplayPlayerAmmo(currentAmmo, totalAmmo);
                 
                 OnAmmoChanged?.Invoke(currentAmmo, totalAmmo);
             }         
+        }
+    }
+
+
+    public static void UpdateAmmoUIForPlayer(string attackerId)
+    {
+        if (attackerId == PlayerController.s_PlayerId) // Check if it's the player
+        {
+            Debug.Log("Player ammo updated!");
+            // Loop through all weapons in the player's inventory (or use a method to get it)
+            foreach (var weaponType in Enum.GetValues(typeof(RangedWeaponType)))
+            {
+                RangedWeaponType weapon = (RangedWeaponType)weaponType;
+                // Use the GetAmmunitionHandler method to get the ammo for each weapon
+                AmmunitionHandler ammoHandler = GetAmmunitionHandler(attackerId, weapon);
+
+                if (ammoHandler != null)
+                {
+                    int currentAmmo = ammoHandler.DisplayCurrentAmmo();
+                    int totalAmmo = ammoHandler.DisplayTotalAmmo();
+
+                    // Call your event or method to update the UI
+                    OnAmmoChanged?.Invoke(currentAmmo, totalAmmo);
+                }
+            }
         }
     }
 

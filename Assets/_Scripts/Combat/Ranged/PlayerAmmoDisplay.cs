@@ -65,12 +65,12 @@ public class PlayerAmmoDisplay : MonoBehaviour
 
     private void SetAmmoCount(int currentAmmo, int totalAmmo)
     {
-        //int currentAmmo = GlobalWeaponManager.Instance.GetCurrentAmmo();  
-        //int totalAmmo = GlobalWeaponManager.Instance.GetTotalAmmo();
-
-        //Debug.Log($"Current ammo: {currentAmmo} | total Ammo: {totalAmmo}");
-
         string ammoUIDisplay = $"{currentAmmo} / {totalAmmo}";
         _ammoText.text = ammoUIDisplay;
+    }
+
+    public void UpdateAmmoUIAfterReload(int currentAmmo, int totalAmmo)
+    {
+        SetAmmoCount(currentAmmo, totalAmmo);
     }
 }
