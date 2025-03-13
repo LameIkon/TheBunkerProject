@@ -17,7 +17,6 @@ public class RefillAmmoSystem : MonoBehaviour
         if (userId != null && weaponUserType != null)
         {
             string attackerId = userId.UniqueEntityId();
-
             RefillAmmo(attackerId, weaponUserType.GetEquippedWeapon());
         }
     }
@@ -25,12 +24,15 @@ public class RefillAmmoSystem : MonoBehaviour
     private void RefillAmmo(string attackerId, WeaponType weapon)
     {
         AmmunitionHandler ammoHandler = RangedWeaponHandler.GetAmmunitionHandler(attackerId, weapon);
-        Debug.Log(ammoHandler);
-        if (ammoHandler != null)
+        if (ammoHandler != null && _totalAmmoStockpileAmount >= 0)
         {
-            // Apply the refill amount
+            // Apply
             ammoHandler.RestockAmmo(_ammoStockpileAmount);
             TakeFromStockPile();
+        }
+        else
+        {
+            Debug.Log("Ammo crate ran out of stock");
         }
     }
 

@@ -49,8 +49,8 @@ public static class RangedWeaponHandler
             return; // Skip starting the coroutine if it's already active
         }
 
-        CheckWeaponAmmunition(rangedWeapon, attackerPosition, attackerId);
         AmmunitionHandler weaponAmmo = _weaponAmmunition[attackerId][rangedWeapon];
+        CheckWeaponAmmunition(rangedWeapon, attackerPosition, attackerId);
         if (!weaponAmmo.HasAmmo()) // If you dont have ammunition
         {
             Debug.Log("need reload");
@@ -71,11 +71,6 @@ public static class RangedWeaponHandler
 
     private static void CheckWeaponAmmunition(RangedWeaponType rangedWeapon, Transform attacker, string attackerId)
     {
-        if (!_weaponAmmunition.ContainsKey(attackerId)) // If there is no such id then save it
-        {
-            _weaponAmmunition[attackerId] = new Dictionary<RangedWeaponType, AmmunitionHandler>();
-        }
-
         if (!_weaponAmmunition[attackerId].ContainsKey(rangedWeapon))
         {
             if (_rangedWeaponData.TryGetValue(rangedWeapon, out SORangedWeapon weaponData))
@@ -87,7 +82,10 @@ public static class RangedWeaponHandler
 
     public static void ReloadWeapon(RangedWeaponType rangedWeapon, string attackerId)
     {
-        //string attackerId = attackerPosition.GetInstanceID().ToString();
+        if (!_weaponAmmunition.ContainsKey(attackerId)) // If there is no such id then save it
+        {
+            _weaponAmmunition[attackerId] = new Dictionary<RangedWeaponType, AmmunitionHandler>();
+        }
         if (_weaponAmmunition.ContainsKey(attackerId) && _weaponAmmunition[attackerId].ContainsKey(rangedWeapon))
         {
             AmmunitionHandler ammoHandler = _weaponAmmunition[attackerId][rangedWeapon];
@@ -98,15 +96,21 @@ public static class RangedWeaponHandler
     public static AmmunitionHandler GetAmmunitionHandler(string attackerId, WeaponType weapon)
     {
         if (WeaponTypes.TryGetRangedType(weapon, out RangedWeaponType rangedWeapon))
-        {
-            // If it is a ranged weapon, check the ammunition dictionary
-            if (_weaponAmmunition.ContainsKey(attackerId) && _weaponAmmunition[attackerId].ContainsKey(rangedWeapon))
+        {        
+            if (!_weaponAmmunition.ContainsKey(attackerId)) // If there is no such id then save it
             {
-                return _weaponAmmunition[attackerId][rangedWeapon];
+                _weaponAmmunition[attackerId] = new Dictionary<RangedWeaponType, AmmunitionHandler>();
+            }       
+            if (!_weaponAmmunition[attackerId].ContainsKey(rangedWeapon))  // Ensure the ammunition handler exists for the weapon
+            {
+                if (_rangedWeaponData.TryGetValue(rangedWeapon, out SORangedWeapon weaponData))
+                {
+                    _weaponAmmunition[attackerId][rangedWeapon] = new AmmunitionHandler(weaponData);
+                }
             }
-        }
 
-        // Return null if it's not a ranged weapon or no ammunition found
+            return _weaponAmmunition[attackerId][rangedWeapon]; // Return the found or newly created ammo handler
+        }
         return null;
     }
 
