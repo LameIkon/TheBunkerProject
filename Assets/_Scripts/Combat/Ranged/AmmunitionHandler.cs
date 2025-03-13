@@ -59,9 +59,10 @@ public class AmmunitionHandler
         Debug.Log("Reloading...");
         yield return new WaitForSeconds(reloadTime); 
 
-        int ammoToReload = Mathf.Min(ammoData.SO_AmmoStorage, ammoData.SO_MaxAmmoCapacity - ammoData.SO_CurrentAmmoCount);
+        int ammoToReload = Mathf.Min(ammoData.SO_AmmoStorage, ammoData.SO_MaxAmmoCapacity - ammoData.SO_CurrentAmmoCount); // Check how much ammo needs to be refilled
         ammoData.ApplyAmmoChange(ammoToReload); // Increase ammo count
         ammoData.SO_AmmoStorage -= ammoToReload; // Decrease reserve ammo
+        GlobalWeaponManager.Instance.ReloadCoroutineFinished();
 
         Debug.Log($"Reload complete. Current Ammo: {ammoData.SO_CurrentAmmoCount} Ammo Storage: {ammoData.SO_AmmoStorage}");
     }

@@ -106,7 +106,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ee9dfc03d1be00945be81645f6ef20ca, type: 2}
   - {fileID: 11400000, guid: 2ea48b95d8ccfc64f807cc480719e5af, type: 2}
   - {fileID: 11400000, guid: b43cb159cc873c84c8c0e78a2c32438d, type: 2}
-  _activeCoroutines: 0
+  _activeWeaponCooldownCoroutines: 0
+  _activeWeaponReloadCoroutines: 0
 --- !u!1 &5441540466101462795
 GameObject:
   m_ObjectHideFlags: 0

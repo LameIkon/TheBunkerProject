@@ -21,8 +21,10 @@ public class GlobalWeaponManager : MonoBehaviour
         {
             Destroy(gameObject); // Ensure only one instance of WeaponManager exists
         }
+    }
 
-
+    private void Start()
+    {
         RangedWeaponHandler.Initialize(_rangedWeapons);
         MeleeWeaponHandler.Initialize(_meleeWeapons);
     }
