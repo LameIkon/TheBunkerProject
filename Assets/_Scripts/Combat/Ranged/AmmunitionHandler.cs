@@ -33,9 +33,7 @@ public class AmmunitionHandler
 
     public void RestockAmmo(int amount)
     {
-        Debug.Log("before restock: " + ammoData.SO_AmmoStorage);
         ammoData.ApplyAmmoChangeToStorage(amount);  // Change the storage amount
-        Debug.Log("after restock: "+ ammoData.SO_AmmoStorage);
     }
 
     public void ReloadWeapon(string entityId)
@@ -66,7 +64,7 @@ public class AmmunitionHandler
 
         if (entityId == PlayerController.s_PlayerId)
         {
-            RangedWeaponHandler.UpdatePlayerUI(weaponData.SO_RangedWeapontype,entityId);
+            RangedWeaponHandler.UpdatePlayerUI(weaponData.SO_RangedWeapontype, entityId);
         }
 
         Debug.Log($"Reload complete. Current Ammo: {ammoData.SO_CurrentAmmoCount} Ammo Storage: {ammoData.SO_AmmoStorage}");

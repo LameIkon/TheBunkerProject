@@ -33,6 +33,7 @@ public class PlayerAmmoDisplay : MonoBehaviour
 
     private void Start()
     {
+        _playerId = PlayerController.s_PlayerId;
         ChangeAmmoSprite();
     }
 
@@ -40,6 +41,11 @@ public class PlayerAmmoDisplay : MonoBehaviour
     {
         _currentWeaponType = weapon;
         ChangeAmmoSprite();
+        if (WeaponTypes.TryGetRangedType(weapon, out RangedWeaponType rangedWeaponType))
+        {
+            Debug.Log("called" + _playerId + "is the player id");
+            RangedWeaponHandler.UpdateAmmoForPlayer(_playerId, rangedWeaponType);
+        }
     }
 
     private void ChangeAmmoSprite()

@@ -30,6 +30,10 @@ public class RefillAmmoSystem : MonoBehaviour
             // Apply
             ammoHandler.RestockAmmo(_ammoStockpileAmount);
             TakeFromStockPile();
+            if (WeaponTypes.TryGetRangedType(weapon, out RangedWeaponType rangedWeaponType))
+            {
+                RangedWeaponHandler.UpdatePlayerUI(rangedWeaponType, attackerId);
+            }
         }
         else
         {
