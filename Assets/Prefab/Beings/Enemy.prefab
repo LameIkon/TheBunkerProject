@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7651652058875381652}
   - component: {fileID: 6093644382444448879}
   m_Layer: 0
-  m_Name: Collider
+  m_Name: EnemyCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

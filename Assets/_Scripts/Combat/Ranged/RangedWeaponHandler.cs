@@ -4,8 +4,7 @@ using UnityEngine;
 
 public static class RangedWeaponHandler
 {
-    private static Dictionary<string, Dictionary<RangedWeaponType, AmmunitionHandler>> _weaponAmmunition = new Dictionary<string, Dictionary<RangedWeaponType, AmmunitionHandler>>();
-
+    private static Dictionary<string, Dictionary<RangedWeaponType, AmmunitionHandler>> _weaponAmmunition = new Dictionary<string, Dictionary<RangedWeaponType, AmmunitionHandler>>(); // Entity has a weapon and that weapon has ammo 
     private static Dictionary<RangedWeaponType, SORangedWeapon> _rangedWeaponData; // Access to scriptableObject from the given enum
     private static Dictionary<string, Dictionary<RangedWeaponType, float>> _weaponCooldowns = new Dictionary<string, Dictionary<RangedWeaponType, float>>();  // For weapon cooldown. The dictionary holds a string and then another dictionary. First it looks for an entity and this entity(like player) can hold multiple weapons with their cooldowns 
     private static Dictionary<string, HashSet<RangedWeaponType>> _activeCooldownCoroutines = new Dictionary<string, HashSet<RangedWeaponType>>(); // Track active coroutines
@@ -98,6 +97,18 @@ public static class RangedWeaponHandler
         {
             AmmunitionHandler ammoHandler = _weaponAmmunition[attackerId][rangedWeapon];
             ammoHandler.ReloadWeapon(); // Reload weapon
+        }
+    }
+
+    public static AmmunitionHandler GetAmmunitionHandler(string attackerId, RangedWeaponType rangedWeapon)
+    {
+        if (_weaponAmmunition.ContainsKey(attackerId) && _weaponAmmunition[attackerId].ContainsKey(rangedWeapon))
+        {
+            return _weaponAmmunition[attackerId][rangedWeapon];
+        }
+        else
+        {
+            return null;
         }
     }
 

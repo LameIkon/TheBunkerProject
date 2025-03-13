@@ -3,16 +3,14 @@ using UnityEngine;
 
 public class AmmunitionHandler
 {
-    private SOAmmunition ammoData;
+    private SOAmmunition ammoData; // Get the ammodata. Used to initialize the amount you start with and what settings related to the ammo usage
     private SORangedWeapon weaponData; // Used to get the reload time needed for that weapon
 
     public AmmunitionHandler(SORangedWeapon weaponData)
     {
         this.weaponData = weaponData;
-        ammoData = weaponData.SO_Ammunition.CreateInstance(); // Create a new instance of ammo for the player
+        ammoData = weaponData.SO_Ammunition.CreateInstance(); // Create a new instance of ammo for the entity
     }
-
-    public int GetCurrentAmmo() => ammoData.SO_CurrentAmmoCount;
 
     public bool HasAmmo()
     {
@@ -23,16 +21,21 @@ public class AmmunitionHandler
     {
         if (ammoData.SO_DontConsumeAmmo)
         {
-            Debug.Log($"You dont consume ammo. CurrentAmmo: {ammoData.SO_CurrentAmmoCount} AmmoStorage: {ammoData.SO_AmmoStorage}");
+            Debug.Log($"You dont consume ammo. CurrentAmmo: {ammoData.SO_CurrentAmmoCount} AmmoStorage: {ammoData.SO_AmmoStorage}... See you have nothing so stop shooting");
             return;
         }
 
         if (HasAmmo())
         {
-            //Debug.Log(ammoData.SO_CurrentAmmoCount-1);
-            //Debug.Log(ammoData.SO_AmmoStorage);
-            ammoData.ApplyAmmoChange(-1); // Decrease ammo count
+            ammoData.ApplyAmmoChangeInWeapon(-1); // Decrease ammo count
         }
+    }
+
+    public void RestockAmmo(int amount)
+    {
+        Debug.Log("before restock: " + ammoData.SO_AmmoStorage);
+        ammoData.ApplyAmmoChangeToStorage(amount);  // Change the storage amount
+        Debug.Log("after restock: "+ ammoData.SO_AmmoStorage);
     }
 
     public void ReloadWeapon()
@@ -42,15 +45,12 @@ public class AmmunitionHandler
             Debug.Log("Not enough ammo to reload.");
             return; // Dont reload
         }
-        GlobalWeaponManager.Instance.StartReloadingWeapon(this, weaponData.reloadTime);
-        //int ammoToReload = Mathf.Min(ammoData.SO_AmmoStorage, ammoData.SO_MaxAmmoCapacity - ammoData.SO_CurrentAmmoCount); 
-        //ammoData.ApplyAmmoChange(ammoToReload); // Increase ammo count
-        //ammoData.SO_AmmoStorage -= ammoToReload; // Decrease reserve ammo
+        GlobalWeaponManager.Instance.StartReloadingWeapon(this, weaponData.reloadTime); // Start reloading.
     }
 
     private bool CheckIfCanReload()
     {
-        bool haveAmmo = ammoData.SO_AmmoStorage > 0;
+        bool haveAmmo = ammoData.SO_AmmoStorage > 0; // Look in your personal storage for ammo
         return haveAmmo;
     }
 
@@ -60,7 +60,7 @@ public class AmmunitionHandler
         yield return new WaitForSeconds(reloadTime); 
 
         int ammoToReload = Mathf.Min(ammoData.SO_AmmoStorage, ammoData.SO_MaxAmmoCapacity - ammoData.SO_CurrentAmmoCount); // Check how much ammo needs to be refilled
-        ammoData.ApplyAmmoChange(ammoToReload); // Increase ammo count
+        ammoData.ApplyAmmoChangeInWeapon(ammoToReload); // Increase ammo count
         ammoData.SO_AmmoStorage -= ammoToReload; // Decrease reserve ammo
         GlobalWeaponManager.Instance.ReloadCoroutineFinished();
 

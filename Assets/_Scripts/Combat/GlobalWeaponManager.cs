@@ -21,17 +21,9 @@ public class GlobalWeaponManager : MonoBehaviour
         {
             Destroy(gameObject); // Ensure only one instance of WeaponManager exists
         }
-    }
 
-    private void Start()
-    {
         RangedWeaponHandler.Initialize(_rangedWeapons);
         MeleeWeaponHandler.Initialize(_meleeWeapons);
-    }
-
-    private void Update()
-    {
-        //MeleeWeaponHandler.UpdateCooldowns(); // Handles attack cooldown for every instance of weapons... idk if this is performance friendly
     }
 
     public static void Attack(WeaponType currentweaponType, Transform attackpoint)
@@ -57,19 +49,19 @@ public class GlobalWeaponManager : MonoBehaviour
     }
 
 
-    public void StartMeleeWeaponCooldown(string attackerId, MeleeWeaponType meleeWeapon, float cooldownTime)
+    public void StartMeleeWeaponCooldown(string attackerId, MeleeWeaponType meleeWeapon, float cooldownTime) // Start the cooldown of specific weapon by specific user
     {
         _activeWeaponCooldownCoroutines++; // For debugging
-        StartCoroutine(MeleeWeaponHandler.HandleCooldown(attackerId, meleeWeapon, cooldownTime));  // Start the cooldown of specific weapon by specific user
+        StartCoroutine(MeleeWeaponHandler.HandleCooldown(attackerId, meleeWeapon, cooldownTime));
     }
 
-    public void StartRangedWeaponCooldown(string attackerId, RangedWeaponType rangedWeapon, float cooldownTime)
+    public void StartRangedWeaponCooldown(string attackerId, RangedWeaponType rangedWeapon, float cooldownTime) // Start the cooldown of specific weapon by specific user
     {
         _activeWeaponCooldownCoroutines++; // For debugging
-        StartCoroutine(RangedWeaponHandler.HandleCooldown(attackerId, rangedWeapon, cooldownTime));  // Start the cooldown of specific weapon by specific user
+        StartCoroutine(RangedWeaponHandler.HandleCooldown(attackerId, rangedWeapon, cooldownTime));  
     }
 
-    public void StartReloadingWeapon(AmmunitionHandler ammoHandler, float reloadTime)
+    public void StartReloadingWeapon(AmmunitionHandler ammoHandler, float reloadTime) // Start the reload for a specific weapon
     {
         _activeWeaponReloadCoroutines++; // For debugging
         StartCoroutine(ammoHandler.ReloadCoroutine(reloadTime));

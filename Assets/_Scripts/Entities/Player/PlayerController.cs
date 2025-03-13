@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour, IMovable
+public class PlayerController : MonoBehaviour, IMovable, IWeaponUser
 {
     [SerializeField] private Rigidbody2D _rb;
     private PlayerAnimationController _animationController;
@@ -324,6 +324,19 @@ public class PlayerController : MonoBehaviour, IMovable
     private void AnimationHandler(string state)
     {
         _animationController.PlayAnimation(state);
+    }
+
+    public RangedWeaponType equippedWeapon;
+
+    public string GetAttackerId()
+    {
+        Debug.Log(GetInstanceID().ToString());
+        return "-2840";
+    }
+
+    public RangedWeaponType GetEquippedWeapon()
+    {
+        return equippedWeapon;
     }
 
     private void OnDrawGizmosSelected()

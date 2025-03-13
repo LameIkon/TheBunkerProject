@@ -86,17 +86,15 @@ public class RotationManager : MonoBehaviour
         }    
     }
 
+    // WIP
     private IEnumerator ResetAngleCoroutine(float angel, Action<float> OnResetComplete)
     {
-        Debug.Log("called");
         yield return new WaitForSeconds(2f);  // Wait for 2 seconds before resetting
-        Debug.Log("Angle reset to 0 after delay");
         angleResetCoroutine = null;
         OnResetComplete(angel);
     }
 
     private void OnResetComplete(float angel)
     {
-        Debug.Log("called after coroutine");
     }
 }
