@@ -22,11 +22,13 @@ public class PlayerAmmoDisplay : MonoBehaviour
     private void OnEnable()
     {
         WeaponSelectionHandler.s_OnWeaponChanged += WeaponChecker;
+        RangedWeaponHandler.OnAmmoChanged += SetAmmoCount;
     }
 
     private void OnDisable()
     {
         WeaponSelectionHandler.s_OnWeaponChanged -= WeaponChecker;
+        RangedWeaponHandler.OnAmmoChanged -= SetAmmoCount;
     }
 
     private void Start()
@@ -49,7 +51,7 @@ public class PlayerAmmoDisplay : MonoBehaviour
                 sprite.enabled = false;
             }
             _currentAmmoSprite[spriteIndex].enabled = true; // Enable the selected
-            _ammoText.text = SetAmmoCount();
+            //_ammoText.text = SetAmmoCount();
         }
         else
         {
@@ -61,14 +63,14 @@ public class PlayerAmmoDisplay : MonoBehaviour
         }
     }
 
-    private string SetAmmoCount()
+    private void SetAmmoCount(int currentAmmo, int totalAmmo)
     {
-        int currentAmmo = GlobalWeaponManager.Instance.GetCurrentAmmo();  
-        int totalAmmo = GlobalWeaponManager.Instance.GetTotalAmmo();
+        //int currentAmmo = GlobalWeaponManager.Instance.GetCurrentAmmo();  
+        //int totalAmmo = GlobalWeaponManager.Instance.GetTotalAmmo();
 
-        Debug.Log($"Current ammo: {currentAmmo} | total Ammo: {totalAmmo}");
+        //Debug.Log($"Current ammo: {currentAmmo} | total Ammo: {totalAmmo}");
 
         string ammoUIDisplay = $"{currentAmmo} / {totalAmmo}";
-        return ammoUIDisplay;
+        _ammoText.text = ammoUIDisplay;
     }
 }

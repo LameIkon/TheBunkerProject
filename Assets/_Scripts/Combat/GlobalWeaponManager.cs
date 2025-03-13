@@ -81,24 +81,23 @@ public class GlobalWeaponManager : MonoBehaviour
     private int _playercCurrentAmmo;
     private int _playerTotalAmmo;
 
-    public void DisplayPlayerAmmo(int currentAmmoData, int totalAmmoData) // Not good that every entity calls this after shooting but cant figure out something else
-    {
-        _playercCurrentAmmo = currentAmmoData;
-        _playerTotalAmmo = totalAmmoData;
-        string ammoUIDisplay = $"{_playercCurrentAmmo} / {_playerTotalAmmo}";
-    }
+    //public void DisplayPlayerAmmo(int currentAmmoData, int totalAmmoData) // Not good that every entity calls this after shooting but cant figure out something else
+    //{
+    //    _playercCurrentAmmo = currentAmmoData;
+    //    _playerTotalAmmo = totalAmmoData;
+    //}
 
-    public int GetCurrentAmmo()
-    {
-        // Return the current ammo for the player
-        return _playercCurrentAmmo;
-    }
+    //public int GetCurrentAmmo()
+    //{
+    //    // Return the current ammo for the player
+    //    return _playercCurrentAmmo;
+    //}
 
-    public int GetTotalAmmo()
-    {
-        // Return the total ammo for the player
-        return _playerTotalAmmo;
-    }
+    //public int GetTotalAmmo()
+    //{
+    //    // Return the total ammo for the player
+    //    return _playerTotalAmmo;
+    //}
 
 
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
@@ -145,6 +146,7 @@ public static class RangedWeaponHandler
     }
 
 
+    public static event Action<int, int> OnAmmoChanged;
     public static void UpdatePlayerUI(RangedWeaponType rangedWeapon, string attackerId)
     {
         if(attackerId == PlayerController.s_PlayerId) // Check if the id is identical to player id
@@ -157,9 +159,13 @@ public static class RangedWeaponHandler
 
                 Debug.Log($"RangedManager | Current ammo: {currentAmmo} | total Ammo: {totalAmmo}");
 
-                GlobalWeaponManager.Instance.DisplayPlayerAmmo(currentAmmo, totalAmmo);
+                //GlobalWeaponManager.Instance.DisplayPlayerAmmo(currentAmmo, totalAmmo);
+                
+                OnAmmoChanged?.Invoke(currentAmmo, totalAmmo);
             }         
         }
     }
+
+
 
 }
