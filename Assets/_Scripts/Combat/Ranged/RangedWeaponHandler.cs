@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public static class RangedWeaponHandler
@@ -82,6 +83,8 @@ public static class RangedWeaponHandler
                 _weaponAmmunition[attackerId][rangedWeapon] = new AmmunitionHandler(weaponData);
             }
         }
+
+        UpdatePlayerUI(rangedWeapon, attackerId);
     }
 
     public static void ReloadWeapon(RangedWeaponType rangedWeapon, string attackerId)
@@ -140,4 +143,21 @@ public static class RangedWeaponHandler
         attackerCooldowns.Remove(rangedWeapon); // Once cooldown is done, remove the weapon from the cooldown list
         _activeCooldownCoroutines[attackerId].Remove(rangedWeapon); // Remove the coroutine from the list
     }
+
+
+    public static void UpdatePlayerUI(RangedWeaponType rangedWeapon, string attackerId)
+    {
+        if (_weaponAmmunition[attackerId].TryGetValue(rangedWeapon, out AmmunitionHandler ammoHandler))
+        {
+            int currentAmmo = ammoHandler.DisplayCurrentAmmo();
+            int totalAmmo = ammoHandler.DisplayTotalAmmo();
+            Debug.Log($"[DEBUG] Attacker: {attackerId} | Weapon: {rangedWeapon} | Current Ammo: {currentAmmo} | Total Ammo: {totalAmmo}");
+        }
+    }
+
+    //private static bool IsPlayer(string attackerId)
+    //{
+    //    return attackerId == PlayerManager.Instance.PlayerID;
+    //}
+
 }

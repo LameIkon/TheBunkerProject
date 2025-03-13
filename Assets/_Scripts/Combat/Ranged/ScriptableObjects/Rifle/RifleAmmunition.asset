@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RifleAmmunition
   m_EditorClassIdentifier: 
   SO_MaxAmmoCapacity: 7
-  SO_AmmoStorage: 14
+  SO_AmmoStorage: 50
   SO_CurrentAmmoCount: 0
   SO_DontConsumeAmmo: 0

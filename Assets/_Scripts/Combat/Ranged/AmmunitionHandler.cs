@@ -72,12 +72,14 @@ public class AmmunitionHandler
     public int DisplayCurrentAmmo()
     {
         int currentAmmo = ammoData.SO_CurrentAmmoCount;
+        //Debug.Log(ammoData.SO_CurrentAmmoCount);
         return currentAmmo;
     }
 
     public int DisplayTotalAmmo()
     {
         int totalAmmo = ammoData.SO_AmmoStorage;
+        //Debug.Log(ammoData.SO_AmmoStorage);
         return totalAmmo;
     }
 }

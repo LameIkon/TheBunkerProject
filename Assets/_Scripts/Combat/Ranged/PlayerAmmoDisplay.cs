@@ -45,6 +45,7 @@ public class PlayerAmmoDisplay : MonoBehaviour
         //SetAmmoCount(_currentWeapon._weapon.SO_CurrentAmmoCount);
         //DisplayAmmoSprite();
         //WeaponSelection();
+        //ChangeAmmoSprite();
     }
 
     private void ChangeAmmoSprite()
@@ -70,12 +71,9 @@ public class PlayerAmmoDisplay : MonoBehaviour
 
     private string SetAmmoCount()
     {
-        AmmunitionHandler ammoHandler = RangedWeaponHandler.GetAmmunitionHandler(_playerId, _currentWeaponType); // Get the player's ammunition details
+         //(int currentAmmo, int totalAmmo) = RangedWeaponHandler.UpdatePlayerUI(_currentWeaponType, _playerId); // Get values
 
-        string currentAmmo = ammoHandler.DisplayCurrentAmmo().ToString();
-        string totalAmmo = ammoHandler.DisplayTotalAmmo().ToString();
-
-        string ammoUIDisplay = $"{currentAmmo} / {totalAmmo}"; // What will be displayed 
+        string ammoUIDisplay = $"2";
 
         return ammoUIDisplay;
     }

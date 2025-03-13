@@ -30,7 +30,7 @@ public class SOAmmunition : ScriptableObject
         SOAmmunition instance = Instantiate(this); // Clone this ScriptableObject
         int ammoToReload = Mathf.Min(SO_AmmoStorage, SO_MaxAmmoCapacity - SO_CurrentAmmoCount); // If you got ammo in storage then consume and reload the gun
         instance.SO_CurrentAmmoCount = ammoToReload; // Set initial ammunition
-        instance.SO_AmmoStorage = ammoToReload; // remove ammo from storage
+        instance.SO_AmmoStorage -= ammoToReload; // remove ammo from storage
         return instance;
     }
 }
