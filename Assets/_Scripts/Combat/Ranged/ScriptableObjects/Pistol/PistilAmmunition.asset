@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc5481d06e7e1e44c8846adeb635988a, type: 3}
-  m_Name: RifleAmmunition
+  m_Name: PistilAmmunition
   m_EditorClassIdentifier: 
-  SO_MaxAmmoCapacity: 7
-  SO_AmmoStorage: 14
+  SO_MaxAmmoCapacity: 5
+  SO_AmmoStorage: 20
   SO_CurrentAmmoCount: 0
   SO_DontConsumeAmmo: 0

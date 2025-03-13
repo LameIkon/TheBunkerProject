@@ -20,3 +20,4 @@ MonoBehaviour:
   SO_CritMultiplyer: 0
   SO_RangedWeapontype: 2
   SO_Ammunition: {fileID: 11400000, guid: 59fb62e2182116f498e8d8f3df646471, type: 2}
+  reloadTime: 2

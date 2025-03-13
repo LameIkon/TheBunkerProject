@@ -4,9 +4,11 @@ using UnityEngine;
 public class AmmunitionHandler
 {
     private SOAmmunition ammoData;
+    private SORangedWeapon weaponData; // Used to get the reload time needed for that weapon
 
     public AmmunitionHandler(SORangedWeapon weaponData)
     {
+        this.weaponData = weaponData;
         ammoData = weaponData.SO_Ammunition.CreateInstance(); // Create a new instance of ammo for the player
     }
 
@@ -40,7 +42,7 @@ public class AmmunitionHandler
             Debug.Log("Not enough ammo to reload.");
             return; // Dont reload
         }
-        GlobalWeaponManager.Instance.StartReloadingWeapon(this);
+        GlobalWeaponManager.Instance.StartReloadingWeapon(this, weaponData.reloadTime);
         //int ammoToReload = Mathf.Min(ammoData.SO_AmmoStorage, ammoData.SO_MaxAmmoCapacity - ammoData.SO_CurrentAmmoCount); 
         //ammoData.ApplyAmmoChange(ammoToReload); // Increase ammo count
         //ammoData.SO_AmmoStorage -= ammoToReload; // Decrease reserve ammo
@@ -54,9 +56,8 @@ public class AmmunitionHandler
 
     public IEnumerator ReloadCoroutine(float reloadTime)
     {
-        // Simulate reload delay (e.g., 2 seconds for reload)
         Debug.Log("Reloading...");
-        yield return new WaitForSeconds(reloadTime); // Wait for the reload to complete
+        yield return new WaitForSeconds(reloadTime); 
 
         int ammoToReload = Mathf.Min(ammoData.SO_AmmoStorage, ammoData.SO_MaxAmmoCapacity - ammoData.SO_CurrentAmmoCount);
         ammoData.ApplyAmmoChange(ammoToReload); // Increase ammo count

@@ -3,8 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "RangedWeapon", menuName = "Weapons/RangedWeapon")]
 public class SORangedWeapon : SOWeaponStats
 {
-    public RangedWeaponType SO_RangedWeapontype;
+    [Header("Weapon Components")]
     public SOAmmunition SO_Ammunition;
+    public float reloadTime;
+    public RangedWeaponType SO_RangedWeapontype;
 
     public void PerformAttack(Transform attacker)
     {
