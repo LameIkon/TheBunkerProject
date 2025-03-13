@@ -26,25 +26,25 @@ public class GlobalWeaponManager : MonoBehaviour
         MeleeWeaponHandler.Initialize(_meleeWeapons);
     }
 
-    public static void Attack(WeaponType currentweaponType, Transform attackpoint)
+    public static void Attack(WeaponType currentweaponType, Transform attackpoint, string attackerId)
     {
         // Check what type of weapon you currently have
         if (WeaponTypes.TryGetMeleeType(currentweaponType, out MeleeWeaponType meleeWeapon)) // You use melee
         {
-            MeleeWeaponHandler.PerformMeleeAttack(meleeWeapon, attackpoint); // use meleeWeapon and know its own position
+            MeleeWeaponHandler.PerformMeleeAttack(meleeWeapon, attackpoint, attackerId); // use meleeWeapon and know its own position
         }
         else if (WeaponTypes.TryGetRangedType(currentweaponType, out RangedWeaponType rangedWeapon)) // You use range
         {
-            RangedWeaponHandler.PerfomRangedAttack(rangedWeapon, attackpoint);
+            RangedWeaponHandler.PerfomRangedAttack(rangedWeapon, attackpoint, attackerId);
         }
     }
 
-    public void ReloadWeapon(WeaponType currentWeaponType, Transform attackerPosition)
+    public void ReloadWeapon(WeaponType currentWeaponType, string userId)
     {
         //string attackerId = _attackPoint.GetInstanceID().ToString(); // Unique attacker ID from the transform
         if (WeaponTypes.TryGetRangedType(currentWeaponType, out RangedWeaponType rangedWeapon))
         {
-            RangedWeaponHandler.ReloadWeapon(rangedWeapon, attackerPosition); // Reload the weapon based on the current weapon type
+            RangedWeaponHandler.ReloadWeapon(rangedWeapon, userId); // Reload the weapon based on the current weapon type
         }
     }
 

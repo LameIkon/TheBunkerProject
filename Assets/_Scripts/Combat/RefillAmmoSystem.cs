@@ -11,20 +11,20 @@ public class RefillAmmoSystem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IWeaponUser weaponUser = collision.GetComponent<IWeaponUser>();
+        IIdentifiable userId = collision.GetComponent<IIdentifiable>();
+        IWeaponUser weaponUserType = collision.GetComponent<IWeaponUser>();
 
-        if (weaponUser != null)
+        if (userId != null && weaponUserType != null)
         {
-            string attackerId = weaponUser.GetAttackerId();
-            RangedWeaponType weaponType = weaponUser.GetEquippedWeapon();
+            string attackerId = userId.UniqueEntityId();
 
-            RefillAmmo(attackerId, weaponType);
+            RefillAmmo(attackerId, weaponUserType.GetEquippedWeapon());
         }
     }
 
-    private void RefillAmmo(string attackerId, RangedWeaponType rangedWeapon)
+    private void RefillAmmo(string attackerId, WeaponType weapon)
     {
-        AmmunitionHandler ammoHandler = RangedWeaponHandler.GetAmmunitionHandler(attackerId, rangedWeapon);
+        AmmunitionHandler ammoHandler = RangedWeaponHandler.GetAmmunitionHandler(attackerId, weapon);
         Debug.Log(ammoHandler);
         if (ammoHandler != null)
         {

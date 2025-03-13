@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MeleeEnemy : MonoBehaviour
+public class MeleeEnemy : MonoBehaviour, IIdentifiable, IWeaponUser
 {
     [Header("Attack Parameters")]
     [SerializeField] private float _damage; // Reduntant
@@ -68,12 +68,20 @@ public class MeleeEnemy : MonoBehaviour
         Gizmos.DrawWireCube(bounds.center + trans.right * _range * trans.localScale.x * _colliderDistance,
             new Vector3(bounds.size.x * _range, bounds.size.y, bounds.size.z));
     }
+    public string UniqueEntityId()
+    {
+        return GetInstanceID().ToString();
+    }
 
+    public WeaponType GetEquippedWeapon() // Implement later so ai can decide what weapon to use perhaps
+    {
+        return WeaponType.Rifle;
+    }
     private void DamagePlayer() // Needs to be set on the attack animation
     {
         if (PlayerInRange())
         {
-            GlobalWeaponManager.Attack(WeaponType.Rifle, transform); // Testing if other can use same attack system. It just need to know what weapon type to use and what start area to attack from.
+            GlobalWeaponManager.Attack(GetEquippedWeapon(), transform, UniqueEntityId()); // Testing if other can use same attack system. It just need to know what weapon type to use and what start area to attack from.
             //_targetHealth.TakeDamage(_damage);
         }
     }

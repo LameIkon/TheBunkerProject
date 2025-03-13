@@ -21,9 +21,9 @@ public static class RangedWeaponHandler
     }
 
 
-    public static void PerfomRangedAttack(RangedWeaponType rangedWeapon, Transform attackerPosition)
+    public static void PerfomRangedAttack(RangedWeaponType rangedWeapon, Transform attackerPosition, string attackerId)
     {
-        string attackerId = attackerPosition.GetInstanceID().ToString(); // Uniq id to the instance of the one perfoming the attack
+        //string attackerId = attackerPosition.GetInstanceID().ToString(); // Uniq id to the instance of the one perfoming the attack
         Debug.Log("unique attacker id: " + attackerId);
 
         
@@ -82,17 +82,12 @@ public static class RangedWeaponHandler
             {
                 _weaponAmmunition[attackerId][rangedWeapon] = new AmmunitionHandler(weaponData);
             }
-            else
-            {
-                Debug.LogError($"Weapon data for {rangedWeapon} not found!");
-                return;
-            }
         }
     }
 
-    public static void ReloadWeapon(RangedWeaponType rangedWeapon, Transform attackerPosition)
+    public static void ReloadWeapon(RangedWeaponType rangedWeapon, string attackerId)
     {
-        string attackerId = attackerPosition.GetInstanceID().ToString();
+        //string attackerId = attackerPosition.GetInstanceID().ToString();
         if (_weaponAmmunition.ContainsKey(attackerId) && _weaponAmmunition[attackerId].ContainsKey(rangedWeapon))
         {
             AmmunitionHandler ammoHandler = _weaponAmmunition[attackerId][rangedWeapon];
@@ -100,16 +95,19 @@ public static class RangedWeaponHandler
         }
     }
 
-    public static AmmunitionHandler GetAmmunitionHandler(string attackerId, RangedWeaponType rangedWeapon)
+    public static AmmunitionHandler GetAmmunitionHandler(string attackerId, WeaponType weapon)
     {
-        if (_weaponAmmunition.ContainsKey(attackerId) && _weaponAmmunition[attackerId].ContainsKey(rangedWeapon))
+        if (WeaponTypes.TryGetRangedType(weapon, out RangedWeaponType rangedWeapon))
         {
-            return _weaponAmmunition[attackerId][rangedWeapon];
+            // If it is a ranged weapon, check the ammunition dictionary
+            if (_weaponAmmunition.ContainsKey(attackerId) && _weaponAmmunition[attackerId].ContainsKey(rangedWeapon))
+            {
+                return _weaponAmmunition[attackerId][rangedWeapon];
+            }
         }
-        else
-        {
-            return null;
-        }
+
+        // Return null if it's not a ranged weapon or no ammunition found
+        return null;
     }
 
 

@@ -19,9 +19,9 @@ public static class MeleeWeaponHandler
     }
 
 
-    public static void PerformMeleeAttack(MeleeWeaponType meleeWeapon, Transform attacker)
+    public static void PerformMeleeAttack(MeleeWeaponType meleeWeapon, Transform attacker, string attackerId)
     {
-        string attackerId = attacker.GetInstanceID().ToString(); // Uniq id to the instance of the one perfoming the attack
+        //string attackerId = attacker.GetInstanceID().ToString(); // Uniq id to the instance of the one perfoming the attack
         Debug.Log("unique attacker id: " + attackerId);
         if (!_weaponCooldowns.ContainsKey(attackerId)) // If there is no such id then save it
         {
