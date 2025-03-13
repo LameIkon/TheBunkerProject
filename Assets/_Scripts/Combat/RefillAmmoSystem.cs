@@ -6,6 +6,7 @@ public class RefillAmmoSystem : MonoBehaviour
 {
     [SerializeField] private int _totalAmmoStockpileAmount; // Used later if stockpile should be refilled
     [SerializeField] private int _ammoStockpileAmount = 10; // Amount taken from stockpile
+    [SerializeField] private string _playerId;
 
 
 

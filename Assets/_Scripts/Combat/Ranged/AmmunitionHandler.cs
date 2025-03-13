@@ -66,4 +66,18 @@ public class AmmunitionHandler
 
         Debug.Log($"Reload complete. Current Ammo: {ammoData.SO_CurrentAmmoCount} Ammo Storage: {ammoData.SO_AmmoStorage}");
     }
+
+
+    /// For player Display:
+    public int DisplayCurrentAmmo()
+    {
+        int currentAmmo = ammoData.SO_CurrentAmmoCount;
+        return currentAmmo;
+    }
+
+    public int DisplayTotalAmmo()
+    {
+        int totalAmmo = ammoData.SO_AmmoStorage;
+        return totalAmmo;
+    }
 }
