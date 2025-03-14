@@ -35,11 +35,12 @@ public class AmmunitionHandler
         ammoData.ApplyAmmoChangeToStorage(amount);  // Change the storage amount
     }
 
-    public void ReloadWeapon(string entityId)
+    public void ReloadWeapon(string entityId, RangedWeaponType rangedWeapon)
     {
         if (!CheckIfMissingAmmo()) // Check if entity has ammo
         {
             Debug.Log("Not enough ammo to reload.");
+            RangedWeaponHandler.RemoveWeaponFromReloading(entityId, rangedWeapon);
             return; // Dont reload
         }
         GlobalWeaponManager.Instance.StartReloadingWeapon(this, weaponData.reloadTime, entityId); // Start reloading.

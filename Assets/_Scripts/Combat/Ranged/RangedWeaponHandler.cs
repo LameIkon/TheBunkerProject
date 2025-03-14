@@ -88,7 +88,7 @@ public static class RangedWeaponHandler
         //}
 
         _reloadingWeapons[attackerId].Add(rangedWeapon);  
-        ammoHandler.ReloadWeapon(attackerId); // Reload weapon      
+        ammoHandler.ReloadWeapon(attackerId, rangedWeapon); // Reload weapon      
     }
 
     public static void RemoveWeaponFromReloading(string attackerId, RangedWeaponType rangedWeapon)
