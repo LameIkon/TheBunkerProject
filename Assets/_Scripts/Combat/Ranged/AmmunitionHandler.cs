@@ -60,17 +60,19 @@ public class AmmunitionHandler
         ammoData.ApplyAmmoChangeInWeapon(ammoToReload); // Increase ammo count
         ammoData.SO_AmmoStorage -= ammoToReload; // Decrease reserve ammo
         GlobalWeaponManager.Instance.ReloadCoroutineFinished();
+        RangedWeaponHandler.RemoveWeaponFromReloading(entityId, weaponData.SO_RangedWeapontype); // remove from dictionary over reloading allow you to shoot again
 
         if (entityId == PlayerController.s_PlayerId)
         {
             RangedWeaponHandler.UpdatePlayerUI(weaponData.SO_RangedWeapontype, entityId);
         }
 
+
         Debug.Log($"Reload complete. Current Ammo: {ammoData.SO_CurrentAmmoCount} Ammo Storage: {ammoData.SO_AmmoStorage}");
     }
 
 
-    /// For player Display:
+    // For player Display:
     public int DisplayCurrentAmmo()
     {
         int currentAmmo = ammoData.SO_CurrentAmmoCount;

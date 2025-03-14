@@ -9,7 +9,9 @@ public static class RangedWeaponHandler
     private static Dictionary<string, Dictionary<RangedWeaponType, AmmunitionHandler>> _weaponAmmunition = new Dictionary<string, Dictionary<RangedWeaponType, AmmunitionHandler>>(); // Entity has a weapon and that weapon has ammo 
     private static Dictionary<RangedWeaponType, SORangedWeapon> _rangedWeaponData; // Access to scriptableObject from the given enum
     private static Dictionary<string, Dictionary<RangedWeaponType, float>> _weaponCooldowns = new Dictionary<string, Dictionary<RangedWeaponType, float>>();  // For weapon cooldown. The dictionary holds a string and then another dictionary. First it looks for an entity and this entity(like player) can hold multiple weapons with their cooldowns 
+    
     private static Dictionary<string, HashSet<RangedWeaponType>> _activeCooldownCoroutines = new Dictionary<string, HashSet<RangedWeaponType>>(); // Track active coroutines for each player and their weapons
+    private static Dictionary<string, HashSet<RangedWeaponType>> _reloadingWeapons = new Dictionary<string, HashSet<RangedWeaponType>>(); // Track active reloads for each player and their weapons
 
     public static event Action<int, int> OnAmmoChanged;
 
@@ -29,6 +31,11 @@ public static class RangedWeaponHandler
         Debug.Log("unique attacker id: " + attackerId);
 
         EnsureWeaponDataExists(attackerId, rangedWeapon); // Create and store data to the dictionaries. Safeguard
+
+        if (_reloadingWeapons.ContainsKey(attackerId) && _reloadingWeapons[attackerId].Contains(rangedWeapon)) // Check if entity is currently reloading for that weapon
+        {
+            return;
+        }
 
         if (_weaponCooldowns[attackerId].ContainsKey(rangedWeapon) && _weaponCooldowns[attackerId][rangedWeapon] > 0f) // Check if entity has a cooldown for that weapon and if it still is on cooldown
         {
@@ -61,14 +68,27 @@ public static class RangedWeaponHandler
 
     public static void ReloadWeapon(RangedWeaponType rangedWeapon, string attackerId)
     {
-        if (!_weaponAmmunition.ContainsKey(attackerId)) // If there is no such id then save it
+        EnsureWeaponDataExists(attackerId, rangedWeapon); // Safeguard
+
+        if (_reloadingWeapons.ContainsKey(attackerId) && _reloadingWeapons[attackerId].Contains(rangedWeapon))
         {
-            _weaponAmmunition[attackerId] = new Dictionary<RangedWeaponType, AmmunitionHandler>();
+            return; // Stop if already reloading
         }
-        if (_weaponAmmunition[attackerId].ContainsKey(rangedWeapon)) // attacker have the weapon in question
+        if (!_reloadingWeapons.ContainsKey(attackerId))
         {
-            AmmunitionHandler ammoHandler = _weaponAmmunition[attackerId][rangedWeapon]; // Get the ammo data
-            ammoHandler.ReloadWeapon(attackerId); // Reload weapon
+            _reloadingWeapons[attackerId] = new HashSet<RangedWeaponType>();
+        }
+
+        AmmunitionHandler ammoHandler = _weaponAmmunition[attackerId][rangedWeapon]; // Get the ammo data
+        _reloadingWeapons[attackerId].Add(rangedWeapon);  
+        ammoHandler.ReloadWeapon(attackerId); // Reload weapon      
+    }
+
+    public static void RemoveWeaponFromReloading(string attackerId, RangedWeaponType rangedWeapon)
+    {
+        if (_reloadingWeapons.ContainsKey(attackerId))
+        {
+            _reloadingWeapons[attackerId].Remove(rangedWeapon);
         }
     }
 
@@ -110,7 +130,6 @@ public static class RangedWeaponHandler
         _weaponCooldowns[attackerId].Remove(rangedWeapon); // Once cooldown is done, remove the weapon from the cooldown list
         _activeCooldownCoroutines[attackerId].Remove(rangedWeapon); // Remove the coroutine from the list
     }
-
 
 
     public static void UpdatePlayerUI(RangedWeaponType rangedWeapon, string attackerId) // Only for player
