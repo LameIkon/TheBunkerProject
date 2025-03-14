@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SO_MinDamage: 10
   SO_MaxDamage: 10
-  SO_AttackRate: 0
+  SO_AttackRate: 0.5
   SO_AttackRange: 10
   SO_CritChance: 0
   SO_CritMultiplyer: 0

@@ -64,7 +64,7 @@ public class GlobalWeaponManager : MonoBehaviour
     public void StartReloadingWeapon(AmmunitionHandler ammoHandler, float reloadTime, string entityId) // Start the reload for a specific weapon
     {
         _activeWeaponReloadCoroutines++; // For debugging
-        StartCoroutine(ammoHandler.ReloadCoroutine(reloadTime, entityId));
+        StartCoroutine(ammoHandler.ReloadCoroutine(reloadTime, entityId)); // Only reason we take id is because of player needs it to update UI
     }
 
     public void CooldownCoroutineFinished() // For debugging

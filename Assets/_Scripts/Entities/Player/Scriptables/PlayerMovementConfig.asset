@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5efa8a0e1243d7a45bcfcd708408858e, type: 3}
   m_Name: PlayerMovementConfig
   m_EditorClassIdentifier: 
-  _walkingSpeed: 5
-  _runningSpeed: 8
-  _crouchingSpeed: 3
+  _walkingSpeed: 3
+  _runningSpeed: 6
+  _crouchingSpeed: 2
   _backwardsMoveSpeed: 2
   _climbSpeed: 4

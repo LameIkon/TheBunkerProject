@@ -9,8 +9,9 @@ public static class RangedWeaponHandler
     private static Dictionary<string, Dictionary<RangedWeaponType, AmmunitionHandler>> _weaponAmmunition = new Dictionary<string, Dictionary<RangedWeaponType, AmmunitionHandler>>(); // Entity has a weapon and that weapon has ammo 
     private static Dictionary<RangedWeaponType, SORangedWeapon> _rangedWeaponData; // Access to scriptableObject from the given enum
     private static Dictionary<string, Dictionary<RangedWeaponType, float>> _weaponCooldowns = new Dictionary<string, Dictionary<RangedWeaponType, float>>();  // For weapon cooldown. The dictionary holds a string and then another dictionary. First it looks for an entity and this entity(like player) can hold multiple weapons with their cooldowns 
-    private static Dictionary<string, HashSet<RangedWeaponType>> _activeCooldownCoroutines = new Dictionary<string, HashSet<RangedWeaponType>>(); // Track active coroutines
+    private static Dictionary<string, HashSet<RangedWeaponType>> _activeCooldownCoroutines = new Dictionary<string, HashSet<RangedWeaponType>>(); // Track active coroutines for each player and their weapons
 
+    public static event Action<int, int> OnAmmoChanged;
 
     public static void Initialize(SORangedWeapon[] allRangedWeaponTypes) // Check what type of weapons exist
     {
@@ -27,7 +28,7 @@ public static class RangedWeaponHandler
     {
         Debug.Log("unique attacker id: " + attackerId);
 
-        EnsureWeaponDataExists(attackerId, rangedWeapon);
+        EnsureWeaponDataExists(attackerId, rangedWeapon); // Create and store data to the dictionaries. Safeguard
 
         if (_weaponCooldowns[attackerId].ContainsKey(rangedWeapon) && _weaponCooldowns[attackerId][rangedWeapon] > 0f) // Check if entity has a cooldown for that weapon and if it still is on cooldown
         {
@@ -36,46 +37,27 @@ public static class RangedWeaponHandler
 
         if (_activeCooldownCoroutines[attackerId].Contains(rangedWeapon)) // Stop if there is an coroutine with that type running
         {
-            return; // Skip starting the coroutine if it's already active
+            return; // Return since you are still on cooldown
         }
-
-        //CheckWeaponAmmunition(rangedWeapon, attackerPosition, attackerId);
         
-        AmmunitionHandler weaponAmmo = _weaponAmmunition[attackerId][rangedWeapon];
-        if (!weaponAmmo.HasAmmo()) // If you dont have ammunition
+        AmmunitionHandler weaponAmmo = _weaponAmmunition[attackerId][rangedWeapon]; // Take the entity and their weapon to be handled by ammunitionHandler
+        if (!weaponAmmo.HasAmmo()) // If entity with that weapon has no ammo
         {
             Debug.Log("need reload");
-            //ReloadWeapon(rangedWeapon, attackerPosition);
-            return; // need reload
+            return; // Return since you dont have ammo
         }
 
-        if (_rangedWeaponData.TryGetValue(rangedWeapon, out SORangedWeapon weaponData)) // Get the specific weapontype scriptable 
+        // All checkers/safeguards have been accepted and now you can begin your attack
+        if (_rangedWeaponData.TryGetValue(rangedWeapon, out SORangedWeapon weaponData)) // Get the specific weapontype ScriptableObject 
         {
-            Debug.Log("attacked using: " + weaponData.SO_RangedWeapontype);
+            Debug.Log("attacking using: " + weaponData.SO_RangedWeapontype); 
             weaponAmmo.ConsumeAmmo(); // Use ammunition
-            weaponData.PerformAttack(attackerPosition); // Access scriptable object method
+            weaponData.PerformAttack(attackerPosition); // Access scriptable object method to perform an attack
         }
-        UpdatePlayerUI(rangedWeapon, attackerId); // Check if its the player 
-        _activeCooldownCoroutines[attackerId].Add(rangedWeapon); // add coroutine to hashset
-        GlobalWeaponManager.Instance.StartRangedWeaponCooldown(attackerId, rangedWeapon, weaponData.SO_AttackRate); // Starts the cooldown for the weapon. Coroutine needs to be called from not an abstract class
+        UpdatePlayerUI(rangedWeapon, attackerId); // Check if its the player to update UI
+        _activeCooldownCoroutines[attackerId].Add(rangedWeapon); // add coroutine to hashset for cooldown
+        GlobalWeaponManager.Instance.StartRangedWeaponCooldown(attackerId, rangedWeapon, weaponData.SO_AttackRate); // Starts the cooldown for the weapon. Coroutine needs to be called from an Monobehaviour
     }
-
-    //private static void CheckWeaponAmmunition(RangedWeaponType rangedWeapon, Transform attacker, string attackerId)
-    //{
-    //    if (!_weaponAmmunition.ContainsKey(attackerId)) // If there is no such id then save it
-    //    {
-    //        _weaponAmmunition[attackerId] = new Dictionary<RangedWeaponType, AmmunitionHandler>();
-    //    }
-    //    if (!_weaponAmmunition[attackerId].ContainsKey(rangedWeapon))
-    //    {
-    //        if (_rangedWeaponData.TryGetValue(rangedWeapon, out SORangedWeapon weaponData))
-    //        {
-    //            _weaponAmmunition[attackerId][rangedWeapon] = new AmmunitionHandler(weaponData);
-    //        }
-    //    }
-
-    //    UpdatePlayerUI(rangedWeapon, attackerId);
-    //}
 
     public static void ReloadWeapon(RangedWeaponType rangedWeapon, string attackerId)
     {
@@ -83,30 +65,30 @@ public static class RangedWeaponHandler
         {
             _weaponAmmunition[attackerId] = new Dictionary<RangedWeaponType, AmmunitionHandler>();
         }
-        if (_weaponAmmunition.ContainsKey(attackerId) && _weaponAmmunition[attackerId].ContainsKey(rangedWeapon))
+        if (_weaponAmmunition[attackerId].ContainsKey(rangedWeapon)) // attacker have the weapon in question
         {
-            AmmunitionHandler ammoHandler = _weaponAmmunition[attackerId][rangedWeapon];
+            AmmunitionHandler ammoHandler = _weaponAmmunition[attackerId][rangedWeapon]; // Get the ammo data
             ammoHandler.ReloadWeapon(attackerId); // Reload weapon
         }
     }
 
-    public static AmmunitionHandler GetAmmunitionHandler(string attackerId, WeaponType weapon)
+    public static AmmunitionHandler GetAmmunitionHandler(string attackerId, WeaponType weapon) // Get ammunitonHandler for each entity and for each of their weapons. When an entity needs their ammo refilled
     {
-        if (WeaponTypes.TryGetRangedType(weapon, out RangedWeaponType rangedWeapon))
+        if (WeaponTypes.TryGetRangedType(weapon, out RangedWeaponType rangedWeapon)) // Check if their weapon is a ranged weapon
         {        
             if (!_weaponAmmunition.ContainsKey(attackerId)) // If there is no such id then save it
             {
                 _weaponAmmunition[attackerId] = new Dictionary<RangedWeaponType, AmmunitionHandler>();
             }       
-            if (!_weaponAmmunition[attackerId].ContainsKey(rangedWeapon))  // Ensure the ammunition handler exists for the weapon
+            if (!_weaponAmmunition[attackerId].ContainsKey(rangedWeapon))  // If entity dont have a weapon stored then:
             {
-                if (_rangedWeaponData.TryGetValue(rangedWeapon, out SORangedWeapon weaponData))
+                if (_rangedWeaponData.TryGetValue(rangedWeapon, out SORangedWeapon weaponData)) // Get the weapontype from ScriptableObject
                 {
-                    _weaponAmmunition[attackerId][rangedWeapon] = new AmmunitionHandler(weaponData);
+                    _weaponAmmunition[attackerId][rangedWeapon] = new AmmunitionHandler(weaponData); // Store the weapon 
                 }
             }
 
-            return _weaponAmmunition[attackerId][rangedWeapon]; // Return the found or newly created ammo handler
+            return _weaponAmmunition[attackerId][rangedWeapon]; // Return entity and their weapon. You are now able to access the AmmunitionHandler Instance for that entity and get its ammo
         }
         return null;
     }
@@ -114,31 +96,25 @@ public static class RangedWeaponHandler
 
     public static IEnumerator HandleCooldown(string attackerId, RangedWeaponType rangedWeapon, float cooldownTime)
     {
-        if (!_weaponCooldowns.ContainsKey(attackerId)) // If attacker doesn't exist in the cooldown dictionary, add it
-        {
-            Debug.Log(attackerId);
-            _weaponCooldowns[attackerId] = new Dictionary<RangedWeaponType, float>();
-        }
+        EnsureWeaponDataExists(attackerId, rangedWeapon); // Create and store data to the dictionaries. Safeguard
 
-        Dictionary<RangedWeaponType, float> attackerCooldowns = _weaponCooldowns[attackerId];
-        attackerCooldowns[rangedWeapon] = cooldownTime; // Set the cooldown time for the weapon
+        _weaponCooldowns[attackerId][rangedWeapon] = cooldownTime; // Set the cooldown time for the weapon
 
         // Wait until cooldown finishes
-        while (attackerCooldowns[rangedWeapon] > 0f)
+        while (_weaponCooldowns[attackerId][rangedWeapon] > 0f)
         {
-            attackerCooldowns[rangedWeapon] -= Time.deltaTime; // Reduce cooldown time
+            _weaponCooldowns[attackerId][rangedWeapon] -= Time.deltaTime; // Reduce cooldown time
             yield return null;
         }
-        GlobalWeaponManager.Instance.CooldownCoroutineFinished(); // For debugging
-        attackerCooldowns.Remove(rangedWeapon); // Once cooldown is done, remove the weapon from the cooldown list
+        GlobalWeaponManager.Instance.CooldownCoroutineFinished(); // For debugging. 
+        _weaponCooldowns[attackerId].Remove(rangedWeapon); // Once cooldown is done, remove the weapon from the cooldown list
         _activeCooldownCoroutines[attackerId].Remove(rangedWeapon); // Remove the coroutine from the list
     }
 
 
-    public static event Action<int, int> OnAmmoChanged;
-    public static void UpdatePlayerUI(RangedWeaponType rangedWeapon, string attackerId)
+
+    public static void UpdatePlayerUI(RangedWeaponType rangedWeapon, string attackerId) // Only for player
     {
-        Debug.Log("checking");
         if(attackerId == PlayerController.s_PlayerId) // Check if the id is identical to player id
         {
             EnsureWeaponDataExists(attackerId, rangedWeapon);
@@ -148,18 +124,14 @@ public static class RangedWeaponHandler
                 int currentAmmo = ammoHandler.DisplayCurrentAmmo();
                 int totalAmmo = ammoHandler.DisplayTotalAmmo();
 
-                Debug.Log($"RangedManager | Current ammo: {currentAmmo} | total Ammo: {totalAmmo}");
+                Debug.Log($"Current ammo: {currentAmmo} | total Ammo: {totalAmmo}");
                 
                 OnAmmoChanged?.Invoke(currentAmmo, totalAmmo);
             }         
         }
-        else
-        {
-            Debug.Log($"This is not the player: {attackerId} | player id is: {PlayerController.s_PlayerId}");
-        }
     }
 
-    public static void UpdateAmmoForPlayer(string playerId, RangedWeaponType weaponType)
+    public static void UpdateAmmoForPlayer(string playerId, RangedWeaponType weaponType) // Player ammo UI
     {
         UpdatePlayerUI(weaponType, playerId);
     }
@@ -167,26 +139,23 @@ public static class RangedWeaponHandler
 
     private static void EnsureWeaponDataExists(string attackerId, RangedWeaponType rangedWeapon)
     {
-        // Ensure ammunition data exists for the attacker
-        if (!_weaponAmmunition.ContainsKey(attackerId))
+        
+        if (!_weaponAmmunition.ContainsKey(attackerId)) // Ensure ammunition data exists for the entity
         {
             _weaponAmmunition[attackerId] = new Dictionary<RangedWeaponType, AmmunitionHandler>();
         }
 
-        // Ensure cooldown data exists for the attacker
-        if (!_weaponCooldowns.ContainsKey(attackerId))
+        if (!_weaponCooldowns.ContainsKey(attackerId)) // Ensure cooldown data exists for the entity
         {
             _weaponCooldowns[attackerId] = new Dictionary<RangedWeaponType, float>();
         }
 
-        // Ensure active cooldown coroutines exist for the attacker
-        if (!_activeCooldownCoroutines.ContainsKey(attackerId))
+        if (!_activeCooldownCoroutines.ContainsKey(attackerId)) // Ensure active cooldown coroutines exist for the entity
         {
             _activeCooldownCoroutines[attackerId] = new HashSet<RangedWeaponType>();
         }
-
-        // Ensure ammo handler exists for the given weapon
-        if (!_weaponAmmunition[attackerId].ContainsKey(rangedWeapon))
+       
+        if (!_weaponAmmunition[attackerId].ContainsKey(rangedWeapon)) // Ensure ammo handler exists for the given weapon
         {
             if (_rangedWeaponData.TryGetValue(rangedWeapon, out SORangedWeapon weaponData))
             {

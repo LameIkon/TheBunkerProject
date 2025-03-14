@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 public class PlayerWeaponController : MonoBehaviour
 {
     [SerializeField] private WeaponType _currentWeaponType = WeaponType.Unarmed;
-    [SerializeField] private Transform _attackPoint;
-    [SerializeField] private string _playerId;
+    [SerializeField] private Transform _attackPoint; // Attack point. This need improvement to know location better. a gun and a rifle should have different points
+    [SerializeField] private string _playerId; // Used to update ammo UI
 
     private void OnEnable()
     {
@@ -30,17 +30,26 @@ public class PlayerWeaponController : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (context.performed) //Fires an event whenever action/key is pressed.  
+        if (context.started)  
         {
-            GlobalWeaponManager.Attack(_currentWeaponType, _attackPoint, _playerId);
+            InvokeRepeating(nameof(PerformAttack),0.01f, 0.01f); // Repeatedly call the fire while holding attack down
+        }
+        else if (context.canceled)
+        {
+            CancelInvoke(nameof(PerformAttack)); // Cancel the repeat call
         }
     }
 
     public void OnReload(InputAction.CallbackContext context)
     {
-        if (context.performed) //Fires an event whenever action/key is pressed.  
+        if (context.performed)
         {
             GlobalWeaponManager.Instance.ReloadWeapon(_currentWeaponType, _playerId);
         }
+    }
+
+    private void PerformAttack()
+    {
+        GlobalWeaponManager.Attack(_currentWeaponType, _attackPoint, _playerId);
     }
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 public class SORangedWeapon : SOWeaponStats
 {
     [Header("Weapon Components")]
-    public SOAmmunition SO_Ammunition;
-    public float reloadTime;
+    public SOAmmunition SO_Ammunition; // Ammunition this gun takes
+    public float reloadTime; // Time needed to reload gun
     public RangedWeaponType SO_RangedWeapontype;
 
     public void PerformAttack(Transform attacker)
@@ -17,7 +17,7 @@ public class SORangedWeapon : SOWeaponStats
         float attackLength = SO_AttackRange; // Horizontal attack range
         RaycastHit2D[] hits = Physics2D.RaycastAll(attackOrigin, attackDirection, SO_AttackRange);
 
-        Debug.DrawRay(attackOrigin, attackDirection * attackLength, Color.red, 0.5f);
+        Debug.DrawRay(attackOrigin, attackDirection * attackLength, Color.red, 0.5f); // Debugging
 
 
         foreach (RaycastHit2D hit in hits)
@@ -35,7 +35,6 @@ public class SORangedWeapon : SOWeaponStats
                     damageable.TakeDamage(DamageOutput());
                 }
             }
-
         }
     }
 }

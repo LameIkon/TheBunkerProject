@@ -7,7 +7,7 @@ public class PlayerAmmoDisplay : MonoBehaviour
 {
     [SerializeField] private Image[] _currentAmmoSprite;
     [SerializeField] private TextMeshProUGUI _ammoText;
-    [SerializeField] private string _playerId;
+    [SerializeField] private string _playerId; // To check player data in GlobalWeaponManager and its scripts
 
     private WeaponType _currentWeaponType = WeaponType.Unarmed;
 
@@ -57,7 +57,6 @@ public class PlayerAmmoDisplay : MonoBehaviour
                 sprite.enabled = false;
             }
             _currentAmmoSprite[spriteIndex].enabled = true; // Enable the selected
-            //_ammoText.text = SetAmmoCount();
         }
         else
         {
@@ -75,8 +74,8 @@ public class PlayerAmmoDisplay : MonoBehaviour
         _ammoText.text = ammoUIDisplay;
     }
 
-    public void UpdateAmmoUIAfterReload(int currentAmmo, int totalAmmo)
-    {
-        SetAmmoCount(currentAmmo, totalAmmo);
-    }
+    //public void UpdateAmmoUIAfterReload(int currentAmmo, int totalAmmo)
+    //{
+    //    SetAmmoCount(currentAmmo, totalAmmo);
+    //}
 }

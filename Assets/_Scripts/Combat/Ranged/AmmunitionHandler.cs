@@ -19,9 +19,8 @@ public class AmmunitionHandler
 
     public void ConsumeAmmo()
     {
-        if (ammoData.SO_DontConsumeAmmo)
+        if (ammoData.SO_DontConsumeAmmo) // If boolean checked you will never consume ammo but still do damage
         {
-            Debug.Log($"You dont consume ammo. CurrentAmmo: {ammoData.SO_CurrentAmmoCount} AmmoStorage: {ammoData.SO_AmmoStorage}... See you have nothing so stop shooting");
             return;
         }
 
@@ -31,7 +30,7 @@ public class AmmunitionHandler
         }
     }
 
-    public void RestockAmmo(int amount)
+    public void RestockAmmo(int amount) // For restocking personal ammo storage
     {
         ammoData.ApplyAmmoChangeToStorage(amount);  // Change the storage amount
     }
@@ -46,9 +45,9 @@ public class AmmunitionHandler
         GlobalWeaponManager.Instance.StartReloadingWeapon(this, weaponData.reloadTime, entityId); // Start reloading.
     }
 
-    private bool CheckIfCanReload()
+    private bool CheckIfCanReload() 
     {
-        bool haveAmmo = ammoData.SO_AmmoStorage > 0; // Look in your personal storage for ammo
+        bool haveAmmo = ammoData.SO_AmmoStorage > 0; // Look in your personal storage for ammo. Can only reload if you are missing ammo from magazine
         return haveAmmo;
     }
 
@@ -57,7 +56,7 @@ public class AmmunitionHandler
         Debug.Log("Reloading...");
         yield return new WaitForSeconds(reloadTime); 
 
-        int ammoToReload = Mathf.Min(ammoData.SO_AmmoStorage, ammoData.SO_MaxAmmoCapacity - ammoData.SO_CurrentAmmoCount); // Check how much ammo needs to be refilled
+        int ammoToReload = Mathf.Min(ammoData.SO_AmmoStorage, ammoData.SO_MaxMagazineCapacity - ammoData.SO_CurrentAmmoCount); // Check how much ammo needs to be refilled
         ammoData.ApplyAmmoChangeInWeapon(ammoToReload); // Increase ammo count
         ammoData.SO_AmmoStorage -= ammoToReload; // Decrease reserve ammo
         GlobalWeaponManager.Instance.ReloadCoroutineFinished();
