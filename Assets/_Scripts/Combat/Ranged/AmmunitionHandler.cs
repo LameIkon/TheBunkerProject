@@ -45,6 +45,11 @@ public class AmmunitionHandler
         GlobalWeaponManager.Instance.StartReloadingWeapon(this, weaponData.reloadTime, entityId); // Start reloading.
     }
 
+    public void StopReloading(string entityId, RangedWeaponType rangedWeapon)
+    {
+        GlobalWeaponManager.Instance.StopReloadingWeapon(entityId, rangedWeapon); // Request GlobalWeaponManager to stop the reload coroutine
+    }
+
     private bool CheckIfCanReload() 
     {
         bool haveAmmo = ammoData.SO_AmmoStorage > 0; // Look in your personal storage for ammo. Can only reload if you are missing ammo from magazine

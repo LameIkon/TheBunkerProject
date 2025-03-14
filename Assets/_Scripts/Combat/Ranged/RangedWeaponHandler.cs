@@ -80,6 +80,9 @@ public static class RangedWeaponHandler
         }
 
         AmmunitionHandler ammoHandler = _weaponAmmunition[attackerId][rangedWeapon]; // Get the ammo data
+
+        //if (ammoHandler.)
+
         _reloadingWeapons[attackerId].Add(rangedWeapon);  
         ammoHandler.ReloadWeapon(attackerId); // Reload weapon      
     }
@@ -88,7 +91,10 @@ public static class RangedWeaponHandler
     {
         if (_reloadingWeapons.ContainsKey(attackerId))
         {
+            //Debug.Log(_reloadingWeapons[attackerId].Remove(rangedWeapon));
             _reloadingWeapons[attackerId].Remove(rangedWeapon);
+            //Debug.Log(_reloadingWeapons[attackerId].Remove(rangedWeapon));
+            //_reloadingWeapons[attackerId].Clear(); // not good for scalability
         }
     }
 
@@ -137,7 +143,6 @@ public static class RangedWeaponHandler
         if(attackerId == PlayerController.s_PlayerId) // Check if the id is identical to player id
         {
             EnsureWeaponDataExists(attackerId, rangedWeapon);
-            Debug.Log("Is player!");
             if (_weaponAmmunition[attackerId].TryGetValue(rangedWeapon, out AmmunitionHandler ammoHandler))
             {
                 int currentAmmo = ammoHandler.DisplayCurrentAmmo();

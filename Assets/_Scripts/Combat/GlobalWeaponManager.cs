@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -61,11 +62,11 @@ public class GlobalWeaponManager : MonoBehaviour
         StartCoroutine(RangedWeaponHandler.HandleCooldown(attackerId, rangedWeapon, cooldownTime));  
     }
 
-    public void StartReloadingWeapon(AmmunitionHandler ammoHandler, float reloadTime, string entityId) // Start the reload for a specific weapon
-    {
-        _activeWeaponReloadCoroutines++; // For debugging
-        StartCoroutine(ammoHandler.ReloadCoroutine(reloadTime, entityId)); // Only reason we take id is because of player needs it to update UI
-    }
+    //public void StartReloadingWeapon(AmmunitionHandler ammoHandler, float reloadTime, string entityId) // Start the reload for a specific weapon
+    //{
+    //    _activeWeaponReloadCoroutines++; // For debugging
+    //    StartCoroutine(ammoHandler.ReloadCoroutine(reloadTime, entityId)); // Only reason we take id is because of player needs it to update UI
+    //}
 
     public void CooldownCoroutineFinished() // For debugging
     {
@@ -76,4 +77,36 @@ public class GlobalWeaponManager : MonoBehaviour
     {
         _activeWeaponReloadCoroutines--;
     }
+
+    private Dictionary<string, Coroutine> reloadCoroutines = new Dictionary<string, Coroutine>();
+
+
+    public Coroutine StartReloadingWeapon(AmmunitionHandler ammoHandler, float reloadTime, string entityId)
+    {
+        // If the player has a reload already happening, stop it
+        if (reloadCoroutines.ContainsKey(entityId))
+        {
+            StopCoroutine(reloadCoroutines[entityId]);
+            reloadCoroutines.Remove(entityId);
+        }
+
+        // Start the reload coroutine and store its reference
+        Coroutine reloadCoroutine = StartCoroutine(ammoHandler.ReloadCoroutine(reloadTime, entityId));
+        reloadCoroutines.Add(entityId, reloadCoroutine);
+        return reloadCoroutine;
+    }
+
+    public void StopReloadingWeapon(string entityId, RangedWeaponType rangedWeapon)
+    {
+        if (reloadCoroutines.ContainsKey(entityId))
+        {
+            StopCoroutine(reloadCoroutines[entityId]); // Stop the reload coroutine
+            reloadCoroutines.Remove(entityId); // Remove from the dictionary
+            RangedWeaponHandler.RemoveWeaponFromReloading(entityId, rangedWeapon);
+            Debug.Log($"Reload for {entityId} stopped.");
+        }
+    }
+
+
+
 }

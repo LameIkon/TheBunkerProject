@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerWeaponController : MonoBehaviour
 {
     [SerializeField] private WeaponType _currentWeaponType = WeaponType.Unarmed;
+    private WeaponType _previousWeaponType; // Used to check when switching to a new weapon
     [SerializeField] private Transform _attackPoint; // Attack point. This need improvement to know location better. a gun and a rifle should have different points
     [SerializeField] private string _playerId; // Used to update ammo UI
 
@@ -25,6 +26,22 @@ public class PlayerWeaponController : MonoBehaviour
 
     private void WeaponChecker(WeaponType state) // Called from event to check current weapon
     {
+        //_currentWeaponType = state; // Update current weapon type
+        //_previousWeaponType = _currentWeaponType; // Update previous weapon type
+
+        //if (_previousWeaponType != _currentWeaponType)
+        //{
+        //    if (WeaponTypes.TryGetRangedType(_previousWeaponType, out RangedWeaponType previousRangedWeaponType))
+        //    {
+        //        GlobalWeaponManager.Instance.StopReloadingWeapon(_playerId, previousRangedWeaponType); // Stop reloading previous weapon
+        //    }
+        //}
+
+
+        if (WeaponTypes.TryGetRangedType(_currentWeaponType, out RangedWeaponType rangedWeaponType))
+        {
+            GlobalWeaponManager.Instance.StopReloadingWeapon(_playerId, rangedWeaponType); // Tell you cant reload since you just switched weapon 
+        }
         _currentWeaponType = state;
     }
 
