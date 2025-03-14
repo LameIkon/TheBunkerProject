@@ -81,7 +81,11 @@ public static class RangedWeaponHandler
 
         AmmunitionHandler ammoHandler = _weaponAmmunition[attackerId][rangedWeapon]; // Get the ammo data
 
-        //if (ammoHandler.)
+        //if (ammoHandler.CheckIfHaveMaxammo())
+        //{
+        //    Debug.Log("max magazine");
+        //    return; // Stop if you have max ammo in magazine
+        //}
 
         _reloadingWeapons[attackerId].Add(rangedWeapon);  
         ammoHandler.ReloadWeapon(attackerId); // Reload weapon      

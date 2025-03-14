@@ -37,7 +37,7 @@ public class AmmunitionHandler
 
     public void ReloadWeapon(string entityId)
     {
-        if (!CheckIfCanReload()) // Check if entity has ammo
+        if (!CheckIfMissingAmmo()) // Check if entity has ammo
         {
             Debug.Log("Not enough ammo to reload.");
             return; // Dont reload
@@ -50,9 +50,15 @@ public class AmmunitionHandler
         GlobalWeaponManager.Instance.StopReloadingWeapon(entityId, rangedWeapon); // Request GlobalWeaponManager to stop the reload coroutine
     }
 
-    private bool CheckIfCanReload() 
+    private bool CheckIfMissingAmmo() 
     {
         bool haveAmmo = ammoData.SO_AmmoStorage > 0; // Look in your personal storage for ammo. Can only reload if you are missing ammo from magazine
+        return haveAmmo;
+    }
+
+    public bool CheckIfHaveMaxammo()
+    {
+        bool haveAmmo = ammoData.SO_MaxMagazineCapacity == ammoData.SO_AmmoStorage; // Look in your personal storage for ammo. If you have max ammo in magazine then dont reload
         return haveAmmo;
     }
 
