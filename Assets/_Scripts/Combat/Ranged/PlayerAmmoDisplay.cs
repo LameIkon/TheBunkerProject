@@ -43,7 +43,6 @@ public class PlayerAmmoDisplay : MonoBehaviour
         ChangeAmmoSprite();
         if (WeaponTypes.TryGetRangedType(weapon, out RangedWeaponType rangedWeaponType))
         {
-            Debug.Log("called" + _playerId + "is the player id");
             RangedWeaponHandler.UpdateAmmoForPlayer(_playerId, rangedWeaponType);
         }
     }

@@ -56,10 +56,10 @@ public class AmmunitionHandler
         return haveAmmo;
     }
 
-    public bool CheckIfHaveMaxammo()
+    public bool CheckIfHaveMaxAmmo()
     {
-        bool haveAmmo = ammoData.SO_MaxMagazineCapacity == ammoData.SO_AmmoStorage; // Look in your personal storage for ammo. If you have max ammo in magazine then dont reload
-        return haveAmmo;
+        bool haveMaxAmmo = ammoData.SO_MaxMagazineCapacity == ammoData.SO_AmmoStorage; // Look in your personal storage for ammo. If you have max ammo in magazine then dont reload
+        return haveMaxAmmo;
     }
 
     public IEnumerator ReloadCoroutine(float reloadTime, string entityId)
