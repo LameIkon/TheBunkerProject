@@ -102,7 +102,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: HeadPivot
+    path: Sprites/MainBody/HeadPivot
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -190,7 +190,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: left arm
+    path: Sprites/MainBody/left arm
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -278,7 +278,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: GunPivot
+    path: Sprites/MainBody/GunPivot
   m_ScaleCurves: []
   m_FloatCurves:
   - serializedVersion: 2
@@ -298,7 +298,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: GunPivot
+    path: Sprites/MainBody/GunPivot
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -319,7 +319,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: left arm
+    path: Sprites/MainBody/left arm
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -340,7 +340,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: HeadPivot
+    path: Sprites/MainBody/HeadPivot
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -360,7 +360,7 @@ AnimationClip:
     - time: 3
       value: {fileID: 113240990, guid: 5879fd10d69e87c4bbf28fd257d427df, type: 3}
     attribute: m_Sprite
-    path: 
+    path: Sprites/MainBody
     classID: 212
     script: {fileID: 0}
     flags: 2
@@ -372,7 +372,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 1050718366
+      path: 1776804174
       attribute: 1
       script: {fileID: 0}
       typeID: 4
@@ -381,7 +381,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 775596847
+      path: 31350363
       attribute: 1
       script: {fileID: 0}
       typeID: 4
@@ -390,7 +390,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1368925398
+      path: 2122109346
       attribute: 1
       script: {fileID: 0}
       typeID: 4
@@ -399,7 +399,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1368925398
+      path: 2122109346
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -408,7 +408,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 775596847
+      path: 31350363
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -417,7 +417,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1050718366
+      path: 1776804174
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -426,7 +426,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 0
+      path: 60212586
       attribute: 0
       script: {fileID: 0}
       typeID: 212
@@ -468,6 +468,69 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_IsActive
+    path: Sprites/MainBody/GunPivot
+    classID: 1
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_IsActive
+    path: Sprites/MainBody/left arm
+    classID: 1
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_IsActive
+    path: Sprites/MainBody/HeadPivot
+    classID: 1
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
         value: -0.14
         inSlope: 0
         outSlope: 0
@@ -551,7 +614,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: HeadPivot
+    path: Sprites/MainBody/HeadPivot
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -644,7 +707,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: HeadPivot
+    path: Sprites/MainBody/HeadPivot
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -737,7 +800,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: HeadPivot
+    path: Sprites/MainBody/HeadPivot
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -830,7 +893,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: left arm
+    path: Sprites/MainBody/left arm
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -923,7 +986,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: left arm
+    path: Sprites/MainBody/left arm
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1016,7 +1079,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: left arm
+    path: Sprites/MainBody/left arm
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1109,7 +1172,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: GunPivot
+    path: Sprites/MainBody/GunPivot
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1202,7 +1265,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: GunPivot
+    path: Sprites/MainBody/GunPivot
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1295,71 +1358,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: GunPivot
+    path: Sprites/MainBody/GunPivot
     classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 103
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_IsActive
-    path: GunPivot
-    classID: 1
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 103
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_IsActive
-    path: left arm
-    classID: 1
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 103
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_IsActive
-    path: HeadPivot
-    classID: 1
     script: {fileID: 0}
     flags: 0
   m_EulerEditorCurves: []

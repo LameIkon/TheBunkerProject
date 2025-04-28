@@ -205,6 +205,7 @@ GameObject:
   - component: {fileID: 7042057296900772580}
   - component: {fileID: 760993591631632595}
   - component: {fileID: 8343961947435198785}
+  - component: {fileID: 7847336092736715503}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -607,6 +608,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0659ef008b34f43409ea458c0ca800bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &7847336092736715503
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5269786520809334512}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 66b3fa0bf43404f4eb79a13b554227d4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7382917052026221293
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,6 +858,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 897754497510329207, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
     - {fileID: 7880213341273552435, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
+    - {fileID: 2874088770706994844, guid: 28d4c83cc3d78d442adbef4443e021ff, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

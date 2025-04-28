@@ -83,6 +83,11 @@ public class PlayerController : MonoBehaviour, IMovable, IIdentifiable, IWeaponU
         }
     }
 
+    public void Steptracker()
+    {
+        Debug.Log("Step");
+    }
+
     public void Move(float movementX)
     {
         _movementX = movementX;

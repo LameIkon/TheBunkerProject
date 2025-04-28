@@ -34,7 +34,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: GunPivot
+    path: Sprites/MainBody/GunPivot
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -55,7 +55,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: HeadPivot
+    path: Sprites/MainBody/left arm
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -76,7 +76,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: left arm
+    path: Sprites/MainBody/HeadPivot
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -94,7 +94,7 @@ AnimationClip:
     - time: 1.3333334
       value: {fileID: -113651226, guid: 36cf549d02ffc424fac1b781598de587, type: 3}
     attribute: m_Sprite
-    path: 
+    path: Sprites/MainBody
     classID: 212
     script: {fileID: 0}
     flags: 2
@@ -106,7 +106,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 1368925398
+      path: 2122109346
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -115,7 +115,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1050718366
+      path: 31350363
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -124,7 +124,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 775596847
+      path: 1776804174
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -133,7 +133,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 0
+      path: 60212586
       attribute: 0
       script: {fileID: 0}
       typeID: 212
@@ -185,7 +185,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: GunPivot
+    path: Sprites/MainBody/GunPivot
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -206,7 +206,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: HeadPivot
+    path: Sprites/MainBody/left arm
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -227,7 +227,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: left arm
+    path: Sprites/MainBody/HeadPivot
     classID: 1
     script: {fileID: 0}
     flags: 0

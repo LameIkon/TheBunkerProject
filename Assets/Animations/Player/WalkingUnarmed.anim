@@ -30,11 +30,20 @@ AnimationClip:
         weightedMode: 0
         inWeight: 0
         outWeight: 0
+      - serializedVersion: 3
+        time: 1.3333334
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: GunPivot
+    path: Sprites/MainBody/GunPivot
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -51,11 +60,20 @@ AnimationClip:
         weightedMode: 0
         inWeight: 0
         outWeight: 0
+      - serializedVersion: 3
+        time: 1.3333334
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: left arm
+    path: Sprites/MainBody/left arm
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -72,11 +90,20 @@ AnimationClip:
         weightedMode: 0
         inWeight: 0
         outWeight: 0
+      - serializedVersion: 3
+        time: 1.3333334
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: HeadPivot
+    path: Sprites/MainBody/HeadPivot
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -102,7 +129,7 @@ AnimationClip:
     - time: 1.3333334
       value: {fileID: -97807953, guid: 8508e5b7544a7ee4d82a6e70b9e91fad, type: 3}
     attribute: m_Sprite
-    path: 
+    path: Sprites/MainBody
     classID: 212
     script: {fileID: 0}
     flags: 2
@@ -114,7 +141,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 1368925398
+      path: 2122109346
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -123,7 +150,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 775596847
+      path: 31350363
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -132,7 +159,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1050718366
+      path: 1776804174
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -141,7 +168,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 0
+      path: 60212586
       attribute: 0
       script: {fileID: 0}
       typeID: 212
@@ -193,11 +220,20 @@ AnimationClip:
         weightedMode: 0
         inWeight: 0
         outWeight: 0
+      - serializedVersion: 3
+        time: 1.3333334
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: GunPivot
+    path: Sprites/MainBody/GunPivot
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -214,11 +250,20 @@ AnimationClip:
         weightedMode: 0
         inWeight: 0
         outWeight: 0
+      - serializedVersion: 3
+        time: 1.3333334
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: left arm
+    path: Sprites/MainBody/left arm
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -235,15 +280,38 @@ AnimationClip:
         weightedMode: 0
         inWeight: 0
         outWeight: 0
+      - serializedVersion: 3
+        time: 1.3333334
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: HeadPivot
+    path: Sprites/MainBody/HeadPivot
     classID: 1
     script: {fileID: 0}
     flags: 0
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.35
+    functionName: Steptracker
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.0166667
+    functionName: Steptracker
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
